@@ -9,7 +9,7 @@
 }
 
 .trending-title {
-  margin-left: 265px;
+  /* margin-left: 265px; */
   margin-top: 15px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -33,7 +33,7 @@
 }
 
 .popular-title {
-  margin-left: 272px;
+  /* margin-left: 272px; */
   margin-top: 22px;
   font-size: 0.9rem;
   font-weight: 500;

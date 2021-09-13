@@ -29,6 +29,7 @@ function App() {
   const [page, setPage] = useState("home");
   // clickedPost stores the data from fetching the post's json data
   const [clickedPost, setClickedPost] = useState("");
+  const [timePosted, setTimePosted] = useState("")
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [clickedPostURL, setClickedPostURL] = useState("");
   const [clickedPostSubredditThumbnail, setClickedPostSubredditThumbnail] = useState("");
@@ -120,6 +121,7 @@ function App() {
         setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
         setGeoFilter={setGeoFilter}
         setSortTop={setSortTop}
+        setTimePosted={setTimePosted}
       />
       <div className="sidebar-container">
         <SideBar setSelectedSubreddit={setSelectedSubreddit} />
@@ -138,6 +140,7 @@ function App() {
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
           setClickedPostComments={setClickedPostComments}
+          timePosted={timePosted}
         />
       </div>
     </div>

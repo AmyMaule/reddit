@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post";
 import SortPosts from "./SortPosts";
 
-export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setClickedPostSubredditThumbnail,  setClickedPostVotes, setGeoFilter, setSortTop }) {
+export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setClickedPostSubredditThumbnail, setClickedPostVotes, setGeoFilter, setSortTop, setTimePosted }) {
   return (
     <div className="PostContainer">
       <SortPosts
@@ -21,6 +21,7 @@ export default function PostContainer({ posts, setSelectedSubreddit, setSearch, 
             setSelectedSubreddit={setSelectedSubreddit}
             setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
             setClickedPostVotes={setClickedPostVotes}
+            setTimePosted={setTimePosted}
           />
       }
       )}

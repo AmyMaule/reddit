@@ -10,9 +10,37 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setClickedPostSubredditThumbnail, setClickedPostVotes }) {
+export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setClickedPostSubredditThumbnail, setClickedPostVotes, setTimePosted }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [subredditThumbnail, setSubredditThumbnail] = useState("");
+
+  // determine how long ago the post was created
+  let timeNow = Date.now();
+  const postedMsAgo = (timeNow/1000 - post.created_utc);
+  let posted;
+  if (postedMsAgo < 60) {
+    posted = "A few seconds";
+  } else if (postedMsAgo < 120) {
+    posted = "1 minute";
+  } else if (postedMsAgo < 3600) {
+    posted = (postedMsAgo/60).toFixed(0) + " minutes";
+  } else if (postedMsAgo < 5400) { // 5400 is 1.5 hours
+    posted = "1 hour";
+  } else if (postedMsAgo < 86400) { // 86400 is 24 hours
+    posted = (postedMsAgo/3600).toFixed(0) + " hours";
+  } else if (postedMsAgo < 129600) {  // 129600 is 1.5 days
+    posted = "1 day";
+  } else if (postedMsAgo < 2.592e+6) {  // 2.592e+6 is 30 days
+    posted = (postedMsAgo/86400).toFixed(0) + " days";
+  } else if (postedMsAgo < 3.942e+6) {  // 3.942e+6 is 1.5 months
+    posted = "1 month";
+  } else if (postedMsAgo < 3.154e+7) {  // 3.154e+7 is 1 year
+    posted = (postedMsAgo/2.592e+6).toFixed(0) + " months";
+  } else if (postedMsAgo < 4.73e+7) {  // 4.73e+7 is 1.5 years
+    posted = "1 year";
+  } else {
+    posted = (postedMsAgo/3.154e+7).toFixed(0) + " years";
+  }
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -62,6 +90,7 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
     setClickedPostSubredditThumbnail(subredditThumbnail);
     setClickedPostURL(`https://www.reddit.com${post.permalink}`);
     setClickedPostVotes(votes);
+    setTimePosted(posted);
   }
 
   return (
@@ -89,7 +118,7 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
           subreddit={post.subreddit}
           author={post.author}
           all_awardings={post.all_awardings}
-          created_utc={post.created_utc}
+          posted={posted}
         />}
 
         {/* Render different types of post based on the media it contains */}

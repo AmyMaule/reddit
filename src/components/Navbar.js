@@ -78,10 +78,10 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
       <div className = "btn-container">
         <button className="nav-btn btn-white btn-login">Log In</button>
         <button className="nav-btn btn-blue btn-signup">Sign Up</button>
-        <a href="#" className="user-icons-container">
+        <div className="user-icons-container">
           <img src={UserIcon} className="user-icon" alt="user-icon" />
           <img src={V} className="v-icon" alt="" />
-        </a>
+        </div>
       </div>
     </div>
   )

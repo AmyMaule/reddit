@@ -17,12 +17,12 @@ export default function Comment({ comment }) {
       {comment.body_html && <h6 dangerouslySetInnerHTML={{__html: htmlDecode(comment.body_html)}} className="base-comment"></h6>}
       <div>
         {comment.replies && comment.replies.data.children.map((subcomment, i) => {
-          {/* the last object in the children array isn't a comment so make sure it doesn't render */}
+          /* the last object in the children array isn't a comment so make sure it doesn't render */
           if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return;
-          {/* there may be a problem with some comments with null data, that somehow still have children - edit the return when you know why */}
-          {/* return subcomment.data.body && (... .map() return <h6 key={subcomment.data.id} className="second-comment">{subcomment.data.body}</h6> */}
+          /* there may be a problem with some comments with null data, that somehow still have children - edit the return when you know why */
+          /* return subcomment.data.body && (... .map() return <h6 key={subcomment.data.id} className="second-comment">{subcomment.data.body}</h6> */
           return subcomment.data.body && <h6 key={subcomment.data.id} className="second-comment">{subcomment.data.body}</h6>
-          {/* subcomment.replies && <h6 className="third-comment">{subcomment.replies.data.children[0]}</h6> */}
+          /* subcomment.replies && <h6 className="third-comment">{subcomment.replies.data.children[0]}</h6> */
           })}
       </div>
     </div>

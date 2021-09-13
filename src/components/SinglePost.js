@@ -16,7 +16,7 @@ import { useEffect } from 'react/cjs/react.development';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
 // comment
-export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, clickedPostSubredditThumbnail, votes, setSelectedSubreddit, comments, setClickedPostComments }) {
+export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, clickedPostSubredditThumbnail, votes, setSelectedSubreddit, comments, setClickedPostComments, timePosted }) {
   window.pageYOffset = 0;
 
   const flairStyle = {
@@ -82,7 +82,7 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
               </div>
             </div>
             <div className="singlepost-right">
-              <SinglePostTopBar clickedPost={clickedPost} clickedPostSubredditThumbnail={clickedPostSubredditThumbnail}  />
+              <SinglePostTopBar clickedPost={clickedPost} clickedPostSubredditThumbnail={clickedPostSubredditThumbnail} timePosted={timePosted}  />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
                 ? <SingleVideoPost

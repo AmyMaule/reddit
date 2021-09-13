@@ -9,7 +9,7 @@ export default function LinkPost({ post, flairStyle, flairDisplay, handlePostCli
         {post.is_original_content && <span className="flair-oc">OC</span>}
       </div>
       {!post.is_gallery && <div className="post-link-container">
-        <a className="post-link" href={post.url_overridden_by_dest}>{post.url_overridden_by_dest.slice(8, 27)}...</a>
+        <a className="post-link" href={post.url_overridden_by_dest} target="_blank">{post.url_overridden_by_dest.slice(8, 27)}...</a>
       </div>}
       <img className="link-image" src={post.thumbnail} onClick={handlePostClick} />
     </>

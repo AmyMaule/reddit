@@ -189,6 +189,10 @@
     margin-right: 0px;
     width: 67px;
   }
+
+  .user-icons-container {
+    margin-left: 5px;
+  }
 }
 
 @media screen and (max-width: 1087px) {
@@ -201,7 +205,6 @@
   .logo-container {
     margin-right: 26px;
   }
-
 }
 
 @media screen and (max-width: 1000px) {

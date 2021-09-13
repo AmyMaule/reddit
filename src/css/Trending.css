@@ -1,0 +1,40 @@
+.Trending {
+  display: inline;
+  margin-top: 2px;
+  width: 50%;
+  position: relative;
+  /* top: 50px; */
+  max-width: 1020px;
+  height: 200px;
+}
+
+.trending-title {
+  margin-left: 265px;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 0.88rem;
+}
+
+.trending-blocks {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.trending-block {
+  background-color: rgba(125, 130, 180, 0.582);
+  margin-left: 6px;
+  margin-right: 6px;
+  height: 178px;
+  /* padding: 12px; */
+  width: 238px;
+  border-radius: 8px;
+}
+
+.popular-title {
+  margin-left: 272px;
+  margin-top: 22px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}

@@ -9,9 +9,8 @@ import SinglePost from './components/SinglePost';
 import SideBarPremium from './components/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
 
-// TODO load 10 more posts when you're near the bottom of the page
-// TODO check the linkpost href
-// TODO sort the search bar
+// TODO load 10 more posts when you're near the bottom of the page - use document.documentElement.scrollHeight - window.innerHeight ?
+// TODO: Subreddit home page, add top/hot fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
 
 function App() {
   // sortedSubs takes allsubs.json and orders them by subscriber count
@@ -24,6 +23,7 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   // const [after, setAfter] = useState("");
+  const [linkPosts, setLinkPosts] = useState([]);
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
@@ -34,21 +34,16 @@ function App() {
   // cachedClickedPostData stores the post information from the inital fetch request to reuse in SinglePost, as it takes a couple of seconds to buffer if pulling directly from the clickedPost fetch request
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [cachedClickedPostData, setCachedClickedPostData] = useState({});
-  // the clickedPostSubredditThumbnail returns to undefined when part of cachedClickedPostData, but is fine in its own state
-  const [clickedPostSubredditThumbnail, setClickedPostSubredditThumbnail] = useState("");
   const [sortTop, setSortTop] = useState("");
 
 
 
   // let scrollPosition = 0;   // later... window.pageYOffset = scrollPosition;
-  // sort=(hot, new, top, controversial)
-  // fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
-  // fetch("http://www.reddit.com/top/.json?sort=top&t=all") // THIS WORKS
 
   useEffect(() => {
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`);
     // if (selectedSubreddit === "r/popular/hot" || selectedSubreddit === "r/popular")
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`)
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`)
     .then(res => {
       if (res.status === 200) {
       return res.json();
@@ -109,13 +104,14 @@ function App() {
       <div className={page === "home" ? "main-container" : "main-container hide"}>
       <PostContainer
         posts={posts}
+        linkPosts={linkPosts}
+        setLinkPosts={setLinkPosts}
         setSelectedSubreddit={setSelectedSubreddit}
         setSearch={setSearch}
         selectedSubreddit={selectedSubreddit}
         setClickedPostURL={setClickedPostURL}
         setSortTop={setSortTop}
         setCachedClickedPostData={setCachedClickedPostData}
-        setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
       />
       <div className="sidebar-container">
         <SideBar setSelectedSubreddit={setSelectedSubreddit} />
@@ -129,7 +125,6 @@ function App() {
           clickedPost={clickedPost}
           setPage={setPage}
           setClickedPost={setClickedPost}
-          clickedPostSubredditThumbnail={clickedPostSubredditThumbnail}
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
           setClickedPostComments={setClickedPostComments}

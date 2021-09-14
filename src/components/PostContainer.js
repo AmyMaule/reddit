@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post";
 import SortPosts from "./SortPosts";
 
-export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setClickedPostSubredditThumbnail, setSortTop, setCachedClickedPostData }) {
+export default function PostContainer({ posts, linkPosts, setLinkPosts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setSortTop, setCachedClickedPostData }) {
   return (
     <div className="PostContainer">
       <SortPosts
@@ -16,9 +16,10 @@ export default function PostContainer({ posts, setSelectedSubreddit, setSearch, 
           <Post
             key={post.data.id}
             post={post.data}
+            linkPosts={linkPosts}
+            setLinkPosts={setLinkPosts}
             setClickedPostURL={setClickedPostURL}
             setSelectedSubreddit={setSelectedSubreddit}
-            setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
             setCachedClickedPostData={setCachedClickedPostData}
           />
       }

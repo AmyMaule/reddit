@@ -10,7 +10,7 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setClickedPostSubredditThumbnail, setCachedClickedPostData }) {
+export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPosts, setClickedPostURL, setCachedClickedPostData }) {
   const [subredditThumbnail, setSubredditThumbnail] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -61,6 +61,12 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
     };
   }, [])
 
+  useEffect(() => {
+    if (post.post_hint === "link") setLinkPosts({...linkPosts, post});
+    if (linkPosts) console.log(Object.entries(linkPosts));
+  }, [])
+
+
   // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
   let votes;
   if (post.ups > 0) {
@@ -86,14 +92,17 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
   })
 
   const handlePostClick = () => {
-    // this sets the subreddit thumbnail of the clicked post without having to do another fetch request
-    setClickedPostSubredditThumbnail(subredditThumbnail);
     setClickedPostURL(`https://www.reddit.com${post.permalink}`);
     setCachedClickedPostData({
       posted: posted,
       votes: votes,
       num_comments: post.num_comments,
       title: post.title,
+      subredditThumbnail: subredditThumbnail,
+      subreddit: post.subreddit,
+      flairStyle: flairStyle,
+      flairDisplay: flairDisplay,
+      link_flair_text: post.link_flair_text
     });
   }
 

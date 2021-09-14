@@ -1,4 +1,5 @@
 import React from 'react';
+import DefaultThumbnail from "../images/logo-small.png";
 
 export default function CommentSideBar({ subreddit, subredditThumbnail, setSelectedSubreddit }) {
   return (
@@ -6,7 +7,7 @@ export default function CommentSideBar({ subreddit, subredditThumbnail, setSelec
       <div className="comment-sidebar-community"></div>
       <div className="comment-sidebar-community-container">
         <img
-          src={subredditThumbnail}
+          src={subredditThumbnail ? subredditThumbnail : DefaultThumbnail}
           alt=""
           className="comment-sidebar-subreddit-thumbnail"
           onClick={() => setSelectedSubreddit(`r/${subreddit}`)}

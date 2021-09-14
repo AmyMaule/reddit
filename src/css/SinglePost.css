@@ -340,6 +340,7 @@
 .singlepost-comments-text {
   position: relative;
   left: 8px;
+  white-space: nowrap;
 }
 
 .singlepost-comments:hover {

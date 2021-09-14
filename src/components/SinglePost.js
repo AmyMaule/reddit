@@ -16,19 +16,9 @@ import SideBarLinks from './SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
 // comment
-export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, clickedPostSubredditThumbnail }) {
+export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData }) {
   // console.log(cachedClickedPostData)
   // window.pageYOffset = 0;
-
-  const flairStyle = {
-    backgroundColor: clickedPost.link_flair_background_color || "rgb(237, 239, 241)",
-    color: clickedPost.link_flair_text_color === "dark" ? "#000" : "#FFF",
-  }
-
-  const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
-    if (part.t) return <span key={i+part.a}>{part.t}</span>;
-    if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} />;
-  }) : "";
 
   const showHomepage = e => {
     if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
@@ -62,7 +52,7 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
         </div>
         <div className="top-bar-title-container">
           <h3 className="top-bar-title">{cachedClickedPostData.title}</h3>
-          {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
+          {cachedClickedPostData.link_flair_text && <span className="singlepost-flair" style={cachedClickedPostData.flairStyle}>{cachedClickedPostData.flairDisplay.length > 0 ? cachedClickedPostData.flairDisplay : cachedClickedPostData.link_flair_text}</span>}
         </div>
         <div className="top-bar-btn-container">
           <div className="top-bar-btn-pointer">
@@ -83,30 +73,30 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
               </div>
             </div>
             <div className="singlepost-right">
-              <SinglePostTopBar clickedPost={clickedPost} clickedPostSubredditThumbnail={clickedPostSubredditThumbnail} timePosted={cachedClickedPostData.timePosted}  />
+              <SinglePostTopBar clickedPost={clickedPost} subredditThumbnail={cachedClickedPostData.subredditThumbnail} timePosted={cachedClickedPostData.timePosted}  />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
                 ? <SingleVideoPost
                     clickedPost={clickedPost}
-                    flairStyle={flairStyle}
-                    flairDisplay={flairDisplay}
+                    flairStyle={cachedClickedPostData.flairStyle}
+                    flairDisplay={cachedClickedPostData.flairDisplay}
                   />
                 : clickedPost.post_hint === "image"
                   ? <SingleImagePost
                       clickedPost={clickedPost}
-                      flairStyle={flairStyle}
-                      flairDisplay={flairDisplay}
+                      flairStyle={cachedClickedPostData.flairStyle}
+                      flairDisplay={cachedClickedPostData.flairDisplay}
                     />
                   : clickedPost.post_hint === "link"
                   ? <SingleLinkPost
                       clickedPost={clickedPost}
-                      flairStyle={flairStyle}
-                      flairDisplay={flairDisplay}
+                      flairStyle={cachedClickedPostData.flairStyle}
+                      flairDisplay={cachedClickedPostData.flairDisplay}
                     />
                   : <SingleTextPost
                       clickedPost={clickedPost}
-                      flairStyle={flairStyle}
-                      flairDisplay={flairDisplay}
+                      flairStyle={cachedClickedPostData.flairStyle}
+                      flairDisplay={cachedClickedPostData.flairDisplay}
                     />
               }
 
@@ -153,8 +143,8 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
           </div>
           <div className="sidebar-container">
             <CommentSideBar
-              subreddit={clickedPost.subreddit}
-              subredditThumbnail={clickedPostSubredditThumbnail}
+              subreddit={cachedClickedPostData.subreddit}
+              subredditThumbnail={cachedClickedPostData.subredditThumbnail}
               setSelectedSubreddit={setSelectedSubreddit}
             />
             <SideBarLinks />

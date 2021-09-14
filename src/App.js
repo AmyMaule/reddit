@@ -23,10 +23,11 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   // const [after, setAfter] = useState("");
-  const [linkPosts, setLinkPosts] = useState([]);
+  const [linkPosts, setLinkPosts] = useState();
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
+  const [prevPage, setPrevPage] = useState("");
   // clickedPostURL is used to fetch the post's json data
   const [clickedPostURL, setClickedPostURL] = useState("");
   // clickedPost stores the data from fetching the post's json data
@@ -35,15 +36,12 @@ function App() {
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [cachedClickedPostData, setCachedClickedPostData] = useState({});
   const [sortTop, setSortTop] = useState("");
-
-
-
-  // let scrollPosition = 0;   // later... window.pageYOffset = scrollPosition;
+  const [scrollPosition, setScrollPosition] = useState();
 
   useEffect(() => {
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`);
     // if (selectedSubreddit === "r/popular/hot" || selectedSubreddit === "r/popular")
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`)
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`)
     .then(res => {
       if (res.status === 200) {
       return res.json();
@@ -67,7 +65,7 @@ function App() {
     if (page !== "home") {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "scroll";
     }
   }, [page])
 
@@ -83,9 +81,11 @@ function App() {
         if (data) {
           setClickedPost(data[0].data.children[0].data);
           setClickedPostComments(data[1].data.children);
-        } else console.log("oh dear fetching post");
+        } else console.log("data error fetching post");
       })
+      // wait2000 waits 2 seconds before loading the comment page to give the fetch request time to get all the data
       const wait2000 = setTimeout(() => {
+        setPrevPage(page);
         setPage("comment");
       }, 2000);
       return () => clearTimeout(wait2000);
@@ -112,6 +112,7 @@ function App() {
         setClickedPostURL={setClickedPostURL}
         setSortTop={setSortTop}
         setCachedClickedPostData={setCachedClickedPostData}
+        setScrollPosition={setScrollPosition}
       />
       <div className="sidebar-container">
         <SideBar setSelectedSubreddit={setSelectedSubreddit} />
@@ -124,11 +125,15 @@ function App() {
           setClickedPostURL={setClickedPostURL}
           clickedPost={clickedPost}
           setPage={setPage}
+          setPrevPage={setPrevPage}
           setClickedPost={setClickedPost}
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
           setClickedPostComments={setClickedPostComments}
           cachedClickedPostData={cachedClickedPostData}
+          scrollPosition={scrollPosition}
+          page={page}
+          prevPage={prevPage}
         />
       </div>
     </div>

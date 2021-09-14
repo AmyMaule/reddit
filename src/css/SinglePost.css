@@ -294,7 +294,7 @@
 .singlepost-image {
   max-width: 700px;
   cursor: pointer;
-  max-height: 700px;
+  /* max-height: 700px; */
   display: flex;
   width: 100%;
 }

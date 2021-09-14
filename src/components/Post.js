@@ -10,7 +10,7 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPosts, setClickedPostURL, setCachedClickedPostData }) {
+export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPosts, setClickedPostURL, setCachedClickedPostData, setScrollPosition }) {
   const [subredditThumbnail, setSubredditThumbnail] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -61,10 +61,10 @@ export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPos
     };
   }, [])
 
-  useEffect(() => {
-    if (post.post_hint === "link") setLinkPosts({...linkPosts, post});
-    if (linkPosts) console.log(Object.entries(linkPosts));
-  }, [])
+  // useEffect(() => {
+  //   if (post.post_hint === "link") setLinkPosts({...linkPosts, post});
+  //   if (linkPosts) console.log(Object.entries(linkPosts));
+  // }, [])
 
 
   // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
@@ -104,6 +104,8 @@ export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPos
       flairDisplay: flairDisplay,
       link_flair_text: post.link_flair_text
     });
+    // console.log("offset: ", window.pageYOffset);
+    setScrollPosition(window.pageYOffset);
   }
 
   return (

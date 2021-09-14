@@ -14,14 +14,11 @@ import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from './SideBarLinks';
 
-// TODO: sort the thumbnails loading slowly and showing before they are ready
-// comment
-export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData }) {
-  // console.log(cachedClickedPostData)
-  // window.pageYOffset = 0;
+export default function SinglePost({ clickedPost, setClickedPost, setClickedPostURL, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition, page, setPage, prevPage, setPrevPage }) {
 
   const showHomepage = e => {
     if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+      setPrevPage(page);
       setPage("home");
       setClickedPost("");
       setClickedPostComments([]);
@@ -31,6 +28,18 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
       document.querySelector(".CommentSideBar").style.display = "hidden";
     }
   }
+
+  // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
+  useEffect(() => {
+    // console.log(page, prevPage)
+    if (page === "home" && prevPage === "home" || page === "subhome" && prevPage === "subhome") {
+      // console.log("scroll position is:", scrollPosition);
+      window.scrollTo(0, scrollPosition);
+    } else {
+      if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+  }, [page])
 
   useEffect(() => {
     document.body.addEventListener("click", e => {

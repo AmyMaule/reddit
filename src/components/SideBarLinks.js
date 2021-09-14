@@ -1,8 +1,12 @@
 import React from 'react'
 
-export default function SideBarLinks() {
+export default function SideBarLinks({ page }) {
+  // margin-left: 24px;
+  const SideBarLinksMarginLeft = {
+    marginLeft: page === "home" ? "24px" : "12px"
+  }
   return (
-    <div className="SideBarLinks">
+    <div className="SideBarLinks" style={SideBarLinksMarginLeft}>
       <div className="sidebar-links-container">
         <div className="sidebar-links-left">
           <a href="https://www.reddithelp.com/hc/en-us" target="blank">Help</a>

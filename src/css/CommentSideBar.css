@@ -1,7 +1,7 @@
 .CommentSideBar {
   margin-left: 12px;
   border: 1px solid #CCC;
-  width: 340px;
+  width: 310px;
   /* margin-top: 80px; */
   background-color: rgb(255, 255, 255);
   border-radius: 4px;
@@ -15,7 +15,7 @@
 }
 
 .comment-sidebar-community {
-  width: 340px;
+  width: 310px;
   height: 34px;
   font-weight: bold;
   background-color: #bbbbdf;

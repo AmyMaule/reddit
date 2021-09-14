@@ -1,11 +1,11 @@
 .Trending {
   display: inline;
-  margin-top: 2px;
-  width: 50%;
   position: relative;
-  /* top: 50px; */
+  top: 50px;
   max-width: 1020px;
   height: 200px;
+  margin-top: 2px;
+  width: 50%;
 }
 
 .trending-title {
@@ -14,6 +14,8 @@
   font-size: 0.9rem;
   font-weight: 500;
   font-size: 0.88rem;
+  /* this margin-left keeps it inline with the trending blocks below */
+  margin-left: calc(50% - 495px);
 }
 
 .trending-blocks {
@@ -30,11 +32,4 @@
   /* padding: 12px; */
   width: 238px;
   border-radius: 8px;
-}
-
-.popular-title {
-  /* margin-left: 272px; */
-  margin-top: 22px;
-  font-size: 0.9rem;
-  font-weight: 500;
 }

@@ -27,16 +27,18 @@ function App() {
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
+  // clickedPostURL is used to fetch the post's json data
+  const [clickedPostURL, setClickedPostURL] = useState("");
   // clickedPost stores the data from fetching the post's json data
   const [clickedPost, setClickedPost] = useState("");
-  const [timePosted, setTimePosted] = useState("")
+  // cachedClickedPostData stores the post information from the inital fetch request to reuse in SinglePost, as it takes a couple of seconds to buffer if pulling directly from the clickedPost fetch request
   const [clickedPostComments, setClickedPostComments] = useState([]);
-  const [clickedPostURL, setClickedPostURL] = useState("");
+  const [cachedClickedPostData, setCachedClickedPostData] = useState({});
+  // the clickedPostSubredditThumbnail returns to undefined when part of cachedClickedPostData, but is fine in its own state
   const [clickedPostSubredditThumbnail, setClickedPostSubredditThumbnail] = useState("");
-  // clickedPostVotes stores the vote count for the post that has been clicked on, as it takes a couple of seconds to buffer if pulling directly from the clickedPost fetch request
-  const [clickedPostVotes, setClickedPostVotes] = useState("");
-  const [geoFilter, setGeoFilter] = useState("GLOBAL");
   const [sortTop, setSortTop] = useState("");
+
+
 
   // let scrollPosition = 0;   // later... window.pageYOffset = scrollPosition;
   // sort=(hot, new, top, controversial)
@@ -46,12 +48,7 @@ function App() {
   useEffect(() => {
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`);
     // if (selectedSubreddit === "r/popular/hot" || selectedSubreddit === "r/popular")
-    // https://www.reddit.com/r/popular/?geo_filter=AR
-    // fetch("https://www.reddit.com/top//.json?t=week")
-    // fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/?geo_filter=${geoFilter}/.json&limit=40`)
-    // fetch("https://www.reddit.com/r/popular/?limit=50&geo_filter=FR/.json")
-    // fetch("https://www.reddit.com/r/popular/.json?geo_filter=FR")
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=100${sortTop}`)
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`)
     .then(res => {
       if (res.status === 200) {
       return res.json();
@@ -68,7 +65,7 @@ function App() {
         // return () => clearInterval(checkForNewPosts);
       } else console.log("oh dear");
     })
-  }, [search, geoFilter])
+  }, [search])
   // selectedSubreddit no longer a dependency
 
   useEffect(() => {
@@ -111,28 +108,24 @@ function App() {
       <Trending page={page} />
       <div className={page === "home" ? "main-container" : "main-container hide"}>
       <PostContainer
-        setClickedPostVotes={setClickedPostVotes}
         posts={posts}
         setSelectedSubreddit={setSelectedSubreddit}
         setSearch={setSearch}
         selectedSubreddit={selectedSubreddit}
         setClickedPostURL={setClickedPostURL}
-        clickedPostSubredditThumbnail={clickedPostSubredditThumbnail}
-        setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
-        setGeoFilter={setGeoFilter}
         setSortTop={setSortTop}
-        setTimePosted={setTimePosted}
+        setCachedClickedPostData={setCachedClickedPostData}
+        setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
       />
       <div className="sidebar-container">
         <SideBar setSelectedSubreddit={setSelectedSubreddit} />
         <SideBarPremium />
-        <SideBarLinks />
+        <SideBarLinks page={page} />
       </div>
       </div>
       <div className={page === "home" ? "main-container hide" : "main-container"}>
         <SinglePost
           setClickedPostURL={setClickedPostURL}
-          votes={clickedPostVotes}
           clickedPost={clickedPost}
           setPage={setPage}
           setClickedPost={setClickedPost}
@@ -140,7 +133,7 @@ function App() {
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
           setClickedPostComments={setClickedPostComments}
-          timePosted={timePosted}
+          cachedClickedPostData={cachedClickedPostData}
         />
       </div>
     </div>

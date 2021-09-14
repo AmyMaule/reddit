@@ -1,9 +1,10 @@
 .SinglePost-page {
   display: flex;
   width: 100vw;
-  /* this height is working fine */
-  height: calc(100vh);
-  overflow-y: auto;
+  /* this height was working fine */
+  height: calc(100vh - 48px);
+  overflow-y: scroll;
+  top: 48px;
   background-color: rgb(50, 50, 50);
   scrollbar-color: rgb(122, 122, 124) rgb(38, 38, 40);
   justify-content: center;
@@ -129,10 +130,6 @@
   font-weight: 700;;
 }
 
-/* <img src={UpArrow} className="top-bar-up-arrow" />
-<span className="top-bar-votes">{votes}</span>
-<img src={DownArrow} className="top-bar-down-arrow" /> */
-
 .singlepost-container {
   box-sizing: border-box;
   background-color: rgb(238, 238, 238);
@@ -140,8 +137,8 @@
   width: calc(100% - 160px);
   display: flex;
   position: relative;
-  top: 88px;
-  padding-top: 40px;
+  margin-top: 48px;
+  padding-top: 30px;
   /* offset: 17px; */
   /* padding: 0 8%; */
   /* margin-top: 48px; */
@@ -197,7 +194,8 @@
 .singlepost-right {
   display: flex;
   flex-direction: column;
-  max-width: calc(100%-40px);
+  width: calc(100%-40px);
+  max-width: 650px;
 }
 
 .singlepost-top {
@@ -233,8 +231,6 @@
   padding-right: 10px;
   color: #7c7c7c;
   cursor: pointer;
-  white-space: nowrap;
-  display: inline-flex;
 }
 
 .singlepost-title {
@@ -492,3 +488,9 @@
   }
 } */
 
+.after-comment-box {
+  height: 200px;
+  width: calc(100% + 40px);
+  margin-left: -40px;
+  background-color: rgb(238, 238, 238);
+}

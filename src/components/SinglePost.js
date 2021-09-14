@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CommentSideBar from './CommentSideBar';
 import UpArrow from "../images/up-arrow.png";
 import DownArrow from "../images/down-arrow.png";
@@ -12,12 +12,13 @@ import SingleVideoPost from './SingleVideoPost';
 import SingleImagePost from './SingleImagePost';
 import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
-import { useEffect } from 'react/cjs/react.development';
+import SideBarLinks from './SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
 // comment
-export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, clickedPostSubredditThumbnail, votes, setSelectedSubreddit, comments, setClickedPostComments, timePosted }) {
-  window.pageYOffset = 0;
+export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, clickedPostSubredditThumbnail }) {
+  // console.log(cachedClickedPostData)
+  // window.pageYOffset = 0;
 
   const flairStyle = {
     backgroundColor: clickedPost.link_flair_background_color || "rgb(237, 239, 241)",
@@ -56,11 +57,11 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
       <div className="singlepost-close">
         <div className="top-bar-votes-container">
           <img src={UpArrow} className="top-bar-up-arrow" />
-          <span className="top-bar-votes">{votes}</span>
+          <span className="top-bar-votes">{cachedClickedPostData.votes}</span>
           <img src={DownArrow} className="top-bar-down-arrow" />
         </div>
         <div className="top-bar-title-container">
-          <h3 className="top-bar-title">{clickedPost.title}</h3>
+          <h3 className="top-bar-title">{cachedClickedPostData.title}</h3>
           {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
         </div>
         <div className="top-bar-btn-container">
@@ -76,13 +77,13 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
               <div>
                 <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" />
               </div>
-              <div className="singlepost-votes-count">{votes}</div>
+              <div className="singlepost-votes-count">{cachedClickedPostData.votes}</div>
               <div>
                 <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" />
               </div>
             </div>
             <div className="singlepost-right">
-              <SinglePostTopBar clickedPost={clickedPost} clickedPostSubredditThumbnail={clickedPostSubredditThumbnail} timePosted={timePosted}  />
+              <SinglePostTopBar clickedPost={clickedPost} clickedPostSubredditThumbnail={clickedPostSubredditThumbnail} timePosted={cachedClickedPostData.timePosted}  />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
                 ? <SingleVideoPost
@@ -113,7 +114,7 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
                 <div className="singlepost-comments">
                   <img src={SpeechBubble} className="singlepost-comments-speechbubble" alt="" />
                   <h4 className="singlepost-comments-text">
-                    {clickedPost.num_comments < 1000 ? clickedPost.num_comments : (clickedPost.num_comments/1000).toFixed(1) + "k"} comments
+                    {cachedClickedPostData.num_comments < 1000 ? cachedClickedPostData.num_comments : (cachedClickedPostData.num_comments/1000).toFixed(1) + "k"} comments
                   </h4>
                 </div>
                 <div className="singlepost-share-link">
@@ -146,13 +147,18 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
                 <CommentsContainer comments={comments} />
               </div>
 
+              <div className="after-comment-box"></div>
+
             </div>
           </div>
-        <CommentSideBar
-          subreddit={clickedPost.subreddit}
-          clickedPostSubredditThumbnail={clickedPostSubredditThumbnail}
-          setSelectedSubreddit={setSelectedSubreddit}
-        />
+          <div className="sidebar-container">
+            <CommentSideBar
+              subreddit={clickedPost.subreddit}
+              subredditThumbnail={clickedPostSubredditThumbnail}
+              setSelectedSubreddit={setSelectedSubreddit}
+            />
+            <SideBarLinks />
+          </div>
       </div>
     </div>
     </>

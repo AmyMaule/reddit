@@ -10,9 +10,9 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setClickedPostSubredditThumbnail, setClickedPostVotes, setTimePosted }) {
-  const [isLoaded, setIsLoaded] = useState(false);
+export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setClickedPostSubredditThumbnail, setCachedClickedPostData }) {
   const [subredditThumbnail, setSubredditThumbnail] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // determine how long ago the post was created
   let timeNow = Date.now();
@@ -89,8 +89,12 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
     // this sets the subreddit thumbnail of the clicked post without having to do another fetch request
     setClickedPostSubredditThumbnail(subredditThumbnail);
     setClickedPostURL(`https://www.reddit.com${post.permalink}`);
-    setClickedPostVotes(votes);
-    setTimePosted(posted);
+    setCachedClickedPostData({
+      posted: posted,
+      votes: votes,
+      num_comments: post.num_comments,
+      title: post.title,
+    });
   }
 
   return (

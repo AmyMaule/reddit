@@ -2,14 +2,13 @@ import React from 'react';
 import Post from "./Post";
 import SortPosts from "./SortPosts";
 
-export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setClickedPostSubredditThumbnail, setClickedPostVotes, setGeoFilter, setSortTop, setTimePosted }) {
+export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setClickedPostSubredditThumbnail, setSortTop, setCachedClickedPostData }) {
   return (
     <div className="PostContainer">
       <SortPosts
         setSelectedSubreddit={setSelectedSubreddit}
         setSearch={setSearch}
         selectedSubreddit={selectedSubreddit}
-        setGeoFilter={setGeoFilter}
         setSortTop={setSortTop}
       />
       {posts.map(post => {
@@ -20,8 +19,7 @@ export default function PostContainer({ posts, setSelectedSubreddit, setSearch, 
             setClickedPostURL={setClickedPostURL}
             setSelectedSubreddit={setSelectedSubreddit}
             setClickedPostSubredditThumbnail={setClickedPostSubredditThumbnail}
-            setClickedPostVotes={setClickedPostVotes}
-            setTimePosted={setTimePosted}
+            setCachedClickedPostData={setCachedClickedPostData}
           />
       }
       )}

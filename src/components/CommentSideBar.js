@@ -1,12 +1,12 @@
 import React from 'react';
 
-export default function CommentSideBar({ subreddit, clickedPostSubredditThumbnail, setSelectedSubreddit }) {
+export default function CommentSideBar({ subreddit, subredditThumbnail, setSelectedSubreddit }) {
   return (
     <div className="CommentSideBar">
       <div className="comment-sidebar-community"></div>
       <div className="comment-sidebar-community-container">
         <img
-          src={clickedPostSubredditThumbnail}
+          src={subredditThumbnail}
           alt=""
           className="comment-sidebar-subreddit-thumbnail"
           onClick={() => setSelectedSubreddit(`r/${subreddit}`)}

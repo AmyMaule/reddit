@@ -88,6 +88,7 @@ export default function SortPosts({ selectedSubreddit, setSelectedSubreddit, set
 
   return (
     <>
+    <h2 className="popular-title">Popular posts</h2>
     <div className="SortPosts">
       <div className="popular-container">
         <div className="popular-btn popular-hot clicked" onClick={() => handleBtnColorChange("r/popular/hot", "hot")}>

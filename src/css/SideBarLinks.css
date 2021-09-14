@@ -1,5 +1,4 @@
 .SideBarLinks {
-  margin-left: 24px;
   border: 1px solid #CCC;
   width: 310px;
   /* width: 340px; */
@@ -7,6 +6,8 @@
   background-color: white;
   border-radius: 4px;
   height: 262px;
+  position: sticky;
+  top: 58px;
 }
 
 .sidebar-links-container {

@@ -8,9 +8,11 @@ import PostContainer from './components/PostContainer';
 import SinglePost from './components/SinglePost';
 import SideBarPremium from './components/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
+import Subhome from './components/Subhome';
 
 // TODO load 10 more posts when you're near the bottom of the page - use document.documentElement.scrollHeight - window.innerHeight ?
 // TODO: Subreddit home page, add top/hot fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
+// TODO: empty the search bar after clicking on one of the SortPosts buttons
 
 function App() {
   // sortedSubs takes allsubs.json and orders them by subscriber count
@@ -27,7 +29,7 @@ function App() {
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
-  const [prevPage, setPrevPage] = useState("");
+  const [prevPage, setPrevPage] = useState("home");
   // clickedPostURL is used to fetch the post's json data
   const [clickedPostURL, setClickedPostURL] = useState("");
   // clickedPost stores the data from fetching the post's json data
@@ -59,10 +61,9 @@ function App() {
       } else console.log("oh dear");
     })
   }, [search])
-  // selectedSubreddit no longer a dependency
 
   useEffect(() => {
-    if (page !== "home") {
+    if (page === "comment") {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "scroll";
@@ -99,33 +100,47 @@ function App() {
         setSelectedSubreddit={setSelectedSubreddit}
         setSearch={setSearch}
         allSubreddits={allSubreddits}
+        page={page}
+        setPage={setPage}
+        setPrevPage={setPrevPage}
       />
       <Trending page={page} />
+
       <div className={page === "home" ? "main-container" : "main-container hide"}>
-      <PostContainer
-        posts={posts}
-        linkPosts={linkPosts}
-        setLinkPosts={setLinkPosts}
-        setSelectedSubreddit={setSelectedSubreddit}
-        setSearch={setSearch}
-        selectedSubreddit={selectedSubreddit}
-        setClickedPostURL={setClickedPostURL}
-        setSortTop={setSortTop}
-        setCachedClickedPostData={setCachedClickedPostData}
-        setScrollPosition={setScrollPosition}
-      />
-      <div className="sidebar-container">
-        <SideBar setSelectedSubreddit={setSelectedSubreddit} />
-        <SideBarPremium />
-        <SideBarLinks page={page} />
+        <PostContainer
+          posts={posts}
+          page={page}
+          setPage={setPage}
+          setPrevPage={setPrevPage}
+          linkPosts={linkPosts}
+          setLinkPosts={setLinkPosts}
+          setSelectedSubreddit={setSelectedSubreddit}
+          setSearch={setSearch}
+          selectedSubreddit={selectedSubreddit}
+          setClickedPostURL={setClickedPostURL}
+          setSortTop={setSortTop}
+          setCachedClickedPostData={setCachedClickedPostData}
+          setScrollPosition={setScrollPosition}
+          selectedSubreddit={selectedSubreddit}
+        />
+        <div className="sidebar-container">
+          <SideBar
+            selectedSubreddit={selectedSubreddit}
+            setSelectedSubreddit={setSelectedSubreddit}
+            setSearch={setSearch}
+            page={page}
+            setPage={setPage}
+            setPrevPage={setPrevPage}
+          />
+          <SideBarPremium />
+          <SideBarLinks page={page} />
+        </div>
       </div>
-      </div>
-      <div className={page === "home" ? "main-container hide" : "main-container"}>
+
+      <div className={page === "comment" ? "main-container" : "main-container hide"}>
         <SinglePost
           setClickedPostURL={setClickedPostURL}
           clickedPost={clickedPost}
-          setPage={setPage}
-          setPrevPage={setPrevPage}
           setClickedPost={setClickedPost}
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
@@ -133,8 +148,14 @@ function App() {
           cachedClickedPostData={cachedClickedPostData}
           scrollPosition={scrollPosition}
           page={page}
+          setPage={setPage}
           prevPage={prevPage}
+          setPrevPage={setPrevPage}
+          setSearch={setSearch}
         />
+      </div>
+      <div className={page === "subhome" ? "main-container" : "main-container hide"}>
+        <Subhome posts={posts} />
       </div>
     </div>
   );

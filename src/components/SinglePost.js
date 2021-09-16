@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import CommentSideBar from './CommentSideBar';
+import SinglePostSideBar from './SinglePostSideBar';
 import UpArrow from "../images/up-arrow.png";
 import DownArrow from "../images/down-arrow.png";
 import SpeechBubble from "../images/speech.png";
@@ -14,7 +14,7 @@ import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from './SideBarLinks';
 
-export default function SinglePost({ clickedPost, setClickedPost, setClickedPostURL, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition, page, setPage, prevPage, setPrevPage }) {
+export default function SinglePost({ clickedPost, setClickedPost, setClickedPostURL, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition, page, setPage, prevPage, setPrevPage, setSearch }) {
 
   const showHomepage = e => {
     if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
@@ -25,7 +25,7 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
       // setClickedPostURL must be called in order for the clickedPost to return to an empty string, otherwise the clickedPostURL doesn't reset when the post is closed, and then the same post can't be reopened
       setClickedPostURL("");
       document.querySelector(".SinglePost-page").style.display = "hidden";
-      document.querySelector(".CommentSideBar").style.display = "hidden";
+      document.querySelector(".SinglePostSideBar").style.display = "hidden";
     }
   }
 
@@ -82,7 +82,16 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
               </div>
             </div>
             <div className="singlepost-right">
-              <SinglePostTopBar clickedPost={clickedPost} subredditThumbnail={cachedClickedPostData.subredditThumbnail} timePosted={cachedClickedPostData.timePosted}  />
+              <SinglePostTopBar
+                clickedPost={clickedPost}
+                subredditThumbnail={cachedClickedPostData.subredditThumbnail}
+                timePosted={cachedClickedPostData.timePosted}
+                page={page}
+                setPage={setPage}
+                setPrevPage={setPrevPage}
+                setSelectedSubreddit={setSelectedSubreddit}
+                setSearch={setSearch}
+              />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
                 ? <SingleVideoPost
@@ -151,7 +160,7 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
             </div>
           </div>
           <div className="sidebar-container">
-            <CommentSideBar
+            <SinglePostSideBar
               subreddit={cachedClickedPostData.subreddit}
               subredditThumbnail={cachedClickedPostData.subredditThumbnail}
               setSelectedSubreddit={setSelectedSubreddit}

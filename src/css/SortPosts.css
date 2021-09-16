@@ -1,17 +1,10 @@
 .SortPosts {
   display: flex;
-  margin-top: 10px;
+  /* margin-top: 60px; */
   height: 60px;
   /* width: 642px; */
   max-width: 640px;
   margin-bottom: 16px;
-}
-
-.popular-title {
-  /* margin-left: 272px; */
-  margin-top: 72px;
-  font-size: 0.85rem;
-  font-weight: 500;
 }
 
 .popular-container {
@@ -60,7 +53,7 @@
   border-radius: 100vmax;
   font-weight: bold;
   padding: 1px 8px 7px 8px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-left: 20px;
   cursor: pointer;
 }
@@ -75,7 +68,7 @@
   border-radius: 100vmax;
   font-weight: bold;
   padding: 6px 17px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-right: 10px;
   cursor: pointer;
 }
@@ -96,7 +89,7 @@
   height: 20px;
   width: 20px;
   top: 4px;
-  right: 2px;
+  right: 5px;
 }
 
 .new-grey {
@@ -125,9 +118,9 @@
   position: relative;
   /* bottom: 2px; */
   color: #878A8C;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
-  right: 10px;
+  /* right: 10px; */
   padding: 3px 7px 6px 7px;
   cursor: pointer;
   border-radius: 20px;
@@ -170,7 +163,7 @@
   position: relative;
   /* bottom: 3px; */
   color: #878A8C;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   cursor: pointer;
   border-radius: 18px;
@@ -186,7 +179,7 @@
   /* bottom: 2px; */
   color: rgb(0, 121, 211);
   left: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   right: 10px;
   cursor: pointer;
@@ -220,7 +213,7 @@
 }
 
 .popular-view {
-  padding-left: 115px;
+  /* padding-left: 115px; */
   padding-right: 12px;
   margin-right: 0;
   position: relative;

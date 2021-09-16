@@ -1,6 +1,6 @@
 .SinglePost-page {
   display: flex;
-  width: 100vw;
+  width: 100%;
   /* this height was working fine */
   height: calc(100vh - 48px);
   overflow-y: scroll;

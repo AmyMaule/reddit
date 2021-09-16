@@ -33,3 +33,11 @@
   width: 238px;
   border-radius: 8px;
 }
+
+.popular-title {
+  /* margin-left: 272px; */
+  margin-top: 22px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-left: calc(50% - 487px);
+}

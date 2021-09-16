@@ -1,9 +1,9 @@
 import React from 'react';
 import DefaultThumbnail from "../images/logo-small.png";
 
-export default function CommentSideBar({ subreddit, subredditThumbnail, setSelectedSubreddit }) {
+export default function SinglePostSideBar({ subreddit, subredditThumbnail, setSelectedSubreddit }) {
   return (
-    <div className="CommentSideBar">
+    <div className="SinglePostSideBar">
       <div className="comment-sidebar-community"></div>
       <div className="comment-sidebar-community-container">
         <img

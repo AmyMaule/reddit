@@ -244,6 +244,7 @@
   display: flex;
   cursor: pointer;
   padding: 10px;
+  min-width: 110px;
 }
 
 .post-comments:hover {

@@ -1,0 +1,32 @@
+.Subhome {
+  width: 100%;
+  background-color: rgb(237, 239, 241);
+}
+
+.subhome-header {
+  width: 100%;
+  display: block;
+  height: 286px;
+  margin-top: 48px;
+}
+
+.subhome-banner {
+  background-color: yellowgreen;
+  width: 100%;
+  height: 208px;
+  /* display: block; */
+}
+
+.subhome-r-bar {
+  width: 100%;
+  background-color: white;
+  height: 78px;
+  /* display: block; */
+}
+
+.subhome-content-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-left: 30px;
+}

@@ -10,7 +10,7 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPosts, setClickedPostURL, setCachedClickedPostData, setScrollPosition }) {
+export default function Post({ setSelectedSubreddit, post, page, setPage, setPrevPage, linkPosts, setLinkPosts, setClickedPostURL, setCachedClickedPostData, setScrollPosition, setSearch }) {
   const [subredditThumbnail, setSubredditThumbnail] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -51,11 +51,8 @@ export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPos
       if (data) {
           setSubredditThumbnail(data.data.icon_img);
           setIsLoaded(true);
-        } else {
-          console.log("something went wrong fetching the thumbnail from /about/.json");
-          return;
         }
-      })
+      }).catch(e => console.log("something went wrong fetching the thumbnail from /about/.json"))
     return () => {
       abortController.abort();
     };
@@ -128,12 +125,16 @@ export default function Post({ setSelectedSubreddit, post, linkPosts, setLinkPos
       </div>
       <div className="post-right">
         {isLoaded && <PostTopBar
+          page={page}
+          setPage={setPage}
+          setPrevPage={setPrevPage}
           setSelectedSubreddit={setSelectedSubreddit}
           subredditThumbnail={subredditThumbnail}
           subreddit={post.subreddit}
           author={post.author}
           all_awardings={post.all_awardings}
           posted={posted}
+          setSearch={setSearch}
         />}
 
         {/* Render different types of post based on the media it contains */}

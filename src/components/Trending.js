@@ -10,6 +10,7 @@ export default function Trending({ page }) {
         <div className="trending-block">Trending 3</div>
         <div className="trending-block">Trending 4</div>
       </div>
+      <h2 className="popular-title">Popular posts</h2>
     </div>
   )
 }

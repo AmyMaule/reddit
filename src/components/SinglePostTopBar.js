@@ -1,7 +1,7 @@
 import React from 'react';
 import DefaultThumbnail from "../images/logo-small.png";
 
-export default function SinglePostTopBar({ clickedPost, subredditThumbnail, timePosted }) {
+export default function SinglePostTopBar({ clickedPost, subredditThumbnail, timePosted, page, setPage, setPrevPage, setSelectedSubreddit, setSearch }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -18,10 +18,17 @@ export default function SinglePostTopBar({ clickedPost, subredditThumbnail, time
     }
   }) : "";
 
+  const handleSinglePageSubredditClick = () => {
+    setSelectedSubreddit(`r/${clickedPost.subreddit}`);
+    setPrevPage(page);
+    setPage("subhome");
+    setSearch(clickedPost.subreddit);
+  }
+
   return (
     <div className="singlepost-top">
       <span className="subreddit-thumbnail"><img src={subredditThumbnail ? subredditThumbnail : DefaultThumbnail} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} /></span>
-      <span className="singlepost-subreddit">r/{clickedPost.subreddit}</span>
+      <span className="singlepost-subreddit" onClick={handleSinglePageSubredditClick}>r/{clickedPost.subreddit}</span>
       <span className="singlepost-separator-dot">•</span>
       <div className="singlepost-posted-by">Posted by u/{clickedPost.author} {timePosted} ago</div>
       <span className="singlepost-awards">{awards}</span>

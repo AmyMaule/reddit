@@ -2,11 +2,14 @@
   margin-left: 12px;
   border: 1px solid #CCC;
   width: 310px;
-  /* margin-top: 80px; */
   background-color: rgb(255, 255, 255);
   border-radius: 4px;
-  height: 180px;
+  min-height: 300px;
+  max-height: 380px;
+  height: fit-content;
   margin-right: 32px;
+  display: flex;
+  flex-direction: column;
 }
 
 @font-face {
@@ -14,43 +17,131 @@
   src: url(../fonts/BentonSans\ Regular.otf);
 }
 
-.comment-sidebar-community {
+.singlepostsidebar-banner {
   width: 310px;
   height: 34px;
   font-weight: bold;
-  background-color: #bbbbdf;
   background-position: contain;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   position: relative;
 }
 
-.comment-sidebar-community-container {
-  border-bottom: 1px solid #EDEFF1;
-  width: 80%;
+.singlepostsidebar-container {
   margin-left: 10%;
   display: flex;
   align-items: center;
 }
 
-.comment-sidebar-subreddit {
+.singlepostsidebar-subreddit {
   font-weight: 500;
-  font-size: 1.1rem;
-  margin: 15px 15px 15px 10px;
+  font-size: 1rem;
+  margin: 10px 15px 5px 5px;
   cursor: pointer;
 }
 
-.comment-sidebar-subreddit-thumbnail {
+.singlepostsidebar-subreddit-thumbnail {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  margin: 15px 0;
-  margin-left: -15px;
+  margin: 10px 0 2px 0;
+  margin-left: -20px;
   cursor: pointer;
 }
 
+.singlepostsidebar-description {
+  font-size: 0.89rem;
+  line-height: 1.3rem;
+  margin-left: 12px;
+  font-weight: 400;
+  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
+}
 
+.singlepostsidebar-member-info-container {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  padding-top: 8px;
+}
 
+.singlepostsidebar-members-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  width: 50%;
+}
+
+.singlepostsidebar-num-members {
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.singlepostsidebar-members-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding-top: 1px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin-top: 1px;
+}
+
+.singlepostsidebar-online-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  width: 50%;
+}
+
+.singlepostsidebar-num-online {
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin-left: 2px;
+}
+
+.singlepostsidebar-online-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding-top: 1px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin-left: 2px;
+  margin-top: 1px;
+}
+
+.singlepostsidebar-border {
+  border-bottom: 1px solid #EDEFF1;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.singlepostsidebar-cake {
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  margin-right: 5px;
+}
+
+.singlepostsidebar-created-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.singlepostsidebar-view-all-communities {
+  padding: 4px 16px;
+  width: 280px;
+  /* the margin 0 auto and display: block center the button horizontally */
+  margin: 0 auto;
+  margin-top: 20px;
+  display: block;
+  height: 24px;
+  line-height: 17px;
+  font-size: 14px;
+  min-height: 32px;
+  min-width: 32px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
 
 @media screen and (max-width: 1119px) {
   .CommentSideBar {

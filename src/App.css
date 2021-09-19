@@ -17,12 +17,9 @@
 @import "./css/SinglePost.css";
 @import "./css/SinglePostSideBar.css";
 @import "./css/Comment.css";
-@import "./css/Subhome.css";
-@import "./css/SubhomeSideBar.css";
 
 *, *::before, *::after {
   /* font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif; */
-  font-family: 'IBM Plex Sans', sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -30,6 +27,7 @@
 body {
   background-color: rgb(218, 224, 230);
   /* margin: 0; */
+  font-family: 'IBM Plex Sans', sans-serif;
   min-height: 100vh;
 }
 
@@ -43,29 +41,29 @@ body {
   display: none;
 }
 
-.btn-blue {
+.btn {
   font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
-  background-color: rgb(0, 121, 211);
-  border: 1px solid rgb(0, 121, 211);
-  color: white;
   border-radius: 100vmax;
   font-weight: bold;
   cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-blue {
+  background-color: rgb(0, 121, 211);
+  border: 1px solid rgb(0, 121, 211);
+  color: white;
 }
 
 .btn-blue:hover {
   background-color: rgb(20, 132, 215);
 }
 
-
 .btn-white {
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
   background-color: white;
   border: 1px solid rgb(0, 121, 211);
   color: rgb(0, 121, 211);
-  border-radius: 100vmax;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .btn-white:hover {
@@ -73,13 +71,9 @@ body {
 }
 
 .btn-red {
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
   background-color: #ff4500;
   border: none;
   color: white;
-  border-radius: 100vmax;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 .btn-red:hover {

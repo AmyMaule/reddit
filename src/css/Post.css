@@ -135,7 +135,6 @@
 }
 
 .post-title {
-  font-family: IBMPlexSans, Arial, sans-serif;
   padding-left: 8px;
   padding-right: 40px;
   font-size: 1.1rem;
@@ -144,6 +143,7 @@
   cursor: pointer;
   font-weight: 500;
   color: #222222;
+  font-family: 'IBM Plex Sans', Arial, sans-serif;
 }
 
 .post-title-shortened {
@@ -215,7 +215,7 @@
 .post-image {
   max-width: 595px;
   cursor: pointer;
-  max-height: 600px;
+  max-height: 510px;
   position: relative;
 }
 
@@ -244,7 +244,6 @@
   display: flex;
   cursor: pointer;
   padding: 10px;
-  min-width: 110px;
 }
 
 .post-comments:hover {

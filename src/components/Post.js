@@ -10,10 +10,12 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, page, setPage, setPrevPage, linkPosts, setLinkPosts, setClickedPostURL, setCachedClickedPostData, setScrollPosition, setSearch }) {
-  const [subredditThumbnail, setSubredditThumbnail] = useState("");
+export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setCachedClickedPostData }) {
+  const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
+  // const [links, setLinks] = useState([]);
 
+  // console.log(links);
   // determine how long ago the post was created
   let timeNow = Date.now();
   const postedMsAgo = (timeNow/1000 - post.created_utc);
@@ -49,20 +51,26 @@ export default function Post({ setSelectedSubreddit, post, page, setPage, setPre
     .catch(err => console.log(err))
     .then(data => {
       if (data) {
-          setSubredditThumbnail(data.data.icon_img);
+          setSubredditInfo({
+            thumbnail: data.data.icon_img,
+            subscribers: data.data.subscribers,
+            active_user_count: data.data.active_user_count,
+            primary_color: data.data.primary_color, // color for banner
+            banner_background_color: data.data.banner_background_color, // color for top banner in actual subreddit
+            key_color: data.data.key_color, // color for join buttons, but not always correct
+            public_description_html: data.data.public_description_html,
+            created_utc: data.data.created_utc
+          });
           setIsLoaded(true);
+        } else {
+          console.log("something went wrong fetching the thumbnail from /about/.json");
+          return;
         }
-      }).catch(e => console.log("something went wrong fetching the thumbnail from /about/.json"))
+      })
     return () => {
       abortController.abort();
     };
   }, [])
-
-  // useEffect(() => {
-  //   if (post.post_hint === "link") setLinkPosts({...linkPosts, post});
-  //   if (linkPosts) console.log(Object.entries(linkPosts));
-  // }, [])
-
 
   // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
   let votes;
@@ -89,20 +97,15 @@ export default function Post({ setSelectedSubreddit, post, page, setPage, setPre
   })
 
   const handlePostClick = () => {
+    // this sets the subreddit thumbnail of the clicked post without having to do another fetch request
     setClickedPostURL(`https://www.reddit.com${post.permalink}`);
     setCachedClickedPostData({
+      ...subredditInfo,
       posted: posted,
       votes: votes,
       num_comments: post.num_comments,
       title: post.title,
-      subredditThumbnail: subredditThumbnail,
-      subreddit: post.subreddit,
-      flairStyle: flairStyle,
-      flairDisplay: flairDisplay,
-      link_flair_text: post.link_flair_text
     });
-    // console.log("offset: ", window.pageYOffset);
-    setScrollPosition(window.pageYOffset);
   }
 
   return (
@@ -125,16 +128,12 @@ export default function Post({ setSelectedSubreddit, post, page, setPage, setPre
       </div>
       <div className="post-right">
         {isLoaded && <PostTopBar
-          page={page}
-          setPage={setPage}
-          setPrevPage={setPrevPage}
           setSelectedSubreddit={setSelectedSubreddit}
-          subredditThumbnail={subredditThumbnail}
+          subredditInfo={subredditInfo}
           subreddit={post.subreddit}
           author={post.author}
           all_awardings={post.all_awardings}
           posted={posted}
-          setSearch={setSearch}
         />}
 
         {/* Render different types of post based on the media it contains */}

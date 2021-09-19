@@ -8,11 +8,10 @@ import PostContainer from './components/PostContainer';
 import SinglePost from './components/SinglePost';
 import SideBarPremium from './components/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
-import Subhome from './components/Subhome';
 
-// TODO load 10 more posts when you're near the bottom of the page - use document.documentElement.scrollHeight - window.innerHeight ?
-// TODO: Subreddit home page, add top/hot fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
-// TODO: empty the search bar after clicking on one of the SortPosts buttons
+// TODO load 10 more posts when you're near the bottom of the page
+// TODO check the linkpost href
+// TODO sort the search bar
 
 function App() {
   // sortedSubs takes allsubs.json and orders them by subscriber count
@@ -25,11 +24,9 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   // const [after, setAfter] = useState("");
-  const [linkPosts, setLinkPosts] = useState();
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
-  const [prevPage, setPrevPage] = useState("home");
   // clickedPostURL is used to fetch the post's json data
   const [clickedPostURL, setClickedPostURL] = useState("");
   // clickedPost stores the data from fetching the post's json data
@@ -37,13 +34,21 @@ function App() {
   // cachedClickedPostData stores the post information from the inital fetch request to reuse in SinglePost, as it takes a couple of seconds to buffer if pulling directly from the clickedPost fetch request
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [cachedClickedPostData, setCachedClickedPostData] = useState({});
+  // the clickedPostSubredditInfo returns to undefined when part of cachedClickedPostData, but is fine in its own state
+  const [clickedPostSubredditInfo, setClickedPostSubredditInfo] = useState("");
   const [sortTop, setSortTop] = useState("");
-  const [scrollPosition, setScrollPosition] = useState();
+  const [links, setLinks] = useState([]);
+
+
+  // let scrollPosition = 0;   // later... window.pageYOffset = scrollPosition;
+  // sort=(hot, new, top, controversial)
+  // fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
+  // fetch("http://www.reddit.com/top/.json?sort=top&t=all") // THIS WORKS
 
   useEffect(() => {
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`);
     // if (selectedSubreddit === "r/popular/hot" || selectedSubreddit === "r/popular")
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`)
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`)
     .then(res => {
       if (res.status === 200) {
       return res.json();
@@ -61,12 +66,13 @@ function App() {
       } else console.log("oh dear");
     })
   }, [search])
+  // selectedSubreddit no longer a dependency
 
   useEffect(() => {
-    if (page === "comment") {
+    if (page !== "home") {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "scroll";
+      document.body.style.overflow = "auto";
     }
   }, [page])
 
@@ -82,16 +88,41 @@ function App() {
         if (data) {
           setClickedPost(data[0].data.children[0].data);
           setClickedPostComments(data[1].data.children);
-        } else console.log("data error fetching post");
+        } else console.log("oh dear fetching post");
       })
-      // wait2000 waits 2 seconds before loading the comment page to give the fetch request time to get all the data
       const wait2000 = setTimeout(() => {
-        setPrevPage(page);
         setPage("comment");
       }, 2000);
       return () => clearTimeout(wait2000);
     }
-  }, [clickedPostURL])
+  }, [clickedPostURL, page])
+  // added page as dependency
+
+  useEffect(() => {
+    fetch("https://www.reddit.com/top/.json?t=day&limit=10")
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      } else console.log("Status error fetching top 100");
+    })
+    .then(data => {
+      data.data.children.map(post => {
+        if (post.data.post_hint === "link") {
+              setLinks([...links, post]);
+              // setItems([...items,
+              //   {
+              //     id: items.length,
+              //     name: itemName
+              //   }
+              // ]);
+        }
+      })
+    })
+  })
+
+  setTimeout(() => {
+    console.log(links);
+  }, 5000)
 
   return (
     <div className="App">
@@ -100,62 +131,35 @@ function App() {
         setSelectedSubreddit={setSelectedSubreddit}
         setSearch={setSearch}
         allSubreddits={allSubreddits}
-        page={page}
-        setPage={setPage}
-        setPrevPage={setPrevPage}
       />
       <Trending page={page} />
-
       <div className={page === "home" ? "main-container" : "main-container hide"}>
-        <PostContainer
-          posts={posts}
-          page={page}
-          setPage={setPage}
-          setPrevPage={setPrevPage}
-          linkPosts={linkPosts}
-          setLinkPosts={setLinkPosts}
-          setSelectedSubreddit={setSelectedSubreddit}
-          setSearch={setSearch}
-          selectedSubreddit={selectedSubreddit}
-          setClickedPostURL={setClickedPostURL}
-          setSortTop={setSortTop}
-          setCachedClickedPostData={setCachedClickedPostData}
-          setScrollPosition={setScrollPosition}
-          selectedSubreddit={selectedSubreddit}
-        />
-        <div className="sidebar-container">
-          <SideBar
-            selectedSubreddit={selectedSubreddit}
-            setSelectedSubreddit={setSelectedSubreddit}
-            setSearch={setSearch}
-            page={page}
-            setPage={setPage}
-            setPrevPage={setPrevPage}
-          />
-          <SideBarPremium />
-          <SideBarLinks page={page} />
-        </div>
+      <PostContainer
+        posts={posts}
+        setSelectedSubreddit={setSelectedSubreddit}
+        setSearch={setSearch}
+        selectedSubreddit={selectedSubreddit}
+        setClickedPostURL={setClickedPostURL}
+        setSortTop={setSortTop}
+        setCachedClickedPostData={setCachedClickedPostData}
+      />
+      <div className="sidebar-container">
+        <SideBar setSelectedSubreddit={setSelectedSubreddit} />
+        <SideBarPremium />
+        <SideBarLinks page={page} />
       </div>
-
-      <div className={page === "comment" ? "main-container" : "main-container hide"}>
+      </div>
+      <div className={page === "home" ? "main-container hide" : "main-container"}>
         <SinglePost
           setClickedPostURL={setClickedPostURL}
           clickedPost={clickedPost}
+          setPage={setPage}
           setClickedPost={setClickedPost}
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
           setClickedPostComments={setClickedPostComments}
           cachedClickedPostData={cachedClickedPostData}
-          scrollPosition={scrollPosition}
-          page={page}
-          setPage={setPage}
-          prevPage={prevPage}
-          setPrevPage={setPrevPage}
-          setSearch={setSearch}
         />
-      </div>
-      <div className={page === "subhome" ? "main-container" : "main-container hide"}>
-        <Subhome posts={posts} />
       </div>
     </div>
   );

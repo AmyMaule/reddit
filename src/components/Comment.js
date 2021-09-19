@@ -24,8 +24,6 @@ export default function Comment({ comment }) {
           return subcomment.data.body && <h6 key={subcomment.data.id} className="second-comment">{subcomment.data.body}</h6>
           /* subcomment.replies && <h6 className="third-comment">{subcomment.replies.data.children[0]}</h6> */
           })}
-
-
       </div>
     </div>
   )

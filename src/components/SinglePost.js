@@ -14,11 +14,24 @@ import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from './SideBarLinks';
 
-export default function SinglePost({ clickedPost, setClickedPost, setClickedPostURL, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition, page, setPage, prevPage, setPrevPage, setSearch }) {
+// TODO: sort the thumbnails loading slowly and showing before they are ready
+// comment
+export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData }) {
+  // console.log(cachedClickedPostData)
+  // window.pageYOffset = 0;
+
+  const flairStyle = {
+    backgroundColor: clickedPost.link_flair_background_color || "rgb(237, 239, 241)",
+    color: clickedPost.link_flair_text_color === "dark" ? "#000" : "#FFF",
+  }
+
+  const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
+    if (part.t) return <span key={i+part.a}>{part.t}</span>;
+    if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} />;
+  }) : "";
 
   const showHomepage = e => {
     if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
-      setPrevPage(page);
       setPage("home");
       setClickedPost("");
       setClickedPostComments([]);
@@ -28,18 +41,6 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
       document.querySelector(".SinglePostSideBar").style.display = "hidden";
     }
   }
-
-  // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
-  useEffect(() => {
-    // console.log(page, prevPage)
-    if (page === "home" && prevPage === "home" || page === "subhome" && prevPage === "subhome") {
-      // console.log("scroll position is:", scrollPosition);
-      window.scrollTo(0, scrollPosition);
-    } else {
-      if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
-      window.scrollTo(0, 0);
-    }
-  }, [page])
 
   useEffect(() => {
     document.body.addEventListener("click", e => {
@@ -61,7 +62,7 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
         </div>
         <div className="top-bar-title-container">
           <h3 className="top-bar-title">{cachedClickedPostData.title}</h3>
-          {cachedClickedPostData.link_flair_text && <span className="singlepost-flair" style={cachedClickedPostData.flairStyle}>{cachedClickedPostData.flairDisplay.length > 0 ? cachedClickedPostData.flairDisplay : cachedClickedPostData.link_flair_text}</span>}
+          {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
         </div>
         <div className="top-bar-btn-container">
           <div className="top-bar-btn-pointer">
@@ -84,37 +85,31 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
             <div className="singlepost-right">
               <SinglePostTopBar
                 clickedPost={clickedPost}
-                subredditThumbnail={cachedClickedPostData.subredditThumbnail}
-                timePosted={cachedClickedPostData.timePosted}
-                page={page}
-                setPage={setPage}
-                setPrevPage={setPrevPage}
-                setSelectedSubreddit={setSelectedSubreddit}
-                setSearch={setSearch}
+                cachedClickedPostData={cachedClickedPostData}
               />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
                 ? <SingleVideoPost
                     clickedPost={clickedPost}
-                    flairStyle={cachedClickedPostData.flairStyle}
-                    flairDisplay={cachedClickedPostData.flairDisplay}
+                    flairStyle={flairStyle}
+                    flairDisplay={flairDisplay}
                   />
                 : clickedPost.post_hint === "image"
                   ? <SingleImagePost
                       clickedPost={clickedPost}
-                      flairStyle={cachedClickedPostData.flairStyle}
-                      flairDisplay={cachedClickedPostData.flairDisplay}
+                      flairStyle={flairStyle}
+                      flairDisplay={flairDisplay}
                     />
                   : clickedPost.post_hint === "link"
                   ? <SingleLinkPost
                       clickedPost={clickedPost}
-                      flairStyle={cachedClickedPostData.flairStyle}
-                      flairDisplay={cachedClickedPostData.flairDisplay}
+                      flairStyle={flairStyle}
+                      flairDisplay={flairDisplay}
                     />
                   : <SingleTextPost
                       clickedPost={clickedPost}
-                      flairStyle={cachedClickedPostData.flairStyle}
-                      flairDisplay={cachedClickedPostData.flairDisplay}
+                      flairStyle={flairStyle}
+                      flairDisplay={flairDisplay}
                     />
               }
 
@@ -146,8 +141,8 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
               <div className="signup-bar">
                   <span className="signup-text">Log in or sign up to leave a comment</span>
                   <span>
-                    <button className="btn-white post-btn-login">Log In</button>
-                    <button className="btn-blue post-btn-signup">Sign Up</button>
+                    <button className="btn btn-white post-btn-login">Log In</button>
+                    <button className="btn btn-blue post-btn-signup">Sign Up</button>
                   </span>
               </div>
 
@@ -161,8 +156,8 @@ export default function SinglePost({ clickedPost, setClickedPost, setClickedPost
           </div>
           <div className="sidebar-container">
             <SinglePostSideBar
-              subreddit={cachedClickedPostData.subreddit}
-              subredditThumbnail={cachedClickedPostData.subredditThumbnail}
+              subreddit={clickedPost.subreddit}
+              cachedClickedPostData={cachedClickedPostData}
               setSelectedSubreddit={setSelectedSubreddit}
             />
             <SideBarLinks />

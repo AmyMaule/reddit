@@ -1,6 +1,6 @@
 .SinglePost-page {
   display: flex;
-  width: 100%;
+  width: 100vw;
   /* this height was working fine */
   height: calc(100vh - 48px);
   overflow-y: scroll;
@@ -138,7 +138,7 @@
   display: flex;
   position: relative;
   margin-top: 48px;
-  padding-top: 30px;
+  padding-top: 32px;
   /* offset: 17px; */
   /* padding: 0 8%; */
   /* margin-top: 48px; */
@@ -150,7 +150,7 @@
 
 .singlepost-post {
   /* width: 100%; */
-  max-width: 740px;
+  max-width: 840px;
   min-width: 550px;
   background-color: rgb(255, 255, 255);
   min-height: 300px;
@@ -195,24 +195,28 @@
   display: flex;
   flex-direction: column;
   width: calc(100%-40px);
-  max-width: 650px;
+  max-width: 700px;
 }
 
 .singlepost-top {
   padding-left: 8px;
   width: 100%;
-  padding-top: 5px;
+  padding-top: 1px;
+  display: inline;
+  /* white-space: nowrap; */
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .singlepost-subreddit {
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
 }
 
 .singlepost-posted-by {
   color: #7c7c7c;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   cursor: pointer;
   display: inline-flex;
 }
@@ -294,7 +298,7 @@
 .singlepost-image {
   max-width: 700px;
   cursor: pointer;
-  /* max-height: 700px; */
+  max-height: 700px;
   display: flex;
   width: 100%;
 }
@@ -340,7 +344,6 @@
 .singlepost-comments-text {
   position: relative;
   left: 8px;
-  white-space: nowrap;
 }
 
 .singlepost-comments:hover {

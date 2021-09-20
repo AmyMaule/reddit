@@ -38,6 +38,7 @@ function App() {
   const [clickedPostSubredditInfo, setClickedPostSubredditInfo] = useState("");
   const [sortTop, setSortTop] = useState("");
   const [links, setLinks] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState();
 
 
   // let scrollPosition = 0;   // later... window.pageYOffset = scrollPosition;
@@ -142,6 +143,7 @@ function App() {
         setClickedPostURL={setClickedPostURL}
         setSortTop={setSortTop}
         setCachedClickedPostData={setCachedClickedPostData}
+        setScrollPosition={setScrollPosition}
       />
       <div className="sidebar-container">
         <SideBar setSelectedSubreddit={setSelectedSubreddit} />
@@ -153,12 +155,14 @@ function App() {
         <SinglePost
           setClickedPostURL={setClickedPostURL}
           clickedPost={clickedPost}
+          page={page}
           setPage={setPage}
           setClickedPost={setClickedPost}
           setSelectedSubreddit={setSelectedSubreddit}
           comments={clickedPostComments}
           setClickedPostComments={setClickedPostComments}
           cachedClickedPostData={cachedClickedPostData}
+          scrollPosition={scrollPosition}
         />
       </div>
     </div>

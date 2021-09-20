@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
-// import Hot from "../images/hot.png";
-// import HotBlue from "../images/hot-blue.png";
 import Rectangle from "../images/rectangle.png";
-// import New from "../images/star.png";
-// import NewBlue from "../images/star-blue.png";
-// import Top from "../images/top.png";
-// import TopBlue from "../images/top-blue.png";
 import VBlue from "../images/v-blue.png";
 import blank from "../images/blank.png";
 import GeoFilter from "../geofilter.json";
 
 // TODO: empty the search bar after clicking on one of these buttons
 
-export default function SortPosts({ selectedSubreddit, setSelectedSubreddit, setSearch, setSortTop }) {
+export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop }) {
   let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
@@ -75,16 +69,17 @@ export default function SortPosts({ selectedSubreddit, setSelectedSubreddit, set
     e.target.classList.add("clicked");
   }
 
+  const handleToggles = e => {
+    toggleCountriesMenu(e);
+    toggleSortMenu(e);
+  }
+
   useEffect(() => {
-    document.body.addEventListener("click", e => {
-      toggleCountriesMenu(e);
-      toggleSortMenu(e);
-    });
-    return function cleanupToggleMenus() {
-        window.removeEventListener("click", toggleCountriesMenu);
-        window.removeEventListener("click", toggleSortMenu);
+    window.addEventListener("click", handleToggles);
+    return () => {
+      window.removeEventListener("click", handleToggles);
     }
-  }, []);
+  });
 
   return (
     <>

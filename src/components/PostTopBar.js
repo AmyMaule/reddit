@@ -29,8 +29,6 @@ export default function PostTopBar({ setSelectedSubreddit, subredditInfo, subred
     }
   });
 
-
-
   return (
     <div className="post-top">
     {/* tons of subreddits don't have icon links in the API even though they do have their own thumbnails, so they just get the default logo instead */}

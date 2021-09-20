@@ -48,13 +48,11 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
   }
 
   useEffect(() => {
-    document.body.addEventListener('click', e => {
-      toggleSearchDropdown(e)
-    });
-    return function cleanupToggleSearchDropdown() {
-        window.removeEventListener('click', toggleSearchDropdown);
+    document.body.addEventListener('click', toggleSearchDropdown);
+    return () => {
+      window.removeEventListener('click', toggleSearchDropdown);
     }
-  }, []);
+  });
 
   const handleReturnToHome = () => {
     setSelectedSubreddit("r/popular");

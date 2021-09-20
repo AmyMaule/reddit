@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post";
 import SortPosts from "./SortPosts";
 
-export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setSortTop, setCachedClickedPostData }) {
+export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setSortTop, setCachedClickedPostData, setScrollPosition }) {
   // let links = [];
   // posts.map(post => {
   //   if (post.data.post_hint === "link") {
@@ -26,6 +26,7 @@ export default function PostContainer({ posts, setSelectedSubreddit, setSearch, 
             setClickedPostURL={setClickedPostURL}
             setSelectedSubreddit={setSelectedSubreddit}
             setCachedClickedPostData={setCachedClickedPostData}
+            setScrollPosition={setScrollPosition}
           />
       }
       )}

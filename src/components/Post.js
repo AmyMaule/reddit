@@ -10,7 +10,7 @@ import LinkPost from './LinkPost';
 import PostTopBar from './PostTopBar';
 import TextPost from './TextPost';
 
-export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setCachedClickedPostData }) {
+export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setCachedClickedPostData, setScrollPosition }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   // const [links, setLinks] = useState([]);
@@ -106,6 +106,7 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
       num_comments: post.num_comments,
       title: post.title,
     });
+    setScrollPosition(window.pageYOffset);
   }
 
   return (

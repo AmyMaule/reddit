@@ -16,7 +16,7 @@ import SideBarLinks from './SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
 // comment
-export default function SinglePost({ clickedPost, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData }) {
+export default function SinglePost({ clickedPost, page, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition }) {
   // console.log(cachedClickedPostData)
   // window.pageYOffset = 0;
 
@@ -43,13 +43,23 @@ export default function SinglePost({ clickedPost, setPage, setClickedPostURL, se
   }
 
   useEffect(() => {
-    document.body.addEventListener("click", e => {
-        showHomepage(e);
-    });
-    return function cleanupSinglePost() {
+    document.body.addEventListener("click", showHomepage);
+    return () => {
       window.removeEventListener('click', showHomepage);
     }
-  }, []);
+  });
+
+    // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
+    useEffect(() => {
+      // console.log(page, prevPage)
+      if (page === "home") {
+        // console.log("scroll position is:", scrollPosition);
+        window.scrollTo(0, scrollPosition);
+      } else {
+        if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
+        window.scrollTo(0, 0);
+      }
+    }, [page]);
 
   return (
     <>

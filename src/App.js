@@ -34,22 +34,17 @@ function App() {
   // cachedClickedPostData stores the post information from the inital fetch request to reuse in SinglePost, as it takes a couple of seconds to buffer if pulling directly from the clickedPost fetch request
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [cachedClickedPostData, setCachedClickedPostData] = useState({});
-  // the clickedPostSubredditInfo returns to undefined when part of cachedClickedPostData, but is fine in its own state
-  const [clickedPostSubredditInfo, setClickedPostSubredditInfo] = useState("");
   const [sortTop, setSortTop] = useState("");
-  const [links, setLinks] = useState([]);
   const [scrollPosition, setScrollPosition] = useState();
 
 
-  // let scrollPosition = 0;   // later... window.pageYOffset = scrollPosition;
   // sort=(hot, new, top, controversial)
   // fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
   // fetch("http://www.reddit.com/top/.json?sort=top&t=all") // THIS WORKS
 
   useEffect(() => {
     const abortApp = new AbortController();
-    // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`);
-    // if (selectedSubreddit === "r/popular/hot" || selectedSubreddit === "r/popular")
+    // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
     fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
@@ -99,14 +94,13 @@ function App() {
         if (data) {
           setClickedPost(data[0].data.children[0].data);
           setClickedPostComments(data[1].data.children);
-        } else console.log("oh dear fetching post");
+        }
       })
       .catch(err => {
         if (err.name !== "AbortError") {
-          console.log("The error is:", err);
+          console.log("abortClickedPostApp:", err);
         } else console.log("app fetch aborted");
       })
-
       const wait2000 = setTimeout(() => {
         setPage("comment");
       }, 2000);
@@ -117,35 +111,6 @@ function App() {
     }
   }, [clickedPostURL, page])
   // added page as dependency
-
-  // useEffect(() => {
-  //   fetch("https://www.reddit.com/top/.json?t=day&limit=10")
-  //   .then(res => {
-  //     if (res.status === 200) {
-  //       return res.json();
-  //     } else console.log("Status error fetching top 100");
-  //   })
-  //   .then(data => {
-  //     data.data.children.map(post => {
-  //       if (post.data.post_hint === "link") {
-  //             setLinks([...links, post]);
-  //             // setItems([...items,
-  //             //   {
-  //             //     id: items.length,
-  //             //     name: itemName
-  //             //   }
-  //             // ]);
-  //       }
-  //     })
-  //   })
-  //   .catch(err => {
-  //     console.log("oh app:142", err);
-  //   })
-  // })
-
-  // setTimeout(() => {
-  //   console.log(links);
-  // }, 5000)
 
   return (
     <div className="App">

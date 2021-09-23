@@ -4,6 +4,7 @@ import UserIcon from "../images/user-2.png";
 import V from "../images/v.png";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
+// TODO: Finish attaching arrow keys to search
 
 export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSearch, allSubreddits }) {
   const [searchResults, setSearchResults] = useState([]);
@@ -28,6 +29,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
       }
     })
     setSearchResults(searchHistory);
+    // if (e.code === "ArrowDown") console.log(2)
   }
 
   const handleSearchSelect = sub => {
@@ -36,7 +38,6 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
     document.querySelector(".dropdown-subreddits").style.display = "none";
     setSearchResults([]);
     console.log(selectedSubreddit)
-
   }
 
   const toggleSearchDropdown = e => {
@@ -47,12 +48,24 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
     }
   }
 
+  // TODO: Finish attaching arrow keys to search
+  const handleArrowKeySearch = e => {
+    if (e.keyCode === 40 || e.keyCode === 38) console.log(e);
+  }
+
   useEffect(() => {
-    document.body.addEventListener('click', toggleSearchDropdown);
+    window.addEventListener("click", toggleSearchDropdown);
     return () => {
-      window.removeEventListener('click', toggleSearchDropdown);
+      window.removeEventListener("click", toggleSearchDropdown);
     }
   });
+
+  useEffect(() => {
+    window.addEventListener("click", handleArrowKeySearch);
+    return () => {
+      window.removeEventListener("click", handleArrowKeySearch);
+    }
+  })
 
   const handleReturnToHome = () => {
     setSelectedSubreddit("r/popular");
@@ -67,7 +80,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
       </div>
       <form className="searchbar-container">
         <img src={SearchIcon} className="search-icon" alt="search-icon" />
-        <input className="searchbar-subreddits" placeholder="Search Reddit" value={selectedSubreddit} onChange={handleSearch} />
+        <input className="searchbar-subreddits" placeholder="Search Reddit" value={selectedSubreddit} onChange={handleSearch} onKeyDown={handleArrowKeySearch} />
         <div className="dropdown-subreddits">
           {searchResults.slice(0, 5).map(sub => <div className="dropdown-div" onClick={() => handleSearchSelect(sub)} key={sub}>{sub}</div>)}
         </div>

@@ -499,10 +499,9 @@
   background-color: rgb(238, 238, 238);
 }
 
-
-@media screen and (max-width: 1465px) {
-  .singlepost-close {
+/* @media screen and (max-width: 1465px) { */
+  /* .singlepost-close { */
     /* at lower than 1465px, both .singlepost-close and .singlepost-container use -160px */
-    width: calc(100% - 160px);
-  }
-}
+    /* width: calc(100% - 160px); */
+  /* } */
+/* } */

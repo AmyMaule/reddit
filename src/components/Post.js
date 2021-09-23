@@ -45,10 +45,9 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
   }
 
   useEffect(() => {
-    const abortController = new AbortController();
-    fetch(`https://www.reddit.com/r/${post.subreddit}/about/.json`, { signal: abortController.signal })
+    const abortPost = new AbortController();
+    fetch(`https://www.reddit.com/r/${post.subreddit}/about/.json`, { signal: abortPost.signal })
     .then(res => res.json())
-    .catch(err => console.log(err))
     .then(data => {
       if (data) {
           setSubredditInfo({
@@ -67,9 +66,14 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
           return;
         }
       })
+      .catch(err => {
+        if (err.name !== "AbortError") {
+          console.log(err);
+        } else console.log("post fetch aborted")
+      })
     return () => {
-      abortController.abort();
-    };
+      abortPost.abort();
+    }
   }, [])
 
   // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0

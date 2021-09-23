@@ -5,7 +5,7 @@
   background-color: rgb(255, 255, 255);
   border-radius: 4px;
   min-height: 300px;
-  max-height: 380px;
+  max-height: 540px;
   height: fit-content;
   margin-right: 32px;
   display: flex;
@@ -55,6 +55,7 @@
   margin-left: 12px;
   font-weight: 400;
   font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
+  padding-right: 5px;
 }
 
 .singlepostsidebar-member-info-container {
@@ -143,8 +144,9 @@
   margin-bottom: 20px;
 }
 
+
 @media screen and (max-width: 1119px) {
-  .CommentSideBar {
+  .SinglePostSideBar {
     display: none;
   }
 }

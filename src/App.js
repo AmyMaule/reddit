@@ -47,9 +47,10 @@ function App() {
   // fetch("http://www.reddit.com/top/.json?sort=top&t=all") // THIS WORKS
 
   useEffect(() => {
+    const abortApp = new AbortController();
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`);
     // if (selectedSubreddit === "r/popular/hot" || selectedSubreddit === "r/popular")
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`)
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
       return res.json();
@@ -66,6 +67,14 @@ function App() {
         // return () => clearInterval(checkForNewPosts);
       } else console.log("oh dear");
     })
+    .catch(err => {
+      if (err.name !== "AbortError") {
+        console.log("The error is:", err);
+      } else console.log("app first fetch aborted");
+    })
+    return () => {
+      abortApp.abort();
+    }
   }, [search])
   // selectedSubreddit no longer a dependency
 
@@ -78,8 +87,9 @@ function App() {
   }, [page])
 
   useEffect(() => {
+    const abortClickedPostApp = new AbortController();
     if (clickedPostURL) {
-      fetch(`${clickedPostURL}.json`)
+      fetch(`${clickedPostURL}.json`, { signal: abortClickedPostApp.signal })
       .then(res => {
         if (res.status === 200) {
           return res.json();
@@ -91,39 +101,51 @@ function App() {
           setClickedPostComments(data[1].data.children);
         } else console.log("oh dear fetching post");
       })
+      .catch(err => {
+        if (err.name !== "AbortError") {
+          console.log("The error is:", err);
+        } else console.log("app fetch aborted");
+      })
+
       const wait2000 = setTimeout(() => {
         setPage("comment");
       }, 2000);
       return () => clearTimeout(wait2000);
     }
+    return () => {
+      abortClickedPostApp.abort();
+    }
   }, [clickedPostURL, page])
   // added page as dependency
 
-  useEffect(() => {
-    fetch("https://www.reddit.com/top/.json?t=day&limit=10")
-    .then(res => {
-      if (res.status === 200) {
-        return res.json();
-      } else console.log("Status error fetching top 100");
-    })
-    .then(data => {
-      data.data.children.map(post => {
-        if (post.data.post_hint === "link") {
-              setLinks([...links, post]);
-              // setItems([...items,
-              //   {
-              //     id: items.length,
-              //     name: itemName
-              //   }
-              // ]);
-        }
-      })
-    })
-  })
+  // useEffect(() => {
+  //   fetch("https://www.reddit.com/top/.json?t=day&limit=10")
+  //   .then(res => {
+  //     if (res.status === 200) {
+  //       return res.json();
+  //     } else console.log("Status error fetching top 100");
+  //   })
+  //   .then(data => {
+  //     data.data.children.map(post => {
+  //       if (post.data.post_hint === "link") {
+  //             setLinks([...links, post]);
+  //             // setItems([...items,
+  //             //   {
+  //             //     id: items.length,
+  //             //     name: itemName
+  //             //   }
+  //             // ]);
+  //       }
+  //     })
+  //   })
+  //   .catch(err => {
+  //     console.log("oh app:142", err);
+  //   })
+  // })
 
-  setTimeout(() => {
-    console.log(links);
-  }, 5000)
+  // setTimeout(() => {
+  //   console.log(links);
+  // }, 5000)
 
   return (
     <div className="App">

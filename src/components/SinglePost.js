@@ -15,11 +15,7 @@ import CommentsContainer from './CommentsContainer';
 import SideBarLinks from './SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
-// comment
 export default function SinglePost({ clickedPost, page, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition }) {
-  // console.log(cachedClickedPostData)
-  // window.pageYOffset = 0;
-
   const flairStyle = {
     backgroundColor: clickedPost.link_flair_background_color || "rgb(237, 239, 241)",
     color: clickedPost.link_flair_text_color === "dark" ? "#000" : "#FFF",
@@ -32,6 +28,7 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
 
   const showHomepage = e => {
     if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+      console.log("OK");
       setPage("home");
       setClickedPost("");
       setClickedPostComments([]);
@@ -43,23 +40,24 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
   }
 
   useEffect(() => {
-    document.body.addEventListener("click", showHomepage);
+    window.addEventListener("click", showHomepage);
     return () => {
       window.removeEventListener('click', showHomepage);
     }
   });
 
-    // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
-    useEffect(() => {
-      // console.log(page, prevPage)
-      if (page === "home") {
-        // console.log("scroll position is:", scrollPosition);
-        window.scrollTo(0, scrollPosition);
-      } else {
-        if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
-        window.scrollTo(0, 0);
-      }
-    }, [page]);
+  // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
+  useEffect(() => {
+    // console.log(page, prevPage)
+    if (page === "home") {
+      // console.log("scroll position is:", scrollPosition);
+      window.scrollTo(0, scrollPosition);
+    } else {
+      if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+  }, [page]);
+  // not sure about dependencies, re-evaluate after subhome page is functioning
 
   return (
     <>

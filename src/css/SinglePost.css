@@ -16,7 +16,7 @@
 .singlepost-close {
   position: fixed;
   max-width: 1280px;
-  /* no idea why these 2 siblings are not the same width when I use width: calc(100% - 160px) for both??? they are the same width when this is -176px and the .singlepost-container is -160px */
+  /* no idea why these 2 siblings are not the same width when I use width: calc(100% - 160px) for both - at lower than 1465px, both .singlepost-close and .singlepost-container use -160px but above this, they are the same width when .singlepost-close is -176px and the .singlepost-container is -160px */
   width: calc(100% - 176px);
   height: 48px;
   background-color: black;
@@ -497,4 +497,12 @@
   width: calc(100% + 40px);
   margin-left: -40px;
   background-color: rgb(238, 238, 238);
+}
+
+
+@media screen and (max-width: 1465px) {
+  .singlepost-close {
+    /* at lower than 1465px, both .singlepost-close and .singlepost-container use -160px */
+    width: calc(100% - 160px);
+  }
 }

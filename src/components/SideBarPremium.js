@@ -12,7 +12,7 @@ export default function SideBarPremium() {
       </div>
     </div>
     <div className="btn-try-now-container">
-      <button className="btn-red btn-try-now">Try Now</button>
+      <button className="btn btn-red btn-try-now">Try Now</button>
     </div>
     </div>
   )

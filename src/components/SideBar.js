@@ -44,7 +44,7 @@ export default function SideBar({ setSelectedSubreddit }) {
           <span className="sidebar-subreddit-name">r/AskMen</span>
         </div>
       </div>
-      <button className="btn-blue view-all-communities">View All</button>
+      <button className="btn btn-blue view-all-communities">View All</button>
       <div className="small-btns">
         <button className="btn-community-small" onClick={() => setSelectedSubreddit("top")}>Top</button>
         <button className="btn-community-small" onClick={() => setSelectedSubreddit("r/news")}>News</button>

@@ -10,8 +10,7 @@ import SideBarPremium from './components/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
 
 // TODO load 10 more posts when you're near the bottom of the page
-// TODO check the linkpost href
-// TODO sort the search bar
+// TODO add keyboard functionality to search bar
 
 function App() {
   // sortedSubs takes allsubs.json and orders them by subscriber count
@@ -23,7 +22,6 @@ function App() {
   allSubreddits = allSubreddits.map(sub => sub.toLowerCase());
 
   const [posts, setPosts] = useState([]);
-  // const [after, setAfter] = useState("");
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
@@ -37,11 +35,6 @@ function App() {
   const [sortTop, setSortTop] = useState("");
   const [scrollPosition, setScrollPosition] = useState();
 
-
-  // sort=(hot, new, top, controversial)
-  // fetch("http://www.reddit.com/r/aww/top/.json?sort=top") // THIS WORKS
-  // fetch("http://www.reddit.com/top/.json?sort=top&t=all") // THIS WORKS
-
   useEffect(() => {
     const abortApp = new AbortController();
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
@@ -54,12 +47,6 @@ function App() {
     .then(data => {
       if (data) {
         setPosts(data.data.children);
-        // try checking for new posts every 30 seconds
-        // const checkForNewPosts = setInterval(() => {
-        //   if (data.data.before !== null) console.log("There's a before")
-        //   if (after !== data.data.after) setAfter(data.data.after);
-        // }, 30000);
-        // return () => clearInterval(checkForNewPosts);
       } else console.log("oh dear");
     })
     .catch(err => {
@@ -71,7 +58,7 @@ function App() {
       abortApp.abort();
     }
   }, [search])
-  // selectedSubreddit no longer a dependency
+  // selectedSubreddit no longer a dependency due to search bar problems
 
   useEffect(() => {
     if (page !== "home") {
@@ -110,7 +97,6 @@ function App() {
       abortClickedPostApp.abort();
     }
   }, [clickedPostURL, page])
-  // added page as dependency
 
   return (
     <div className="App">
@@ -159,15 +145,4 @@ function App() {
 export default App;
 
 // if (data.before) - display a little popup or add a bar or something that says "new posts" or console.log("new posts")
-
-// setTimeout(function() {
-//     getThreads(token, before, limit);
-// }, 60000);
-
-
-  // useEffect(() => {
-  //   const dateNow = new Date();
-  //   console.log("NEW POSTS!", dateNow.toTimeString())
-  // }, [after])
-
-  // check for new posts every 30 seconds, if the "before" property of the data changes, there are new posts ????
+// check for new posts every 30 seconds, if the "before" property of the data changes, there are new posts?

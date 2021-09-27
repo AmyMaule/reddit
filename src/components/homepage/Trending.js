@@ -65,7 +65,7 @@ export default function Trending({ page }) {
         <div className="trending-blocks">
         {isLoading
         ? <>
-            <div className="trending-block"></div>
+            <div className="trending-block-img"></div>
           </>
         : <>
             {trendingLinks.slice(0, 4).map(link => {

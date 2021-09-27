@@ -283,9 +283,9 @@
   background-color: black;
   justify-content: center;
   display: flex;
-  max-width: 600px;
-
-  margin-top: 10px;
+  max-width: 100%;
+  /* max-width: 600px; */
+  /* margin-top: 10px; */
   position: relative;
 }
 

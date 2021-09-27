@@ -28,7 +28,6 @@
   margin-left: 6px;
   margin-right: 6px;
   height: 178px;
-  /* padding: 12px; */
   width: 238px;
   border-radius: 8px;
   opacity: 0.9;
@@ -38,19 +37,13 @@
 }
 
 .black-overlay {
-  /* margin-left: 6px;
-  margin-right: 6px; */
   height: 178px;
-  /* padding: 12px; */
   width: 238px;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.1);
   opacity: 1;
   z-index: 10;
   display: inline;
-  /* bottom: 178px; */
-  /* opacity: 0.4; */
-  /* object-fit: cover; */
 }
 
 .no-data {

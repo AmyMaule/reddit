@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultThumbnail from "../images/logo-small.png";
+import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function SinglePostTopBar({ clickedPost, cachedClickedPostData }) {
   const awardStyle = {

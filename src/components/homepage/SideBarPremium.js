@@ -1,5 +1,5 @@
 import React from 'react';
-import PremiumIcon from "../images/premium.png";
+import PremiumIcon from "../../images/premium.png";
 
 export default function SideBarPremium() {
   return (

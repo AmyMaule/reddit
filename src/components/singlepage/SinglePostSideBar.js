@@ -1,6 +1,6 @@
 import React from 'react';
-import DefaultThumbnail from "../images/logo-small.png";
-import Cake from "../images/cake.png";
+import DefaultThumbnail from "../../images/logo-small.png";
+import Cake from "../../images/cake.png";
 
 export default function SinglePostSideBar({ subreddit, cachedClickedPostData, setSelectedSubreddit }) {
   // If there are a million or more members, round to 1 decimal place and add "m" otherwise if there are a thousand or more, round to 1 decimal place and add "k"

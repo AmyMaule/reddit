@@ -1,10 +1,10 @@
 import React from 'react';
-import UpV from "../images/up-v.png";
-import MadeMeSmile from "../images/mademesmile.png";
-import RareInsults from "../images/rareinsults.png";
-import CoolGuides from "../images/coolguides.png";
-import LifeProTips from "../images/lifeprotips.png";
-import AskMen from "../images/askmen.png";
+import UpV from "../../images/up-v.png";
+import MadeMeSmile from "../../images/mademesmile.png";
+import RareInsults from "../../images/rareinsults.png";
+import CoolGuides from "../../images/coolguides.png";
+import LifeProTips from "../../images/lifeprotips.png";
+import AskMen from "../../images/askmen.png";
 
 export default function SideBar({ setSelectedSubreddit }) {
   return (

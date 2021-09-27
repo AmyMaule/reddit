@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import DefaultThumbnail from "../images/logo-small.png";
+import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function Trending({ page }) {
   const [isLoading, setIsLoading] = useState(true);
+  // trendingLinks stores the top trending link posts to use in the Trending component
   const [trendingLinks, setTrendingLinks] = useState([]);
 
-    // trendingLinks stores the top trending link posts to use in the Trending component
-  // let trendingLinks = [];
+  // These subs contain popular non-news link posts - these should not be put in the trending blocks
+  let notTrendingSubs = ["Eyebleach", "todayilearned"]
   useEffect(() => {
     fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100")
     .then(res => {
@@ -16,7 +17,8 @@ export default function Trending({ page }) {
     })
     .then(data => {
       data.data.children.map((post, i) => {
-        if (trendingLinks < 5 && post.data.post_hint === "link") {
+        // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
+        if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1 ) {
             setTrendingLinks(prevLinks => {
               if (!prevLinks) return post.data;
               return [...prevLinks, post.data];
@@ -38,7 +40,6 @@ export default function Trending({ page }) {
         // the image from the API is encoded using &amp; so needs to be removed in order to display
         link.img = link.preview.images[0].source.url.replace("&amp;", "&");
       })
-      // setIsLoading(false);
     }
   }, [trendingLinks]);
 

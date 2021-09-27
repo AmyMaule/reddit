@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import SinglePostSideBar from './SinglePostSideBar';
-import UpArrow from "../images/up-arrow.png";
-import DownArrow from "../images/down-arrow.png";
-import SpeechBubble from "../images/speech.png";
-import ShareArrow from "../images/share-arrow.png";
-import SaveBanner from "../images/save.png";
-import x from "../images/x.png"
+import UpArrow from "../../images/up-arrow.png";
+import DownArrow from "../../images/down-arrow.png";
+import SpeechBubble from "../../images/speech.png";
+import ShareArrow from "../../images/share-arrow.png";
+import SaveBanner from "../../images/save.png";
+import x from "../../images/x.png";
 import SinglePostTopBar from './SinglePostTopBar';
 import SingleTextPost from './SingleTextPost';
 import SingleVideoPost from './SingleVideoPost';
 import SingleImagePost from './SingleImagePost';
 import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
-import SideBarLinks from './SideBarLinks';
+import SideBarLinks from '../SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
 export default function SinglePost({ clickedPost, page, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition }) {

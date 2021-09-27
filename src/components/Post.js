@@ -4,18 +4,16 @@ import DownArrow from "../images/down-arrow.png";
 import SpeechBubble from "../images/speech.png";
 import ShareArrow from "../images/share-arrow.png";
 import SaveBanner from "../images/save.png";
-import VideoPost from './VideoPost';
-import ImagePost from './ImagePost';
-import LinkPost from './LinkPost';
-import PostTopBar from './PostTopBar';
-import TextPost from './TextPost';
+import VideoPost from "./homepage/VideoPost";
+import ImagePost from './homepage/ImagePost';
+import LinkPost from './homepage/LinkPost';
+import PostTopBar from './homepage/PostTopBar';
+import TextPost from './homepage/TextPost';
 
 export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setCachedClickedPostData, setScrollPosition }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
-  // const [links, setLinks] = useState([]);
 
-  // console.log(links);
   // determine how long ago the post was created
   let timeNow = Date.now();
   const postedMsAgo = (timeNow/1000 - post.created_utc);

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import AllSubs from "./allsubs.json";
 import Navbar from './components/Navbar';
-import Trending from './components/Trending';
-import SideBar from './components/SideBar';
-import PostContainer from './components/PostContainer';
-import SinglePost from './components/SinglePost';
-import SideBarPremium from './components/SideBarPremium';
+import Trending from './components/homepage/Trending';
+import SideBar from './components/homepage/SideBar';
+import PostContainer from "./components/PostContainer";
+import SinglePost from './components/singlepage/SinglePost';
+import SideBarPremium from './components/homepage/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
 
 // TODO load 10 more posts when you're near the bottom of the page
@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     const abortApp = new AbortController();
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`, { signal: abortApp.signal })
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
       return res.json();

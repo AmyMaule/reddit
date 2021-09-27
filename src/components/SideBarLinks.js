@@ -1,7 +1,6 @@
-import React from 'react'
+import React from 'react';
 
 export default function SideBarLinks({ page }) {
-  // margin-left: 24px;
   const SideBarLinksMarginLeft = {
     marginLeft: page === "home" ? "24px" : "12px"
   }

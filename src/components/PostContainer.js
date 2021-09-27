@@ -1,15 +1,8 @@
 import React from 'react';
-import Post from "./Post";
+import Post from './Post';
 import SortPosts from "./SortPosts";
 
 export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setClickedPostURL, setSortTop, setCachedClickedPostData, setScrollPosition }) {
-  // let links = [];
-  // posts.map(post => {
-  //   if (post.data.post_hint === "link") {
-  //     links.push(post);
-  //   }
-  // })
-
   return (
     <div className="PostContainer">
       <SortPosts

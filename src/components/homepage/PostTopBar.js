@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import DefaultThumbnail from "../images/logo-small.png";
+import React from 'react';
+import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function PostTopBar({ setSelectedSubreddit, subredditInfo, subreddit, author, all_awardings, posted }) {
   const awardStyle = {

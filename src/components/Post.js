@@ -9,6 +9,7 @@ import ImagePost from './homepage/ImagePost';
 import LinkPost from './homepage/LinkPost';
 import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
+import GalleryPost from './homepage/GalleryPost';
 
 export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setCachedClickedPostData, setScrollPosition }) {
   const [subredditInfo, setSubredditInfo] = useState("");
@@ -154,14 +155,21 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
                 flairDisplay={flairDisplay}
                 handlePostClick={handlePostClick}
               />
-            : post.post_hint === "link" || post.is_gallery
+            : post.post_hint === "link"
             ? <LinkPost
                 post={post}
                 flairStyle={flairStyle}
                 flairDisplay={flairDisplay}
                 handlePostClick={handlePostClick}
               />
-            : <TextPost
+            : post.is_gallery
+              ? <GalleryPost
+                  post={post}
+                  flairStyle={flairStyle}
+                  flairDisplay={flairDisplay}
+                  handlePostClick={handlePostClick}
+                />
+              : <TextPost
                 post={post}
                 flairStyle={flairStyle}
                 flairDisplay={flairDisplay}

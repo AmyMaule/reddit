@@ -7,7 +7,7 @@ export default function Trending({ page }) {
   const [trendingLinks, setTrendingLinks] = useState([]);
 
   // These subs contain popular non-news link posts - these should not be put in the trending blocks
-  let notTrendingSubs = ["Eyebleach", "todayilearned"]
+  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl"];
   useEffect(() => {
     fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100")
     .then(res => {

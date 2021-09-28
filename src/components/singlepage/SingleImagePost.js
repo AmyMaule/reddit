@@ -6,7 +6,7 @@ export default function SingleImagePost({ clickedPost, flairStyle, flairDisplay 
       <div className="singlepost-title">
         <span>{clickedPost.title}</span>
         {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
-        {/* {clickedPost.link_flair_text && <span className="flair" style={flairStyle}>{flairDisplay}</span>} */}
+        {clickedPost.is_original_content && <span className="flair-oc">OC</span>}
       </div>
       <div className="singlepost-img-center">
         {clickedPost.thumbnail_height &&

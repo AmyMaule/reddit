@@ -10,6 +10,7 @@ import SinglePostTopBar from './SinglePostTopBar';
 import SingleTextPost from './SingleTextPost';
 import SingleVideoPost from './SingleVideoPost';
 import SingleImagePost from './SingleImagePost';
+import SingleGalleryPost from './SingleGalleryPost';
 import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
@@ -114,11 +115,17 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
                       flairStyle={flairStyle}
                       flairDisplay={flairDisplay}
                     />
-                  : <SingleTextPost
-                      clickedPost={clickedPost}
-                      flairStyle={flairStyle}
-                      flairDisplay={flairDisplay}
-                    />
+                  : clickedPost.is_gallery
+                    ? <SingleGalleryPost
+                        clickedPost={clickedPost}
+                        flairStyle={flairStyle}
+                        flairDisplay={flairDisplay}
+                      />
+                    : <SingleTextPost
+                        clickedPost={clickedPost}
+                        flairStyle={flairStyle}
+                        flairDisplay={flairDisplay}
+                      />
               }
 
               <div className="singlepost-bottom-bar">

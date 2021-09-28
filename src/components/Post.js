@@ -96,11 +96,11 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
 
   const flairDisplay = post.link_flair_richtext.map((part, i) => {
     if (part.t) return <span key={i+part.a || i+part.t}>{part.t}</span>;
-    if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} />;
+    if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
   })
 
   const handlePostClick = () => {
-    // this sets the subreddit thumbnail of the clicked post without having to do another fetch request
+    // this sets the subreddit thumbnail and other data for the clicked post without having to do another fetch request
     setClickedPostURL(`https://www.reddit.com${post.permalink}`);
     setCachedClickedPostData({
       ...subredditInfo,

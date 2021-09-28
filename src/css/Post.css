@@ -209,17 +209,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 600px;
 }
 
 .post-image {
-  max-width: 595px;
+  max-width: 600px;
   cursor: pointer;
   max-height: 510px;
   position: relative;
 }
 
 .post-gallery-image {
-  max-width: 550px;
+  max-width: 600px;
   cursor: pointer;
   max-height: 510px;
   position: relative;
@@ -245,13 +246,13 @@
 
 .gallery-button-left {
   position: absolute;
-  left: 40px;
+  left: 45px;
   z-index: 2;
 }
 
 .gallery-button-right {
   position: absolute;
-  right: 0;
+  right: 5px;
 }
 
 .post-video {

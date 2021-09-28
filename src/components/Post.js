@@ -73,7 +73,7 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
     return () => {
       abortPost.abort();
     }
-  }, [])
+  }, [post.subreddit])
 
   // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
   let votes;

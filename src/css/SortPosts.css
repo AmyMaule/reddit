@@ -8,7 +8,6 @@
 }
 
 .popular-title {
-  /* margin-left: 272px; */
   margin-top: 72px;
   font-size: 0.85rem;
   font-weight: 500;
@@ -123,11 +122,10 @@
 
 .popular-new {
   position: relative;
-  /* bottom: 2px; */
   color: #878A8C;
   font-size: 1rem;
   font-weight: bold;
-  right: 10px;
+  right: 2px;
   padding: 3px 7px 6px 7px;
   cursor: pointer;
   border-radius: 20px;
@@ -174,7 +172,7 @@
   font-weight: bold;
   cursor: pointer;
   border-radius: 18px;
-  padding: 0 6px 8px 8px;
+  padding: 0 6px 6px 8px;
 }
 
 .popular-top:hover {
@@ -191,14 +189,11 @@
   right: 10px;
   cursor: pointer;
   display: flex;
+  padding: 5px 0px;
 }
 
 .popular-more {
   position: relative;
-
-  /* bottom: 4px; */
-  /* display: flex;
-  align-items: center; */
   left: 9px;
   padding: 2px;
   color: #878A8C;
@@ -211,7 +206,6 @@
   justify-content: center;
   height: 25px;
   width: 25px;
-
 }
 
 .popular-more:hover {
@@ -278,7 +272,6 @@
   background-color: #f1f1f1;
   color: black;
 }
-
 
 .dropdown-top-container {
   display: flex;

@@ -24,7 +24,7 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
 
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
     if (part.t) return <span key={i+part.a}>{part.t}</span>;
-    if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} />;
+    if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
   }) : "";
 
   const showHomepage = e => {
@@ -84,11 +84,11 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
           <div className="singlepost-post">
             <div className="singlepost-votes">
               <div>
-                <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" />
+                <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" alt="" />
               </div>
               <div className="singlepost-votes-count">{cachedClickedPostData.votes}</div>
               <div>
-                <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" />
+                <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" alt="" />
               </div>
             </div>
             <div className="singlepost-right">

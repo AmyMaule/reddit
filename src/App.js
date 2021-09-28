@@ -57,7 +57,7 @@ function App() {
     return () => {
       abortApp.abort();
     }
-  }, [search])
+  }, [search, sortTop])
   // selectedSubreddit no longer a dependency due to search bar problems
 
   useEffect(() => {

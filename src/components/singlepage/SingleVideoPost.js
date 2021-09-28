@@ -20,7 +20,7 @@ export default function SingleVideoPost({ clickedPost, flairStyle, flairDisplay 
                     : undefined} type="video/mp4" />
             </video>
           /* sometimes the API stores video posts as links, in which case all 3 video sources above are empty, and just a thumbnail is available, so in this case it renders as an image instead */
-          : <img className="singlepost-image" src={clickedPost.media?.oembed?.thumbnail_url} />
+          : <img className="singlepost-image" src={clickedPost.media?.oembed?.thumbnail_url} alt="" />
         }
       </div>
     </>

@@ -9,7 +9,12 @@ export default function ImagePost({ post, flairStyle, flairDisplay, handlePostCl
         {post.is_original_content && <span className="flair-oc">OC</span>}
       </div>
       <div className="img-center" onClick={handlePostClick}>
-          {post.thumbnail_height && <img className={post.thumbnail === "spoiler" ? "post-image spoiler" : "post-image"}  src={post.thumbnail !== "spoiler" ? post.url_overridden_by_dest : undefined } />}
+          {post.thumbnail_height &&
+          <img
+            className={post.thumbnail === "spoiler" ? "post-image spoiler" : "post-image"}
+            src={post.thumbnail !== "spoiler" ? post.url_overridden_by_dest : undefined }
+            alt=""
+          />}
       </div>
     </>
   )

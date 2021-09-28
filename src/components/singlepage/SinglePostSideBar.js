@@ -54,7 +54,7 @@ export default function SinglePostSideBar({ subreddit, cachedClickedPostData, se
       </div>
       <div className="singlepostsidebar-border"></div>
       <div className="singlepostsidebar-created-container">
-        <img src={Cake} className="singlepostsidebar-cake" />
+        <img src={Cake} className="singlepostsidebar-cake" alt="" />
         <h6>Created {created.slice(3)}</h6>
       </div>
       <button className="btn singlepostsidebar-view-all-communities" style={btnStyle}>Join</button>

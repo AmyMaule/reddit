@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 export default function GalleryPost({ post, flairStyle, flairDisplay, handlePostClick }) {
-  console.log(post);
   const [currentImage, setCurrentImage] = useState(0);
 
   // The gallery from the API is stored as an object with random keys for each item, so Object.entries creates an array containing all the gallery items
@@ -37,6 +36,7 @@ export default function GalleryPost({ post, flairStyle, flairDisplay, handlePost
             className="post-gallery-image"
             src={galleryImages[currentImage]}
             onClick={handlePostClick}
+            alt=""
           />
         {currentImage !== galleryImages.length-1 && <button className="gallery-button gallery-button-right" onClick={() => setCurrentImage(prev => prev+1)}>
           <span>&#x203A;</span></button>}

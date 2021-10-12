@@ -2,24 +2,24 @@ import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
-export default function SinglePostSideBar({ subreddit, cachedClickedPostData, setSelectedSubreddit }) {
+export default function SinglePostSideBar({ posty, clickedPost, setSelectedSubreddit }) {
   // If there are a million or more members, round to 1 decimal place and add "m" otherwise if there are a thousand or more, round to 1 decimal place and add "k"
-  const totalMembers = cachedClickedPostData.subscribers > 999999
-    ? (cachedClickedPostData.subscribers/1000000).toFixed(1) + "m"
-    : cachedClickedPostData.subscribers > 999
-      ? (cachedClickedPostData.subscribers/1000).toFixed(0) + "k"
-      : cachedClickedPostData.subscribers;
+  const totalMembers = posty.subscribers > 999999
+    ? (posty.subscribers/1000000).toFixed(1) + "m"
+    : posty.posty > 999
+      ? (clickedPost.subscribers/1000).toFixed(0) + "k"
+      : posty.subscribers;
 
   // If there are more than 999 active users, round it to the nearest 1 decimal place and add k (so 18150 becomes 18.1k)
-  const activeUsers = cachedClickedPostData.active_user_count > 999
-    ? (cachedClickedPostData.active_user_count/1000).toFixed(1) + "k"
-    : cachedClickedPostData.active_user_count;
+  const activeUsers = posty.active_user_count > 999
+    ? (posty.active_user_count/1000).toFixed(1) + "k"
+    : posty.active_user_count;
 
-  let created = new Date(cachedClickedPostData.created_utc*1000).toDateString();
+  let created = new Date(posty.created_utc*1000).toDateString();
 
   const btnStyle = {
     color: "#FFF",
-    backgroundColor: cachedClickedPostData.banner_background_color || cachedClickedPostData.primary_color || cachedClickedPostData.key_color || "#0079d3"
+    backgroundColor: posty.banner_background_color || posty.primary_color || posty.key_color || "#0079d3"
   }
 
   const htmlDecode = description => {
@@ -30,18 +30,17 @@ export default function SinglePostSideBar({ subreddit, cachedClickedPostData, se
 
   return (
     <div className="SinglePostSideBar">
-      <div className="singlepostsidebar-banner" style={{backgroundColor: cachedClickedPostData.primary_color || cachedClickedPostData.key_color || "#bbbbdf"}}></div>
+      <div className="singlepostsidebar-banner" style={{backgroundColor: clickedPost.primary_color || clickedPost.key_color || "#bbbbdf"}}></div>
       <div className="singlepostsidebar-container">
         <img
-          src={cachedClickedPostData.thumbnail ? cachedClickedPostData.thumbnail : DefaultThumbnail}
-          // style={{border: "3px solid " + cachedClickedPostData.primary_color}}
+          src={posty.thumbnail ? posty.thumbnail : DefaultThumbnail}
           alt=""
           className="singlepostsidebar-subreddit-thumbnail"
-          onClick={() => setSelectedSubreddit(`r/${subreddit}`)}
+          onClick={() => setSelectedSubreddit(`r/${clickedPost.subreddit}`)}
         />
-        <h2 className="singlepostsidebar-subreddit" onClick={() => setSelectedSubreddit(`r/${subreddit}`)}>r/{subreddit}</h2>
+        <h2 className="singlepostsidebar-subreddit" onClick={() => setSelectedSubreddit(`r/${clickedPost.subreddit}`)}>r/{clickedPost.subreddit}</h2>
       </div>
-      <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecode(cachedClickedPostData.public_description_html)}}></div>
+      <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecode(posty.public_description_html)}}></div>
       <div className="singlepostsidebar-member-info-container">
         <div className="singlepostsidebar-members-container">
           <h6 className="singlepostsidebar-num-members">{totalMembers}</h6>

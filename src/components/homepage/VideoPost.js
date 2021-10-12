@@ -16,7 +16,7 @@ export default function VideoPost({ post, flairStyle, flairDisplay, handlePostCl
             </video>
 
           /* sometimes the API stores video posts as links, in which case all 3 video sources above are empty, and just a thumbnail is available, so in this case it renders as an image instead */
-          : <img className="post-image" src={post.media?.oembed?.thumbnail_url} />
+          : <img className="post-image" src={post.media?.oembed?.thumbnail_url} alt="" />
         }
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import SearchIcon from "../images/search-icon.png";
 import UserIcon from "../images/user-2.png";
 import V from "../images/v.png";
@@ -10,11 +10,15 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, setSea
   const [searchResults, setSearchResults] = useState([]);
   let searchHistory = [];
 
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    setSearch(selectedSubreddit);
-    setSelectedSubreddit("");
-  }
+  // useCallback - check syntax
+  const handleFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      setSearch(selectedSubreddit);
+      setSelectedSubreddit("");
+    },
+    [selectedSubreddit, setSearch, setSelectedSubreddit],
+  );
 
   const handleSearch = e => {
     document.querySelector(".dropdown-subreddits").style.display = "block";

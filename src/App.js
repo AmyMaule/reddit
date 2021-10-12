@@ -11,6 +11,7 @@ import SideBarLinks from './components/SideBarLinks';
 
 // TODO load 10 more posts when you're near the bottom of the page
 // TODO add keyboard functionality to search bar
+// Call <SortPosts /> with different parameters based on whether it is coming from home or subhome (so <SortPosts top={top} hot={hot} /> etc)
 
 function App() {
   // sortedSubs takes allsubs.json and orders them by subscriber count
@@ -23,17 +24,27 @@ function App() {
 
   const [posts, setPosts] = useState([]);
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
+  const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
-  // clickedPostURL is used to fetch the post's json data
-  const [clickedPostURL, setClickedPostURL] = useState("");
-  // clickedPost stores the data from fetching the post's json data
+  const [posty, setPosty] = useState({});
+  // clickedPost stores the data from fetching the individual post's json data
   const [clickedPost, setClickedPost] = useState("");
-  // cachedClickedPostData stores the post information from the inital fetch request to reuse in SinglePost, as it takes a couple of seconds to buffer if pulling directly from the clickedPost fetch request
+  // postData stores the clicked post's data from the original fetch request
+  // const [postData, setPostData] = useState();
   const [clickedPostComments, setClickedPostComments] = useState([]);
-  const [cachedClickedPostData, setCachedClickedPostData] = useState({});
   const [sortTop, setSortTop] = useState("");
   const [scrollPosition, setScrollPosition] = useState();
+
+  // useCallback?
+  const onClose = e => {
+    if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+      setPage("home");
+      setClickedPost("");
+      setClickedPostComments([]);
+      setClickedPostId("");
+    }
+  }
 
   useEffect(() => {
     const abortApp = new AbortController();
@@ -49,6 +60,7 @@ function App() {
         setPosts(data.data.children);
       } else console.log("oh dear");
     })
+    // .then second fetch for thumbnail?
     .catch(err => {
       if (err.name !== "AbortError") {
         console.log("The error is:", err);
@@ -60,22 +72,33 @@ function App() {
   }, [search, sortTop])
   // selectedSubreddit no longer a dependency due to search bar problems
 
+  // this hides the main scrollbar when the comment page is shown
   useEffect(() => {
-    if (page !== "home") {
+    if (page === "comment") {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
   }, [page])
 
+  // console.log(clickedPostId); this page is rendering so many times initially
+
+// this fetches the data for the post itself including comments
   useEffect(() => {
     const abortClickedPostApp = new AbortController();
-    if (clickedPostURL) {
-      fetch(`${clickedPostURL}.json`, { signal: abortClickedPostApp.signal })
+    let postData;
+    posts.filter(post => {
+      if (post.data.id === clickedPostId) {
+        postData = post.data;
+        return postData;
+      }
+    });
+    if (postData) {
+      fetch(`https://www.reddit.com${postData.permalink}.json`, { signal: abortClickedPostApp.signal })
       .then(res => {
         if (res.status === 200) {
           return res.json();
-        } else console.log("Status error fetching post");
+        }
       })
       .then(data => {
         if (data) {
@@ -86,7 +109,7 @@ function App() {
       .catch(err => {
         if (err.name !== "AbortError") {
           console.log("abortClickedPostApp:", err);
-        } else console.log("app fetch aborted");
+        }
       })
       const wait2000 = setTimeout(() => {
         setPage("comment");
@@ -96,7 +119,9 @@ function App() {
     return () => {
       abortClickedPostApp.abort();
     }
-  }, [clickedPostURL, page])
+  }, [clickedPostId])
+  // page was a dependency, but page is set during useEffect?
+
 
   return (
     <div className="App">
@@ -106,38 +131,44 @@ function App() {
         setSearch={setSearch}
         allSubreddits={allSubreddits}
       />
+      {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
       <Trending page={page} />
       <div className={page === "home" ? "main-container" : "main-container hide"}>
-      <PostContainer
-        posts={posts}
-        setSelectedSubreddit={setSelectedSubreddit}
-        setSearch={setSearch}
-        selectedSubreddit={selectedSubreddit}
-        setClickedPostURL={setClickedPostURL}
-        setSortTop={setSortTop}
-        setCachedClickedPostData={setCachedClickedPostData}
-        setScrollPosition={setScrollPosition}
-      />
-      <div className="sidebar-container">
-        <SideBar setSelectedSubreddit={setSelectedSubreddit} />
-        <SideBarPremium />
-        <SideBarLinks page={page} />
-      </div>
-      </div>
-      <div className={page === "home" ? "main-container hide" : "main-container"}>
-        <SinglePost
-          setClickedPostURL={setClickedPostURL}
-          clickedPost={clickedPost}
-          page={page}
-          setPage={setPage}
-          setClickedPost={setClickedPost}
+        <PostContainer
+          posts={posts}
+          setClickedPostId={setClickedPostId}
           setSelectedSubreddit={setSelectedSubreddit}
-          comments={clickedPostComments}
-          setClickedPostComments={setClickedPostComments}
-          cachedClickedPostData={cachedClickedPostData}
-          scrollPosition={scrollPosition}
+          setSearch={setSearch}
+          selectedSubreddit={selectedSubreddit}
+          setSortTop={setSortTop}
+          setScrollPosition={setScrollPosition}
+          setPosty={setPosty}
+          posty={posty}
         />
+        <div className="sidebar-container">
+          <SideBar setSelectedSubreddit={setSelectedSubreddit} />
+          <SideBarPremium />
+          <SideBarLinks page={page} />
+        </div>
       </div>
+      {page !== "home" &&
+        <div className="main-container">
+          <SinglePost
+            clickedPost={clickedPost}
+            posts={posts}
+            page={page}
+            setPage={setPage}
+            setClickedPost={setClickedPost}
+            setSelectedSubreddit={setSelectedSubreddit}
+            comments={clickedPostComments}
+            setClickedPostComments={setClickedPostComments}
+            scrollPosition={scrollPosition}
+            clickedPostId={clickedPostId}
+            posty={posty}
+            onClose={onClose}
+        />
+        </div>
+      }
     </div>
   );
 }

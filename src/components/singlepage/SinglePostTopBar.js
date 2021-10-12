@@ -1,7 +1,7 @@
 import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function SinglePostTopBar({ clickedPost, cachedClickedPostData }) {
+export default function SinglePostTopBar({ clickedPost, posty }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -20,10 +20,10 @@ export default function SinglePostTopBar({ clickedPost, cachedClickedPostData })
 
   return (
     <div className="singlepost-top">
-      <span className="subreddit-thumbnail"><img src={cachedClickedPostData.thumbnail ? cachedClickedPostData.thumbnail : DefaultThumbnail} style={{height: "21px", width: "21px", borderRadius: "50%", marginRight: "5px"}} alt="" /></span>
+      <span className="subreddit-thumbnail"><img src={posty.thumbnail ? posty.thumbnail : DefaultThumbnail} style={{height: "21px", width: "21px", borderRadius: "50%", marginRight: "5px"}} alt="" /></span>
       <span className="singlepost-subreddit">r/{clickedPost.subreddit}</span>
       <span className="singlepost-separator-dot">•</span>
-      <div className="singlepost-posted-by">Posted by u/{clickedPost.author} {cachedClickedPostData.posted} ago</div>
+      <div className="singlepost-posted-by">Posted by u/{clickedPost.author} {posty.posted} ago</div>
       <span className="singlepost-awards">{awards}</span>
     </div>
   )

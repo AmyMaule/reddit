@@ -11,7 +11,7 @@ import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
 import GalleryPost from './homepage/GalleryPost';
 
-export default function Post({ setSelectedSubreddit, post, setClickedPostURL, setCachedClickedPostData, setScrollPosition }) {
+export default function Post({ setSelectedSubreddit, post, posty, setScrollPosition, setClickedPostId, setPosty }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -43,13 +43,38 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
     posted = (postedMsAgo/3.154e+7).toFixed(0) + " years";
   }
 
+  // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
+  let votes;
+  if (post.ups > 0) {
+    if (post.ups < 1000) {
+      votes = post.ups;
+    } else if (post.ups > 100000) {
+      votes = `${(post.ups/1000).toFixed(0)}k`;
+    } else votes = `${(post.ups/1000).toFixed(1)}k`;
+  } else if (post.downs < 1000) {
+      votes = post.downs;
+  } else votes = `-${(post.downs/1000).toFixed(1)}k`;
+
+  const flairStyle = {
+    backgroundColor: post.link_flair_background_color || "rgb(237, 239, 241)",
+    color: post.link_flair_text_color === "dark" ? "#000" : "#FFF",
+    fontSize: "0.75rem",
+    fontWeight: "500"
+  }
+
+  const flairDisplay = post.link_flair_richtext.map((part, i) => {
+    if (part.t) return <span key={i+part.a || i+part.t}>{part.t}</span>;
+    if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
+  })
+
+  // this useEffect fetches the subreddit data for each post, in order to get the subreddit thumbnail that isn't in the inital post data - it also stores data for the singlepost sidebar
   useEffect(() => {
     const abortPost = new AbortController();
     fetch(`https://www.reddit.com/r/${post.subreddit}/about/.json`, { signal: abortPost.signal })
     .then(res => res.json())
     .then(data => {
       if (data) {
-          setSubredditInfo({
+        setSubredditInfo({
             thumbnail: data.data.icon_img,
             subscribers: data.data.subscribers,
             active_user_count: data.data.active_user_count,
@@ -75,40 +100,23 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
     }
   }, [post.subreddit])
 
-  // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
-  let votes;
-  if (post.ups > 0) {
-    if (post.ups < 1000) {
-      votes = post.ups;
-    } else if (post.ups > 100000) {
-      votes = `${(post.ups/1000).toFixed(0)}k`;
-    } else votes = `${(post.ups/1000).toFixed(1)}k`;
-  } else if (post.downs < 1000) {
-      votes = post.downs;
-  } else votes = `-${(post.downs/1000).toFixed(1)}k`;
-
-  const flairStyle = {
-    backgroundColor: post.link_flair_background_color || "rgb(237, 239, 241)",
-    color: post.link_flair_text_color === "dark" ? "#000" : "#FFF",
-    fontSize: "0.75rem",
-    fontWeight: "500"
-  }
-
-  const flairDisplay = post.link_flair_richtext.map((part, i) => {
-    if (part.t) return <span key={i+part.a || i+part.t}>{part.t}</span>;
-    if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
-  })
-
   const handlePostClick = () => {
     // this sets the subreddit thumbnail and other data for the clicked post without having to do another fetch request
-    setClickedPostURL(`https://www.reddit.com${post.permalink}`);
-    setCachedClickedPostData({
+    setClickedPostId(post.id);
+    setPosty({
       ...subredditInfo,
       posted: posted,
       votes: votes,
       num_comments: post.num_comments,
-      title: post.title,
-    });
+      title: post.title
+    })
+    // setCachedClickedPostData({
+    //   ...subredditInfo,
+    //   posted: posted,
+    //   votes: votes,
+    //   num_comments: post.num_comments,
+    //   title: post.title,
+    // });
     setScrollPosition(window.pageYOffset);
   }
 
@@ -131,14 +139,15 @@ export default function Post({ setSelectedSubreddit, post, setClickedPostURL, se
         </div>
       </div>
       <div className="post-right">
-        {isLoaded && <PostTopBar
-          setSelectedSubreddit={setSelectedSubreddit}
-          subredditInfo={subredditInfo}
-          subreddit={post.subreddit}
-          author={post.author}
-          all_awardings={post.all_awardings}
-          posted={posted}
-        />}
+        {isLoaded &&
+          <PostTopBar
+            setSelectedSubreddit={setSelectedSubreddit}
+            thumbnail={subredditInfo.thumbnail}
+            all_awardings={post.all_awardings}
+            subreddit={post.subreddit}
+            author={post.author}
+            posted={posted}
+          />}
 
         {/* Render different types of post based on the media it contains */}
         {post.is_video || post.post_hint === "rich:video"

@@ -16,10 +16,10 @@ import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
-export default function SinglePost({ clickedPost, page, setPage, setClickedPostURL, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, cachedClickedPostData, scrollPosition }) {
+export default function SinglePost({ clickedPost, posty, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose }) {
   const flairStyle = {
-    backgroundColor: clickedPost.link_flair_background_color || "rgb(237, 239, 241)",
-    color: clickedPost.link_flair_text_color === "dark" ? "#000" : "#FFF",
+    backgroundColor: posty.link_flair_background_color || "rgb(237, 239, 241)",
+    color: posty.link_flair_text_color === "dark" ? "#000" : "#FFF",
   }
 
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
@@ -27,23 +27,10 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
     if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
   }) : "";
 
-  const showHomepage = e => {
-    if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
-      console.log("OK");
-      setPage("home");
-      setClickedPost("");
-      setClickedPostComments([]);
-      // setClickedPostURL must be called in order for the clickedPost to return to an empty string, otherwise the clickedPostURL doesn't reset when the post is closed, and then the same post can't be reopened
-      setClickedPostURL("");
-      document.querySelector(".SinglePost-page").style.display = "hidden";
-      document.querySelector(".SinglePostSideBar").style.display = "hidden";
-    }
-  }
-
   useEffect(() => {
-    window.addEventListener("click", showHomepage);
+    window.addEventListener("click", onClose);
     return () => {
-      window.removeEventListener('click', showHomepage);
+      window.removeEventListener('click', onClose);
     }
   });
 
@@ -57,25 +44,27 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
       if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
       window.scrollTo(0, 0);
     }
-  }, [page]);
+  }, [page, scrollPosition]);
   // not sure about dependencies, re-evaluate after subhome page is functioning
 
-  return (
+  if (page === "home") {
+    return <></>
+  } else return (
     <>
     <div className="SinglePost-page">
       <div className="singlepost-close">
         <div className="top-bar-votes-container">
-          <img src={UpArrow} className="top-bar-up-arrow" />
-          <span className="top-bar-votes">{cachedClickedPostData.votes}</span>
-          <img src={DownArrow} className="top-bar-down-arrow" />
+          <img src={UpArrow} className="top-bar-up-arrow" alt="up-arrow" />
+          <span className="top-bar-votes">{posty.votes}</span>
+          <img src={DownArrow} className="top-bar-down-arrow" alt="down-arrow" />
         </div>
         <div className="top-bar-title-container">
-          <h3 className="top-bar-title">{cachedClickedPostData.title}</h3>
-          {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
+          <h3 className="top-bar-title">{posty.title}</h3>
+          {posty.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
         </div>
         <div className="top-bar-btn-container">
           <div className="top-bar-btn-pointer">
-            <img src={x} className="btn-x" />
+            <img src={x} className="btn-x" alt="x" />
             <button className="top-bar-close">Close</button>
           </div>
         </div>
@@ -84,17 +73,17 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
           <div className="singlepost-post">
             <div className="singlepost-votes">
               <div>
-                <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" alt="" />
+                <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" />
               </div>
-              <div className="singlepost-votes-count">{cachedClickedPostData.votes}</div>
+              <div className="singlepost-votes-count">{posty.votes}</div>
               <div>
-                <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" alt="" />
+                <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" />
               </div>
             </div>
             <div className="singlepost-right">
               <SinglePostTopBar
                 clickedPost={clickedPost}
-                cachedClickedPostData={cachedClickedPostData}
+                posty={posty}
               />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
@@ -132,7 +121,7 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
                 <div className="singlepost-comments">
                   <img src={SpeechBubble} className="singlepost-comments-speechbubble" alt="" />
                   <h4 className="singlepost-comments-text">
-                    {cachedClickedPostData.num_comments < 1000 ? cachedClickedPostData.num_comments : (cachedClickedPostData.num_comments/1000).toFixed(1) + "k"} comments
+                    {posty.num_comments < 1000 ? posty.num_comments : (posty.num_comments/1000).toFixed(1) + "k"} comments
                   </h4>
                 </div>
                 <div className="singlepost-share-link">
@@ -171,9 +160,9 @@ export default function SinglePost({ clickedPost, page, setPage, setClickedPostU
           </div>
           <div className="sidebar-container">
             <SinglePostSideBar
-              subreddit={clickedPost.subreddit}
-              cachedClickedPostData={cachedClickedPostData}
+              clickedPost={clickedPost}
               setSelectedSubreddit={setSelectedSubreddit}
+              posty={posty}
             />
             <SideBarLinks />
           </div>

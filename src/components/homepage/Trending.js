@@ -7,7 +7,7 @@ export default function Trending({ page }) {
   const [trendingLinks, setTrendingLinks] = useState([]);
 
   // These subs contain popular non-news link posts - these should not be put in the trending blocks
-  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl"];
+  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside"];
   useEffect(() => {
     fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100")
     .then(res => {
@@ -19,10 +19,10 @@ export default function Trending({ page }) {
       data.data.children.map((post, i) => {
         // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
         if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1 ) {
-            setTrendingLinks(prevLinks => {
-              if (!prevLinks) return post.data;
-              return [...prevLinks, post.data];
-            })
+          setTrendingLinks(prevLinks => {
+            if (!prevLinks) return post.data;
+            return [...prevLinks, post.data];
+          })
         }
       })
       return trendingLinks;
@@ -34,7 +34,6 @@ export default function Trending({ page }) {
 
   // In order for the trending blocks to load the data, isLoading sets to false once trendingLinks has enough data to render
   useEffect(() => {
-    // console.log(trendingLinks[0]);
     if (trendingLinks.length === 4) {
       trendingLinks.map(link => {
         // the image from the API is encoded using &amp; so needs to be removed in order to display
@@ -49,14 +48,11 @@ export default function Trending({ page }) {
         fetch(`https://www.reddit.com/r/${link.subreddit}/about/.json`)
         .then(res => res.json())
         .then(data => {
-          // console.log("1", data.data.icon_img)
           trendingLinks[i].iconImg = data.data.icon_img;
-          // console.log("2", trendingLinks[i].iconImg)
         });
         setIsLoading(false);
       })
     }
-    // if (trendingLinks) console.log(trendingLinks.iconImg)
   }, [trendingLinks])
 
   return (
@@ -70,12 +66,12 @@ export default function Trending({ page }) {
         : <>
             {trendingLinks.slice(0, 4).map(link => {
               return (
-              <a href={link.url_overridden_by_dest} target="_blank" className="trending-link">
+              <a href={link.url_overridden_by_dest} target="_blank" rel="noreferrer" className="trending-link">
                 {/* <div className="black-overlay"> */}
                   <img className="trending-block-img" src={link.img} />
                 {/* </div> */}
                 <div className="trending-block-dark">
-                  <div className="trending-links-title">{link.title.slice(0, 55)}{link.title.length > 55 && "..."}</div>
+                  <div className="trending-links-title">{link.title.slice(0, 50)}{link.title.length > 50 && "..."}</div>
                   <div className="trending-block-subreddit-container">
                     <img src={link.iconImg || DefaultThumbnail} className="trending-block-subreddit-icon" />
                     <div className="trending-links-subreddit">r/{link.subreddit} and more</div>

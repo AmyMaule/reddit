@@ -38,6 +38,7 @@ export default function SingleGalleryPost({ clickedPost, flairStyle, flairDispla
           <img
             className="singlepost-image" // singlepost-gallery-image
             src={galleryImages[currentImageClicked]}
+            alt=""
           />
           <div className="singlepost-gallery-btn-container">
         {currentImageClicked !== galleryImages.length-1 && <button className="singlepost-gallery-button singlepost-gallery-button-right" onClick={() => setCurrentImageClicked(prev => prev+1)}>

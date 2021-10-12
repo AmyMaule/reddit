@@ -5,7 +5,7 @@ export default function SideBarPremium() {
   return (
     <div className="SideBarPremium">
     <div className="sidebar-premium-container">
-      <img src={PremiumIcon} className="premium-icon" />
+      <img src={PremiumIcon} className="premium-icon" alt="" />
       <div className="premium-text-container">
         <h4 className="premium-title">Reddit Premium</h4>
         <p className="premium-text">The best Reddit experience, with monthly Coins</p>

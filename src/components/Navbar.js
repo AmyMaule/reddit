@@ -34,11 +34,11 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   // handleSearch performs the search using the mouse
   const handleSearch = sub => {
-    setSelectedSubreddit(sub);
-    setSearch(sub);
     // document.querySelector(".dropdown-subreddits").style.display = "none";
+    setSelectedSubreddit(sub);
     setSearchResults([]);
     document.querySelector(".searchbar-subreddits").value = "";
+    setSearch(sub);
   };
 
   const toggleSearchDropdown = e => {
@@ -123,7 +123,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   // currentSubredditWidth takes the value of the width of the subreddit text in the search bar, whenever a subreddit has been selected
   let currentSubredditWidth = 0;
-  if (document.querySelector(".current-subreddit")) currentSubredditWidth = document.querySelector(".current-subreddit").clientWidth ;
+  if (document.querySelector(".current-subreddit")) currentSubredditWidth = document.querySelector(".current-subreddit").clientWidth
 
   return (
     <div className="Navbar">

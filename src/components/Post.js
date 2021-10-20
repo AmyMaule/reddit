@@ -11,7 +11,7 @@ import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
 import GalleryPost from './homepage/GalleryPost';
 
-export default function Post({ setSelectedSubreddit, post, posty, setScrollPosition, setClickedPostId, setPosty }) {
+export default function Post({ setSelectedSubreddit, post, setScrollPosition, setClickedPostId, setCachedPostData }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -103,20 +103,13 @@ export default function Post({ setSelectedSubreddit, post, posty, setScrollPosit
   const handlePostClick = () => {
     // this sets the subreddit thumbnail and other data for the clicked post without having to do another fetch request
     setClickedPostId(post.id);
-    setPosty({
+    setCachedPostData({
       ...subredditInfo,
       posted: posted,
       votes: votes,
       num_comments: post.num_comments,
       title: post.title
     })
-    // setCachedClickedPostData({
-    //   ...subredditInfo,
-    //   posted: posted,
-    //   votes: votes,
-    //   num_comments: post.num_comments,
-    //   title: post.title,
-    // });
     setScrollPosition(window.pageYOffset);
   }
 

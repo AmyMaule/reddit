@@ -27,11 +27,10 @@ function App() {
   const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
-  const [posty, setPosty] = useState({});
+    // cachedPostData stores the clicked post's data from the original fetch request
+  const [cachedPostData, setCachedPostData] = useState({});
   // clickedPost stores the data from fetching the individual post's json data
   const [clickedPost, setClickedPost] = useState("");
-  // postData stores the clicked post's data from the original fetch request
-  // const [postData, setPostData] = useState();
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [sortTop, setSortTop] = useState("");
   const [scrollPosition, setScrollPosition] = useState();
@@ -143,8 +142,7 @@ function App() {
           selectedSubreddit={selectedSubreddit}
           setSortTop={setSortTop}
           setScrollPosition={setScrollPosition}
-          setPosty={setPosty}
-          posty={posty}
+          setCachedPostData={setCachedPostData}
         />
         <div className="sidebar-container">
           <SideBar setSelectedSubreddit={setSelectedSubreddit} />
@@ -165,7 +163,7 @@ function App() {
             setClickedPostComments={setClickedPostComments}
             scrollPosition={scrollPosition}
             clickedPostId={clickedPostId}
-            posty={posty}
+            cachedPostData={cachedPostData}
             onClose={onClose}
         />
         </div>

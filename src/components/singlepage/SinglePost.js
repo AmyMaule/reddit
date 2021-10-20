@@ -16,10 +16,10 @@ import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
 
 // TODO: sort the thumbnails loading slowly and showing before they are ready
-export default function SinglePost({ clickedPost, posty, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose }) {
+export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose }) {
   const flairStyle = {
-    backgroundColor: posty.link_flair_background_color || "rgb(237, 239, 241)",
-    color: posty.link_flair_text_color === "dark" ? "#000" : "#FFF",
+    backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
+    color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
   }
 
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
@@ -55,12 +55,12 @@ export default function SinglePost({ clickedPost, posty, page, setPage, setClick
       <div className="singlepost-close">
         <div className="top-bar-votes-container">
           <img src={UpArrow} className="top-bar-up-arrow" alt="up-arrow" />
-          <span className="top-bar-votes">{posty.votes}</span>
+          <span className="top-bar-votes">{cachedPostData.votes}</span>
           <img src={DownArrow} className="top-bar-down-arrow" alt="down-arrow" />
         </div>
         <div className="top-bar-title-container">
-          <h3 className="top-bar-title">{posty.title}</h3>
-          {posty.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
+          <h3 className="top-bar-title">{cachedPostData.title}</h3>
+          {cachedPostData.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
         </div>
         <div className="top-bar-btn-container">
           <div className="top-bar-btn-pointer">
@@ -75,7 +75,7 @@ export default function SinglePost({ clickedPost, posty, page, setPage, setClick
               <div>
                 <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" />
               </div>
-              <div className="singlepost-votes-count">{posty.votes}</div>
+              <div className="singlepost-votes-count">{cachedPostData.votes}</div>
               <div>
                 <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" />
               </div>
@@ -83,7 +83,7 @@ export default function SinglePost({ clickedPost, posty, page, setPage, setClick
             <div className="singlepost-right">
               <SinglePostTopBar
                 clickedPost={clickedPost}
-                posty={posty}
+                cachedPostData={cachedPostData}
               />
 
               {clickedPost.is_video || clickedPost.post_hint === "rich:video"
@@ -121,7 +121,7 @@ export default function SinglePost({ clickedPost, posty, page, setPage, setClick
                 <div className="singlepost-comments">
                   <img src={SpeechBubble} className="singlepost-comments-speechbubble" alt="" />
                   <h4 className="singlepost-comments-text">
-                    {posty.num_comments < 1000 ? posty.num_comments : (posty.num_comments/1000).toFixed(1) + "k"} comments
+                    {cachedPostData.num_comments < 1000 ? cachedPostData.num_comments : (cachedPostData.num_comments/1000).toFixed(1) + "k"} comments
                   </h4>
                 </div>
                 <div className="singlepost-share-link">
@@ -162,7 +162,7 @@ export default function SinglePost({ clickedPost, posty, page, setPage, setClick
             <SinglePostSideBar
               clickedPost={clickedPost}
               setSelectedSubreddit={setSelectedSubreddit}
-              posty={posty}
+              cachedPostData={cachedPostData}
             />
             <SideBarLinks />
           </div>

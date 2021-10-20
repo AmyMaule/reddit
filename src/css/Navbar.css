@@ -9,9 +9,7 @@
   background-color: #FFF;
   height: 48px;
   justify-content: space-between;
-  /* position: fixed; - causes issues with scrollbar */
   position: fixed;
-  /* position: sticky; */
   width: 100%;
   top: 0;
   z-index: 5;
@@ -21,14 +19,6 @@
 .logo-container {
   margin-right: 105px;
 }
-
-/*
-.a-logo {
-  width: 117px;
-  height: 48px;
-  margin-left: 20px;
-  margin-right: 10px;
-} */
 
 .logo {
   height: 33px;
@@ -44,8 +34,9 @@
 
 .searchbar-subreddits {
   position: relative;
+  display: inline-block;
   margin-top: 5px;
-  padding-left: 42px;
+  /* padding-left: 42px; */
   padding-top: 1px;
   font-family: inherit;
   font-size: 0.9rem;
@@ -79,10 +70,24 @@
   z-index: 7;
 }
 
+.current-subreddit {
+  position: relative;
+  background-color: #d6d6d6;
+  left: 65px;
+  width: fit-content;
+  padding: 3px 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'IBM Plex Sans', sans-serif;
+  bottom: 29px;
+  border-radius: 15px;
+  z-index: 7;
+  display: inline-block;
+}
+
 .dropdown-subreddits {
   margin-left: 21px;
   margin-top: 7px;
-  /* display: none; */
   position: relative;
   background-color: #f9f9f9;
   width: 655px;
@@ -92,7 +97,6 @@
 }
 
 .dropdown-div {
-/* .dropdown-subreddits div { */
   position: relative;
   cursor: pointer;
   color: black;
@@ -102,16 +106,15 @@
   z-index: 15;
 }
 
-.dropdown-div:hover {
-/* .dropdown-subreddits div:hover { */
-  background-color: #f1f1f1
+.dropdown-div-hover {
+  background-color: #f1f1f1;
 }
 
 /* Show the dropdown when the input search bar is focused (the plus is the next sibling) */
 /* .searchbar-container:focus + .dropdown-subreddits { */
-.searchbar-subreddits:focus + .dropdown-subreddits {
+/* .searchbar-subreddits:focus + .dropdown-subreddits {
   display: block;
-}
+} */
 
 .btn-container {
   display: flex;

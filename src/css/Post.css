@@ -217,6 +217,7 @@
   cursor: pointer;
   max-height: 510px;
   position: relative;
+  padding-bottom: 4px;
 }
 
 .post-gallery-image {

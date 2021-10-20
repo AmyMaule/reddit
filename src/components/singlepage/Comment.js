@@ -28,3 +28,13 @@ export default function Comment({ comment }) {
     </div>
   )
 }
+
+
+
+// function displayComment(element) {
+//   if (element.hasChildNodes()) {
+//     element.childNodes.forEach(displayComment);
+//   } else if (element is a comment) {
+//     // do something to display it
+//   }
+// }

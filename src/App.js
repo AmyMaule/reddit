@@ -128,6 +128,7 @@ function App() {
       <Navbar
         selectedSubreddit={selectedSubreddit}
         setSelectedSubreddit={setSelectedSubreddit}
+        search={search}
         setSearch={setSearch}
         allSubreddits={allSubreddits}
       />

@@ -8,6 +8,7 @@ import PostContainer from "./components/PostContainer";
 import SinglePost from './components/singlepage/SinglePost';
 import SideBarPremium from './components/homepage/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
+import Subhome from './components/Subhome';
 
 // TODO load 10 more posts when you're near the bottom of the page
 // TODO add keyboard functionality to search bar
@@ -26,7 +27,7 @@ function App() {
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("none");
-  const [page, setPage] = useState("home");
+  const [page, setPage] = useState("subhome");
   // cachedPostData stores the clicked post's data from the original fetch request
   const [cachedPostData, setCachedPostData] = useState({});
   // clickedPost stores the data from fetching the individual post's json data
@@ -47,7 +48,7 @@ function App() {
 
   useEffect(() => {
     const abortApp = new AbortController();
-    // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
+    console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
     fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
@@ -57,7 +58,7 @@ function App() {
     .then(data => {
       if (data) {
         setPosts(data.data.children);
-      } else console.log("oh dear");
+      } else console.log("error 60: couldn't set posts");
     })
     // .then second fetch for thumbnail?
     .catch(err => {
@@ -79,8 +80,6 @@ function App() {
       document.body.style.overflow = "auto";
     }
   }, [page])
-
-  // console.log(clickedPostId); this page is rendering so many times initially
 
 // this fetches the data for the post itself including comments
   useEffect(() => {
@@ -133,7 +132,8 @@ function App() {
       />
       {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
       <Trending page={page} />
-      <div className={page === "home" ? "main-container" : "main-container hide"}>
+      {page === "subhome" && <Subhome posts={posts} />}
+      <div className={page !== "comment" ? "main-container" : "main-container hide"}>
         <PostContainer
           posts={posts}
           setClickedPostId={setClickedPostId}
@@ -143,6 +143,8 @@ function App() {
           setSortTop={setSortTop}
           setScrollPosition={setScrollPosition}
           setCachedPostData={setCachedPostData}
+          page={page}
+          setPage={setPage}
         />
         <div className="sidebar-container">
           <SideBar setSelectedSubreddit={setSelectedSubreddit} />
@@ -150,7 +152,7 @@ function App() {
           <SideBarLinks page={page} />
         </div>
       </div>
-      {page !== "home" &&
+      {page === "comment" &&
         <div className="main-container">
           <SinglePost
             clickedPost={clickedPost}

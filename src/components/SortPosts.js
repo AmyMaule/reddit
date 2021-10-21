@@ -6,7 +6,7 @@ import GeoFilter from "../geofilter.json";
 
 // TODO: empty the search bar after clicking on one of these buttons
 
-export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop }) {
+export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop, page }) {
   let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
@@ -83,7 +83,7 @@ export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop 
 
   return (
     <>
-    <h2 className="popular-title">Popular posts</h2>
+    {page === "home" && <h2 className="popular-title">Popular posts</h2>}
     <div className="SortPosts">
       <div className="popular-container">
         <div className="popular-btn popular-hot clicked" onClick={() => handleBtnColorChange("r/popular/hot", "hot")}>

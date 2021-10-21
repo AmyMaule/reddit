@@ -32,7 +32,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     handleSearch(hoveredSubreddit);
   };
 
-  // handleSearch performs the search using the mouse
+  // handleSearch performs the search
   const handleSearch = sub => {
     // document.querySelector(".dropdown-subreddits").style.display = "none";
     setSelectedSubreddit(sub);

@@ -11,7 +11,7 @@ import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
 import GalleryPost from './homepage/GalleryPost';
 
-export default function Post({ setSelectedSubreddit, post, setScrollPosition, setClickedPostId, setCachedPostData }) {
+export default function Post({ setSelectedSubreddit, post, setScrollPosition, setClickedPostId, setCachedPostData, setPage, setSearch }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -141,6 +141,8 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
             subreddit={post.subreddit}
             author={post.author}
             posted={posted}
+            setPage={setPage}
+            setSearch={setSearch}
           />}
 
         {/* Render different types of post based on the media it contains */}

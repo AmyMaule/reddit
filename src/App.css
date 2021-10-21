@@ -17,6 +17,7 @@
 @import "./css/SinglePost.css";
 @import "./css/SinglePostSideBar.css";
 @import "./css/Comment.css";
+@import "./css/Subhome.css";
 
 *, *::before, *::after {
   /* font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif; */

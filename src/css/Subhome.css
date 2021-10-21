@@ -1,27 +1,66 @@
 .Subhome {
   width: 100%;
-  background-color: rgb(237, 239, 241);
 }
 
 .subhome-header {
   width: 100%;
-  display: block;
   height: 286px;
   margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .subhome-banner {
-  background-color: yellowgreen;
+  background-color: rgb(215, 250, 145);
   width: 100%;
-  height: 208px;
+  height: 144px;
   /* display: block; */
 }
 
 .subhome-r-bar {
-  width: 100%;
+  display: flex;
+  justify-content: center;
   background-color: white;
-  height: 78px;
-  /* display: block; */
+  width: 100%;
+}
+
+.subhome-r-bar-positioning {
+  width: 310px;
+  margin-left: 24px;
+  height: 102px;
+}
+
+.subhome-r-bar-content {
+  width: 640px;
+  height: 102px;
+}
+
+.subhome-r-bar-top {
+  display: flex;
+}
+
+.subhome-r-bar-bottom {
+  display: flex;
+}
+
+.r-bar-link {
+  font-weight: 500;
+  font-size: 0.9rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  padding: 2px 4px;
+}
+
+.subhome-icon {
+  border-radius: 50%;
+  background-color: yellowgreen;
+  width: 62px;
+  height: 62px;
+  font-size: 0.75rem;
+}
+
+.subhome-title {
+  font-size: 1.2rem;
 }
 
 .subhome-content-container {

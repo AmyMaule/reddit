@@ -7,9 +7,10 @@ export default function Trending({ page }) {
   const [trendingLinks, setTrendingLinks] = useState([]);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
-  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "pcgaming", "KDRAMA", "CozyPlaces"];
+  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "pcgaming", "KDRAMA", "CozyPlaces", "Damnthatsinteresting", "Whatcouldgowrong", "BetterEveryLoop"];
 
   useEffect(() => {
+    console.log("fetching trending posts")
     fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100")
     .then(res => {
       if (res.status === 200) {

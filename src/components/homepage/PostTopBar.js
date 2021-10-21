@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  posted }) {
+export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -35,13 +35,20 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     if (showAll) setAwards(allAwards)
   }, [showAll]);
 
+  // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
+  const setSubhome = () => {
+    setSelectedSubreddit("r/" + subreddit);
+    setSearch(subreddit);
+    setPage("subhome");
+  }
+
   return (
     <div className="post-top">
     {/* tons of subreddits don't have icon links in the API even though they do have their own thumbnails, so they just get the default logo instead */}
       <span className="subreddit-thumbnail">
         <img src={thumbnail ? thumbnail : DefaultThumbnail} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} alt="" />
       </span>
-      <span className="post-subreddit" onClick={() => setSelectedSubreddit(`r/${subreddit}`)}>r/{subreddit}</span>
+      <span className="post-subreddit" onClick={setSubhome}>r/{subreddit}</span>
       <span className="separator-dot">•</span>
       <span className="post-posted-by">Posted by u/{author} {posted} ago</span>
       <span className="post-awards" onClick={() => setShowAll(true)}>{awards}</span>

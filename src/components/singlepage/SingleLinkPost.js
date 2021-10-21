@@ -11,7 +11,7 @@ export default function SingleLinkPost({ clickedPost, flairStyle, flairDisplay }
         {clickedPost.thumbnail_height && <img className="singlepost-link-image" src={clickedPost.thumbnail} alt="" /> }
       </div>
       <div className="post-link-container">
-        <a className="singlepost-link" href={clickedPost.url_overridden_by_dest} target="_blank" rel="noreferrer">{clickedPost.url_overridden_by_dest.slice(12, 36)}...</a>
+        {clickedPost.url_overridden_by_dest && <a className="singlepost-link" href={clickedPost.url_overridden_by_dest} target="_blank" rel="noreferrer">{clickedPost.url_overridden_by_dest.slice(12, 36)}...</a>}
       </div>
     </>
   )

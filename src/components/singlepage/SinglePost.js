@@ -15,12 +15,12 @@ import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
 
-// TODO: sort the thumbnails loading slowly and showing before they are ready
 export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose }) {
   const flairStyle = {
     backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
   }
+
 
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
     if (part.t) return <span key={i+part.a}>{part.t}</span>;
@@ -86,19 +86,19 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
                 cachedPostData={cachedPostData}
               />
 
-              {clickedPost.is_video || clickedPost.post_hint === "rich:video"
+              {clickedPost.is_video || cachedPostData.post_hint === "rich:video"
                 ? <SingleVideoPost
                     clickedPost={clickedPost}
                     flairStyle={flairStyle}
                     flairDisplay={flairDisplay}
                   />
-                : clickedPost.post_hint === "image"
+                : cachedPostData.post_hint === "image"
                   ? <SingleImagePost
                       clickedPost={clickedPost}
                       flairStyle={flairStyle}
                       flairDisplay={flairDisplay}
                     />
-                  : clickedPost.post_hint === "link"
+                  : cachedPostData.post_hint === "link"
                   ? <SingleLinkPost
                       clickedPost={clickedPost}
                       flairStyle={flairStyle}

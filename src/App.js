@@ -27,7 +27,7 @@ function App() {
   const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
-    // cachedPostData stores the clicked post's data from the original fetch request
+  // cachedPostData stores the clicked post's data from the original fetch request
   const [cachedPostData, setCachedPostData] = useState({});
   // clickedPost stores the data from fetching the individual post's json data
   const [clickedPost, setClickedPost] = useState("");

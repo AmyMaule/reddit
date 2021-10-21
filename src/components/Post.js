@@ -108,7 +108,8 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
       posted: posted,
       votes: votes,
       num_comments: post.num_comments,
-      title: post.title
+      title: post.title,
+      post_hint: post.post_hint
     })
     setScrollPosition(window.pageYOffset);
   }

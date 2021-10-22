@@ -12,7 +12,6 @@ import Subhome from './components/Subhome';
 import SinglePostSideBar from './components/singlepage/SinglePostSideBar';
 
 // TODO load 10 more posts when you're near the bottom of the page
-// TODO add keyboard functionality to search bar
 // Call <SortPosts /> with different parameters based on whether it is coming from home or subhome (so <SortPosts top={top} hot={hot} /> etc)
 
 function App() {
@@ -29,7 +28,7 @@ function App() {
   const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("none");
   const [page, setPage] = useState("home");
-  // cachedPostData stores the clicked post's data from the original fetch request
+  // cachedPostData stores data from the original fetch request and from the fetch request in Post.js for faster loading
   const [cachedPostData, setCachedPostData] = useState({});
   // clickedPost stores the data from fetching the individual post's json data
   const [clickedPost, setClickedPost] = useState("");
@@ -49,7 +48,7 @@ function App() {
 
   useEffect(() => {
     const abortApp = new AbortController();
-    console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
+    // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
     fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
@@ -59,13 +58,12 @@ function App() {
     .then(data => {
       if (data) {
         setPosts(data.data.children);
-      } else console.log("error 60: couldn't set posts");
+      }
     })
-    // .then second fetch for thumbnail?
     .catch(err => {
       if (err.name !== "AbortError") {
-        console.log("The error is:", err);
-      } else console.log("app first fetch aborted");
+        console.log("Error 66:", err);
+      }
     })
     return () => {
       abortApp.abort();
@@ -119,8 +117,6 @@ function App() {
       abortClickedPostApp.abort();
     }
   }, [clickedPostId])
-  // page was a dependency, but page is set during useEffect?
-
 
   return (
     <div className="App">
@@ -180,8 +176,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
-
-// if (data.before) - display a little popup or add a bar or something that says "new posts" or console.log("new posts")
-// check for new posts every 30 seconds, if the "before" property of the data changes, there are new posts?

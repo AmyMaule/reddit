@@ -116,13 +116,15 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
   });
 
   const handleReturnToHome = () => {
+    setTimeout(() => {
+      setPage("home");
+    }, 1000);
     setSelectedSubreddit("r/popular");
-    setPage("home");
     document.querySelector(".popular-location").classList.remove("hide");
     setSearch("home");
   };
 
-  // currentSubredditWidth takes the value of the width of the subreddit text in the search bar, whenever a subreddit has been selected
+  // currentSubredditWidth takes the value of the width of the subreddit text in the search bar, whenever a subreddit has been selected, to make sure the search text appears in the right place
   let currentSubredditWidth = 0;
   if (document.querySelector(".current-subreddit")) currentSubredditWidth = document.querySelector(".current-subreddit").clientWidth
 

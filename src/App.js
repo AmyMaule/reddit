@@ -170,6 +170,7 @@ function App() {
             clickedPostId={clickedPostId}
             cachedPostData={cachedPostData}
             onClose={onClose}
+            setSearch={setSearch}
         />
         </div>
       }

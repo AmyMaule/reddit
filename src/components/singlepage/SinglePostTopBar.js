@@ -1,7 +1,7 @@
 import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function SinglePostTopBar({ clickedPost, cachedPostData }) {
+export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelectedSubreddit, setSearch, setPage }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -18,10 +18,19 @@ export default function SinglePostTopBar({ clickedPost, cachedPostData }) {
     }
   }) : "";
 
+  // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
+  const singlePostSetSubhome = () => {
+    setSelectedSubreddit("r/" + clickedPost.subreddit);
+    setSearch(clickedPost.subreddit);
+    setTimeout(() => {
+      setPage("subhome");
+    }, 1000);
+  }
+
   return (
     <div className="singlepost-top">
       <span className="subreddit-thumbnail"><img src={cachedPostData.thumbnail ? cachedPostData.thumbnail : DefaultThumbnail} style={{height: "21px", width: "21px", borderRadius: "50%", marginRight: "5px"}} alt="" /></span>
-      <span className="singlepost-subreddit">r/{clickedPost.subreddit}</span>
+      <span className="singlepost-subreddit" onClick={singlePostSetSubhome}>r/{clickedPost.subreddit}</span>
       <span className="singlepost-separator-dot">•</span>
       <div className="singlepost-posted-by">Posted by u/{clickedPost.author} {cachedPostData.posted} ago</div>
       <span className="singlepost-awards">{awards}</span>

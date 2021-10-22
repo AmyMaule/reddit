@@ -15,7 +15,7 @@ import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
 
-export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose }) {
+export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose, setSearch }) {
   const flairStyle = {
     backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
@@ -83,6 +83,9 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
               <SinglePostTopBar
                 clickedPost={clickedPost}
                 cachedPostData={cachedPostData}
+                setSelectedSubreddit={setSelectedSubreddit}
+                setSearch={setSearch}
+                setPage={setPage}
               />
 
               {clickedPost.is_video || cachedPostData.post_hint === "rich:video"

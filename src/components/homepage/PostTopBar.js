@@ -41,7 +41,9 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     handlePostClick(null);
     setSelectedSubreddit("r/" + subreddit);
     setSearch(subreddit);
-    setPage("subhome");
+    setTimeout(() => {
+      setPage("subhome");
+    }, 1000);
   }
 
   return (

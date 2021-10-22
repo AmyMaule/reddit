@@ -2,12 +2,12 @@ import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
-export default function SinglePostSideBar({ cachedPostData, clickedPost, setSelectedSubreddit }) {
+export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, page }) {
   // If there are a million or more members, round to 1 decimal place and add "m" otherwise if there are a thousand or more, round to 1 decimal place and add "k"
   const totalMembers = cachedPostData.subscribers > 999999
     ? (cachedPostData.subscribers/1000000).toFixed(1) + "m"
-    : cachedPostData.cachedPostData > 999
-      ? (clickedPost.subscribers/1000).toFixed(0) + "k"
+    : cachedPostData.subscribers > 999
+      ? (cachedPostData.subscribers/1000).toFixed(0) + "k"
       : cachedPostData.subscribers;
 
   // If there are more than 999 active users, round it to the nearest 1 decimal place and add k (so 18150 becomes 18.1k)
@@ -18,8 +18,8 @@ export default function SinglePostSideBar({ cachedPostData, clickedPost, setSele
   let created = new Date(cachedPostData.created_utc*1000).toDateString();
 
   const btnStyle = {
-    color: "#FFF",
-    backgroundColor: cachedPostData.banner_background_color || cachedPostData.primary_color || cachedPostData.key_color || "#0079d3"
+    backgroundColor: cachedPostData.primary_color || cachedPostData.banner_background_color || cachedPostData.key_color || "#0079d3",
+    color: "#FFF"
   }
 
   const htmlDecode = description => {
@@ -29,16 +29,18 @@ export default function SinglePostSideBar({ cachedPostData, clickedPost, setSele
   }
 
   return (
-    <div className="SinglePostSideBar">
-      <div className="singlepostsidebar-banner" style={{backgroundColor: clickedPost.primary_color || clickedPost.key_color || "#bbbbdf"}}></div>
+    <div className={page === "comment" ? "SinglePostSideBar sidebar-height" : "SinglePostSideBar subhome-sidebar-margin"}>
+      <div className="singlepostsidebar-banner" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>
+        {page !== "subhome" && <div className="about-community">About Community</div>}
+      </div>
       <div className="singlepostsidebar-container">
-        <img
+        {page === "comment" && <img
           src={cachedPostData.thumbnail ? cachedPostData.thumbnail : DefaultThumbnail}
           alt=""
           className="singlepostsidebar-subreddit-thumbnail"
-          onClick={() => setSelectedSubreddit(`r/${clickedPost.subreddit}`)}
-        />
-        <h2 className="singlepostsidebar-subreddit" onClick={() => setSelectedSubreddit(`r/${clickedPost.subreddit}`)}>r/{clickedPost.subreddit}</h2>
+          onClick={() => setSelectedSubreddit(cachedPostData.display_name_prefixed)}
+        />}
+        {page === "comment" && <h2 className="singlepostsidebar-subreddit" onClick={() => setSelectedSubreddit(cachedPostData.display_name_prefixed)}>{cachedPostData.display_name_prefixed}</h2>}
       </div>
       <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecode(cachedPostData.public_description_html)}}></div>
       <div className="singlepostsidebar-member-info-container">

@@ -9,6 +9,7 @@ import SinglePost from './components/singlepage/SinglePost';
 import SideBarPremium from './components/homepage/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
 import Subhome from './components/Subhome';
+import SinglePostSideBar from './components/singlepage/SinglePostSideBar';
 
 // TODO load 10 more posts when you're near the bottom of the page
 // TODO add keyboard functionality to search bar
@@ -27,7 +28,7 @@ function App() {
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("none");
-  const [page, setPage] = useState("subhome");
+  const [page, setPage] = useState("home");
   // cachedPostData stores the clicked post's data from the original fetch request
   const [cachedPostData, setCachedPostData] = useState({});
   // clickedPost stores the data from fetching the individual post's json data
@@ -129,10 +130,11 @@ function App() {
         search={search}
         setSearch={setSearch}
         allSubreddits={allSubreddits}
+        setPage={setPage}
       />
       {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
       <Trending page={page} />
-      {page === "subhome" && <Subhome posts={posts} />}
+      {page === "subhome" && <Subhome cachedPostData={cachedPostData} />}
       <div className={page !== "comment" ? "main-container" : "main-container hide"}>
         <PostContainer
           posts={posts}
@@ -147,8 +149,13 @@ function App() {
           setPage={setPage}
         />
         <div className="sidebar-container">
-          <SideBar setSelectedSubreddit={setSelectedSubreddit} />
-          <SideBarPremium />
+          {page === "home" && <SideBar setSelectedSubreddit={setSelectedSubreddit} />}
+          {page === "home" && <SideBarPremium />}
+          {page === "subhome" && <SinglePostSideBar
+                                    cachedPostData={cachedPostData}
+                                    clickedPost={clickedPost}
+                                    setSelectedSubreddit={setSelectedSubreddit}
+                                  />}
           <SideBarLinks page={page} />
         </div>
       </div>

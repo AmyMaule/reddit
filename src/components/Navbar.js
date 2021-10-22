@@ -5,7 +5,7 @@ import V from "../images/v.png";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
 
-export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits }) {
+export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage }) {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearchInput = e => {
@@ -117,6 +117,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   const handleReturnToHome = () => {
     setSelectedSubreddit("r/popular");
+    setPage("home");
     document.querySelector(".popular-location").classList.remove("hide");
     setSearch("home");
   };

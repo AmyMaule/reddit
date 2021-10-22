@@ -21,7 +21,6 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
   }
 
-
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
     if (part.t) return <span key={i+part.a}>{part.t}</span>;
     if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
@@ -160,9 +159,9 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
           </div>
           <div className="sidebar-container">
             <SinglePostSideBar
-              clickedPost={clickedPost}
               setSelectedSubreddit={setSelectedSubreddit}
               cachedPostData={cachedPostData}
+              page={page}
             />
             <SideBarLinks />
           </div>

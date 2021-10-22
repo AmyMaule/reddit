@@ -75,6 +75,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
     .then(data => {
       if (data) {
         setSubredditInfo({
+            subreddit_title: data.data.title,
             thumbnail: data.data.icon_img,
             subscribers: data.data.subscribers,
             active_user_count: data.data.active_user_count,
@@ -82,7 +83,14 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
             banner_background_color: data.data.banner_background_color, // color for top banner in actual subreddit
             key_color: data.data.key_color, // color for join buttons, but not always correct
             public_description_html: data.data.public_description_html,
-            created_utc: data.data.created_utc
+            created_utc: data.data.created_utc,
+            header_img: data.data.header_img,
+            icon_img: data.data.icon_img,
+            display_name_prefixed: data.data.display_name_prefixed,
+            community_icon: data.data.community_icon,
+            banner_background_image: data.data.banner_background_image,
+            banner_size: data.data.banner_size,
+            banner_img: data.data.banner_img
           });
           setIsLoaded(true);
         } else {
@@ -100,9 +108,9 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
     }
   }, [post.subreddit])
 
-  const handlePostClick = () => {
+  const handlePostClick = (postId) => {
     // this sets the subreddit thumbnail and other data for the clicked post without having to do another fetch request
-    setClickedPostId(post.id);
+    if (postId) setClickedPostId(post.id);
     setCachedPostData({
       ...subredditInfo,
       posted: posted,
@@ -143,6 +151,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
             posted={posted}
             setPage={setPage}
             setSearch={setSearch}
+            handlePostClick={handlePostClick}
           />}
 
         {/* Render different types of post based on the media it contains */}
@@ -183,7 +192,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
         }
 
         <div className="post-bottom-bar" >
-          <div className="post-comments" onClick={handlePostClick}>
+          <div className="post-comments" onClick={() => handlePostClick("post")}>
             <img src={SpeechBubble} className="comments-speechbubble" alt="" />
             <h4 className="comments">{post.num_comments < 1000 ? post.num_comments : (post.num_comments/1000).toFixed(1) + "k"} comments</h4>
           </div>

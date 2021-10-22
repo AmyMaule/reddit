@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted }) {
+export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted, handlePostClick }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -37,6 +37,8 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
 
   // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
   const setSubhome = () => {
+    // handlePostClick sets cachedPostData, using null if going directly to the subreddit page
+    handlePostClick(null);
     setSelectedSubreddit("r/" + subreddit);
     setSearch(subreddit);
     setPage("subhome");

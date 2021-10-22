@@ -23,7 +23,7 @@ export default function GalleryPost({ post, flairStyle, flairDisplay, handlePost
 
   return (
     <>
-      <div className="post-title" onClick={handlePostClick}>
+      <div className="post-title" onClick={() => handlePostClick("post")}>
         <span>{post.title}</span>
         {post.link_flair_text && <span className="flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : post.link_flair_text}</span>}
         {post.is_original_content && <span className="flair-oc">OC</span>}
@@ -35,7 +35,7 @@ export default function GalleryPost({ post, flairStyle, flairDisplay, handlePost
           <img
             className="post-gallery-image"
             src={galleryImages[currentImage]}
-            onClick={handlePostClick}
+            onClick={() => handlePostClick("post")}
             alt=""
           />
         {currentImage !== galleryImages.length-1 && <button className="gallery-button gallery-button-right" onClick={() => setCurrentImage(prev => prev+1)}>

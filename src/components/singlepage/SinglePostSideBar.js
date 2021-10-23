@@ -3,6 +3,9 @@ import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
 export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, page }) {
+  let aboutCommunityHeight = "34px";
+  if (page !== "comment") aboutCommunityHeight = "44px";
+
   // If there are a million or more members, round to 1 decimal place and add "m" otherwise if there are a thousand or more, round to 1 decimal place and add "k"
   const totalMembers = cachedPostData.subscribers > 999999
     ? (cachedPostData.subscribers/1000000).toFixed(1) + "m"
@@ -30,7 +33,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
 
   return (
     <div className={page === "comment" ? "SinglePostSideBar sidebar-height" : "SinglePostSideBar subhome-sidebar-margin"}>
-      <div className="singlepostsidebar-banner" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>
+      <div className="singlepostsidebar-banner" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59", height: aboutCommunityHeight}}>
         {page !== "subhome" && <div className="about-community">About Community</div>}
       </div>
       <div className="singlepostsidebar-container">

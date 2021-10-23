@@ -3,7 +3,14 @@ import React from 'react';
 export default function Subhome({ cachedPostData }) {
   // If a banner image is given in the API, it is encoded so the amp; must be removed before it can be used
   let bannerImg;
-  if (cachedPostData.banner_background_image) bannerImg = cachedPostData.banner_background_image.replace("&amp;", "&");
+  if (cachedPostData.banner_background_image) {
+    bannerImg = cachedPostData.banner_background_image.replace("&amp;", "&");
+  } else if (cachedPostData.banner_img) {
+    bannerImg = cachedPostData.banner_img;
+  }
+  let bannerHeight = "220px";
+  console.log(cachedPostData.banner_size);
+  if (cachedPostData.banner_size) bannerHeight = cachedPostData.banner_size[1];
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
   let btnWidth = 96;
@@ -12,9 +19,12 @@ export default function Subhome({ cachedPostData }) {
   return (
     <div className="Subhome">
       <div className="subhome-header">
-        {bannerImg
-          ? <img className="subhome-banner" src={bannerImg} style={cachedPostData.banner_size && {height: cachedPostData.banner_size[1]}}/>
-          : <div className="subhome-banner" style={{backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59"}}></div>}
+        {/* src={bannerImg} */}
+        {/* {bannerImg
+
+          ? <div className="subhome-banner" style={cachedPostData.banner_size && {height: cachedPostData.banner_size[1]}}></div>
+          : <div className="subhome-banner" style={{backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59"}}></div>} */}
+        <div className="subhome-banner" style={{height: bannerHeight, backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59", backgroundImage: `url(${bannerImg})` }}></div>
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content">
             <div className="subhome-r-bar-top">

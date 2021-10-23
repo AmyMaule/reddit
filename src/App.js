@@ -10,6 +10,7 @@ import SideBarPremium from './components/homepage/SideBarPremium';
 import SideBarLinks from './components/SideBarLinks';
 import Subhome from './components/Subhome';
 import SinglePostSideBar from './components/singlepage/SinglePostSideBar';
+import SubhomeRules from './components/SubhomeRules';
 
 // TODO load 10 more posts when you're near the bottom of the page
 // Call <SortPosts /> with different parameters based on whether it is coming from home or subhome (so <SortPosts top={top} hot={hot} /> etc)
@@ -152,6 +153,7 @@ function App() {
                                     clickedPost={clickedPost}
                                     setSelectedSubreddit={setSelectedSubreddit}
                                   />}
+          {page === "subhome" && <SubhomeRules />}
           <SideBarLinks page={page} />
         </div>
       </div>

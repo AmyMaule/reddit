@@ -297,10 +297,11 @@
 }
 
 .singlepost-image {
-  max-width: 700px;
+  max-width: 100%;
   cursor: pointer;
   max-height: 700px;
   display: flex;
+  /* max-width: 700px */
   /* width: 100%; */
   position: relative;
 }

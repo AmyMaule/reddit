@@ -11,10 +11,10 @@
 }
 
 .subhome-banner {
-  background-color: rgb(215, 250, 145);
+  /* background-color: rgb(215, 250, 145); */
   width: 100%;
-  /*  */
-  object-fit: cover;
+  max-height: 220px;
+  /* object-fit: cover; */
 }
 
 .subhome-r-bar {

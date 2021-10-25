@@ -9,7 +9,6 @@ export default function Subhome({ cachedPostData }) {
     bannerImg = cachedPostData.banner_img;
   }
   let bannerHeight = "220px";
-  console.log(cachedPostData.banner_size);
   if (cachedPostData.banner_size) bannerHeight = cachedPostData.banner_size[1];
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
@@ -19,11 +18,6 @@ export default function Subhome({ cachedPostData }) {
   return (
     <div className="Subhome">
       <div className="subhome-header">
-        {/* src={bannerImg} */}
-        {/* {bannerImg
-
-          ? <div className="subhome-banner" style={cachedPostData.banner_size && {height: cachedPostData.banner_size[1]}}></div>
-          : <div className="subhome-banner" style={{backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59"}}></div>} */}
         <div className="subhome-banner" style={{height: bannerHeight, backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59", backgroundImage: `url(${bannerImg})` }}></div>
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content">
@@ -47,9 +41,3 @@ export default function Subhome({ cachedPostData }) {
     </div>
   )
 }
-
-
-// rules available at:
-// https://www.reddit.com/r/AskReddit/about/rules/.json
-
-// reuse Singlepostsidebar

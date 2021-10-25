@@ -1,15 +1,39 @@
-import React from 'react'
+import React, { useState, useEffect}  from 'react'
 
-export default function SubhomeRules() {
-  const htmlDecode = description => {
+export default function SubhomeRules({ subreddit_prefixed }) {
+  const htmlDecodeRules = description => {
     let descriptionContainer = document.createElement("div");
     descriptionContainer.innerHTML = description;
     return descriptionContainer.childNodes.length === 0 ? "" : descriptionContainer.childNodes[0].nodeValue;
   }
 
-  let rules = `"&lt;!-- SC_OFF --&gt;&lt;div class=\"md wiki\"&gt;&lt;h1 id=\"section_reddit_content_policy\"&gt;&lt;a href=\"#section_reddit_content_policy\"&gt;Reddit Content Policy&lt;/a&gt;&lt;/h1&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_1\" href=\"#p_1\"&gt;1&lt;/a&gt; Reddit is a platform for communities to discuss, connect, and share in an open environment, home to some of the most authentic content anywhere online. The nature of this content might be funny, serious, offensive, or anywhere in between. While participating, it’s important to keep in mind this value above all others: show enough respect to others so that we all may continue to enjoy Reddit for what it is.&lt;/p&gt;\n&lt;h2 id=\"section_unwelcome_content\"&gt;&lt;a href=\"#section_unwelcome_content\"&gt;Unwelcome content&lt;/a&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_2\" href=\"#p_2\"&gt;2&lt;/a&gt; While Reddit generally provides a lot of leeway in what content is acceptable, here are some guidelines for content that is not. Please keep in mind the spirit in which these were written, and know that looking for loopholes is a waste of time.&lt;/p&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_3\" href=\"#p_3\"&gt;3&lt;/a&gt; Content is prohibited if it&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Is illegal&lt;/li&gt;\n&lt;li&gt;Is &lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/what-involuntary-pornography-and\" rel=\"nofollow\"&gt;involuntary pornography&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;Is &lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/do-not-post-sexual-or-suggestive\" rel=\"nofollow\"&gt;sexual or suggestive content involving minors&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/do-not-post-violent-content\" rel=\"nofollow\"&gt;Encourages or incites violence&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\"https://www.reddithelp.com/en/categories/reddit-101/rules-reporting/account-and-community-restrictions/do-not-threaten-harass-or\" rel=\"nofollow\"&gt;Threatens, harasses, or bullies&lt;/a&gt; or encourages others to do so&lt;/li&gt;\n&lt;li&gt;&lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/posting-someones-private-or-personal\" rel=\"nofollow\"&gt;Is personal and confidential information&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/user-pretending-be-me-what-can-i-do\" rel=\"nofollow\"&gt;Impersonates&lt;/a&gt; someone in a misleading or deceptive manner&lt;/li&gt;\n&lt;li&gt;Uses &lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/reddits-policy-against-transactions\" rel=\"nofollow\"&gt;Reddit to solicit or facilitate any transaction or gift involving certain goods and services&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;Is &lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/what-constitutes-spam-am-i-spammer\" rel=\"nofollow\"&gt;spam&lt;/a&gt;&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h2 id=\"section_prohibited_behavior\"&gt;&lt;a href=\"#section_prohibited_behavior\"&gt;Prohibited behavior&lt;/a&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_4\" href=\"#p_4\"&gt;4&lt;/a&gt; In addition to not submitting unwelcome content, the following behaviors are prohibited on Reddit&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Asking for votes or &lt;a href=\"https://www.reddithelp.com/en/categories/reddit-101/rules-reporting/account-and-community-restrictions/what-constitutes-vote\" rel=\"nofollow\"&gt;engaging in vote manipulation&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;&lt;a href=\"https://www.reddithelp.com/en/categories/rules-reporting/account-and-community-restrictions/dont-break-site\" rel=\"nofollow\"&gt;Breaking Reddit&lt;/a&gt; or doing anything that interferes with normal use of Reddit&lt;/li&gt;\n&lt;li&gt;Creating multiple accounts to evade punishment or avoid restrictions&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h2 id=\"section_nsfw_.28not_safe_for_work.29_content\"&gt;&lt;a href=\"#section_nsfw_.28not_safe_for_work.29_content\"&gt;NSFW (Not Safe For Work) content&lt;/a&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_5\" href=\"#p_5\"&gt;5&lt;/a&gt; Content that contains nudity, pornography, or profanity, which a reasonable viewer may not want to be seen accessing in a public or formal setting such as in a workplace should be tagged as NSFW. This tag can be applied to individual pieces of content or to entire communities.&lt;/p&gt;\n&lt;h2 id=\"section_enforcement\"&gt;&lt;a href=\"#section_enforcement\"&gt;Enforcement&lt;/a&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_6\" href=\"#p_6\"&gt;6&lt;/a&gt; We have a variety of ways of enforcing our rules, including, but not limited to&lt;/p&gt;\n&lt;ul&gt;\n&lt;li&gt;Asking you nicely to knock it off&lt;/li&gt;\n&lt;li&gt;Asking you less nicely&lt;/li&gt;\n&lt;li&gt;Temporary or permanent suspension of accounts&lt;/li&gt;\n&lt;li&gt;Removal of privileges from, or adding restrictions to, accounts&lt;/li&gt;\n&lt;li&gt;Adding restrictions to Reddit communities, such as adding NSFW tags or &lt;a href=\"https://www.reddithelp.com/en/categories/reddit-101/rules-reporting/account-and-community-restrictions/quarantined-subreddits\" rel=\"nofollow\"&gt;Quarantining&lt;/a&gt;&lt;/li&gt;\n&lt;li&gt;Removal of content&lt;/li&gt;\n&lt;li&gt;Banning of Reddit communities&lt;/li&gt;\n&lt;/ul&gt;\n&lt;h2 id=\"section_moderation_within_communities\"&gt;&lt;a href=\"#section_moderation_within_communities\"&gt;Moderation within communities&lt;/a&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;a class=\"p-anchor\" id=\"p_7\" href=\"#p_7\"&gt;7&lt;/a&gt; Individual communities on Reddit may have their own rules in addition to ours and their own moderators to enforce them. Reddit provides tools to aid moderators, but does not prescribe their usage.&lt;/p&gt;\n&lt;/div&gt;&lt;!-- SC_ON --&gt;`
+  // const [isLoading, setIsLoading] = useState(true);
+  const [rules, setRules] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://www.reddit.com/${subreddit_prefixed}/about/rules/.json`)
+    .then(res => res.json())
+    .then(data => {
+      if (data) {
+        setRules(data.rules);
+      }
+    })
+    .catch(err => console.log("Rules error:", err))
+  }, [])
+
+  if (rules) console.log(rules[0])
 
   return (
-    <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecode(rules)}}></div>
+    <div className="subhome-rules-container">
+      <div className="subhome-rules-heading">{subreddit_prefixed} rules</div>
+        <div></div>
+        {rules.map((rule, i) => {
+          return (
+            <div>
+              <span className="subhome-rule">{i+1}.</span>
+              <span className="subhome-rule" key={i} dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}}></span>
+            </div>)
+        })}
+    </div>
   )
 }

@@ -100,3 +100,15 @@
   margin-top: 10px;
   margin-left: 25px;
 }
+
+.subhome-rules-container {
+  width: 310px;
+  background-color: white;
+  margin-left: 12px;
+  margin-top: 10px;
+}
+
+.subhome-rule {
+  font-weight: 500;
+  margin-bottom: 10px;
+}

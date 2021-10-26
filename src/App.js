@@ -153,7 +153,7 @@ function App() {
                                     clickedPost={clickedPost}
                                     setSelectedSubreddit={setSelectedSubreddit}
                                   />}
-          {page === "subhome" && <SubhomeRules subreddit_prefixed={cachedPostData.display_name_prefixed} />}
+          {page === "subhome" && <SubhomeRules cachedPostData={cachedPostData} />}
           <SideBarLinks page={page} />
         </div>
       </div>

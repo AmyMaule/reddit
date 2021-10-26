@@ -136,7 +136,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       <form className="searchbar-container">
         <img src={SearchIcon} className="search-icon" alt="search-icon" />
         <input className="searchbar-subreddits" placeholder="Search Reddit" onChange={handleSearchInput} onKeyDown={handleMouseAndKeySearch} style={{paddingLeft: currentSubredditWidth + 50 + "px"}} />
-        {search.startsWith("r/") && <div className="current-subreddit">{search}</div>}
+        {search.startsWith("r/") && !search.startsWith("r/popular") ? <div className="current-subreddit">{search}</div> : <></>}
         <div className="dropdown-subreddits" style={document.querySelector(".current-subreddit") && {bottom: "25px"}}>
           {searchResults.slice(0, 5).map(sub => <div className="dropdown-div" onClick={() => handleSearch(sub)} key={sub}>{sub}</div>)}
         </div>

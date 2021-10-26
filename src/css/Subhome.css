@@ -102,13 +102,74 @@
 }
 
 .subhome-rules-container {
-  width: 310px;
+  width: 300px;
   background-color: white;
-  margin-left: 12px;
-  margin-top: 10px;
+  margin-left: 25px;
+  margin-top: 15px;
+  border-radius: 4px;
+  padding-right: 10px;
+}
+
+.subhome-rules-heading {
+  width: 300px;
+  height: 44px;
+  font-weight: bold;
+  background-position: contain;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 0.9rem;
+}
+
+.subhome-rule-container {
+  width: 100%;
+  padding: 10px 0px;
+  margin-left: 8px;
+  margin-right: 10px;
+  border-bottom: 1px solid rgba(26, 26, 27, 0.08);
+  font-size: 0.9rem;
+}
+
+.subhome-rule-number {
+  font-weight: 500;
+  padding-right: 5px;
 }
 
 .subhome-rule {
   font-weight: 500;
-  margin-bottom: 10px;
+  padding-right: 20px;
+}
+
+.subhome-v-icon {
+  height: 6px;
+  width: 12px;
+  /* position: relative; */
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.v-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  right: 0;
+  z-index: 20;
+  bottom: 10px;
+}
+
+.subhome-rule-inner {
+  /* width: 90%; */
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
+
+}
+
+.subhome-rule-inner li {
+  margin-top: 10px;
 }

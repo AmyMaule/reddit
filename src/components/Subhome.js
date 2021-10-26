@@ -8,8 +8,9 @@ export default function Subhome({ cachedPostData }) {
   } else if (cachedPostData.banner_img) {
     bannerImg = cachedPostData.banner_img;
   }
-  let bannerHeight = "220px";
-  if (cachedPostData.banner_size) bannerHeight = cachedPostData.banner_size[1];
+  // Default bannerHeight to 180px and if one exists in the API and it is less than 200px, use the API size instead
+  let bannerHeight = "180px";
+  if (cachedPostData.banner_size && cachedPostData.banner_size < 200) bannerHeight = cachedPostData.banner_size[1];
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
   let btnWidth = 96;

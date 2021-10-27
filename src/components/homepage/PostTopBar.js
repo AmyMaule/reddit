@@ -33,7 +33,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
   // if a user clicks on the awards, it should show all of them, not just the first 4
   useEffect(() => {
     if (showAll) setAwards(allAwards)
-  }, [showAll]);
+  }, [showAll]); //allAwards
 
   // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
   const setSubhome = () => {

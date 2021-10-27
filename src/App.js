@@ -164,10 +164,8 @@ function App() {
             posts={posts}
             page={page}
             setPage={setPage}
-            setClickedPost={setClickedPost}
             setSelectedSubreddit={setSelectedSubreddit}
             comments={clickedPostComments}
-            setClickedPostComments={setClickedPostComments}
             scrollPosition={scrollPosition}
             clickedPostId={clickedPostId}
             cachedPostData={cachedPostData}

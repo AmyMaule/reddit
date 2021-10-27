@@ -15,7 +15,8 @@ import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
 
-export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setClickedPost, setSelectedSubreddit, comments, setClickedPostComments, scrollPosition, onClose, setSearch }) {
+export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, scrollPosition, onClose, setSearch }) {
+
   const flairStyle = {
     backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",

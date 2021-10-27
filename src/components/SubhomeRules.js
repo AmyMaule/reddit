@@ -12,15 +12,21 @@ export default function SubhomeRules({ cachedPostData }) {
   const [rules, setRules] = useState([]);
 
   useEffect(() => {
-    fetch(`https://www.reddit.com/${cachedPostData.display_name_prefixed}/about/rules/.json`)
+    const abortRules = new AbortController();
+    fetch(`https://www.reddit.com/${cachedPostData.display_name_prefixed}/about/rules/.json`, { signal: abortRules.signal })
     .then(res => res.json())
     .then(data => {
       if (data) {
         setRules(data.rules);
       }
     })
-    .catch(err => console.log("Rules error:", err))
-  }, [])
+    .catch(err => {
+      if (err.name !== "AbortError") console.log("Rules error:", err);
+    })
+    return () => {
+      abortRules.abort();
+    }
+  }, [rules])
 
   // For some subreddits, the background color is white or very light, so if that's the case, change the text to be black
   if (document.querySelector(".subhome-rules-heading")) {
@@ -40,10 +46,10 @@ export default function SubhomeRules({ cachedPostData }) {
     })
   }, [rules])
 
-  const openRule = e => {
+  // toggleRule adds the inner rule text as a child, or removes it
+  const toggleRule = e => {
     let transformTarget = e.currentTarget.childElementCount === 4 ? e.currentTarget.lastElementChild.previousElementSibling.firstChild : e.currentTarget.lastElementChild.firstChild;
     transformTarget.style.transform = transformTarget.style.transform === "rotate(180deg)" ? "rotate(0deg)" : "rotate(180deg)";
-
 
     // If there are more than 3 child nodes, it means that the rule is already open and should be closed, so the last child element is removed
     if (e.currentTarget.childElementCount === 4) {
@@ -60,13 +66,14 @@ export default function SubhomeRules({ cachedPostData }) {
     e.currentTarget.appendChild(innerRule);
   }
 
+  if (!rules) return <></>;
   return (
     <div className="subhome-rules-container">
       <div className="subhome-rules-heading" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>{cachedPostData.display_name_prefixed} rules</div>
       <div className="subhome-rules-inner-container">
         {rules.map((rule, i) => {
           return (
-            <div onClick={openRule} key={i} className="subhome-rule-container">
+            <div onClick={toggleRule} key={i} className="subhome-rule-container">
               <span className="subhome-rule-number">{i+1}.</span>
               <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}}></span>
               <div className="v-container">

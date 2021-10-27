@@ -82,7 +82,6 @@
   bottom: 29px;
   border-radius: 15px;
   z-index: 7;
-  display: inline-block;
 }
 
 .dropdown-subreddits {
@@ -148,6 +147,7 @@
   height: 30px;
   border-radius: 5px;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .user-icons-container:hover {

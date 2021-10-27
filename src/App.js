@@ -27,7 +27,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [clickedPostId, setClickedPostId] = useState();
-  const [search, setSearch] = useState("none");
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState("home");
   // cachedPostData stores data from the original fetch request and from the fetch request in Post.js for faster loading
   const [cachedPostData, setCachedPostData] = useState({});
@@ -109,10 +109,11 @@ function App() {
           console.log("abortClickedPostApp:", err);
         }
       })
-      const wait2000 = setTimeout(() => {
+
+      const wait1500 = setTimeout(() => {
         setPage("comment");
-      }, 2000);
-      return () => clearTimeout(wait2000);
+      }, 1500);
+      return () => clearTimeout(wait1500);
     }
     return () => {
       abortClickedPostApp.abort();
@@ -128,6 +129,7 @@ function App() {
         setSearch={setSearch}
         allSubreddits={allSubreddits}
         setPage={setPage}
+        setCachedPostData={setCachedPostData}
       />
       {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
       <Trending page={page} />

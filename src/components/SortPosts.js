@@ -84,7 +84,7 @@ export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop,
   return (
     <>
     {page === "home" && <h2 className="popular-title">Popular posts</h2>}
-    <div className="SortPosts">
+    <div className="SortPosts" style={page === "home" ? {marginTop: "10px"} : {marginTop: "20px"}}>
       <div className="popular-container">
         <div className="popular-btn popular-hot clicked" onClick={() => handleBtnColorChange("r/popular/hot", "hot")}>
         {/* hot is blue by default, so needs the class hot-blue, but also needs the class hot-grey as the grey classes are never removed */}

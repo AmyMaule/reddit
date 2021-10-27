@@ -5,7 +5,7 @@ import V from "../images/v.png";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
 
-export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage }) {
+export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData }) {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearchInput = e => {
@@ -36,10 +36,52 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
   const handleSearch = sub => {
     // document.querySelector(".dropdown-subreddits").style.display = "none";
     setSelectedSubreddit(sub);
-    setSearchResults([]);
     document.querySelector(".searchbar-subreddits").value = "";
     setSearch(sub);
+    const wait1500 = setTimeout(() => {
+      setPage("subhome");
+      setSearchResults([]);
+    }, 1500);
+    return () => clearTimeout(wait1500);
   };
+
+  useEffect(() => {
+    if (!searchResults.length) return;
+    if (!search.startsWith("r/")) search = "r/" + search;
+    const abortSearch = new AbortController();
+    fetch(`https://www.reddit.com/${search}/about/.json`, { signal: abortSearch.signal })
+    .then(res => res.json())
+    .then(data => {
+      if (data) {
+        setCachedPostData({
+            subreddit_title: data.data.title,
+            thumbnail: data.data.icon_img,
+            subscribers: data.data.subscribers,
+            active_user_count: data.data.active_user_count,
+            primary_color: data.data.primary_color,
+            banner_background_color: data.data.banner_background_color,
+            key_color: data.data.key_color,
+            public_description_html: data.data.public_description_html,
+            created_utc: data.data.created_utc,
+            header_img: data.data.header_img,
+            icon_img: data.data.icon_img,
+            display_name_prefixed: data.data.display_name_prefixed,
+            community_icon: data.data.community_icon,
+            banner_background_image: data.data.banner_background_image,
+            banner_size: data.data.banner_size,
+            banner_img: data.data.banner_img
+          });
+        }
+      })
+      .catch(err => {
+        if (err.name !== "AbortError") {
+          console.log(err);
+        }
+      })
+    return () => {
+      abortSearch.abort();
+    }
+  }, [search])
 
   const toggleSearchDropdown = e => {
     if (!e.target.classList.contains("searchbar-subreddits")) {
@@ -126,7 +168,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   // currentSubredditWidth takes the value of the width of the subreddit text in the search bar, whenever a subreddit has been selected, to make sure the search text appears in the right place
   let currentSubredditWidth = 0;
-  if (document.querySelector(".current-subreddit")) currentSubredditWidth = document.querySelector(".current-subreddit").clientWidth
+  if (document.querySelector(".current-subreddit")) currentSubredditWidth = document.querySelector(".current-subreddit").clientWidth;
 
   return (
     <div className="Navbar">

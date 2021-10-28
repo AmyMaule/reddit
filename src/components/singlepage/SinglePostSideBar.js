@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
-export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, page }) {
+export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, page, setSearch, setPage, subreddit }) {
   let aboutCommunityHeight = "34px";
   if (page !== "comment") aboutCommunityHeight = "44px";
 
@@ -31,6 +31,15 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
     return descriptionContainer.childNodes.length === 0 ? "" : descriptionContainer.childNodes[0].nodeValue;
   }
 
+  const singlePostSetSubhome = () => {
+    setSelectedSubreddit("r/" + subreddit);
+    // error, setSearch is not a function
+    setSearch(subreddit);
+    setTimeout(() => {
+      setPage("subhome");
+    }, 1000);
+  }
+
   return (
     <div className={page === "comment" ? "SinglePostSideBar sidebar-height" : "SinglePostSideBar subhome-sidebar-margin"}>
       <div className="singlepostsidebar-banner" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59", height: aboutCommunityHeight}}>
@@ -43,7 +52,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
           className="singlepostsidebar-subreddit-thumbnail"
           onClick={() => setSelectedSubreddit(cachedPostData.display_name_prefixed)}
         />}
-        {page === "comment" && <h2 className="singlepostsidebar-subreddit" onClick={() => setSelectedSubreddit(cachedPostData.display_name_prefixed)}>{cachedPostData.display_name_prefixed}</h2>}
+        {page === "comment" && <h2 className="singlepostsidebar-subreddit" onClick={singlePostSetSubhome}>{cachedPostData.display_name_prefixed}</h2>}
       </div>
       <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecode(cachedPostData.public_description_html)}}></div>
       <div className="singlepostsidebar-member-info-container">

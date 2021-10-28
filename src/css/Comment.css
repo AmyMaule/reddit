@@ -1,31 +1,32 @@
 .Comment {
-  border: 1px solid blue;
-  /* display: flex; */
   align-items: center;
   width: 100%;
+  /* padding: 20px; */
+  background-color: yellowgreen;
 }
 
-h6, h6 p {
+.Comment li {
+  list-style-type: none;
+  /* background-color: rgb(117, 117, 46); */
+  /* border-top: 1px solid black; */
+  /* padding-left: 40px; */
+  border-left: 1px solid rgb(41, 0, 0);
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+li, li p, li h1, li h2 {
   font-size: 0.9rem;
   font-weight: 500;
   font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
 }
 
 .base-comment {
-  min-height: 50px;
-  display: flex;
+  min-height: 70px;
   align-items: center;
   background-color: #EEE;
 }
 
-.second-comment {
-  background-color: #CCC;
-  min-height: 50px;
-  border-bottom: 1px solid black;
-}
-
-.third-comment {
-  background-color: rgb(219, 168, 176);
-  min-height: 50px;
-  border-bottom: 1px solid black;
+.comment-details {
+  display: flex;
 }

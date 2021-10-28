@@ -18,7 +18,6 @@ export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelec
     }
   }) : "";
 
-  // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
   const singlePostSetSubhome = () => {
     setSelectedSubreddit("r/" + clickedPost.subreddit);
     setSearch(clickedPost.subreddit);

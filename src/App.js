@@ -110,10 +110,10 @@ function App() {
         }
       })
 
-      const wait1500 = setTimeout(() => {
+      const wait2000 = setTimeout(() => {
         setPage("comment");
-      }, 1500);
-      return () => clearTimeout(wait1500);
+      }, 2000);
+      return () => clearTimeout(wait2000);
     }
     return () => {
       abortClickedPostApp.abort();

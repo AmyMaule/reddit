@@ -2,7 +2,6 @@ import React from 'react';
 import Comment from './Comment';
 
 export default function CommentsContainer({ comments }) {
-  // console.log(!!comments)
   return (
     <>
       {comments && comments.map(comment => {

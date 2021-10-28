@@ -1,19 +1,28 @@
 .Comment {
   align-items: center;
   width: 100%;
-  /* padding: 20px; */
-  background-color: yellowgreen;
+  /* background-color: yellowgreen; */
 }
 
 .Comment li {
   list-style-type: none;
-  /* background-color: rgb(117, 117, 46); */
-  /* border-top: 1px solid black; */
-  /* padding-left: 40px; */
-  border-left: 1px solid rgb(41, 0, 0);
-  margin-left: -10px;
-  padding-left: 10px;
+  /* border-left: 2px solid rgb(199, 84, 84); */
+  padding-left: 20px;
+  margin-left: -20px;
+  padding-left: 5px;
+  padding-top: 10px;
 }
+
+/* .base-comment::before {
+  content: "";
+  background: rgb(199, 84, 84);
+  position: absolute;
+  margin-left: -5px;
+  top: 50px;
+  height: 80px;
+  width: 2px;
+} */
+
 
 li, li p, li h1, li h2 {
   font-size: 0.9rem;
@@ -21,12 +30,118 @@ li, li p, li h1, li h2 {
   font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
 }
 
+.hm {
+  /* border-left: 2px solid #f51c40; */
+  border-left: 2px solid rgb(237, 239, 241);
+  margin-left: -5px;
+  padding-left: 5px;
+  position: relative;
+  top: 10px;
+}
+
 .base-comment {
-  min-height: 70px;
-  align-items: center;
-  background-color: #EEE;
+  /* border-left: 2px solid #f51c40; */
+  position: relative;
+  /* min-height: 70px; */
+  /* background-color: #EEE; */
+  /* display: flex; */
+  display: block;
+  flex-direction: column;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.subcomment {
+  /* border-left: 2px solid #f7cc3f; */
+  border-left: 2px solid rgb(237, 239, 241);
+  /* hover 68, 78, 89 */
+}
+
+.comment-details-container {
+  display: flex;
+  margin-bottom: -5px;
 }
 
 .comment-details {
   display: flex;
+  align-items: center;
+}
+
+.comment-author {
+  font-size: 0.75rem;
+  color: #1A1A1B;
+  font-weight: 500;
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin-left: -5px;
+}
+
+.comment-separator-dot {
+  position: relative;
+  bottom: 3px;
+  margin: 0px 5px;
+}
+
+.comment-time-posted {
+  font-size: 0.75rem;
+  color: #7c7c7c;
+}
+
+.comment-avatar {
+  height: 36px;
+  width: 36px;
+  margin-left: -22px;
+  padding-right: 10px;
+  margin-top: -10px;
+  /* padding-top: 5px; */
+}
+
+.comment-body {
+  padding-bottom: 20px;
+  padding-left: 18px;
+  padding-top: 5px;
+}
+
+.comment-bottom-bar {
+  display: flex;
+  position: relative;
+  margin-top: auto;
+  margin-left: 18px;
+}
+
+.comment-votes {
+  display: flex;
+}
+
+.comment-votes-up, .comment-votes-down {
+  height: 18px;
+  width: 18px;
+  margin-right: 5px;
+}
+
+.comment-votes-count {
+  font-size: 0.73rem;
+  font-weight: bold;
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin-right: 5px;
+  position: relative;
+  top: 2px;
+}
+
+.comment-reply-container {
+  display: flex;
+}
+
+.comment-speechbubble {
+  height: 20px;
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 8px;
+}
+
+.comment-link {
+  color: #898989;
+  font-size: 0.75rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin-right: 10px;
 }

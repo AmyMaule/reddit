@@ -1,7 +1,8 @@
 import React from 'react';
 import SpeechBubble from "../../images/speech.png";
-import ShareArrow from "../../images/share-arrow.png";
-import SaveBanner from "../../images/save.png";
+import UpArrow from "../../images/up-arrow.png";
+import DownArrow from "../../images/down-arrow.png";
+import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function Comment({ comment }) {
   function htmlDecode(commentBody){
@@ -28,33 +29,50 @@ export default function Comment({ comment }) {
     posted = (postedMsAgo/3.154e+7).toFixed(0) + "y";
   }
 
+    // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
+    let votes;
+    if (comment.ups > 0) {
+      if (comment.ups < 1000) {
+        votes = comment.ups;
+      } else if (comment.ups > 100000) {
+        votes = `${(comment.ups/1000).toFixed(0)}k`;
+      } else votes = `${(comment.ups/1000).toFixed(1)}k`;
+    } else if (comment.downs < 1000) {
+        votes = comment.downs;
+    } else votes = `-${(comment.downs/1000).toFixed(1)}k`;
+
   // the last in the series has an undefined body_html so make sure that doesn't render
   if (!comment.body_html) {
     return <></>
   } else return (
     <div className="Comment">
-    <div className="comment-details">
-      <div>{comment.author}</div>
-      <div>{posted}</div>
-    </div>
       <ul>
         <li className="base-comment">
-          <div dangerouslySetInnerHTML={{__html: htmlDecode(comment.body_html)}}></div>
-          <div className="post-bottom-bar" >
-          <div className="post-comments">
-            <img src={SpeechBubble} className="comments-speechbubble" alt="" />
-            <h4 className="comments">Reply</h4>
+        <div className="comment-details-container">
+          <img src={DefaultThumbnail} className="comment-avatar" />
+          <div className="comment-details">
+            <div className="comment-author">{comment.author}</div>
+            <div className="comment-separator-dot">.</div>
+            <div className="comment-time-posted">{posted}</div>
           </div>
-          <div className="post-share-link">
-            <img src={ShareArrow} className="share-arrow" alt="" />
-            <h4 className="share">Share</h4>
-          </div>
-          <div className="post-save">
-            <img src={SaveBanner} className="save-banner" alt="" />
-            <h4 className="save">Save</h4>
-          </div>
-          <div className="post-more">...</div>
         </div>
+        <div className="hm">
+          <div className="comment-body" dangerouslySetInnerHTML={{__html: htmlDecode(comment.body_html)}}></div>
+          <div className="comment-bottom-bar">
+            <div className="comment-votes">
+              <img className="comment-votes-up" src={UpArrow} alt="up-arrow" />
+              <div className="comment-votes-count">{votes}</div>
+              <img className="comment-votes-down" src={DownArrow} alt="down-arrow" />
+            </div>
+            <div className="comment-reply-container">
+              <img src={SpeechBubble} className="comment-speechbubble" alt="" />
+              <h4 className="comment-link comment-reply">Reply</h4>
+            </div>
+            <h4 className="comment-link comment-share">Share</h4>
+            <h4 className="comment-link comment-report">Report</h4>
+            <h4 className="comment-link comment-save">Save</h4>
+          </div>
+          </div>
         </li>
       </ul>
       <ul>
@@ -62,40 +80,12 @@ export default function Comment({ comment }) {
         /* the last object in the children array isn't a comment so make sure it doesn't render */
         if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return;
         return (
-          <li>
-            <Comment key={subcomment.data} comment={subcomment.data} />
+          <li className="subcomment">
+            <Comment key={subcomment.data.id} comment={subcomment.data} />
           </li>
         )
         })}
-        </ul>
+      </ul>
     </div>
   )
 }
-
-
-
-
-// function displayComment(element) {
-//   if (element.hasChildNodes()) {
-//     element.childNodes.forEach(displayComment);
-//   } else if (element is a comment) {
-//     // do something to display it
-//   }
-// }
-
-
-// works with first 2 comments
-//     <div className="Comment">
-    //   {/* the last in the series has an undefined body_html so make sure that doesn't render */}
-    //   {comment.body_html && <h6 dangerouslySetInnerHTML={{__html: htmlDecode(comment.body_html)}} className="base-comment"></h6>}
-    //   <div>
-    //     {comment.replies && comment.replies.data.children.map((subcomment, i) => {
-    //       /* the last object in the children array isn't a comment so make sure it doesn't render */
-    //       if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return;
-    //       /* there may be a problem with some comments with null data, that somehow still have children - edit the return when you know why */
-    //       /* return subcomment.data.body && (... .map() return <h6 key={subcomment.data.id} className="second-comment">{subcomment.data.body}</h6> */
-    //       return subcomment.data.body && <h6 key={subcomment.data.id} className="second-comment">{subcomment.data.body}</h6>
-    //       /* subcomment.replies && <h6 className="third-comment">{subcomment.replies.data.children[0]}</h6> */
-    //       })}
-    //   </div>
-    // </div>

@@ -29,17 +29,17 @@ export default function Comment({ comment }) {
     posted = (postedMsAgo/3.154e+7).toFixed(0) + "y";
   }
 
-    // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
-    let votes;
-    if (comment.ups > 0) {
-      if (comment.ups < 1000) {
-        votes = comment.ups;
-      } else if (comment.ups > 100000) {
-        votes = `${(comment.ups/1000).toFixed(0)}k`;
-      } else votes = `${(comment.ups/1000).toFixed(1)}k`;
-    } else if (comment.downs < 1000) {
-        votes = comment.downs;
-    } else votes = `-${(comment.downs/1000).toFixed(1)}k`;
+  // if a post has fewer than 0 upvotes, comment.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
+  let votes;
+  if (comment.ups > 0) {
+    if (comment.ups < 1000) {
+      votes = comment.ups;
+    } else if (comment.ups > 100000) {
+      votes = `${(comment.ups/1000).toFixed(0)}k`;
+    } else votes = `${(comment.ups/1000).toFixed(1)}k`;
+  } else if (comment.downs < 1000) {
+      votes = comment.downs;
+  } else votes = `-${(comment.downs/1000).toFixed(1)}k`;
 
   // the last in the series has an undefined body_html so make sure that doesn't render
   if (!comment.body_html) {
@@ -56,7 +56,7 @@ export default function Comment({ comment }) {
             <div className="comment-time-posted">{posted}</div>
           </div>
         </div>
-        <div className="hm">
+        <div className="comment-border">
           <div className="comment-body" dangerouslySetInnerHTML={{__html: htmlDecode(comment.body_html)}}></div>
           <div className="comment-bottom-bar">
             <div className="comment-votes">

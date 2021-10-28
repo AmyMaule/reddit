@@ -1,7 +1,6 @@
 .Comment {
   align-items: center;
   width: 100%;
-  /* background-color: yellowgreen; */
 }
 
 .Comment li {
@@ -13,24 +12,13 @@
   padding-top: 10px;
 }
 
-/* .base-comment::before {
-  content: "";
-  background: rgb(199, 84, 84);
-  position: absolute;
-  margin-left: -5px;
-  top: 50px;
-  height: 80px;
-  width: 2px;
-} */
-
-
 li, li p, li h1, li h2 {
   font-size: 0.9rem;
   font-weight: 500;
   font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
 }
 
-.hm {
+.comment-border {
   /* border-left: 2px solid #f51c40; */
   border-left: 2px solid rgb(237, 239, 241);
   margin-left: -5px;
@@ -40,11 +28,7 @@ li, li p, li h1, li h2 {
 }
 
 .base-comment {
-  /* border-left: 2px solid #f51c40; */
   position: relative;
-  /* min-height: 70px; */
-  /* background-color: #EEE; */
-  /* display: flex; */
   display: block;
   flex-direction: column;
   margin-top: 10px;

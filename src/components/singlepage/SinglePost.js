@@ -14,6 +14,8 @@ import SingleGalleryPost from './SingleGalleryPost';
 import SingleLinkPost from './SingleLinkPost';
 import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
+import Hide from "../../images/hide.png";
+import Report from "../../images/report.png";
 
 export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, scrollPosition, onClose, setSearch }) {
   const flairStyle = {
@@ -135,11 +137,11 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
                   <h4 className="singlepost-save-text">Save</h4>
                 </div>
                 <div className="singlepost-hide">
-                  <img src={SaveBanner} className="singlepost-save-banner" alt="" />
+                  <img src={Hide} className="singlepost-hide-banner" alt="" />
                   <h4 className="singlepost-save-text">Hide</h4>
                 </div>
                 <div className="singlepost-report">
-                  <img src={SaveBanner} className="singlepost-save-banner" alt="" />
+                  <img src={Report} className="singlepost-report-banner" alt="" />
                   <h4 className="singlepost-save-text">Report</h4>
                 </div>
               </div>

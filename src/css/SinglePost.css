@@ -381,7 +381,7 @@
 .singlepost-comments-speechbubble {
   position: relative;
   height: 25px;
-  bottom: 5px;
+  bottom: 3px;
 }
 
 .singlepost-share-link {
@@ -423,7 +423,7 @@
   position: relative;
   height: 22px;
   width: 17px;
-  bottom: 5px;
+  bottom: 2px;
 }
 
 .singlepost-save-text {
@@ -439,6 +439,11 @@
   padding: 10px;
 }
 
+.singlepost-hide-banner {
+  width: 20px;
+  height: 20px;
+}
+
 .singlepost-hide:hover {
   background-color: rgba(0,0,0,0.04);
   border-radius: 5px;
@@ -448,6 +453,11 @@
   display: flex;
   cursor: pointer;
   padding: 10px;
+}
+
+.singlepost-report-banner {
+  width: 15px;
+  height: 18px;
 }
 
 .singlepost-report:hover {

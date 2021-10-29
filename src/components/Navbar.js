@@ -5,9 +5,8 @@ import V from "../images/v.png";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
 
-export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData }) {
+export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData, setSelectedTimeText, setSortTop }) {
   const [searchResults, setSearchResults] = useState([]);
-
   const handleSearchInput = e => {
     // must keep in this style change as otherwise in various circumstances (including once a search has been performed), the dropdown subreddits box doesn't reappear
     document.querySelector(".dropdown-subreddits").style.display = "block";
@@ -168,11 +167,14 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");
       document.querySelector(".popular-hot").classList.add("clicked");
+      document.querySelector(".hot-icon").classList.add("hot-blue");
       document.querySelector(".top-icon").classList.remove("top-blue");
       document.querySelector(".new-icon").classList.remove("new-blue");
       document.querySelector(".popular-today").classList.add("hide");
+      setSortTop("");
+      setSelectedTimeText("Today");
       setPage("home");
-    }, 1000);
+    }, 1200);
     setSelectedSubreddit("r/popular");
     setSearch("home");
   };
@@ -189,13 +191,11 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       <form className="searchbar-container">
         <img src={SearchIcon} className="search-icon" alt="search-icon" />
         <input className="searchbar-subreddits" placeholder="Search Reddit" onChange={handleSearchInput} onKeyDown={handleMouseAndKeySearch} style={{paddingLeft: currentSubredditWidth + 50 + "px"}} />
-
         {search.startsWith("r/") && !search.startsWith("r/popular")
-          ? search.indexOf("/") !== search.lastIndexOf("/")
-            ? <div className="current-subreddit">{"no" + search + " " + search.slice(0, search.lastIndexOf("/"))}</div>
-            : <div className="current-subreddit">{"oh" + search}</div>
+          ? search.indexOf("/") !== search.lastIndexOf("/") && search.indexOf("/") !== -1
+            ? <div className="current-subreddit">{search.slice(0, search.lastIndexOf("/"))}</div>
+            : <div className="current-subreddit">{search}</div>
           : <></>}
-
         <div className="dropdown-subreddits" style={document.querySelector(".current-subreddit") && {bottom: "25px"}}>
           {searchResults.slice(0, 5).map(sub => <div className="dropdown-div" onClick={() => handleSearch(sub)} key={sub}>{sub}</div>)}
         </div>

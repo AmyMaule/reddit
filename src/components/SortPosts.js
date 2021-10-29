@@ -4,16 +4,15 @@ import VBlue from "../images/v-blue.png";
 import blank from "../images/blank.png";
 import GeoFilter from "../geofilter.json";
 
-export default function SortPosts({ setSelectedSubreddit, search, setSearch, setSortTop, page }) {
-  const prevPageRef = useRef();
-  useEffect(() => {
-    prevPageRef.current = page;
-  });
-  const prevPage = prevPageRef.current;
+export default function SortPosts({ setSelectedSubreddit, search, setSearch, setSortTop, page, selectedTimeText, setSelectedTimeText }) {
+  // const prevPageRef = useRef();
+  // useEffect(() => {
+  //   prevPageRef.current = page;
+  // });
+  // const prevPage = prevPageRef.current;
 
   let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
-  const [selectedTimeText, setSelectedTimeText] = useState("Today");
 
   // handleSort sets the subreddit and search to be hot, new, top or rising, triggering a new fetch request
   const handleSort = sub => {
@@ -28,6 +27,8 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
       let secondSlash = search.lastIndexOf("/");
       search = search.slice(firstSlash, secondSlash);
     }
+    // if there's an r/ but no second slash, just remove the r/
+    if (search.indexOf("/") !== -1 && search.indexOf("/") === search.lastIndexOf("/")) search = search.slice(2);
 
     // if on the homepage, the sub is r/popular/hot for example, so if in subhome, sub becomes the name of the subreddit
     if (page === "subhome") sub = `r/${search}/${clickedClass}`;
@@ -77,6 +78,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
   const handleTimeSort = e => {
     // this slices the end of the .dropdown-top- class to give the time period selected
     let selectedTime = e.target.classList[0].slice(13);
+    console.log(selectedTime);
     setSortTop(`&sort=top&t=${selectedTime}`);
     setSearch(selectedTime);
     setSelectedTimeText(e.target.textContent);

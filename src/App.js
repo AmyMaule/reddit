@@ -21,7 +21,7 @@ function App() {
     Object.entries(AllSubs).sort(([,a],[,b]) => b-a)
   );
   // Object.keys creates an array of all the subreddits from sortedSubs, so that when filter is called while searching, they appear in order of most to least popular
-  let allSubreddits = Object.keys(sortedSubs)
+  let allSubreddits = Object.keys(sortedSubs);
   allSubreddits = allSubreddits.map(sub => sub.toLowerCase());
 
   const [posts, setPosts] = useState([]);
@@ -36,6 +36,8 @@ function App() {
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [sortTop, setSortTop] = useState("");
   const [scrollPosition, setScrollPosition] = useState();
+  // selectedTimeText is the text that shows in the "top" section of SortPosts ("Today", "This Week", etc)
+  const [selectedTimeText, setSelectedTimeText] = useState("Today");
 
   // useCallback?
   const onClose = e => {
@@ -130,6 +132,8 @@ function App() {
         allSubreddits={allSubreddits}
         setPage={setPage}
         setCachedPostData={setCachedPostData}
+        setSelectedTimeText={setSelectedTimeText}
+        setSortTop={setSortTop}
       />
       {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
       <Trending page={page} />
@@ -147,6 +151,9 @@ function App() {
           setCachedPostData={setCachedPostData}
           page={page}
           setPage={setPage}
+          selectedTimeText={selectedTimeText}
+          setSelectedTimeText={setSelectedTimeText}
+          setSortTop={setSortTop}
         />
         <div className="sidebar-container">
           {page === "home" && <SideBar setSelectedSubreddit={setSelectedSubreddit} />}
@@ -174,6 +181,8 @@ function App() {
             cachedPostData={cachedPostData}
             onClose={onClose}
             setSearch={setSearch}
+            setSortTop={setSortTop}
+            setSelectedTimeText={setSelectedTimeText}
         />
         </div>
       }

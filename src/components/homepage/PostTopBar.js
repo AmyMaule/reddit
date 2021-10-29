@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted, handlePostClick }) {
+export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted, handlePostClick,setSelectedTimeText, setSortTop }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -40,8 +40,10 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     // handlePostClick sets cachedPostData, using null if going directly to the subreddit page
     handlePostClick(null);
     setSelectedSubreddit("r/" + subreddit);
-    setSearch(subreddit);
+    setSearch("r/" + subreddit);
     setTimeout(() => {
+      setSortTop("");
+      setSelectedTimeText("Today");
       setPage("subhome");
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");

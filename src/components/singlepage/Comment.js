@@ -46,7 +46,8 @@ export default function Comment({ comment }) {
 
   // Fetch the user's avatar separately as it isn't in the main comment data
   useEffect(() => {
-    fetch(`https://www.reddit.com/user/${comment.author}/about/.json`)
+    const abortComment = new AbortController();
+    fetch(`https://www.reddit.com/user/${comment.author}/about/.json`, { signal: abortComment.signal })
     .then(res => res.json())
     .then(data => {
         // if a post and account were deleted after the post was made, data.data will be undefined
@@ -59,6 +60,9 @@ export default function Comment({ comment }) {
       }
     })
     .catch(err => console.log(err))
+    return () => {
+      abortComment.abort();
+    }
   }, [])
 
 

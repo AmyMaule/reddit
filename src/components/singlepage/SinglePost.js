@@ -26,6 +26,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
     if (part.t) return <span key={i+part.a}>{part.t}</span>;
     if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
+    return <></>;
   }) : "";
 
   useEffect(() => {
@@ -35,17 +36,17 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
     }
   });
 
-  // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
-  useEffect(() => {
-    // console.log(page, prevPage)
-    if (page === "home") {
-      // console.log("scroll position is:", scrollPosition);
-      window.scrollTo(0, scrollPosition);
-    } else {
-      if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
-      window.scrollTo(0, 0);
-    }
-  }, [page, scrollPosition]);
+  // // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
+  // useEffect(() => {
+  //   // console.log(page, prevPage)
+  //   if (page === "home") {
+  //     // console.log("scroll position is:", scrollPosition);
+  //     window.scrollTo(0, scrollPosition);
+  //   } else {
+  //     if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
+  //     window.scrollTo(0, 0);
+  //   }
+  // }, [page, scrollPosition]);
   // not sure about dependencies, re-evaluate after subhome page is functioning
 
   if (page === "home") {

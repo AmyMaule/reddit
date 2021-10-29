@@ -9,7 +9,7 @@ export default function SingleGalleryPost({ clickedPost, flairStyle, flairDispla
 
   // To make sure the post renders at the correct height, scale it based on the largest height in the gallery
   let postHeight = 0;
-  validGalleryData.map(item => {
+  validGalleryData.forEach(item => {
     if (item[1].p[item[1].p.length-1].y > postHeight) {
       postHeight = item[1].p[item[1].p.length-1].y;
     }

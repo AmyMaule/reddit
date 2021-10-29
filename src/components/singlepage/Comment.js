@@ -63,7 +63,7 @@ export default function Comment({ comment }) {
     return () => {
       abortComment.abort();
     }
-  }, [])
+  })
 
 
   // TODO - figure out when the comment borders are being hovered over to make them collapsible
@@ -95,7 +95,7 @@ export default function Comment({ comment }) {
       <ul>
         <li className="base-comment">
         <div className="comment-details-container">
-          <img src={profileImage} className="comment-avatar" />
+          <img src={profileImage} className="comment-avatar" alt="" />
           <div className="comment-details">
             <div className="comment-author">{comment.author}</div>
             <div className="comment-separator-dot">.</div>
@@ -124,7 +124,7 @@ export default function Comment({ comment }) {
       <ul>
       {comment.replies && comment.replies.data.children.map((subcomment, i) => {
         /* the last object in the children array isn't a comment so make sure it doesn't render */
-        if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return;
+        if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return <></>;
         return (
           <li className="subcomment" key={subcomment.data.id}>
             <Comment comment={subcomment.data} />

@@ -14,11 +14,11 @@ export default function Trending({ page }) {
     .then(res => {
       if (res.status === 200) {
         return res.json();
-      } else console.log("Status error fetching top 100");
+      } else console.log("Status error Trending");
     })
     .then(data => {
       if (data) {
-        data.data.children.map((post, i) => {
+        data.data.children.forEach((post, i) => {
           // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
           if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1 ) {
             setTrendingLinks(prevLinks => {
@@ -38,7 +38,7 @@ export default function Trending({ page }) {
   // In order for the trending blocks to load the data, isLoading sets to false once trendingLinks has enough data to render
   useEffect(() => {
     if (trendingLinks.length > 3) {
-      trendingLinks.map((link, i) => {
+      trendingLinks.forEach((link, i) => {
         fetch(`https://www.reddit.com/r/${link.subreddit}/about/.json`)
         .then(res => res.json())
         .then(data => {
@@ -65,11 +65,11 @@ export default function Trending({ page }) {
             {trendingLinks.slice(0, 4).map(link => {
               return (
               <a href={link.url_overridden_by_dest} target="_blank" rel="noreferrer" className="trending-link" key={link.url_overridden_by_dest}>
-                <img className="trending-block-img" src={link.img} />
+                <img className="trending-block-img" src={link.img} alt="" />
                 <div className="trending-block-dark">
                   <div className="trending-links-title">{link.title.slice(0, 50)}{link.title.length > 50 && "..."}</div>
                   <div className="trending-block-subreddit-container">
-                    <img src={link.iconImg || DefaultThumbnail} className="trending-block-subreddit-icon" />
+                    <img src={link.iconImg || DefaultThumbnail} className="trending-block-subreddit-icon" alt="" />
                     <div className="trending-links-subreddit">r/{link.subreddit} and more</div>
                   </div>
                 </div>

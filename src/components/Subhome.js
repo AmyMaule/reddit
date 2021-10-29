@@ -1,4 +1,5 @@
 import React from 'react';
+import DefaultThumbnail from "../images/logo-small.png";
 
 export default function Subhome({ cachedPostData }) {
   window.scrollTo(0, 0);
@@ -20,7 +21,7 @@ export default function Subhome({ cachedPostData }) {
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
   let btnWidth = 96;
-  if (cachedPostData.subreddit_title.length > 30) btnWidth = 58;
+  if (cachedPostData?.subreddit_title.length > 30) btnWidth = 58;
 
   let titleWidth = "640px";
   let positioningWidth = "310px"
@@ -42,7 +43,7 @@ export default function Subhome({ cachedPostData }) {
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content" style={{width: titleWidth}}>
             <div className="subhome-r-bar-top">
-              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon} />
+              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon || DefaultThumbnail} />
               <div className="subhome-title-container">
                 <div className="subhome-title">{cachedPostData.subreddit_title}</div>
                 <div className="subhome-title-small">{cachedPostData.display_name_prefixed}</div>

@@ -15,7 +15,7 @@ export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelec
   let awards = clickedPost.all_awardings ? clickedPost.all_awardings.map((award, i) => {
     if (award.icon_url) {
       return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
-    }
+    } else return <></>
   }) : "";
 
   const singlePostSetSubhome = () => {

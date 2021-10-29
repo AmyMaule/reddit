@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post';
 import SortPosts from "./SortPosts";
 
-export default function PostContainer({ posts, setSelectedSubreddit, setSearch, selectedSubreddit, setSortTop, setCachedClickedPostData, setScrollPosition, setClickedPostId, setCachedPostData, page, setPage }) {
+export default function PostContainer({ posts, setSelectedSubreddit, search, setSearch, selectedSubreddit, setSortTop, setCachedClickedPostData, setScrollPosition, setClickedPostId, setCachedPostData, page, setPage }) {
   return (
     <div className="PostContainer">
       <SortPosts
@@ -11,6 +11,7 @@ export default function PostContainer({ posts, setSelectedSubreddit, setSearch, 
         selectedSubreddit={selectedSubreddit}
         setSortTop={setSortTop}
         page={page}
+        search={search}
       />
       {posts.map(post => {
         return post.data.whitelist_status !== "promo_adult_nsfw" &&

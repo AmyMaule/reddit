@@ -139,6 +139,7 @@ function App() {
           posts={posts}
           setClickedPostId={setClickedPostId}
           setSelectedSubreddit={setSelectedSubreddit}
+          search={search}
           setSearch={setSearch}
           selectedSubreddit={selectedSubreddit}
           setSortTop={setSortTop}

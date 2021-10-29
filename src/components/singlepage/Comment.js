@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SpeechBubble from "../../images/speech.png";
 import UpArrow from "../../images/up-arrow.png";
 import DownArrow from "../../images/down-arrow.png";
 import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function Comment({ comment }) {
+  const [profileImage, setProfileImage] = useState();
+
   function htmlDecode(commentBody){
     let commentContainer = document.createElement("div");
     commentContainer.innerHTML = commentBody;
@@ -41,6 +43,42 @@ export default function Comment({ comment }) {
       votes = comment.downs;
   } else votes = `-${(comment.downs/1000).toFixed(1)}k`;
 
+
+  // Fetch the user's avatar separately as it isn't in the main comment data
+  useEffect(() => {
+    fetch(`https://www.reddit.com/user/${comment.author}/about/.json`)
+    .then(res => res.json())
+    .then(data => {
+      // remove the encoding
+      data.data.icon_img = data.data.icon_img.replaceAll("amp;", "");
+      if (!data.data.icon_img) {
+        setProfileImage(DefaultThumbnail);
+      } else setProfileImage(data.data.icon_img)
+    })
+  }, [])
+
+
+  // TODO - figure out when the comment borders are being hovered over to make them collapsible
+  // const mouseBorder = (e) => {
+  //   console.log(e.target);
+  //   // console.log("mouse");
+  // }
+
+  // let commentBorders;
+  // if (document.querySelector(".comment-border")) commentBorders = Array.from(document.querySelectorAll(".comment-border"));
+  // useEffect(() => {
+  //   if (!commentBorders) return;
+  //   // console.log(commentBorders.length);
+  //   commentBorders.map(border => {
+  //     border.addEventListener("mouseover", mouseBorder)
+  //   })
+  //   return () => {
+  //     commentBorders.map(border => {
+  //     border.removeEventListener("mouseover", mouseBorder)
+  //     })
+  //   }
+  // }, [commentBorders])
+
   // the last in the series has an undefined body_html so make sure that doesn't render
   if (!comment.body_html) {
     return <></>
@@ -49,7 +87,7 @@ export default function Comment({ comment }) {
       <ul>
         <li className="base-comment">
         <div className="comment-details-container">
-          <img src={DefaultThumbnail} className="comment-avatar" />
+          <img src={profileImage} className="comment-avatar" />
           <div className="comment-details">
             <div className="comment-author">{comment.author}</div>
             <div className="comment-separator-dot">.</div>

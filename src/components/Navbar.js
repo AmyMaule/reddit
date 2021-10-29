@@ -162,7 +162,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       setPage("home");
     }, 1000);
     setSelectedSubreddit("r/popular");
-    document.querySelector(".popular-location").classList.remove("hide");
+    if (document.querySelector(".popular-location")) document.querySelector(".popular-location").classList.remove("hide");
     setSearch("home");
   };
 

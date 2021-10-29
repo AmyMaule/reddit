@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Rectangle from "../images/rectangle.png";
 import VBlue from "../images/v-blue.png";
 import blank from "../images/blank.png";
 import GeoFilter from "../geofilter.json";
 
-// TODO: empty the search bar after clicking on one of these buttons
+export default function SortPosts({ setSelectedSubreddit, search, setSearch, setSortTop, page }) {
+  const prevPageRef = useRef();
+  useEffect(() => {
+    prevPageRef.current = page;
+  });
+  const prevPage = prevPageRef.current;
+  // console.log(prevPage, page);
 
-export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop, page }) {
   let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
@@ -18,10 +23,23 @@ export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop,
   }
 
   const handleBtnColorChange = (sub, clickedClass) => {
+    // use .slice() to remove the r/ and /hot from search, if they are there
+    if (search.indexOf("/") !== -1 && !search.indexOf("/") !== search.lastIndexOf("/")) {
+      let firstSlash = search.indexOf("/") + 1;
+      let secondSlash = search.lastIndexOf("/");
+      search = search.slice(firstSlash, secondSlash);
+    }
+
+    // if on the homepage, the sub is r/popular/hot for example, so if in subhome, sub becomes the name of the subreddit
+    if (page === "subhome") sub = `r/${search}/${clickedClass}`;
+
     // "new" and "top" hide the location button, "hot" shows the location button (so does the reddit logo in Navbar.js)
-    clickedClass === "hot"
-      ? document.querySelector(".popular-location").classList.remove("hide")
-      : document.querySelector(".popular-location").classList.add("hide");
+    // "popular-location" is only accessible from the homepage
+    if (page === "home") {
+      if (clickedClass === "hot") {
+        document.querySelector(".popular-location").classList.remove("hide")
+      } else document.querySelector(".popular-location").classList.add("hide");
+    }
     let popularBtns = Array.from(document.querySelectorAll(".popular-btn"));
     popularBtns.map(btn => btn.classList.remove("clicked"));
     let clickedItem = document.querySelector(`.popular-${clickedClass}`);
@@ -91,7 +109,7 @@ export default function SortPosts({ setSelectedSubreddit, setSearch, setSortTop,
           <img src={blank} className="hot-icon hot-blue hot-grey" alt="" />
           Hot
         </div>
-        <div className="popular-location">
+        <div className={page === "home" ? "popular-location" : "hide"}>
           {selectedCountry}
           <img src={VBlue} className="v-location" alt="" />
           <div className="dropdown-location-container">

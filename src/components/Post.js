@@ -101,7 +101,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
       .catch(err => {
         if (err.name !== "AbortError") {
           console.log(err);
-        } else console.log("post fetch aborted")
+        }
       })
     return () => {
       abortPost.abort();

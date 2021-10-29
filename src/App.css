@@ -85,3 +85,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 1119px) {
+  .sidebar-container {
+    display: none;
+  }
+}

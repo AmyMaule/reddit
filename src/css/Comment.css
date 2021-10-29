@@ -75,8 +75,9 @@ li, li p, li h1, li h2 {
   height: 36px;
   width: 36px;
   margin-left: -22px;
-  padding-right: 10px;
+  margin-right: 10px;
   margin-top: -10px;
+  border-radius: 50%;
   /* padding-top: 5px; */
 }
 
@@ -84,6 +85,7 @@ li, li p, li h1, li h2 {
   padding-bottom: 20px;
   padding-left: 18px;
   padding-top: 5px;
+  padding-right: 10px;
 }
 
 .comment-bottom-bar {

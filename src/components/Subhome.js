@@ -24,14 +24,16 @@ export default function Subhome({ cachedPostData }) {
 
   let titleWidth = "640px";
   let positioningWidth = "310px"
-  if (cachedPostData.subreddit_title.length > 40) {
+  if (cachedPostData.subreddit_title.length > 46) {
+    titleWidth = "1050px";
+    positioningWidth = "0px";
+  } else if (cachedPostData.subreddit_title.length > 40) {
     titleWidth = "850px";
     positioningWidth = "100px";
   } else if (cachedPostData.subreddit_title.length > 36) {
     titleWidth = "750px";
     positioningWidth = "200px";
   }
-  //   width: 310px;
 
   return (
     <div className="Subhome">

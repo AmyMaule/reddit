@@ -10,7 +10,6 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
     prevPageRef.current = page;
   });
   const prevPage = prevPageRef.current;
-  // console.log(prevPage, page);
 
   let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
@@ -24,7 +23,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
 
   const handleBtnColorChange = (sub, clickedClass) => {
     // use .slice() to remove the r/ and /hot from search, if they are there
-    if (search.indexOf("/") !== -1 && !search.indexOf("/") !== search.lastIndexOf("/")) {
+    if (search.indexOf("/") !== -1 && search.indexOf("/") !== search.lastIndexOf("/")) {
       let firstSlash = search.indexOf("/") + 1;
       let secondSlash = search.lastIndexOf("/");
       search = search.slice(firstSlash, secondSlash);

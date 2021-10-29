@@ -50,6 +50,7 @@ li, li p, li h1, li h2 {
 .comment-details {
   display: flex;
   align-items: center;
+  padding-bottom: 5px;
 }
 
 .comment-author {

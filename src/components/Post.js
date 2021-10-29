@@ -99,7 +99,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
         }
       })
       .catch(err => {
-        if (err.name !== "AbortError") {
+        if (err.name !== "AbortError" && err.name !== "TypeError") {
           console.log(err);
         }
       })

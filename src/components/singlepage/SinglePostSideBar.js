@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
-export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, page, setSearch, setPage, subreddit }) {
+export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, setSearch, page, setPage, subreddit }) {
   let aboutCommunityHeight = "34px";
   if (page !== "comment") aboutCommunityHeight = "44px";
 
@@ -33,10 +33,16 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
 
   const singlePostSetSubhome = () => {
     setSelectedSubreddit("r/" + subreddit);
-    // error, setSearch is not a function
     setSearch(subreddit);
     setTimeout(() => {
       setPage("subhome");
+      document.querySelector(".popular-top").classList.remove("clicked");
+      document.querySelector(".popular-new").classList.remove("clicked");
+      document.querySelector(".popular-hot").classList.add("clicked");
+      document.querySelector(".hot-icon").classList.add("hot-blue")
+      document.querySelector(".top-icon").classList.remove("top-blue");
+      document.querySelector(".new-icon").classList.remove("new-blue");
+      if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
     }, 1000);
   }
 

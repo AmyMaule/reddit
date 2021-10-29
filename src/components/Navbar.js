@@ -42,6 +42,11 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       setPage("subhome");
       setSearchResults([]);
     }, 1500);
+    document.querySelector(".popular-top").classList.remove("clicked");
+    document.querySelector(".popular-new").classList.remove("clicked");
+    document.querySelector(".popular-hot").classList.add("clicked");
+    document.querySelector(".top-icon").classList.remove("top-blue");
+    document.querySelector(".new-icon").classList.remove("new-blue");
     return () => clearTimeout(wait1500);
   };
 
@@ -159,10 +164,16 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   const handleReturnToHome = () => {
     setTimeout(() => {
+      // reset the sort posts bar to default hot
+      document.querySelector(".popular-top").classList.remove("clicked");
+      document.querySelector(".popular-new").classList.remove("clicked");
+      document.querySelector(".popular-hot").classList.add("clicked");
+      document.querySelector(".top-icon").classList.remove("top-blue");
+      document.querySelector(".new-icon").classList.remove("new-blue");
+      document.querySelector(".popular-today").classList.add("hide");
       setPage("home");
     }, 1000);
     setSelectedSubreddit("r/popular");
-    if (document.querySelector(".popular-location")) document.querySelector(".popular-location").classList.remove("hide");
     setSearch("home");
   };
 
@@ -178,7 +189,13 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       <form className="searchbar-container">
         <img src={SearchIcon} className="search-icon" alt="search-icon" />
         <input className="searchbar-subreddits" placeholder="Search Reddit" onChange={handleSearchInput} onKeyDown={handleMouseAndKeySearch} style={{paddingLeft: currentSubredditWidth + 50 + "px"}} />
-        {search.startsWith("r/") && !search.startsWith("r/popular") ? <div className="current-subreddit">{search}</div> : <></>}
+
+        {search.startsWith("r/") && !search.startsWith("r/popular")
+          ? search.indexOf("/") !== search.lastIndexOf("/")
+            ? <div className="current-subreddit">{"no" + search + " " + search.slice(0, search.lastIndexOf("/"))}</div>
+            : <div className="current-subreddit">{"oh" + search}</div>
+          : <></>}
+
         <div className="dropdown-subreddits" style={document.querySelector(".current-subreddit") && {bottom: "25px"}}>
           {searchResults.slice(0, 5).map(sub => <div className="dropdown-div" onClick={() => handleSearch(sub)} key={sub}>{sub}</div>)}
         </div>

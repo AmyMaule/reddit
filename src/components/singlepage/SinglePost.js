@@ -166,7 +166,10 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
             <SinglePostSideBar
               setSelectedSubreddit={setSelectedSubreddit}
               cachedPostData={cachedPostData}
+              setSearch={setSearch}
               page={page}
+              setPage={setPage}
+              subreddit={clickedPost.subreddit}
             />
             <SideBarLinks />
           </div>

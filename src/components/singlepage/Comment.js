@@ -49,12 +49,16 @@ export default function Comment({ comment }) {
     fetch(`https://www.reddit.com/user/${comment.author}/about/.json`)
     .then(res => res.json())
     .then(data => {
-      // remove the encoding
-      data.data.icon_img = data.data.icon_img.replaceAll("amp;", "");
-      if (!data.data.icon_img) {
-        setProfileImage(DefaultThumbnail);
-      } else setProfileImage(data.data.icon_img)
+        // if a post and account were deleted after the post was made, data.data will be undefined
+        if (!data?.data?.icon_img) {
+          setProfileImage(DefaultThumbnail);
+        } else {
+        // remove the encoding
+        data.data.icon_img = data.data.icon_img.replaceAll("amp;", "");
+        setProfileImage(data.data.icon_img);
+      }
     })
+    .catch(err => console.log(err))
   }, [])
 
 
@@ -118,8 +122,8 @@ export default function Comment({ comment }) {
         /* the last object in the children array isn't a comment so make sure it doesn't render */
         if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return;
         return (
-          <li className="subcomment">
-            <Comment key={subcomment.data.id} comment={subcomment.data} />
+          <li className="subcomment" key={subcomment.data.id}>
+            <Comment comment={subcomment.data} />
           </li>
         )
         })}

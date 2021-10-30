@@ -43,7 +43,7 @@ export default function Subhome({ cachedPostData }) {
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content" style={{width: titleWidth}}>
             <div className="subhome-r-bar-top">
-              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon || DefaultThumbnail} />
+              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon || DefaultThumbnail} alt="" />
               <div className="subhome-title-container">
                 <div className="subhome-title">{cachedPostData.subreddit_title}</div>
                 <div className="subhome-title-small">{cachedPostData.display_name_prefixed}</div>

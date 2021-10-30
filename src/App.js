@@ -112,10 +112,10 @@ function App() {
         }
       })
 
-      const wait2000 = setTimeout(() => {
+      const wait2200 = setTimeout(() => {
         setPage("comment");
-      }, 2000);
-      return () => clearTimeout(wait2000);
+      }, 2200);
+      return () => clearTimeout(wait2200);
     }
     return () => {
       abortClickedPostApp.abort();
@@ -153,7 +153,6 @@ function App() {
           setPage={setPage}
           selectedTimeText={selectedTimeText}
           setSelectedTimeText={setSelectedTimeText}
-          setSortTop={setSortTop}
         />
         <div className="sidebar-container">
           {page === "home" && <SideBar setSelectedSubreddit={setSelectedSubreddit} />}

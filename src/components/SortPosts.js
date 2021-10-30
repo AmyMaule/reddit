@@ -1,21 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Rectangle from "../images/rectangle.png";
 import VBlue from "../images/v-blue.png";
 import blank from "../images/blank.png";
 import GeoFilter from "../geofilter.json";
 
 export default function SortPosts({ setSelectedSubreddit, search, setSearch, setSortTop, page, selectedTimeText, setSelectedTimeText }) {
-  // const prevPageRef = useRef();
-  // useEffect(() => {
-  //   prevPageRef.current = page;
-  // });
-  // const prevPage = prevPageRef.current;
-
   let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
 
   // handleSort sets the subreddit and search to be hot, new, top or rising, triggering a new fetch request
   const handleSort = sub => {
+    console.log("handlesort", sub);
     setSelectedSubreddit(sub);
     setSearch(sub);
   }

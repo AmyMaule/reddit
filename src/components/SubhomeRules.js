@@ -26,7 +26,7 @@ export default function SubhomeRules({ cachedPostData }) {
     return () => {
       abortRules.abort();
     }
-  }, [rules])
+  });
 
   // For some subreddits, the background color is white or very light, so if that's the case, change the text to be black
   if (document.querySelector(".subhome-rules-heading")) {
@@ -39,12 +39,12 @@ export default function SubhomeRules({ cachedPostData }) {
   // This moves the v arrows towards the middle of their section based on the height of the parent element
   useEffect(() => {
     let vArrows = Array.from(document.querySelectorAll(".v-container"));
-    vArrows.map(arrow => {
+    vArrows.forEach(arrow => {
       if (arrow.parentElement.clientHeight > 55) {
         arrow.style.bottom = "20px";
       }
     })
-  }, [rules])
+  }, [rules]);
 
   // toggleRule adds the inner rule text as a child, or removes it
   const toggleRule = e => {

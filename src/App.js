@@ -43,6 +43,15 @@ function App() {
   // useCallback?
   const onClose = e => {
     if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+      document.querySelector(".popular-top").classList.remove("clicked");
+      document.querySelector(".popular-new").classList.remove("clicked");
+      document.querySelector(".popular-hot").classList.add("clicked");
+      document.querySelector(".hot-icon").classList.add("hot-blue");
+      document.querySelector(".top-icon").classList.remove("top-blue");
+      document.querySelector(".new-icon").classList.remove("new-blue");
+      if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
+      setSortTop("");
+      setSelectedTimeText("Today");
       setPage("home");
       setClickedPost("");
       setClickedPostComments([]);

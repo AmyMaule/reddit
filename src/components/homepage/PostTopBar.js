@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted, handlePostClick,setSelectedTimeText, setSortTop }) {
+export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted, handlePostClick,setSelectedTimeText, setSortTop, setScrollPosition }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -44,10 +44,8 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     setTimeout(() => {
       setSortTop("");
       setSelectedTimeText("Today");
-      setPage(prevPage => {
-        console.log("previous page:", prevPage);
-        return "subhome"
-      });
+      setScrollPosition(0);
+      setPage("subhome");
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");
       document.querySelector(".popular-hot").classList.add("clicked");

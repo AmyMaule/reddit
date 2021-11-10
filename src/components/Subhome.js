@@ -2,8 +2,6 @@ import React from 'react';
 import DefaultThumbnail from "../images/logo-small.png";
 
 export default function Subhome({ cachedPostData }) {
-  window.scrollTo(0, 0);
-
   // If a banner image is given in the API, it is encoded so the amp; must be removed before it can be used
   let bannerImg;
   if (cachedPostData.banner_background_image) {
@@ -21,17 +19,17 @@ export default function Subhome({ cachedPostData }) {
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
   let btnWidth = 96;
-  if (cachedPostData?.subreddit_title.length > 30) btnWidth = 58;
+  if (cachedPostData?.subreddit_title?.length > 30) btnWidth = 58;
 
   let titleWidth = "640px";
   let positioningWidth = "310px"
-  if (cachedPostData.subreddit_title.length > 46) {
+  if (cachedPostData?.subreddit_title.length > 46) {
     titleWidth = "1050px";
     positioningWidth = "0px";
-  } else if (cachedPostData.subreddit_title.length > 40) {
+  } else if (cachedPostData?.subreddit_title.length > 40) {
     titleWidth = "850px";
     positioningWidth = "100px";
-  } else if (cachedPostData.subreddit_title.length > 36) {
+  } else if (cachedPostData?.subreddit_title.length > 36) {
     titleWidth = "750px";
     positioningWidth = "200px";
   }

@@ -5,7 +5,7 @@ import V from "../images/v.png";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
 
-export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData, setSelectedTimeText, setSortTop }) {
+export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData, setSelectedTimeText, setSortTop, setScrollPosition }) {
   const [searchResults, setSearchResults] = useState([]);
   const handleSearchInput = e => {
     // must keep in this style change as otherwise in various circumstances (including once a search has been performed), the dropdown subreddits box doesn't reappear
@@ -37,6 +37,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     setSelectedSubreddit(sub);
     document.querySelector(".searchbar-subreddits").value = "";
     setSearch(sub);
+    setScrollPosition(0);
     const wait1500 = setTimeout(() => {
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");
@@ -177,6 +178,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
       document.querySelector(".popular-today").classList.add("hide");
       setSortTop("");
       setSelectedTimeText("Today");
+      setScrollPosition(0);
       setPage("home");
     }, 1200);
     setSelectedSubreddit("r/popular");

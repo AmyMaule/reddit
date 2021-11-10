@@ -17,7 +17,8 @@ import SideBarLinks from '../SideBarLinks';
 import Hide from "../../images/hide.png";
 import Report from "../../images/report.png";
 
-export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, scrollPosition, onClose, setSearch, setSelectedTimeText, setSortTop }) {
+export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, onClose, setSearch, setSelectedTimeText, setSortTop, setScrollPosition }) {
+
   const flairStyle = {
     backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
@@ -35,19 +36,6 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
       window.removeEventListener('click', onClose);
     }
   });
-
-  // // check if they came from home page or subreddit page, then reset whichever they came from to scrollPosition, or send them to 0,0 for the other
-  // useEffect(() => {
-  //   // console.log(page, prevPage)
-  //   if (page === "home") {
-  //     // console.log("scroll position is:", scrollPosition);
-  //     window.scrollTo(0, scrollPosition);
-  //   } else {
-  //     if (document.querySelector(".SinglePost-page")) document.querySelector(".SinglePost-page").scrollTop = 0;
-  //     window.scrollTo(0, 0);
-  //   }
-  // }, [page, scrollPosition]);
-  // not sure about dependencies, re-evaluate after subhome page is functioning
 
   if (page === "home") {
     return <></>
@@ -91,6 +79,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
                 setPage={setPage}
                 setSortTop={setSortTop}
                 setSelectedTimeText={setSelectedTimeText}
+                setScrollPosition={setScrollPosition}
               />
 
               {clickedPost.is_video || cachedPostData.post_hint === "rich:video"
@@ -175,6 +164,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
               subreddit={clickedPost.subreddit}
               setSortTop={setSortTop}
               setSelectedTimeText={setSelectedTimeText}
+              setScrollPosition={setScrollPosition}
             />
             <SideBarLinks />
           </div>

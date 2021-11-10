@@ -63,7 +63,7 @@
   padding-left: 5px;
   margin-top: 10px;
   padding-right: 2px;
-
+  overflow-wrap: break-word;
 }
 
 .singlepostsidebar-description, .singlepostsidebar-description h2{

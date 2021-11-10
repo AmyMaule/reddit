@@ -2,7 +2,7 @@ import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
-export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, setSearch, page, setPage, subreddit, setSelectedTimeText, setSortTop }) {
+export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, setSearch, page, setPage, subreddit, setSelectedTimeText, setSortTop, setScrollPosition }) {
   let aboutCommunityHeight = "34px";
   if (page !== "comment") aboutCommunityHeight = "44px";
 
@@ -37,6 +37,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
     setTimeout(() => {
       setSortTop("");
       setSelectedTimeText("Today");
+      setScrollPosition(0);
       setPage("subhome");
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");

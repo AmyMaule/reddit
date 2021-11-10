@@ -47,10 +47,12 @@ export default function Comment({ comment }) {
   // Fetch the user's avatar separately as it isn't in the main comment data
   useEffect(() => {
     const abortComment = new AbortController();
-    fetch(`https://www.reddit.com/user/${comment.author}/about/.json`, { signal: abortComment.signal })
+    // If the post has been deleted or the author has removed their account, the author will be undefined of "[deleted]" so no need to fetch
+    if (!comment.author || comment.author === "[deleted]") {
+      setProfileImage(DefaultThumbnail);
+    } else fetch(`https://www.reddit.com/user/${comment.author}/about/.json`, { signal: abortComment.signal })
     .then(res => res.json())
     .then(data => {
-        // if a post and account were deleted after the post was made, data.data will be undefined
         if (!data?.data?.icon_img) {
           setProfileImage(DefaultThumbnail);
         } else {
@@ -60,7 +62,9 @@ export default function Comment({ comment }) {
       }
     })
     .catch(err => {
-      if (err.name !== "AbortError") console.log(err);
+      if (err.name !== "AbortError" & err.name !== "TypeError") {
+        console.log(err.name);
+      }
     })
     return () => {
       abortComment.abort();
@@ -94,8 +98,8 @@ export default function Comment({ comment }) {
     return <></>
   } else return (
     <div className="Comment">
-      <ul key={comment.id}>
-        <li className="base-comment">
+      <ul>
+        <li className="base-comment" key={comment.id}>
         <div className="comment-details-container">
           <img src={profileImage} className="comment-avatar" alt="" />
           <div className="comment-details">

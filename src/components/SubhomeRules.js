@@ -21,7 +21,7 @@ export default function SubhomeRules({ cachedPostData }) {
       }
     })
     .catch(err => {
-      if (err.name !== "AbortError") console.log("Rules error:", err);
+      if (err.name !== "AbortError" && err.name !== "TypeError") console.log("Rules error:", err);
     })
     return () => {
       abortRules.abort();

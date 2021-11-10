@@ -1,7 +1,7 @@
 import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelectedSubreddit, setSearch, setPage, setSelectedTimeText, setSortTop }) {
+export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelectedSubreddit, setSearch, setPage, setSelectedTimeText, setSortTop, setScrollPosition }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -24,6 +24,7 @@ export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelec
     setTimeout(() => {
       setSortTop("");
       setSelectedTimeText("Today");
+      setScrollPosition(0);
       setPage("subhome");
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");

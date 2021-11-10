@@ -52,13 +52,7 @@ function App() {
       if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
       setSortTop("");
       setSelectedTimeText("Today");
-      setPage(prevPage => {
-        if (prevPage === "comment") {
-          console.log("scrolling to:", scrollPosition);
-          window.scrollTo(0, scrollPosition);
-        }
-        return "home"
-      });
+      setPage("home");
       setClickedPost("");
       setClickedPostComments([]);
       setClickedPostId("");
@@ -66,8 +60,8 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(scrollPosition, "in use effect");
-    //rerender on scroll change
+    //rerender to correct scroll position on page change
+    if (page !== "comment") window.scrollTo(0, scrollPosition);
   }, [page])
 
   useEffect(() => {
@@ -134,10 +128,7 @@ function App() {
       })
 
       const wait2200 = setTimeout(() => {
-        setPage(prevPage => {
-          console.log("previous page:", prevPage);
-          return "comment"
-        });
+        setPage("comment");
       }, 2200);
       return () => clearTimeout(wait2200);
     }
@@ -158,6 +149,7 @@ function App() {
         setCachedPostData={setCachedPostData}
         setSelectedTimeText={setSelectedTimeText}
         setSortTop={setSortTop}
+        setScrollPosition={setScrollPosition}
       />
       {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
       <Trending page={page} />
@@ -185,6 +177,7 @@ function App() {
                                     cachedPostData={cachedPostData}
                                     clickedPost={clickedPost}
                                     setSelectedSubreddit={setSelectedSubreddit}
+                                    setScrollPosition={setScrollPosition}
                                   />}
           {page === "subhome" && <SubhomeRules cachedPostData={cachedPostData} />}
           <SideBarLinks page={page} />
@@ -199,13 +192,13 @@ function App() {
             setPage={setPage}
             setSelectedSubreddit={setSelectedSubreddit}
             comments={clickedPostComments}
-            scrollPosition={scrollPosition}
             clickedPostId={clickedPostId}
             cachedPostData={cachedPostData}
             onClose={onClose}
             setSearch={setSearch}
             setSortTop={setSortTop}
             setSelectedTimeText={setSelectedTimeText}
+            setScrollPosition={setScrollPosition}
         />
         </div>
       }

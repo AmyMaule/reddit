@@ -119,6 +119,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
       title: post.title,
       post_hint: post.post_hint
     })
+    // console.log(window.pageYOffset);
     setScrollPosition(window.pageYOffset);
   }
 
@@ -154,6 +155,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
             handlePostClick={handlePostClick}
             setSelectedTimeText={setSelectedTimeText}
             setSortTop={setSortTop}
+            setScrollPosition={setScrollPosition}
           />}
 
         {/* Render different types of post based on the media it contains */}

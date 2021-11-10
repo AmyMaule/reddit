@@ -33,8 +33,8 @@ export default function Trending({ page }) {
       }
     })
     .catch(err => {
-      if (err.name !== "TypeError")
-      console.log("trending 26:", err);
+      if (err.name !== "AbortError" && err.name !== "TypeError")
+      console.log("Trending error:", err);
     })
     return () => {
       abortTrending.abort();

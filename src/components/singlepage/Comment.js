@@ -59,7 +59,9 @@ export default function Comment({ comment }) {
         setProfileImage(data.data.icon_img);
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      if (err.name !== "AbortError") console.log(err);
+    })
     return () => {
       abortComment.abort();
     }
@@ -92,7 +94,7 @@ export default function Comment({ comment }) {
     return <></>
   } else return (
     <div className="Comment">
-      <ul>
+      <ul key={comment.id}>
         <li className="base-comment">
         <div className="comment-details-container">
           <img src={profileImage} className="comment-avatar" alt="" />

@@ -16,7 +16,6 @@ export default function SingleGalleryPost({ clickedPost, flairStyle, flairDispla
   })
 
   useEffect(() => {
-    console.log(currentImageClicked);
     // rerender component when currentImage changes
   }, [currentImageClicked])
 
@@ -27,9 +26,7 @@ export default function SingleGalleryPost({ clickedPost, flairStyle, flairDispla
         {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
         {clickedPost.is_original_content && <span className="flair-oc">OC</span>}
       </div>
-      {/* style={{height: postHeight > 510 ? "510px" : postHeight + "px"}} */}
       <div className="singlepost-img-center">
-      {/* <div className="singlepost-gallery-container"> */}
         <div className="singlepost-gallery-btn-container">
           {currentImageClicked !== 0 && <button className="singlepost-gallery-button singlepost-gallery-button-left" onClick={() => setCurrentImageClicked(prev => prev-1)}>
             <span>&#x2039;</span>

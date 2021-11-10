@@ -44,7 +44,10 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     setTimeout(() => {
       setSortTop("");
       setSelectedTimeText("Today");
-      setPage("subhome");
+      setPage(prevPage => {
+        console.log("previous page:", prevPage);
+        return "subhome"
+      });
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");
       document.querySelector(".popular-hot").classList.add("clicked");

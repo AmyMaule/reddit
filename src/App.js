@@ -36,7 +36,7 @@ function App() {
   const [clickedPost, setClickedPost] = useState("");
   const [clickedPostComments, setClickedPostComments] = useState([]);
   const [sortTop, setSortTop] = useState("");
-  const [scrollPosition, setScrollPosition] = useState();
+  const [scrollPosition, setScrollPosition] = useState(0);
   // selectedTimeText is the text that shows in the "top" section of SortPosts ("Today", "This Week", etc)
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
 
@@ -52,12 +52,23 @@ function App() {
       if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
       setSortTop("");
       setSelectedTimeText("Today");
-      setPage("home");
+      setPage(prevPage => {
+        if (prevPage === "comment") {
+          console.log("scrolling to:", scrollPosition);
+          window.scrollTo(0, scrollPosition);
+        }
+        return "home"
+      });
       setClickedPost("");
       setClickedPostComments([]);
       setClickedPostId("");
     }
   }
+
+  useEffect(() => {
+    console.log(scrollPosition, "in use effect");
+    //rerender on scroll change
+  }, [page])
 
   useEffect(() => {
     const abortApp = new AbortController();
@@ -123,7 +134,10 @@ function App() {
       })
 
       const wait2200 = setTimeout(() => {
-        setPage("comment");
+        setPage(prevPage => {
+          console.log("previous page:", prevPage);
+          return "comment"
+        });
       }, 2200);
       return () => clearTimeout(wait2200);
     }

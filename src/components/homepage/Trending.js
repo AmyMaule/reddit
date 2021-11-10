@@ -10,7 +10,8 @@ export default function Trending({ page }) {
   let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes"];
 
   useEffect(() => {
-    fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100")
+    const abortTrending = new AbortController();
+    fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100", { signal: abortTrending.signal })
     .then(res => {
       if (res.status === 200) {
         return res.json();
@@ -32,8 +33,12 @@ export default function Trending({ page }) {
       }
     })
     .catch(err => {
+      if (err.name !== "TypeError")
       console.log("trending 26:", err);
     })
+    return () => {
+      abortTrending.abort();
+    }
   }, [isLoading]);
 
   // In order for the trending blocks to load the data, isLoading sets to false once trendingLinks has enough data to render

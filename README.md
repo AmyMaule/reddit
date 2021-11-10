@@ -18,7 +18,6 @@
 </details>
 <br>
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -30,17 +29,18 @@ This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit
 ### Built With
 
 * React
-*
+* CSS
+* [Markedjs](https://github.com/markedjs/marked)
 <br>
 
 ## Demo & Screenshots
+Some videos in case there are any changes to the Reddit API that result in the live site not functioning correctly: <br>
 <div align="center">
-  <img src="./images/whatsfordinner-fullpage.jpg" width="85%">
+  <img src= src="./readme/reddit%20homepage.mp4" />
 </div>
 <br><br>
 
 <div align="center">
-  <img src="./images/whatsfordinner-search-small.jpg" height="410px">
 </div>
 <br><br>
 

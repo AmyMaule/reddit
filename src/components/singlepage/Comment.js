@@ -62,20 +62,19 @@ export default function Comment({ comment }) {
       }
     })
     .catch(err => {
-      if (err.name !== "AbortError" & err.name !== "TypeError") {
+      if (err.name !== "AbortError" && err.name !== "TypeError") {
         console.log(err.name);
       }
-    })
+    });
     return () => {
       abortComment.abort();
-    }
-  })
-
+    };
+  }, [comment.author]);
 
   // TODO - figure out when the comment borders are being hovered over to make them collapsible
   // const mouseBorder = (e) => {
   //   console.log(e.target);
-  //   // console.log("mouse");
+  //
   // }
 
   // let commentBorders;
@@ -116,9 +115,9 @@ export default function Comment({ comment }) {
               <div className="comment-votes-count">{votes}</div>
               <img className="comment-votes-down" src={DownArrow} alt="down-arrow" />
             </div>
-            <div className="comment-reply-container">
+            <div className="comment-reply-container comment-link">
               <img src={SpeechBubble} className="comment-speechbubble" alt="" />
-              <h4 className="comment-link comment-reply">Reply</h4>
+              <h4 className="comment-reply">Reply</h4>
             </div>
             <h4 className="comment-link comment-share">Share</h4>
             <h4 className="comment-link comment-report">Report</h4>

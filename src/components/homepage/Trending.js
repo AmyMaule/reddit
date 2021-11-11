@@ -26,20 +26,20 @@ export default function Trending({ page }) {
             setTrendingLinks(prevLinks => {
               if (!prevLinks) return post.data;
               return [...prevLinks, post.data];
-            })
+            });
           }
-        })
+        });
         return trendingLinks;
       }
     })
     .catch(err => {
       if (err.name !== "AbortError" && err.name !== "TypeError")
-      console.log("Trending error:", err);
-    })
+        console.log("Trending error:", err);
+    });
     return () => {
       abortTrending.abort();
-    }
-  }, [isLoading]);
+    };
+  }, [isLoading, notTrendingSubs]);
 
   // In order for the trending blocks to load the data, isLoading sets to false once trendingLinks has enough data to render
   useEffect(() => {
@@ -50,13 +50,13 @@ export default function Trending({ page }) {
         .then(data => {
           trendingLinks[i].iconImg = data.data.icon_img;
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
         setIsLoading(false);
         // the image from the API is encoded using &amp; so needs to be removed in order to display
         link.img = link.preview.images[0].source.url.replace("&amp;", "&");
-      })
+      });
     }
-  }, [trendingLinks])
+  }, [trendingLinks]);
 
   return (
     // Trending needs to hide when SinglePost is shown but not demount - otherwise it re-renders from scratch which causes a huge lag and doesn't save the page scroll position

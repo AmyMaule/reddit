@@ -92,8 +92,9 @@ li, li p, li h1, li h2 {
 .comment-bottom-bar {
   display: flex;
   position: relative;
-  margin-top: auto;
+  /* margin-top: auto; */
   margin-left: 18px;
+  margin-top: -10px;
 }
 
 .comment-votes {
@@ -104,6 +105,7 @@ li, li p, li h1, li h2 {
   height: 18px;
   width: 18px;
   margin-right: 5px;
+  margin-top: 8px;
 }
 
 .comment-votes-count {
@@ -112,7 +114,7 @@ li, li p, li h1, li h2 {
   font-family: 'IBM Plex Sans', sans-serif;
   margin-right: 5px;
   position: relative;
-  top: 2px;
+  top: 8px;
 }
 
 .comment-reply-container {
@@ -130,5 +132,11 @@ li, li p, li h1, li h2 {
   color: #898989;
   font-size: 0.75rem;
   font-family: 'IBM Plex Sans', sans-serif;
-  margin-right: 10px;
+  padding: 8px 7px 3px 7px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.comment-link:hover {
+  background-color: rgba(26, 26, 27, 0.1);
 }

@@ -35,14 +35,7 @@ This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit
 
 ## Demo & Screenshots
 Some videos in case there are any changes to the Reddit API that result in the live site not functioning correctly: <br>
-<div align="center">
-  <img src="./readme/homepage.gif" width="70%" />
-  <br><br><br>
-  <img src="./readme/top.gif" width="70%" />
-  <br><br><br>
-  <img src="./readme/subhome.gif" width="70%" />
-</div>
-<br><br>
+
 
 ## Next Steps
 * Use the before/after API endpoints to alert users of new posts, and to load posts when the user scrolls towards the bottom of the page

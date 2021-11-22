@@ -51,6 +51,7 @@ Some videos in case there are any changes to the Reddit API that result in the l
 
 ## Current Issues
 * The fetch requests for each page sometimes take a few seconds to load all the data, so all the data doesn't always display at the same time
+* Due to CORS issues with the Reddit API, the site doesn't display correctly on Firefox, though works fine on Firefox Developer Edition.
 <br>
 
 ## Contributing

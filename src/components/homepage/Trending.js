@@ -9,7 +9,7 @@ export default function Trending({ page }) {
   const [numLinks, setNumLinks] = useState(4);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
-  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes"];
+  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe"];
 
   useEffect(() => {
     const abortTrending = new AbortController();

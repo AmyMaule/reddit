@@ -48,6 +48,7 @@ Some videos in case there are any changes to the Reddit API that result in the l
 * Use the before/after API endpoints to alert users of new posts, and to load posts when the user scrolls towards the bottom of the page
 * Add default trending posts/subreddits to the navbar that display automatically if there are no subreddits that match the current search, or while the searchbar is empty 
 * Create the homepage for each user, pulling in their post data and comment history
+* The site is currently only responsive to ~760px; create responsive layouts for smaller screens
 
 ## Current Issues
 * The fetch requests for each page sometimes take a few seconds to load all the data, so all the data doesn't always display at the same time

@@ -105,3 +105,11 @@
 .trending-block-subreddit-container {
   display: flex;
 }
+
+@media screen and (max-width: 1009px) {
+  .trending-title {
+    /* this margin-left keeps it inline with the trending blocks below */
+    /* margin-left: calc(50% - 495px); */
+    margin-left: calc(50% - 370px);
+  }
+}

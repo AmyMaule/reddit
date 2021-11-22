@@ -5,6 +5,8 @@ export default function Trending({ page }) {
   const [isLoading, setIsLoading] = useState(true);
   // trendingLinks stores the top trending link posts to use in the Trending component
   const [trendingLinks, setTrendingLinks] = useState([]);
+  // numLinks is the number of trending links that will be displayed - 4 by default, unless the screen is too small, then 3 will be displayed
+  const [numLinks, setNumLinks] = useState(4);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
   let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes"];
@@ -58,6 +60,22 @@ export default function Trending({ page }) {
     }
   }, [trendingLinks]);
 
+  // This useEffect checks the window's innerWidth property, and returns 4 if the innerWidth is at least 1010px, or 3 if it is below 1010px, which will display 4 or 3 trending links
+  useEffect(() => {
+    function handleResize() {
+      setNumLinks(() => {
+        if (window.innerWidth >= 1010) {
+          return 4;
+        } else return 3;
+      });
+    }
+    window.addEventListener("resize", handleResize);
+    // Call handleResize immediately so state is updated with initial window size
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+
   return (
     // Trending needs to hide when SinglePost is shown but not demount - otherwise it re-renders from scratch which causes a huge lag and doesn't save the page scroll position
     <div className={page === "home" ? "Trending" : "Trending hide"}>
@@ -68,7 +86,7 @@ export default function Trending({ page }) {
             <div className="trending-block-img"></div>
           </>
         : <>
-            {trendingLinks.slice(0, 4).map(link => {
+            {trendingLinks.slice(0, numLinks).map(link => {
               return (
               <a href={link.url_overridden_by_dest} target="_blank" rel="noreferrer" className="trending-link" key={link.url_overridden_by_dest}>
                 <img className="trending-block-img" src={link.img} alt="" />

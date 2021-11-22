@@ -213,3 +213,9 @@
     width: 60vw;
   }
 }
+
+@media screen and (max-width: 830px) {
+  .searchbar-subreddits {
+    width: 55vw;
+  }
+}

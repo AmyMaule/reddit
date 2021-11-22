@@ -18,13 +18,13 @@
 </details>
 <br>
 
+# Live version [here](https://amy-reddit.netlify.app/).
+<br>
+
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit API](https://www.reddit.com/dev/api/)...
-
-## Live version [here](https://amy-reddit.netlify.app/).
-<br>
+This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit API](https://www.reddit.com/dev/api/) to display posts and comments as on reddit.com. This version allows searching by hot, new, top and rising (and sub-searching by top of today, this week, this month, this year and all time). This SPA has 3 'pages' - the homepage, a page for each subtopic (subreddit) and a page for each post. Click on any link beginning with "r/" to visit a subreddit homepage, and click on the content of any post, its title or comment button to visit the post in detail including all comments.
 
 ### Built With
 
@@ -48,9 +48,12 @@ Some videos in case there are any changes to the Reddit API that result in the l
 * Use the before/after API endpoints to alert users of new posts, and to load posts when the user scrolls towards the bottom of the page
 * Add default trending posts/subreddits to the navbar that display automatically if there are no subreddits that match the current search, or while the searchbar is empty 
 * Create the homepage for each user, pulling in their post data and comment history
+* The site is currently only responsive to ~760px; create responsive layouts for smaller screens
 
 ## Current Issues
 * The fetch requests for each page sometimes take a few seconds to load all the data, so all the data doesn't always display at the same time
+* Due to CORS issues with the Reddit API, the site doesn't display correctly on Firefox, though works fine on Firefox Developer Edition.
+* The Geofilter search option on the homepage isn't functional, as the Reddit API no longer allows access to this data
 <br>
 
 ## Contributing

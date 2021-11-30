@@ -18,13 +18,26 @@
 </details>
 <br>
 
-# Live version [here](https://amy-reddit.netlify.app/).
-<br>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit API](https://www.reddit.com/dev/api/) to display posts and comments as on reddit.com. This version allows searching by hot, new, top and rising (and sub-searching by top of today, this week, this month, this year and all time). This SPA has 3 'pages' - the homepage, a page for each subtopic (subreddit) and a page for each post. Click on any link beginning with "r/" to visit a subreddit homepage, and click on the content of any post, its title or comment button to visit the post in detail including all comments.
+<br>
+
+## Demo & Screenshots
+Some videos in case there are any changes to the Reddit API that result in the live site not functioning correctly: <br><br>
+<div align="center">
+  <img src="./readme/homepage.gif" width="80%" />
+  <br><br><br><br>
+  <img src="./readme/top.gif" width="80%" />
+  <br><br><br><br>
+  <img src="./readme/subhome.gif" width="80%" />
+</div>
+<br><br>
+
+# Live version [here](https://amy-reddit.netlify.app/).
+<br>
 
 ### Built With
 
@@ -32,17 +45,6 @@ This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit
 * CSS
 * [Markedjs](https://github.com/markedjs/marked)
 <br>
-
-## Demo & Screenshots
-Some videos in case there are any changes to the Reddit API that result in the live site not functioning correctly: <br>
-<div align="center">
-  <img src="./readme/homepage.gif" width="80%" />
-  <br><br><br>
-  <img src="./readme/top.gif" width="80%" />
-  <br><br><br>
-  <img src="./readme/subhome.gif" width="80%" />
-</div>
-<br><br>
 
 ## Next Steps
 * Use the before/after API endpoints to alert users of new posts, and to load posts when the user scrolls towards the bottom of the page

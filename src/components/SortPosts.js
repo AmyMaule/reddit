@@ -10,7 +10,6 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
 
   // handleSort sets the subreddit and search to be hot, new, top or rising, triggering a new fetch request
   const handleSort = sub => {
-    console.log("handlesort", sub);
     setSelectedSubreddit(sub);
     setSearch(sub);
   }

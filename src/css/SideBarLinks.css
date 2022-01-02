@@ -46,6 +46,10 @@
   color: black;
 }
 
+.sidebar-links-left a:hover, .sidebar-links-right a:hover {
+  text-decoration: underline;
+}
+
 .sidebar-copyright {
   position: relative;
   display: inline;

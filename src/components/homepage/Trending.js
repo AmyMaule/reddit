@@ -9,11 +9,12 @@ export default function Trending({ page }) {
   const [numLinks, setNumLinks] = useState(4);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
-  let notTrendingSubs = ["Eyebleach", "todayilearned", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "GetMotivated", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe"];
+  let notTrendingSubs = ["Eyebleach", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe", "aww"];
 
   useEffect(() => {
     const abortTrending = new AbortController();
-    fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100", { signal: abortTrending.signal })
+    // reddit has recently updated the algorithm that chooses which trending posts to display, so t=hour gives a more accurate display than the previous t=day
+    fetch("https://www.reddit.com/r/popular/top/.json?t=hour&limit=100", { signal: abortTrending.signal })
     .then(res => {
       if (res.status === 200) {
         return res.json();
@@ -21,7 +22,7 @@ export default function Trending({ page }) {
     })
     .then(data => {
       if (data) {
-        // showing twice
+        console.log(data);
         data.data.children.forEach((post, i) => {
           // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
           if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1 ) {

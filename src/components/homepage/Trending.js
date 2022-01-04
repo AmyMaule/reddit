@@ -95,7 +95,7 @@ export default function Trending({ page }) {
                   <div className="trending-links-title">{link.title.slice(0, 50)}{link.title.length > 50 && "..."}</div>
                   <div className="trending-block-subreddit-container">
                     <img src={link.iconImg || DefaultThumbnail} className="trending-block-subreddit-icon" alt="" />
-                    <div className="trending-links-subreddit">r/{link.subreddit} and more</div>
+                    <div className="trending-links-subreddit">r/{link.subreddit} {link.subreddit.length < 19 && "and more"}</div>
                   </div>
                 </div>
               </a>)

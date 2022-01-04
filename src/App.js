@@ -12,10 +12,6 @@ import Subhome from './components/Subhome';
 import SinglePostSideBar from './components/singlepage/SinglePostSideBar';
 import SubhomeRules from './components/SubhomeRules';
 
-// TODO load 10 more posts when you're near the bottom of the page
-// For each page change, check if prevPage is equal to the new page, and if it is, return without changing page, then update scroll position using prevPage and current page (if prevPage === "home" and page === "home", then do one thing, etc)
-
-
 function App() {
   // sortedSubs takes allsubs.json and orders them by subscriber count
   const sortedSubs = Object.fromEntries(

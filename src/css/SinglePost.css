@@ -266,6 +266,11 @@
   top: -15px;
 }
 
+.singlepost-link-long {
+  font-size: 0.8rem;
+  position: relative;
+}
+
 .singlepost-link-image-container {
   margin-left: auto;
   min-width: 150px;
@@ -311,6 +316,7 @@
   max-height: 580px;
   max-width: 600px;
   width: 100%;
+  cursor: pointer;
 }
 
 .singlepost-gallery-btn-container {

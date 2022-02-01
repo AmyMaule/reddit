@@ -28,7 +28,12 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
   const htmlDecode = description => {
     let descriptionContainer = document.createElement("div");
     descriptionContainer.innerHTML = description;
-    return descriptionContainer.childNodes.length === 0 ? "" : descriptionContainer.childNodes[0].nodeValue;
+    if (descriptionContainer.childNodes.length !== 0) {
+      let decodedDescription = descriptionContainer.childNodes[0].nodeValue;
+      // the original description of many subreddits includes a link to the subreddit which causes an error, so replace the link with a span
+      decodedDescription = decodedDescription.replace("</a>", "</span>");
+      return decodedDescription.replace(`<a href="/${cachedPostData.display_name_prefixed}">`, "<span>")
+    }
   }
 
   const singlePostSetSubhome = () => {

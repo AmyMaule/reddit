@@ -28,7 +28,7 @@ export default function SideBarLinks({ page }) {
           <a href="https://www.reddit.com/help/healthycommunities/" target="blank">Mod policy</a>
         </div>
       </div>
-      <p className="sidebar-copyright">Reddit Inc © 2021. All rights reserved</p>
+      <p className="sidebar-copyright">Reddit Inc © 2022. All rights reserved</p>
     </div>
   )
 }

@@ -22,7 +22,6 @@ export default function Trending({ page }) {
     })
     .then(data => {
       if (data) {
-        console.log(data);
         data.data.children.forEach((post, i) => {
           // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
           if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1 ) {

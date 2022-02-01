@@ -204,6 +204,7 @@
   width: 600px;
   margin-top: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .img-center {

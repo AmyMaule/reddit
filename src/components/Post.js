@@ -62,8 +62,16 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
     fontWeight: "500"
   }
 
+  // Some flair text is encoded (so & shows as &amp; for example) so each flair text is run through htmlDecode before displaying
+  function htmlDecode(flairText){
+    let flairTextContainer = document.createElement("div");
+    flairTextContainer.innerHTML = flairText;
+    let result = flairTextContainer.childNodes.length === 0 ? "" : flairTextContainer.childNodes[0].nodeValue;
+    return result;
+  }
+
   const flairDisplay = post.link_flair_richtext.map((part, i) => {
-    if (part.t) return <span key={i+part.a || i+part.t}>{part.t}</span>;
+    if (part.t) return <span key={i+part.a || i+part.t}>{htmlDecode(part.t)}</span>;
     if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
   })
 

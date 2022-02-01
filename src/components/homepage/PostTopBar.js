@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author,  setSearch, setPage, posted, handlePostClick,setSelectedTimeText, setSortTop, setScrollPosition }) {
+export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick,setSelectedTimeText, setSortTop, setScrollPosition }) {
   const awardStyle = {
     height: "16px",
     width: "16px",

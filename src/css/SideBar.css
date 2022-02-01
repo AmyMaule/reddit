@@ -116,6 +116,10 @@
   cursor: pointer;
 }
 
+.btn-community-small:hover {
+  background-color: rgb(226, 237, 245);
+}
+
 @media screen and (max-width: 959px) {
   .SideBar {
     display: none;

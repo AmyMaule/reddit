@@ -22,14 +22,14 @@ export default function Subhome({ cachedPostData }) {
   if (cachedPostData?.subreddit_title?.length > 30) btnWidth = 58;
 
   let titleWidth = "640px";
-  let positioningWidth = "310px"
-  if (cachedPostData?.subreddit_title.length > 46) {
+  let positioningWidth = "310px";
+  if (cachedPostData?.subreddit_title?.length > 46) {
     titleWidth = "1050px";
     positioningWidth = "0px";
-  } else if (cachedPostData?.subreddit_title.length > 40) {
+  } else if (cachedPostData?.subreddit_title?.length > 40) {
     titleWidth = "850px";
     positioningWidth = "100px";
-  } else if (cachedPostData?.subreddit_title.length > 36) {
+  } else if (cachedPostData?.subreddit_title?.length > 36) {
     titleWidth = "750px";
     positioningWidth = "200px";
   }

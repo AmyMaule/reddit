@@ -26,6 +26,7 @@ function App() {
   const [clickedPostId, setClickedPostId] = useState();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState("home");
+  const [subredditInfo, setSubredditInfo] = useState("");
   // cachedPostData stores data from the original fetch request and from the fetch request in Post.js for faster loading
   const [cachedPostData, setCachedPostData] = useState({});
   // clickedPost stores the data from fetching the individual post's json data
@@ -35,6 +36,8 @@ function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
   // selectedTimeText is the text that shows in the "top" section of SortPosts ("Today", "This Week", etc)
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
+
+    console.log(selectedSubreddit);
 
   // useCallback?
   const onClose = e => {
@@ -60,6 +63,7 @@ function App() {
     if (page !== "comment") window.scrollTo(0, scrollPosition);
   }, [page])
 
+  // this fetches the posts for the homepage or subreddit home page
   useEffect(() => {
     const abortApp = new AbortController();
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
@@ -82,7 +86,7 @@ function App() {
     return () => {
       abortApp.abort();
     }
-  }, [search, sortTop])
+  }, [search, sortTop]);
   // selectedSubreddit no longer a dependency due to search bar problems
 
   // this hides the main scrollbar when the comment page is shown
@@ -92,7 +96,7 @@ function App() {
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [page])
+  }, [page]);
 
 // this fetches the data for the post itself including comments
   useEffect(() => {
@@ -152,6 +156,7 @@ function App() {
       {page === "subhome" && <Subhome cachedPostData={cachedPostData} />}
       <div className={page !== "comment" ? "main-container" : "main-container hide"}>
         <PostContainer
+          setSubredditInfo={setSubredditInfo}
           posts={posts}
           setClickedPostId={setClickedPostId}
           setSelectedSubreddit={setSelectedSubreddit}
@@ -167,7 +172,17 @@ function App() {
           setSelectedTimeText={setSelectedTimeText}
         />
         <div className="sidebar-container">
-          {page === "home" && <SideBar setSelectedSubreddit={setSelectedSubreddit} />}
+          {page === "home" && <SideBar
+                                subredditInfo={subredditInfo}
+                                setSubredditInfo={setSubredditInfo}
+                                setCachedPostData={setCachedPostData}
+                                setSelectedSubreddit={setSelectedSubreddit}
+                                setSearch={setSearch}
+                                setSortTop={setSortTop}
+                                setSelectedTimeText={setSelectedTimeText}
+                                setScrollPosition={setScrollPosition}
+                                setPage={setPage}
+                              />}
           {page === "home" && <SideBarPremium />}
           {page === "subhome" && <SinglePostSideBar
                                     cachedPostData={cachedPostData}

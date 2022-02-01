@@ -127,7 +127,6 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
       title: post.title,
       post_hint: post.post_hint
     })
-    // console.log(window.pageYOffset);
     setScrollPosition(window.pageYOffset);
   }
 

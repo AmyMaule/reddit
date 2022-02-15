@@ -3,7 +3,6 @@ import V from "../images/v.png";
 const marked = require('marked');
 
 export default function SubhomeRules({ cachedPostData }) {
-  console.log(cachedPostData)
   const htmlDecodeRules = description => {
     let descriptionContainer = document.createElement("div");
     descriptionContainer.innerHTML = description;

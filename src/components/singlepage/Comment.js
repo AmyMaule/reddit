@@ -7,7 +7,7 @@ import DefaultThumbnail from "../../images/logo-small.png";
 export default function Comment({ comment }) {
   const [profileImage, setProfileImage] = useState();
 
-  function htmlDecode(commentBody){
+  const htmlDecode = commentBody => {
     let commentContainer = document.createElement("div");
     commentContainer.innerHTML = commentBody;
     let result = commentContainer.childNodes.length === 0 ? "" : commentContainer.childNodes[0].nodeValue;
@@ -15,34 +15,35 @@ export default function Comment({ comment }) {
   }
 
   // determine how long ago the comment was posted
-  let timeNow = Date.now();
-  const postedMsAgo = (timeNow/1000 - comment.created_utc);
-  let posted;
-  // Reddit uses "m" for minutes and months
-  if (postedMsAgo < 3600) {
-    posted = (postedMsAgo/60).toFixed(0) + "m";
-  } else if (postedMsAgo < 86400) { // 86400 is 24 hours
-    posted = (postedMsAgo/3600).toFixed(0) + "h";
-  } else if (postedMsAgo < 2.592e+6) {  // 2.592e+6 is 30 days
-    posted = (postedMsAgo/86400).toFixed(0) + "d";
-  } else if (postedMsAgo < 3.154e+7) {  // 3.154e+7 is 1 year
-    posted = (postedMsAgo/2.592e+6).toFixed(0) + "m";
-  } else {
-    posted = (postedMsAgo/3.154e+7).toFixed(0) + "y";
+  const determineTimePosted = () => {
+    const timeNow = Date.now();
+    const postedMsAgo = (timeNow/1000 - comment.created_utc);
+    // Reddit uses "m" for minutes and for months
+    if (postedMsAgo < 3600) {
+      return (postedMsAgo/60).toFixed(0) + "m";
+    } else if (postedMsAgo < 86400) { // 86400 is 24 hours
+      return (postedMsAgo/3600).toFixed(0) + "h";
+    } else if (postedMsAgo < 2.592e+6) {  // 2.592e+6 is 30 days
+      return (postedMsAgo/86400).toFixed(0) + "d";
+    } else if (postedMsAgo < 3.154e+7) {  // 3.154e+7 is 1 year
+      return (postedMsAgo/2.592e+6).toFixed(0) + "m";
+    } else {
+      return (postedMsAgo/3.154e+7).toFixed(0) + "y";
+    }
   }
 
   // if a post has fewer than 0 upvotes, comment.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
-  let votes;
-  if (comment.ups > 0) {
-    if (comment.ups < 1000) {
-      votes = comment.ups;
-    } else if (comment.ups > 100000) {
-      votes = `${(comment.ups/1000).toFixed(0)}k`;
-    } else votes = `${(comment.ups/1000).toFixed(1)}k`;
-  } else if (comment.downs < 1000) {
-      votes = comment.downs;
-  } else votes = `-${(comment.downs/1000).toFixed(1)}k`;
-
+  const determineVotes = () => {
+    if (comment.ups > 0) {
+      if (comment.ups < 1000) {
+        return comment.ups;
+      } else if (comment.ups > 100000) {
+        return `${(comment.ups/1000).toFixed(0)}k`;
+      } else return `${(comment.ups/1000).toFixed(1)}k`;
+    } else if (comment.downs < 1000) {
+      return comment.downs;
+    } else return `-${(comment.downs/1000).toFixed(1)}k`;
+  }
 
   // Fetch the user's avatar separately as it isn't in the main comment data
   useEffect(() => {
@@ -104,7 +105,7 @@ export default function Comment({ comment }) {
           <div className="comment-details">
             <div className="comment-author">{comment.author}</div>
             <div className="comment-separator-dot">.</div>
-            <div className="comment-time-posted">{posted}</div>
+            <div className="comment-time-posted">{determineTimePosted()}</div>
           </div>
         </div>
         <div className="comment-border">
@@ -112,7 +113,7 @@ export default function Comment({ comment }) {
           <div className="comment-bottom-bar">
             <div className="comment-votes">
               <img className="comment-votes-up" src={UpArrow} alt="up-arrow" />
-              <div className="comment-votes-count">{votes}</div>
+              <div className="comment-votes-count">{determineVotes()}</div>
               <img className="comment-votes-down" src={DownArrow} alt="down-arrow" />
             </div>
             <div className="comment-reply-container comment-link">

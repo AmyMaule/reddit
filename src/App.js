@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import AllSubs from "./allsubs.json";
 import Navbar from './components/Navbar';
@@ -17,9 +17,9 @@ function App() {
   const sortedSubs = Object.fromEntries(
     Object.entries(AllSubs).sort(([,a],[,b]) => b-a)
   );
+
   // Object.keys creates an array of all the subreddits from sortedSubs, so that when filter is called while searching, they appear in order of most to least popular
-  let allSubreddits = Object.keys(sortedSubs);
-  allSubreddits = allSubreddits.map(sub => sub.toLowerCase());
+  const allSubreddits = Object.keys(sortedSubs).map(sub => sub.toLowerCase());
 
   const [posts, setPosts] = useState([]);
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
@@ -37,26 +37,26 @@ function App() {
   // selectedTimeText is the text that shows in the "top" section of SortPosts ("Today", "This Week", etc)
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
 
-    console.log(selectedSubreddit);
-
   // useCallback?
-  const onClose = e => {
-    if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
-      document.querySelector(".popular-top").classList.remove("clicked");
-      document.querySelector(".popular-new").classList.remove("clicked");
-      document.querySelector(".popular-hot").classList.add("clicked");
-      document.querySelector(".hot-icon").classList.add("hot-blue");
-      document.querySelector(".top-icon").classList.remove("top-blue");
-      document.querySelector(".new-icon").classList.remove("new-blue");
-      if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
-      setSortTop("");
-      setSelectedTimeText("Today");
-      setPage("home");
-      setClickedPost("");
-      setClickedPostComments([]);
-      setClickedPostId("");
+  const onClose = useCallback(() => {
+    return e => {
+      if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+        document.querySelectorAll(".popular-top.popular-new").classList.remove("clicked");
+        document.querySelector(".popular-new").classList.remove("clicked");
+        document.querySelector(".popular-hot").classList.add("clicked");
+        document.querySelector(".hot-icon").classList.add("hot-blue");
+        document.querySelector(".top-icon").classList.remove("top-blue");
+        document.querySelector(".new-icon").classList.remove("new-blue");
+        if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
+        setSortTop("");
+        setSelectedTimeText("Today");
+        setPage("home");
+        setClickedPost("");
+        setClickedPostComments([]);
+        setClickedPostId("");
+      }
     }
-  }
+  }, [])
 
   useEffect(() => {
     //rerender to correct scroll position on page change

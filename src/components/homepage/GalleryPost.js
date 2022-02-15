@@ -5,6 +5,7 @@ export default function GalleryPost({ post, flairStyle, flairDisplay, handlePost
 
   // The gallery from the API is stored as an object with random keys for each item, so Object.entries creates an array containing all the gallery items
   let galleryData = Object.entries(post.media_metadata);
+
   // The gallery items aren't always valid, so .filter() returns the useable items, then .map() takes the last item in the p array (p.length-1) which is the highest quality image (p is an array of the same image of increasing quality), then removes the the &amp; encoding
   let validGalleryData = galleryData.filter(item => item[1].status === "valid")
   let galleryImages = validGalleryData.map(item => item[1].p[item[1].p.length-1].u.replaceAll("&amp;", "&"));

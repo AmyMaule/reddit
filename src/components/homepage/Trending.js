@@ -9,7 +9,7 @@ export default function Trending({ page }) {
   const [numLinks, setNumLinks] = useState(4);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
-  let notTrendingSubs = ["Eyebleach", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe", "aww"];
+  const notTrendingSubs = ["Eyebleach", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe", "aww"];
 
   useEffect(() => {
     const abortTrending = new AbortController();
@@ -24,7 +24,8 @@ export default function Trending({ page }) {
       if (data) {
         data.data.children.forEach((post, i) => {
           // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
-          if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1 ) {
+          // TODO: add extra error check to make sure the same link isn't already in trendingLinks from another subreddit
+          if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1) {
             setTrendingLinks(prevLinks => {
               if (!prevLinks) return post.data;
               return [...prevLinks, post.data];
@@ -77,7 +78,7 @@ export default function Trending({ page }) {
 
 
   return (
-    // Trending needs to hide when SinglePost is shown but not demount - otherwise it re-renders from scratch which causes a huge lag and doesn't save the page scroll position
+    // Trending needs to hide when SinglePost is shown but not demount - otherwise it re-renders from scratch which causes lag and doesn't save the page scroll position
     <div className={page === "home" ? "Trending" : "Trending hide"}>
       <h2 className="trending-title">Trending today</h2>
         <div className="trending-blocks">

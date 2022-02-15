@@ -63,7 +63,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
   }
 
   // Some flair text is encoded (so & shows as &amp; for example) so each flair text is run through htmlDecode before displaying
-  function htmlDecode(flairText){
+  const htmlDecode = flairText => {
     let flairTextContainer = document.createElement("div");
     flairTextContainer.innerHTML = flairText;
     let result = flairTextContainer.childNodes.length === 0 ? "" : flairTextContainer.childNodes[0].nodeValue;

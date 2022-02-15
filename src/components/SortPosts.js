@@ -5,8 +5,8 @@ import blank from "../images/blank.png";
 import GeoFilter from "../geofilter.json";
 
 export default function SortPosts({ setSelectedSubreddit, search, setSearch, setSortTop, page, selectedTimeText, setSelectedTimeText }) {
-  let allCountries = Object.keys(GeoFilter);
   const [selectedCountry, setSelectedCountry] = useState("Everywhere");
+  const allCountries = Object.keys(GeoFilter);
 
   // handleSort sets the subreddit and search to be hot, new, top or rising, triggering a new fetch request
   const handleSort = sub => {
@@ -72,7 +72,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
   const handleTimeSort = e => {
     // this slices the end of the .dropdown-top- class to give the time period selected
     let selectedTime = e.target.classList[0].slice(13);
-    console.log(selectedTime);
+    // sortTop adds this extra string to the end of the URL to be fetched to get the posts in App.js
     setSortTop(`&sort=top&t=${selectedTime}`);
     setSearch(selectedTime);
     setSelectedTimeText(e.target.textContent);

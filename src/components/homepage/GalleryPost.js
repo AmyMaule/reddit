@@ -7,12 +7,12 @@ export default function GalleryPost({ post, flairStyle, flairDisplay, handlePost
   let galleryData = Object.entries(post.media_metadata);
 
   // The gallery items aren't always valid, so .filter() returns the useable items, then .map() takes the last item in the p array (p.length-1) which is the highest quality image (p is an array of the same image of increasing quality), then removes the the &amp; encoding
-  let validGalleryData = galleryData.filter(item => item[1].status === "valid")
-  let galleryImages = validGalleryData.map(item => item[1].p[item[1].p.length-1].u.replaceAll("&amp;", "&"));
+  const validGalleryData = galleryData.filter(item => item[1].status === "valid");
+  const galleryImages = validGalleryData.map(item => item[1].p[item[1].p.length-1].u.replaceAll("&amp;", "&"));
 
   // To make sure the post renders at the correct height, scale it based on the largest height in the gallery
   let postHeight = 0;
-  validGalleryData.map(item => {
+  validGalleryData.forEach(item => {
     if (item[1].p[item[1].p.length-1].y > postHeight) {
       postHeight = item[1].p[item[1].p.length-1].y;
     }

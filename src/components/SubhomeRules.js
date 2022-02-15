@@ -3,13 +3,13 @@ import V from "../images/v.png";
 const marked = require('marked');
 
 export default function SubhomeRules({ cachedPostData }) {
+  const [rules, setRules] = useState([]);
+
   const htmlDecodeRules = description => {
     let descriptionContainer = document.createElement("div");
     descriptionContainer.innerHTML = description;
     return descriptionContainer.childNodes.length === 0 ? "" : descriptionContainer.childNodes[0].nodeValue;
   }
-
-  const [rules, setRules] = useState([]);
 
   useEffect(() => {
     const abortRules = new AbortController();

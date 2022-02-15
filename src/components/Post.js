@@ -4,10 +4,10 @@ import DownArrow from "../images/down-arrow.png";
 import SpeechBubble from "../images/speech.png";
 import ShareArrow from "../images/share-arrow.png";
 import SaveBanner from "../images/save.png";
+import PostTopBar from './homepage/PostTopBar';
 import VideoPost from "./homepage/VideoPost";
 import ImagePost from './homepage/ImagePost';
 import LinkPost from './homepage/LinkPost';
-import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
 import GalleryPost from './homepage/GalleryPost';
 
@@ -16,44 +16,49 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
   const [isLoaded, setIsLoaded] = useState(false);
 
   // determine how long ago the post was created
-  let timeNow = Date.now();
-  const postedMsAgo = (timeNow/1000 - post.created_utc);
-  let posted;
-  if (postedMsAgo < 60) {
-    posted = "A few seconds";
-  } else if (postedMsAgo < 120) {
-    posted = "1 minute";
-  } else if (postedMsAgo < 3600) {
-    posted = (postedMsAgo/60).toFixed(0) + " minutes";
-  } else if (postedMsAgo < 5400) { // 5400 is 1.5 hours
-    posted = "1 hour";
-  } else if (postedMsAgo < 86400) { // 86400 is 24 hours
-    posted = (postedMsAgo/3600).toFixed(0) + " hours";
-  } else if (postedMsAgo < 129600) {  // 129600 is 1.5 days
-    posted = "1 day";
-  } else if (postedMsAgo < 2.592e+6) {  // 2.592e+6 is 30 days
-    posted = (postedMsAgo/86400).toFixed(0) + " days";
-  } else if (postedMsAgo < 3.942e+6) {  // 3.942e+6 is 1.5 months
-    posted = "1 month";
-  } else if (postedMsAgo < 3.154e+7) {  // 3.154e+7 is 1 year
-    posted = (postedMsAgo/2.592e+6).toFixed(0) + " months";
-  } else if (postedMsAgo < 4.73e+7) {  // 4.73e+7 is 1.5 years
-    posted = "1 year";
-  } else {
-    posted = (postedMsAgo/3.154e+7).toFixed(0) + " years";
+  const determineTimePosted = () => {
+    const timeNow = Date.now();
+    const postedMsAgo = (timeNow/1000 - comment.created_utc);
+    // Reddit uses "m" for minutes and for months
+    if (postedMsAgo < 60) {
+      return "A few seconds";
+    } else if (postedMsAgo < 120) {
+      return "1 minute";
+    } else if (postedMsAgo < 3600) {
+      return (postedMsAgo/60).toFixed(0) + " minutes";
+    } else if (postedMsAgo < 5400) { // 5400 is 1.5 hours
+      return "1 hour";
+    } else if (postedMsAgo < 86400) { // 86400 is 24 hours
+      return (postedMsAgo/3600).toFixed(0) + " hours";
+    } else if (postedMsAgo < 129600) {  // 129600 is 1.5 days
+      return "1 day";
+    } else if (postedMsAgo < 2.592e+6) {  // 2.592e+6 is 30 days
+      return (postedMsAgo/86400).toFixed(0) + " days";
+    } else if (postedMsAgo < 3.942e+6) {  // 3.942e+6 is 1.5 months
+      return "1 month";
+    } else if (postedMsAgo < 3.154e+7) {  // 3.154e+7 is 1 year
+      return (postedMsAgo/2.592e+6).toFixed(0) + " months";
+    } else if (postedMsAgo < 4.73e+7) {  // 4.73e+7 is 1.5 years
+      return "1 year";
+    } else {
+      return (postedMsAgo/3.154e+7).toFixed(0) + " years";
+    }
   }
+  const posted = determineTimePosted();
 
   // if a post has fewer than 0 upvotes, post.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
-  let votes;
-  if (post.ups > 0) {
-    if (post.ups < 1000) {
-      votes = post.ups;
-    } else if (post.ups > 100000) {
-      votes = `${(post.ups/1000).toFixed(0)}k`;
-    } else votes = `${(post.ups/1000).toFixed(1)}k`;
-  } else if (post.downs < 1000) {
-      votes = post.downs;
-  } else votes = `-${(post.downs/1000).toFixed(1)}k`;
+  const determineNumVotes = () => {
+    if (post.ups > 0) {
+      if (post.ups < 1000) {
+        return post.ups;
+      } else if (post.ups > 100000) {
+        return `${(post.ups/1000).toFixed(0)}k`;
+      } else return `${(post.ups/1000).toFixed(1)}k`;
+    } else if (post.downs < 1000) {
+      return post.downs;
+    } else return `-${(post.downs/1000).toFixed(1)}k`;
+  }
+  const votes = determineNumVotes();
 
   const flairStyle = {
     backgroundColor: post.link_flair_background_color || "rgb(237, 239, 241)",

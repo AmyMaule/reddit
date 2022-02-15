@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import AllSubs from "./allsubs.json";
 import Navbar from './components/Navbar';
@@ -32,36 +32,35 @@ function App() {
   // clickedPost stores the data from fetching the individual post's json data
   const [clickedPost, setClickedPost] = useState("");
   const [clickedPostComments, setClickedPostComments] = useState([]);
+  // sortTop determines whether or not an extra sorting string is added to the fetch request to get the posts (e.g. sort by top of today)
   const [sortTop, setSortTop] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
   // selectedTimeText is the text that shows in the "top" section of SortPosts ("Today", "This Week", etc)
   const [selectedTimeText, setSelectedTimeText] = useState("Today");
 
   // useCallback?
-  const onClose = useCallback(() => {
-    return e => {
-      if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
-        document.querySelectorAll(".popular-top.popular-new").classList.remove("clicked");
-        document.querySelector(".popular-new").classList.remove("clicked");
-        document.querySelector(".popular-hot").classList.add("clicked");
-        document.querySelector(".hot-icon").classList.add("hot-blue");
-        document.querySelector(".top-icon").classList.remove("top-blue");
-        document.querySelector(".new-icon").classList.remove("new-blue");
-        if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
-        setSortTop("");
-        setSelectedTimeText("Today");
-        setPage("home");
-        setClickedPost("");
-        setClickedPostComments([]);
-        setClickedPostId("");
-      }
+  const onClose = e => {
+    if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+      document.querySelector(".popular-hot").classList.add("clicked");
+      document.querySelector(".popular-top").classList.remove("clicked");
+      document.querySelector(".popular-new").classList.remove("clicked");
+      document.querySelector(".hot-icon").classList.add("hot-blue");
+      document.querySelector(".top-icon").classList.remove("top-blue");
+      document.querySelector(".new-icon").classList.remove("new-blue");
+      if (document.querySelector(".popular-today")) document.querySelector(".popular-today").classList.add("hide");
+      setSortTop("");
+      setSelectedTimeText("Today");
+      setPage("home");
+      setClickedPost("");
+      setClickedPostComments([]);
+      setClickedPostId("");
     }
-  }, [])
+  }
 
   useEffect(() => {
     //rerender to correct scroll position on page change
     if (page !== "comment") window.scrollTo(0, scrollPosition);
-  }, [page])
+  }, [page]);
 
   // this fetches the posts for the homepage or subreddit home page
   useEffect(() => {
@@ -98,11 +97,11 @@ function App() {
     }
   }, [page]);
 
-// this fetches the data for the post itself including comments
+  // this fetches the data for the post itself including comments
   useEffect(() => {
     const abortClickedPostApp = new AbortController();
     let postData;
-    posts.filter(post => {
+    posts.forEach(post => {
       if (post.data.id === clickedPostId) {
         postData = post.data;
         return postData;

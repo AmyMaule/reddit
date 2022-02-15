@@ -7,13 +7,15 @@ import V from "../images/v.png";
 
 export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData, setSelectedTimeText, setSortTop, setScrollPosition }) {
   const [searchResults, setSearchResults] = useState([]);
+
   const handleSearchInput = e => {
     // must keep in this style change as otherwise in various circumstances (including once a search has been performed), the dropdown subreddits box doesn't reappear
     document.querySelector(".dropdown-subreddits").style.display = "block";
     // searchHistory is emptied at the beginning of each function call to remove previous values that may no longer be correct
-    let searchHistory = [];
+    const searchHistory = [];
+    // if selectedSubreddit isn't set here, the mouse can't be used to hover over any of the suggested subs in the dropdown, though they can still be selected (dependency in useEffect for handleMouseAndKeySearch?)
     setSelectedSubreddit(e.target.value);
-    let query = e.target.value;
+    const query = e.target.value;
     allSubreddits.filter(sub => {
       // for testing, it's easier to make sure query isn't an empty string, but take this out later to add default values
       if (query && sub.startsWith("r/" + query) && !searchHistory.includes(sub)) {
@@ -39,9 +41,9 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     setSearch(sub);
     setScrollPosition(0);
     const wait1500 = setTimeout(() => {
+      document.querySelector(".popular-hot").classList.add("clicked");
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");
-      document.querySelector(".popular-hot").classList.add("clicked");
       document.querySelector(".hot-icon").classList.add("hot-blue");
       document.querySelector(".top-icon").classList.remove("top-blue");
       document.querySelector(".new-icon").classList.remove("new-blue");
@@ -168,7 +170,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   const handleReturnToHome = () => {
     setTimeout(() => {
-      // reset the sort posts bar to default hot
+      // reset the sort posts bar to default styling and sorting
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");
       document.querySelector(".popular-hot").classList.add("clicked");
@@ -186,8 +188,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
   };
 
   // currentSubredditWidth takes the value of the width of the subreddit text in the search bar, whenever a subreddit has been selected, to make sure the search text appears in the right place
-  let currentSubredditWidth = 0;
-  if (document.querySelector(".current-subreddit")) currentSubredditWidth = document.querySelector(".current-subreddit").clientWidth;
+  let currentSubredditWidth = (document.querySelector(".current-subreddit")) ? document.querySelector(".current-subreddit").clientWidth : 0;
 
   return (
     <div className="Navbar">

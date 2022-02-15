@@ -3,11 +3,12 @@ import DefaultThumbnail from "../images/logo-small.png";
 
 export default function Subhome({ cachedPostData }) {
   // If a banner image is given in the API, it is encoded so the amp; must be removed before it can be used
-  let bannerImg;
-  if (cachedPostData.banner_background_image) {
-    bannerImg = cachedPostData.banner_background_image.replace("&amp;", "&");
-  } else if (cachedPostData.banner_img) {
-    bannerImg = cachedPostData.banner_img;
+  const getBannerImg = () => {
+    if (cachedPostData.banner_background_image) {
+      return cachedPostData.banner_background_image.replace("&amp;", "&");
+    } else if (cachedPostData.banner_img) {
+      return cachedPostData.banner_img;
+    }
   }
 
   // If the subreddit icon is in community_icon, it also needs to be decoded
@@ -18,8 +19,7 @@ export default function Subhome({ cachedPostData }) {
   if (cachedPostData.banner_size && cachedPostData.banner_size < 200) bannerHeight = cachedPostData.banner_size[1];
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
-  let btnWidth = 96;
-  if (cachedPostData?.subreddit_title?.length > 30) btnWidth = 58;
+  let btnWidth = (cachedPostData?.subreddit_title?.length > 30) ? 58 : 96;
 
   let titleWidth = "640px";
   let positioningWidth = "310px";
@@ -37,7 +37,7 @@ export default function Subhome({ cachedPostData }) {
   return (
     <div className="Subhome">
       <div className="subhome-header">
-        <div className="subhome-banner" style={{height: bannerHeight, backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59", backgroundImage: `url(${bannerImg})` }}></div>
+        <div className="subhome-banner" style={{height: bannerHeight, backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59", backgroundImage: `url(${getBannerImg()})` }}></div>
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content" style={{width: titleWidth}}>
             <div className="subhome-r-bar-top">

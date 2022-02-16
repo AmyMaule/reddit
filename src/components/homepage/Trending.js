@@ -9,12 +9,12 @@ export default function Trending({ page }) {
   const [numLinks, setNumLinks] = useState(4);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
-  const notTrendingSubs = ["Eyebleach", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe", "aww"];
+  const notTrendingSubs = ["Eyebleach", "youseeingthisshit", "me_irl", "gifs", "educationalgifs", "BeAmazed", "WatchPeopleDieInside", "PublicFreakout", "instantkarma", "KDRAMA", "CozyPlaces", "Whatcouldgowrong", "BetterEveryLoop", "NatureIsFuckingLit", "antiwork", "MadeMeSmile", "dankmemes", "maybemaybemaybe", "aww", "leagueoflegends", "oddlysatisfying"];
 
   useEffect(() => {
     const abortTrending = new AbortController();
-    // reddit has recently updated the algorithm that chooses which trending posts to display, so t=hour gives a more accurate display than the previous t=day
-    fetch("https://www.reddit.com/r/popular/top/.json?t=hour&limit=100", { signal: abortTrending.signal })
+    // reddit has recently updated the algorithm that chooses which trending posts to display, so t=day currently gives the most accurate links
+    fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100", { signal: abortTrending.signal })
     .then(res => {
       if (res.status === 200) {
         return res.json();
@@ -22,9 +22,10 @@ export default function Trending({ page }) {
     })
     .then(data => {
       if (data) {
-        data.data.children.forEach((post, i) => {
+        data.data.children.forEach(post => {
           // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
           // TODO: add extra error check to make sure the same link isn't already in trendingLinks from another subreddit
+          // TODO: add extra error check to make sure there are 4 links that qualify, if not, either fetch posts from news subreddit directly or trigger second fetch request for /popular/top/.json?t=hour
           if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1) {
             setTrendingLinks(prevLinks => {
               if (!prevLinks) return post.data;

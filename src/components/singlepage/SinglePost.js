@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
-import SinglePostSideBar from './SinglePostSideBar';
 import UpArrow from "../../images/up-arrow.png";
 import DownArrow from "../../images/down-arrow.png";
 import SpeechBubble from "../../images/speech.png";
 import ShareArrow from "../../images/share-arrow.png";
 import SaveBanner from "../../images/save.png";
 import x from "../../images/x.png";
+import Hide from "../../images/hide.png";
+import Report from "../../images/report.png";
+import CommentsContainer from './CommentsContainer';
+import SingleGalleryPost from './SingleGalleryPost';
+import SingleImagePost from './SingleImagePost';
+import SingleLinkPost from './SingleLinkPost';
+import SinglePostSideBar from './SinglePostSideBar';
 import SinglePostTopBar from './SinglePostTopBar';
 import SingleTextPost from './SingleTextPost';
 import SingleVideoPost from './SingleVideoPost';
-import SingleImagePost from './SingleImagePost';
-import SingleGalleryPost from './SingleGalleryPost';
-import SingleLinkPost from './SingleLinkPost';
-import CommentsContainer from './CommentsContainer';
 import SideBarLinks from '../SideBarLinks';
-import Hide from "../../images/hide.png";
-import Report from "../../images/report.png";
 
 export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, onClose, setSearch, setSelectedTimeText, setSortTop, setScrollPosition }) {
 
@@ -41,7 +41,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
   useEffect(() => {
     window.addEventListener("click", onClose);
     return () => {
-      window.removeEventListener('click', onClose);
+      window.removeEventListener("click", onClose);
     }
   });
 

@@ -4,6 +4,8 @@ import UpArrow from "../../images/up-arrow.png";
 import DownArrow from "../../images/down-arrow.png";
 import DefaultThumbnail from "../../images/logo-small.png";
 
+// TODO: Find source of children not having unique keys (deleted comments?)
+
 export default function Comment({ comment }) {
   const [profileImage, setProfileImage] = useState();
 

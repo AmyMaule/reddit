@@ -18,7 +18,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
   // determine how long ago the post was created
   const determineTimePosted = () => {
     const timeNow = Date.now();
-    const postedMsAgo = (timeNow/1000 - comment.created_utc);
+    const postedMsAgo = (timeNow/1000 - post.created_utc);
     // Reddit uses "m" for minutes and for months
     if (postedMsAgo < 60) {
       return "A few seconds";
@@ -121,7 +121,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
     }
   }, [post.subreddit])
 
-  const handlePostClick = (postId) => {
+  const handlePostClick = postId => {
     // this sets the subreddit thumbnail and other data for the clicked post without having to do another fetch request
     if (postId) setClickedPostId(post.id);
     setCachedPostData({

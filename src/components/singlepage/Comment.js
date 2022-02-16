@@ -4,7 +4,7 @@ import UpArrow from "../../images/up-arrow.png";
 import DownArrow from "../../images/down-arrow.png";
 import DefaultThumbnail from "../../images/logo-small.png";
 
-// TODO: Find source of children not having unique keys (deleted comments?)
+// TODO: Find source of children not having unique keys (deleted comment or user account?)
 
 export default function Comment({ comment }) {
   const [profileImage, setProfileImage] = useState();
@@ -12,8 +12,7 @@ export default function Comment({ comment }) {
   const htmlDecode = commentBody => {
     let commentContainer = document.createElement("div");
     commentContainer.innerHTML = commentBody;
-    let result = commentContainer.childNodes.length === 0 ? "" : commentContainer.childNodes[0].nodeValue;
-    return result;
+    return commentContainer.childNodes.length === 0 ? "" : commentContainer.childNodes[0].nodeValue;
   }
 
   // determine how long ago the comment was posted
@@ -34,7 +33,7 @@ export default function Comment({ comment }) {
     }
   }
 
-  // if a post has fewer than 0 upvotes, comment.ups is 0 and post.downs keeps the vote tally, otherwise post.ups keeps the tally and post.downs is 0
+  // if a comment has fewer than 0 upvotes, comment.ups is 0 and comment.downs keeps the vote tally, otherwise comment.ups keeps the tally and comment.downs is 0
   const determineVotes = () => {
     if (comment.ups > 0) {
       if (comment.ups < 1000) {
@@ -60,13 +59,13 @@ export default function Comment({ comment }) {
           setProfileImage(DefaultThumbnail);
         } else {
         // remove the encoding
-        data.data.icon_img = data.data.icon_img.replaceAll("amp;", "");
+        data.data.icon_img = data.data.icon_img.replaceAll("&amp;", "&");
         setProfileImage(data.data.icon_img);
       }
     })
     .catch(err => {
       if (err.name !== "AbortError" && err.name !== "TypeError") {
-        console.log(err.name);
+        console.log(err);
       }
     });
     return () => {

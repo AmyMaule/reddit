@@ -4,14 +4,14 @@ import DownArrow from "../images/down-arrow.png";
 import SpeechBubble from "../images/speech.png";
 import ShareArrow from "../images/share-arrow.png";
 import SaveBanner from "../images/save.png";
-import PostTopBar from './homepage/PostTopBar';
-import VideoPost from "./homepage/VideoPost";
+import GalleryPost from './homepage/GalleryPost';
 import ImagePost from './homepage/ImagePost';
 import LinkPost from './homepage/LinkPost';
+import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
-import GalleryPost from './homepage/GalleryPost';
+import VideoPost from "./homepage/VideoPost";
 
-export default function Post({ setSelectedSubreddit, post, setScrollPosition, setClickedPostId, setCachedPostData, setPage, setSearch, setSelectedTimeText, setSortTop }) {
+export default function Post({ post, setSelectedSubreddit, setScrollPosition, setClickedPostId, setCachedPostData, setPage, setSearch, setSelectedTimeText, setSortTop }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -71,8 +71,7 @@ export default function Post({ setSelectedSubreddit, post, setScrollPosition, se
   const htmlDecode = flairText => {
     let flairTextContainer = document.createElement("div");
     flairTextContainer.innerHTML = flairText;
-    let result = flairTextContainer.childNodes.length === 0 ? "" : flairTextContainer.childNodes[0].nodeValue;
-    return result;
+    return flairTextContainer.childNodes.length === 0 ? "" : flairTextContainer.childNodes[0].nodeValue;
   }
 
   const flairDisplay = post.link_flair_richtext.map((part, i) => {

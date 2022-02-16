@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick,setSelectedTimeText, setSortTop, setScrollPosition }) {
+export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick, setSelectedTimeText, setSortTop, setScrollPosition }) {
   const awardStyle = {
     height: "16px",
     width: "16px",
@@ -37,7 +37,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
 
   // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
   const setSubhome = () => {
-    // handlePostClick sets cachedPostData, using null if going directly to the subreddit page
+    // handlePostClick sets cachedPostData, using null if going directly to the subreddit page - if handlePostClick isn't called here, when a subreddit is clicked, it will load with data from the most recent subreddit visited (including title, background, etc) but the posts from the correct subreddit will show
     handlePostClick(null);
     setSelectedSubreddit("r/" + subreddit);
     setSearch("r/" + subreddit);
@@ -58,7 +58,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
 
   return (
     <div className="post-top">
-    {/* tons of subreddits don't have icon links in the API even though they do have their own thumbnails, so they just get the default logo instead */}
+    {/* many subreddits don't have icon links in the API even though they do have their own thumbnails, so they just get the default logo */}
       <span className="subreddit-thumbnail">
         <img src={thumbnail ? thumbnail : DefaultThumbnail} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} alt="" />
       </span>

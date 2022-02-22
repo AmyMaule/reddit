@@ -7,7 +7,7 @@ import SaveBanner from "../../images/save.png";
 import x from "../../images/x.png";
 import Hide from "../../images/hide.png";
 import Report from "../../images/report.png";
-import CommentsContainer from './CommentsContainer';
+import Comment from './Comment';
 import SingleGalleryPost from './SingleGalleryPost';
 import SingleImagePost from './SingleImagePost';
 import SingleLinkPost from './SingleLinkPost';
@@ -155,7 +155,9 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
               </div>
 
               <div className="singlepost-comment-container">
-                <CommentsContainer comments={comments} />
+                {comments && comments.map(comment => {
+                  return <Comment comment={comment.data} key={comment.data.name} />
+                })}
               </div>
 
               <div className="after-comment-box"></div>

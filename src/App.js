@@ -150,7 +150,7 @@ function App() {
         setSortTop={setSortTop}
         setScrollPosition={setScrollPosition}
       />
-      {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes a huge lag and doesn't save the page scroll position */}
+      {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes lag and doesn't save the scroll position */}
       <Trending page={page} />
       {page === "subhome" && <Subhome cachedPostData={cachedPostData} />}
       <div className={page !== "comment" ? "main-container" : "main-container hide"}>

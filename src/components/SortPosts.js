@@ -21,6 +21,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
       let secondSlash = search.lastIndexOf("/");
       search = search.slice(firstSlash, secondSlash);
     }
+
     // if there's an r/ but no second slash, just remove the r/
     if (search.indexOf("/") !== -1 && search.indexOf("/") === search.lastIndexOf("/")) search = search.slice(2);
 
@@ -31,17 +32,22 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
     // "popular-location" is only accessible from the homepage
     if (page === "home") {
       if (clickedClass === "hot") {
-        document.querySelector(".popular-location").classList.remove("hide")
+        document.querySelector(".popular-location").classList.remove("hide");
       } else document.querySelector(".popular-location").classList.add("hide");
     }
+
     let popularBtns = Array.from(document.querySelectorAll(".popular-btn"));
-    popularBtns.map(btn => btn.classList.remove("clicked"));
+    popularBtns.forEach(btn => btn.classList.remove("clicked"));
+
     let clickedItem = document.querySelector(`.popular-${clickedClass}`);
     clickedItem.classList.add("clicked");
+
     let allIcons = Array.from(document.querySelectorAll(".hot-icon, .top-icon, .new-icon"));
     allIcons.map(icon => icon.classList.remove("hot-blue", "top-blue", "new-blue"));
+
     clickedItem.firstChild.classList.add(`${clickedClass}-blue`);
     handleSort(sub);
+
     // if "top" has been clicked, show the dropdown to select the time period, otherwise hide it
     if (document.querySelector(".popular-top").classList.contains("clicked")) {
       document.querySelector(".popular-today").classList.remove("hide");
@@ -72,13 +78,14 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
   const handleTimeSort = e => {
     // this slices the end of the .dropdown-top- class to give the time period selected
     let selectedTime = e.target.classList[0].slice(13);
+
     // sortTop adds this extra string to the end of the URL to be fetched to get the posts in App.js
     setSortTop(`&sort=top&t=${selectedTime}`);
     setSearch(selectedTime);
     setSelectedTimeText(e.target.textContent);
     const timeDropdowns = Array.from(document.querySelectorAll(".dropdown-top"));
     // remove clicked from all of the dropdown buttons, then re-add it to the time period that has been selected
-    timeDropdowns.map(timeDropdown => timeDropdown.classList.remove("clicked"));
+    timeDropdowns.forEach(timeDropdown => timeDropdown.classList.remove("clicked"));
     e.target.classList.add("clicked");
   }
 

@@ -49,11 +49,18 @@ export default function SubhomeRules({ cachedPostData }) {
   // toggleRule adds the inner rule text as a child, or removes it
   const toggleRule = e => {
     let transformTarget = e.currentTarget.childElementCount === 4 ? e.currentTarget.lastElementChild.previousElementSibling.firstChild : e.currentTarget.lastElementChild.firstChild;
+    // this rotates the arrow on the right hand side
     transformTarget.style.transform = transformTarget.style.transform === "rotate(180deg)" ? "rotate(0deg)" : "rotate(180deg)";
 
     // If there are more than 3 child nodes, it means that the rule is already open and should be closed, so the last child element is removed
     if (e.currentTarget.childElementCount === 4) {
       e.currentTarget.removeChild(e.currentTarget.lastElementChild);
+
+      // if the rule container is less than 55px high, move the arrow back to the center when the rule is closed
+      if (e.currentTarget.clientHeight < 55) {
+        e.currentTarget.lastChild.style.bottom = "10px";
+      }
+
       return;
     }
 

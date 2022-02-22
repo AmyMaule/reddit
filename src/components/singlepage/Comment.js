@@ -49,7 +49,7 @@ export default function Comment({ comment }) {
   // Fetch the user's avatar separately as it isn't in the main comment data
   useEffect(() => {
     const abortComment = new AbortController();
-    // If the post has been deleted or the author has removed their account, the author will be undefined of "[deleted]" so no need to fetch
+    // If the post has been deleted or the author has removed their account, the author will be undefined or "[deleted]" so no need to fetch
     if (!comment.author || comment.author === "[deleted]") {
       setProfileImage(DefaultThumbnail);
     } else fetch(`https://www.reddit.com/user/${comment.author}/about/.json`, { signal: abortComment.signal })
@@ -76,9 +76,7 @@ export default function Comment({ comment }) {
   // TODO - figure out when the comment borders are being hovered over to make them collapsible
   // const mouseBorder = (e) => {
   //   console.log(e.target);
-  //
   // }
-
   // let commentBorders;
   // if (document.querySelector(".comment-border")) commentBorders = Array.from(document.querySelectorAll(".comment-border"));
   // useEffect(() => {

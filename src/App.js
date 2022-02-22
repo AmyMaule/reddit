@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import AllSubs from "./allsubs.json";
 import Navbar from './components/Navbar';
 import Trending from './components/homepage/Trending';
 import SideBar from './components/homepage/SideBar';
@@ -13,14 +12,6 @@ import SinglePostSideBar from './components/singlepage/SinglePostSideBar';
 import SubhomeRules from './components/SubhomeRules';
 
 function App() {
-  // sortedSubs takes allsubs.json and orders them by subscriber count
-  const sortedSubs = Object.fromEntries(
-    Object.entries(AllSubs).sort(([,a],[,b]) => b-a)
-  );
-
-  // Object.keys creates an array of all the subreddits from sortedSubs, so that when filter is called while searching, they appear in order of most to least popular
-  const allSubreddits = Object.keys(sortedSubs).map(sub => sub.toLowerCase());
-
   const [posts, setPosts] = useState([]);
   const [selectedSubreddit, setSelectedSubreddit] = useState("");
   const [clickedPostId, setClickedPostId] = useState();
@@ -143,7 +134,6 @@ function App() {
         setSelectedSubreddit={setSelectedSubreddit}
         search={search}
         setSearch={setSearch}
-        allSubreddits={allSubreddits}
         setPage={setPage}
         setCachedPostData={setCachedPostData}
         setSelectedTimeText={setSelectedTimeText}

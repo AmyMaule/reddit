@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react';
 import SearchIcon from "../images/search-icon.png";
 import UserIcon from "../images/user-2.png";
 import V from "../images/v.png";
+import AllSubs from "../allsubs.json";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
 
-export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, allSubreddits, setPage, setCachedPostData, setSelectedTimeText, setSortTop, setScrollPosition }) {
+export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, setPage, setCachedPostData, setSelectedTimeText, setSortTop, setScrollPosition }) {
+  // sortedSubs takes allsubs.json and orders them by subscriber count
+  const sortedSubs = Object.fromEntries(
+    Object.entries(AllSubs).sort(([,a],[,b]) => b-a)
+  );
+
+  // Object.keys creates an array of all the subreddits from sortedSubs, so that when filter is called while searching, they appear in order of most to least popular
+  const allSubreddits = Object.keys(sortedSubs).map(sub => sub.toLowerCase());
+
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearchInput = e => {

@@ -55,24 +55,24 @@ export default function SubhomeRules({ cachedPostData }) {
   if (!rules) return <></>;
   return (
     <div className="subhome-rules-container">
-      <div className="subhome-rules-heading" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>{cachedPostData.display_name_prefixed} rules</div>
+      <div className="subhome-rules-heading" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>
+        {cachedPostData.display_name_prefixed} rules
+      </div>
       <div className="subhome-rules-inner-container">
         {rules.map((rule, i) => {
           {/* currentCursor is set to "pointer" when the rule has a description and therefore can be clicked on */}
           const currentCursor = rules[i].description === "" ? "unset" : "pointer";
           return (
-            <>
-            <div className="subhome-rule-container-outer" key={i}>
+            <div className="subhome-rule-container-outer" key={i} style={{cursor: currentCursor}}>
               <div onClick={e => toggleRule(e, i)} className="subhome-rule-container">
                 <span className="subhome-rule-number">{i+1}.</span>
-                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}} style={{cursor: currentCursor}}></span>
+                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}}></span>
               </div>
               {rules[i].description &&
                 <div className="v-container">
                   <img src={V} className="subhome-v-icon" alt="" />
                 </div>}
-            </div>
-            </>)
+            </div>)
         })}
       </div>
     </div>

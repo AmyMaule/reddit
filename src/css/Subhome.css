@@ -129,8 +129,12 @@
   padding: 10px 0px;
   margin-left: 8px;
   margin-right: 10px;
-  border-bottom: 1px solid rgba(26, 26, 27, 0.08);
   font-size: 0.9rem;
+}
+
+.subhome-rule-container-outer {
+  display: flex;
+  border-bottom: 1px solid rgba(26, 26, 27, 0.08);
 }
 
 .subhome-rule-container * {
@@ -140,7 +144,6 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  cursor: pointer;
 }
 
 .subhome-rule-number {
@@ -156,28 +159,24 @@
 .subhome-v-icon {
   height: 6px;
   width: 12px;
-  /* position: relative; */
   margin-left: auto;
   margin-right: 5px;
 }
 
 .v-container {
   display: flex;
-  justify-content: center;
-  position: relative;
-  right: 0;
   z-index: 20;
-  bottom: 10px;
+  height: 100%;
+  margin-top: 16px;
+  /* margin-bottom: auto; */
 }
 
 .subhome-rule-inner {
-  /* width: 90%; */
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 10px;
   font-size: 0.88rem;
   font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
-
 }
 
 .subhome-rule-inner li {

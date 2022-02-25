@@ -28,34 +28,22 @@ export default function SubhomeRules({ cachedPostData }) {
     }
   }, []);
 
-  // This moves the v arrows towards the middle of their section based on the height of the parent element
-  useEffect(() => {
-    let vArrows = Array.from(document.querySelectorAll(".v-container"));
-    vArrows.forEach(arrow => {
-      if (arrow.parentElement.clientHeight > 55) {
-        arrow.style.bottom = "20px";
-      }
-    })
-  }, [rules]);
-
   // toggleRule adds the inner rule text as a child, or removes it
-  const toggleRule = e => {
-    let transformTarget = e.currentTarget.childElementCount === 4 ? e.currentTarget.lastElementChild.previousElementSibling.firstChild : e.currentTarget.lastElementChild.firstChild;
-    // this rotates the arrow on the right hand side
+  const toggleRule = (e, i) => {
+    // some rules don't have a further description, so return out of the function
+    if (rules[i].description === "") return;
+
+    // transformTarget is the arrow on the right hand side
+    const transformTarget = e.currentTarget.parentElement.lastElementChild.firstChild;
     transformTarget.style.transform = transformTarget.style.transform === "rotate(180deg)" ? "rotate(0deg)" : "rotate(180deg)";
 
-    // If there are more than 3 child nodes, it means that the rule is already open and should be closed, so the last child element is removed
-    if (e.currentTarget.childElementCount === 4) {
+    // If there are 3 child nodes, it means that the rule is already open and should be closed, so the last child element is removed
+    if (e.currentTarget.childElementCount === 3) {
       e.currentTarget.removeChild(e.currentTarget.lastElementChild);
-
-      // if the rule container is less than 55px high, move the arrow back to the center when the rule is closed
-      if (e.currentTarget.clientHeight < 55) {
-        e.currentTarget.lastChild.style.bottom = "10px";
-      }
       return;
     }
 
-    // ruleNumber gets the number of the rule that was clicked on
+    // ruleNumber gets the number of the rule that was clicked on - a new div is then created with the rule's description and this is appended to the rule that was clisscked on
     let ruleNumber = e.currentTarget.firstChild.innerText.slice(0, -1);
     let innerRule = document.createElement("div");
     innerRule.classList.add("subhome-rule-inner")
@@ -67,16 +55,23 @@ export default function SubhomeRules({ cachedPostData }) {
   if (!rules) return <></>;
   return (
     <div className="subhome-rules-container">
-      <div className="subhome-rules-heading" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>{cachedPostData.display_name_prefixed} rules</div>
+      <div className="subhome-rules-heading" style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59"}}>
+        {cachedPostData.display_name_prefixed} rules
+      </div>
       <div className="subhome-rules-inner-container">
         {rules.map((rule, i) => {
+          {/* currentCursor is set to "pointer" when the rule has a description and therefore can be clicked on */}
+          const currentCursor = rules[i].description === "" ? "unset" : "pointer";
           return (
-            <div onClick={toggleRule} key={i} className="subhome-rule-container">
-              <span className="subhome-rule-number">{i+1}.</span>
-              <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}}></span>
-              <div className="v-container">
-                <img src={V} className="subhome-v-icon" alt="" />
+            <div className="subhome-rule-container-outer" key={i} style={{cursor: currentCursor}}>
+              <div onClick={e => toggleRule(e, i)} className="subhome-rule-container">
+                <span className="subhome-rule-number">{i+1}.</span>
+                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}}></span>
               </div>
+              {rules[i].description &&
+                <div className="v-container">
+                  <img src={V} className="subhome-v-icon" alt="" />
+                </div>}
             </div>)
         })}
       </div>

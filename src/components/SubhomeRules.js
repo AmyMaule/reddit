@@ -1,4 +1,4 @@
-import React, { useState, useEffect}  from 'react';
+import React, { useState, useEffect, useMemo }  from 'react';
 import V from "../images/v.png";
 const marked = require('marked');
 
@@ -26,15 +26,7 @@ export default function SubhomeRules({ cachedPostData }) {
     return () => {
       abortRules.abort();
     }
-  });
-
-  // For some subreddits, the background color is white or very light, so if that's the case, change the text to be black
-  if (document.querySelector(".subhome-rules-heading")) {
-    if (document.querySelector(".subhome-rules-heading").style.backgroundColor.startsWith("rgb(25") || document.querySelector(".subhome-rules-heading").style.backgroundColor.startsWith("rgb(247")) {
-      document.querySelector(".subhome-rules-heading").style.color = "black";
-      document.querySelector(".about-community").style.color = "black";
-    }
-  }
+  }, []);
 
   // This moves the v arrows towards the middle of their section based on the height of the parent element
   useEffect(() => {
@@ -60,7 +52,6 @@ export default function SubhomeRules({ cachedPostData }) {
       if (e.currentTarget.clientHeight < 55) {
         e.currentTarget.lastChild.style.bottom = "10px";
       }
-
       return;
     }
 

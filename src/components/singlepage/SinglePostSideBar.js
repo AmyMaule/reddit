@@ -10,7 +10,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
   const totalMembers = cachedPostData.subscribers > 999999
     ? (cachedPostData.subscribers/1000000).toFixed(1) + "m"
     : cachedPostData.subscribers > 999
-      ? (cachedPostData.subscribers/1000).toFixed(0) + "k"
+      ? (cachedPostData.subscribers/1000).toFixed(1) + "k"
       : cachedPostData.subscribers;
 
   // If there are more than 999 active users, round it to the nearest 1 decimal place and add k (so 18150 becomes 18.1k)

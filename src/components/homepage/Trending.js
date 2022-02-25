@@ -77,7 +77,6 @@ export default function Trending({ page }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
   return (
     // Trending needs to hide when SinglePost is shown but not demount - otherwise it re-renders from scratch which causes lag and doesn't save the page scroll position
     <div className={page === "home" ? "Trending" : "Trending hide"}>

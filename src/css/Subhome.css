@@ -14,7 +14,7 @@
   /* background-color: rgb(215, 250, 145); */
   width: 100%;
   max-height: 220px;
-  /* object-fit: cover; */
+  background-size: cover;
 }
 
 .subhome-r-bar {

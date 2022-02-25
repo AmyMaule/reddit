@@ -7,6 +7,8 @@ import AllSubs from "../allsubs.json";
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
 
 export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search, setSearch, setPage, setCachedPostData, setSelectedTimeText, setSortTop, setScrollPosition }) {
+  const [searchResults, setSearchResults] = useState([]);
+
   // sortedSubs takes allsubs.json and orders them by subscriber count
   const sortedSubs = Object.fromEntries(
     Object.entries(AllSubs).sort(([,a],[,b]) => b-a)
@@ -14,8 +16,6 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   // Object.keys creates an array of all the subreddits from sortedSubs, so that when filter is called while searching, they appear in order of most to least popular
   const allSubreddits = Object.keys(sortedSubs).map(sub => sub.toLowerCase());
-
-  const [searchResults, setSearchResults] = useState([]);
 
   const handleSearchInput = e => {
     // must keep in this style change as otherwise in various circumstances (including once a search has been performed), the dropdown subreddits box doesn't reappear

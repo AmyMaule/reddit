@@ -2,6 +2,8 @@ import React from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 import Cake from "../../images/cake.png";
 
+import { htmlDecodeWithReplace } from '../../utilities';
+
 export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, setSearch, page, setPage, subreddit, setSelectedTimeText, setSortTop, setScrollPosition }) {
   let aboutCommunityHeight = "34px";
   if (page !== "comment") aboutCommunityHeight = "44px";
@@ -23,17 +25,6 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
   const btnStyle = {
     backgroundColor: cachedPostData.primary_color || cachedPostData.banner_background_color || cachedPostData.key_color || "#0079d3",
     color: "#FFF"
-  }
-
-  const htmlDecode = description => {
-    let descriptionContainer = document.createElement("div");
-    descriptionContainer.innerHTML = description;
-    if (descriptionContainer.childNodes.length !== 0) {
-      let decodedDescription = descriptionContainer.childNodes[0].nodeValue;
-      // the original description of many subreddits includes a link to the subreddit which causes an error, so replace the link with a span
-      decodedDescription = decodedDescription.replace("</a>", "</span>");
-      return decodedDescription.replace(`<a href="/${cachedPostData.display_name_prefixed}">`, "<span>")
-    }
   }
 
   const singlePostSetSubhome = () => {
@@ -68,7 +59,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
         />}
         {page === "comment" && <h2 className="singlepostsidebar-subreddit" onClick={singlePostSetSubhome}>{cachedPostData.display_name_prefixed}</h2>}
       </div>
-      <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecode(cachedPostData.public_description_html)}}></div>
+      <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecodeWithReplace(cachedPostData)}}></div>
       <div className="singlepostsidebar-member-info-container">
         <div className="singlepostsidebar-members-container">
           <h6 className="singlepostsidebar-num-members">{totalMembers}</h6>

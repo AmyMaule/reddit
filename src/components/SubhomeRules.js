@@ -1,15 +1,12 @@
 import React, { useState, useEffect }  from 'react';
 import V from "../images/v.png";
+
+import { htmlDecode } from '../utilities';
+
 const marked = require('marked');
 
 export default function SubhomeRules({ cachedPostData }) {
   const [rules, setRules] = useState([]);
-
-  const htmlDecodeRules = description => {
-    let descriptionContainer = document.createElement("div");
-    descriptionContainer.innerHTML = description;
-    return descriptionContainer.childNodes.length === 0 ? "" : descriptionContainer.childNodes[0].nodeValue;
-  }
 
   useEffect(() => {
     const abortRules = new AbortController();
@@ -48,7 +45,7 @@ export default function SubhomeRules({ cachedPostData }) {
     let innerRule = document.createElement("div");
     innerRule.classList.add("subhome-rule-inner")
     // Use the markedjs library to turn markdown into html
-    innerRule.innerHTML = marked(htmlDecodeRules(rules[ruleNumber-1].description));
+    innerRule.innerHTML = marked(htmlDecode(rules[ruleNumber-1].description));
     e.currentTarget.appendChild(innerRule);
   }
 
@@ -66,7 +63,7 @@ export default function SubhomeRules({ cachedPostData }) {
             <div className="subhome-rule-container-outer" key={i} style={{cursor: currentCursor}}>
               <div onClick={e => toggleRule(e, i)} className="subhome-rule-container">
                 <span className="subhome-rule-number">{i+1}.</span>
-                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecodeRules(rule.short_name)}}></span>
+                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecode(rule.short_name)}}></span>
               </div>
               {rules[i].description &&
                 <div className="v-container">

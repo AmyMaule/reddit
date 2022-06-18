@@ -17,19 +17,13 @@ import SingleTextPost from './SingleTextPost';
 import SingleVideoPost from './SingleVideoPost';
 import SideBarLinks from '../SideBarLinks';
 
+import { htmlDecode } from '../../utilities';
+
 export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, onClose, setSearch, setSelectedTimeText, setSortTop, setScrollPosition }) {
 
   const flairStyle = {
     backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
-  }
-
-  // Some flair text is encoded (so & shows as &amp; for example) so each flair text is run through htmlDecode before displaying
-  function htmlDecode(flairText){
-    let flairTextContainer = document.createElement("div");
-    flairTextContainer.innerHTML = flairText;
-    let result = flairTextContainer.childNodes.length === 0 ? "" : flairTextContainer.childNodes[0].nodeValue;
-    return result;
   }
 
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {

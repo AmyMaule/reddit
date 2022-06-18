@@ -4,16 +4,10 @@ import UpArrow from "../../images/up-arrow.png";
 import DownArrow from "../../images/down-arrow.png";
 import DefaultThumbnail from "../../images/logo-small.png";
 
-// TODO: Find source of children not having unique keys (deleted comment or user account?)
+import { htmlDecode } from '../../utilities';
 
 export default function Comment({ comment }) {
   const [profileImage, setProfileImage] = useState();
-
-  const htmlDecode = commentBody => {
-    let commentContainer = document.createElement("div");
-    commentContainer.innerHTML = commentBody;
-    return commentContainer.childNodes.length === 0 ? "" : commentContainer.childNodes[0].nodeValue;
-  }
 
   // determine how long ago the comment was posted
   const determineTimePosted = () => {

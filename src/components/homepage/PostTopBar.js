@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick, setSelectedTimeText, setSortTop, setScrollPosition }) {
@@ -11,11 +11,14 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     paddingLeft: "3px"
   }
 
-  let allAwards = all_awardings.map(award => {
-    if (award.icon_url) {
-      return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
-    }
-  });
+  const showAllAwards = useCallback(() => {
+    const allAwards = all_awardings.map(award => {
+      if (award.icon_url) {
+        return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
+      }
+    })
+    return allAwards
+  }, [all_awardings]);
 
   // Show awards - as default, only show first 4, then the rest as a "& __ more"
   let remainingAwards = 0;
@@ -25,6 +28,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     }
     if (i >= 4) remainingAwards += award.count;
     if (i === all_awardings.length - 1 && all_awardings.length > 4) return <span key={award.id}> & {remainingAwards} more</span>
+    return null;
   });
 
   const [showAll, setShowAll] = useState(false);
@@ -32,8 +36,8 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
 
   // if a user clicks on the awards, it should show all of them, not just the first 4
   useEffect(() => {
-    if (showAll) setAwards(allAwards)
-  }, [showAll]); //allAwards
+    if (showAll) setAwards(showAllAwards)
+  }, [showAll, showAllAwards]);
 
   // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
   const setSubhome = () => {

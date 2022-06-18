@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import SpeechBubble from "../../images/speech.png";
 import UpArrow from "../../images/up-arrow.png";
 import DownArrow from "../../images/down-arrow.png";
@@ -129,7 +129,7 @@ export default function Comment({ comment }) {
       <ul>
       {comment.replies && comment.replies.data.children.map((subcomment, i) => {
         /* the last object in the children array isn't a comment so make sure it doesn't render */
-        if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return <></>;
+        if (comment.replies.data.children.length !== 1 && i === comment.replies.data.children.length - 1) return <Fragment key={i}></Fragment>;
         return (
           <li className="subcomment" key={subcomment.data.id}>
             <Comment comment={subcomment.data} />

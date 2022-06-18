@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import PostFlair from './PostFlair';
 
-export default function GalleryPost({ post, flairStyle, flairDisplay, handlePostClick }) {
+export default function GalleryPost({ post, handlePostClick }) {
   const [currentImage, setCurrentImage] = useState(0);
 
   // The gallery from the API is stored as an object with random keys for each item, so Object.entries creates an array containing all the gallery items
@@ -24,11 +25,7 @@ export default function GalleryPost({ post, flairStyle, flairDisplay, handlePost
 
   return (
     <>
-      <div className="post-title" onClick={() => handlePostClick("post")}>
-        <span>{post.title}</span>
-        {post.link_flair_text && <span className="flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : post.link_flair_text}</span>}
-        {post.is_original_content && <span className="flair-oc">OC</span>}
-      </div>
+      <PostFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
       <div className="img-center" style={{maxHeight: postHeight > 510 ? "510px" : postHeight + "px"}}>
         {currentImage !== 0 && <button className="gallery-button gallery-button-left" onClick={() => setCurrentImage(prev => prev-1)}>
           <span>&#x2039;</span>

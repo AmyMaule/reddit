@@ -24,6 +24,8 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
   const flairStyle = {
     backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
     color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
+    fontSize: "0.75rem",
+    fontWeight: "500"
   }
 
   const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {

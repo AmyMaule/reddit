@@ -1,11 +1,8 @@
 import React from 'react';
+import PostFlair from './PostFlair';
 
-export default function TextPost({ post, flairStyle, flairDisplay, handlePostClick }) {
+export default function TextPost({ post, handlePostClick }) {
   return (
-    <div className="post-title" onClick={() => handlePostClick("post")}>
-      <span>{post.title}</span>
-      {post.link_flair_text && <span className="flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : post.link_flair_text}</span>}
-      {post.is_original_content && <span className="flair-oc">OC</span>}
-    </div>
+    <PostFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
   )
 }

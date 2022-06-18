@@ -62,20 +62,6 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
   }
   const votes = determineNumVotes();
 
-  const flairStyle = {
-    backgroundColor: post.link_flair_background_color || "rgb(237, 239, 241)",
-    color: post.link_flair_text_color === "dark" ? "#000" : "#FFF",
-    fontSize: "0.75rem",
-    fontWeight: "500"
-  }
-
-  const flairDisplay = post.link_flair_richtext.map((part, i) => {
-    // Some flair text is encoded (so & shows as &amp; for example) so each flair text is run through htmlDecode before displaying
-    if (part.t) return <span key={i+part.a || i+part.t}>{htmlDecode(part.t)}</span>;
-    if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
-    return null;
-  })
-
   // this useEffect fetches the subreddit data for each post, in order to get the subreddit thumbnail that isn't in the inital post data - it also stores data for the singlepost sidebar
   useEffect(() => {
     const abortPost = new AbortController();
@@ -170,35 +156,25 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
         {post.is_video || post.post_hint === "rich:video"
           ? <VideoPost
               post={post}
-              flairStyle={flairStyle}
-              flairDisplay={flairDisplay}
               handlePostClick={handlePostClick}
             />
           : post.post_hint === "image"
             ? <ImagePost
                 post={post}
-                flairStyle={flairStyle}
-                flairDisplay={flairDisplay}
                 handlePostClick={handlePostClick}
               />
             : post.post_hint === "link"
             ? <LinkPost
                 post={post}
-                flairStyle={flairStyle}
-                flairDisplay={flairDisplay}
                 handlePostClick={handlePostClick}
               />
             : post.is_gallery
               ? <GalleryPost
                   post={post}
-                  flairStyle={flairStyle}
-                  flairDisplay={flairDisplay}
                   handlePostClick={handlePostClick}
                 />
               : <TextPost
                 post={post}
-                flairStyle={flairStyle}
-                flairDisplay={flairDisplay}
                 handlePostClick={handlePostClick}
               />
         }

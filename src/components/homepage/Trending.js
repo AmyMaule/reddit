@@ -40,10 +40,11 @@ export default function Trending({ page }) {
       if (err.name !== "AbortError" && err.name !== "TypeError")
         console.log("Trending error:", err);
     });
+
     return () => {
       abortTrending.abort();
     };
-  }, [isLoading, notTrendingSubs]);
+  }, [isLoading, notTrendingSubs, trendingLinks]);
 
   // In order for the trending blocks to load the data, isLoading sets to false once trendingLinks has enough data to render
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import V from "../images/v.png";
 const marked = require('marked');
 
@@ -26,7 +26,7 @@ export default function SubhomeRules({ cachedPostData }) {
     return () => {
       abortRules.abort();
     }
-  }, []);
+  }, [cachedPostData.display_name_prefixed]);
 
   // toggleRule adds the inner rule text as a child, or removes it
   const toggleRule = (e, i) => {
@@ -60,7 +60,7 @@ export default function SubhomeRules({ cachedPostData }) {
       </div>
       <div className="subhome-rules-inner-container">
         {rules.map((rule, i) => {
-          {/* currentCursor is set to "pointer" when the rule has a description and therefore can be clicked on */}
+          // currentCursor is set to "pointer" when the rule has a description and therefore can be clicked on
           const currentCursor = rules[i].description === "" ? "unset" : "pointer";
           return (
             <div className="subhome-rule-container-outer" key={i} style={{cursor: currentCursor}}>
@@ -72,7 +72,8 @@ export default function SubhomeRules({ cachedPostData }) {
                 <div className="v-container">
                   <img src={V} className="subhome-v-icon" alt="" />
                 </div>}
-            </div>)
+            </div>
+          )
         })}
       </div>
     </div>

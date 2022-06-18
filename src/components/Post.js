@@ -152,29 +152,14 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
 
         {/* Render different types of post based on the media it contains */}
         {post.is_video || post.post_hint === "rich:video"
-          ? <VideoPost
-              post={post}
-              handlePostClick={handlePostClick}
-            />
+          ? <VideoPost post={post} handlePostClick={handlePostClick} />
           : post.post_hint === "image"
-            ? <ImagePost
-                post={post}
-                handlePostClick={handlePostClick}
-              />
+            ? <ImagePost post={post} handlePostClick={handlePostClick} />
             : post.post_hint === "link"
-            ? <LinkPost
-                post={post}
-                handlePostClick={handlePostClick}
-              />
+            ? <LinkPost post={post} handlePostClick={handlePostClick} />
             : post.is_gallery
-              ? <GalleryPost
-                  post={post}
-                  handlePostClick={handlePostClick}
-                />
-              : <TextPost
-                post={post}
-                handlePostClick={handlePostClick}
-              />
+              ? <GalleryPost post={post} handlePostClick={handlePostClick} />
+              : <TextPost post={post} handlePostClick={handlePostClick} />
         }
 
         <div className="post-bottom-bar" >

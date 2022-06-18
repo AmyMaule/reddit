@@ -31,7 +31,7 @@ export default function PostContainer({ posts, setSelectedSubreddit, search, set
             setSortTop={setSortTop}
             setSelectedTimeText={setSelectedTimeText}
           />
-      }
+        }
       )}
     </div>
   )

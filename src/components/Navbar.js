@@ -25,7 +25,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     // if selectedSubreddit isn't set here, the mouse can't be used to hover over any of the suggested subs in the dropdown, though they can still be selected (dependency in useEffect for handleMouseAndKeySearch?)
     setSelectedSubreddit(e.target.value);
     const query = e.target.value;
-    allSubreddits.filter(sub => {
+    allSubreddits.forEach(sub => {
       // for testing, it's easier to make sure query isn't an empty string, but take this out later to add default values
       if (query && sub.startsWith("r/" + query) && !searchHistory.includes(sub)) {
           searchHistory.push(sub);

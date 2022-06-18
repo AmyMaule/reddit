@@ -77,6 +77,7 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
   const flairDisplay = post.link_flair_richtext.map((part, i) => {
     if (part.t) return <span key={i+part.a || i+part.t}>{htmlDecode(part.t)}</span>;
     if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
+    return null;
   })
 
   // this useEffect fetches the subreddit data for each post, in order to get the subreddit thumbnail that isn't in the inital post data - it also stores data for the singlepost sidebar

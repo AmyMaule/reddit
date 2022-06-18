@@ -4,7 +4,7 @@ import PostTitleFlair from './PostTitleFlair';
 export default function ImagePost({ post, handlePostClick }) {
   return (
     <>
-      <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
+      <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} singlePost={false} />
       <div className="img-center" onClick={() => handlePostClick("post")}>
           {post.thumbnail_height &&
           <img

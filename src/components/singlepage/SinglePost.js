@@ -16,23 +16,9 @@ import SinglePostTopBar from './SinglePostTopBar';
 import SingleTextPost from './SingleTextPost';
 import SingleVideoPost from './SingleVideoPost';
 import SideBarLinks from '../SideBarLinks';
-
-import { htmlDecode } from '../../utilities';
+import PostTitleFlair from '../homepage/PostTitleFlair';
 
 export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, onClose, setSearch, setSelectedTimeText, setSortTop, setScrollPosition }) {
-
-  const flairStyle = {
-    backgroundColor: cachedPostData.link_flair_background_color || "rgb(237, 239, 241)",
-    color: cachedPostData.link_flair_text_color === "dark" ? "#000" : "#FFF",
-    fontSize: "0.75rem",
-    fontWeight: "500"
-  }
-
-  const flairDisplay = clickedPost ? clickedPost.link_flair_richtext.map((part, i) => {
-    if (part.t) return <span key={i+part.a || i+part.t}>{htmlDecode(part.t)}</span>;
-    if (part.u) return <img key={i+part.a} src={part.u } style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
-    return <></>;
-  }) : "";
 
   useEffect(() => {
     window.addEventListener("click", onClose);
@@ -54,7 +40,9 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
         </div>
         <div className="top-bar-title-container">
           <h3 className="top-bar-title">{cachedPostData.title}</h3>
-          {cachedPostData.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
+          {clickedPost.link_flair_text &&
+            <PostTitleFlair handlePostClick={null} post={clickedPost} isShortened={false} singlePost={true} isTopBar={true} />
+          }
         </div>
         <div className="top-bar-btn-container">
           <div className="top-bar-btn-pointer">
@@ -87,34 +75,14 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
               />
 
               {clickedPost.is_video || cachedPostData.post_hint === "rich:video"
-                ? <SingleVideoPost
-                    clickedPost={clickedPost}
-                    flairStyle={flairStyle}
-                    flairDisplay={flairDisplay}
-                  />
+                ? <SingleVideoPost clickedPost={clickedPost} />
                 : cachedPostData.post_hint === "image"
-                  ? <SingleImagePost
-                      clickedPost={clickedPost}
-                      flairStyle={flairStyle}
-                      flairDisplay={flairDisplay}
-                    />
+                  ? <SingleImagePost clickedPost={clickedPost} />
                   : cachedPostData.post_hint === "link"
-                  ? <SingleLinkPost
-                      clickedPost={clickedPost}
-                      flairStyle={flairStyle}
-                      flairDisplay={flairDisplay}
-                    />
+                  ? <SingleLinkPost clickedPost={clickedPost} />
                   : clickedPost.is_gallery
-                    ? <SingleGalleryPost
-                        clickedPost={clickedPost}
-                        flairStyle={flairStyle}
-                        flairDisplay={flairDisplay}
-                      />
-                    : <SingleTextPost
-                        clickedPost={clickedPost}
-                        flairStyle={flairStyle}
-                        flairDisplay={flairDisplay}
-                      />
+                    ? <SingleGalleryPost clickedPost={clickedPost} />
+                    : <SingleTextPost clickedPost={clickedPost} />
               }
 
               <div className="singlepost-bottom-bar">

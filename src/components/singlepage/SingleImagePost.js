@@ -1,13 +1,10 @@
 import React from 'react'
+import PostTitleFlair from '../homepage/PostTitleFlair'
 
-export default function SingleImagePost({ clickedPost, flairStyle, flairDisplay }) {
+export default function SingleImagePost({ clickedPost }) {
   return (
     <>
-      <div className="singlepost-title">
-        <span>{clickedPost.title}</span>
-        {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
-        {clickedPost.is_original_content && <span className="flair-oc">OC</span>}
-      </div>
+      <PostTitleFlair handlePostClick={null} post={clickedPost} isShortened={false} singlePost={true} />
       <div className="singlepost-img-center">
         {clickedPost.thumbnail_height &&
           <img

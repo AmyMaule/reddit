@@ -1,12 +1,10 @@
 import React from 'react'
+import PostTitleFlair from '../homepage/PostTitleFlair'
 
-export default function SingleVideoPost({ clickedPost, flairStyle, flairDisplay }) {
+export default function SingleVideoPost({ clickedPost }) {
   return (
     <>
-      <div className="singlepost-title">
-        <span>{clickedPost.title}</span>
-        {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
-      </div>
+      <PostTitleFlair handlePostClick={null} post={clickedPost} isShortened={false} singlePost={true} />
       <div className="singlepost-video-background">
         {/*  previously used clickedPost.thumbnail_height as well, test to see if necessary*/}
         {clickedPost.secure_media?.reddit_video?.fallback_url || clickedPost.media?.reddit_video?.fallback_url || clickedPost.preview?.reddit_video_preview?.fallback_url

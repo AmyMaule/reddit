@@ -154,7 +154,7 @@
 .flair {
   display: inline-flex;
   font-size: 0.7rem;
-  /* white-space: pre; */
+  font-weight: 500;
   border-radius: 20px;
   padding: 2px 8px;
   margin-left: 5px;

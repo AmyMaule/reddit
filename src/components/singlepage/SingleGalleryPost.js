@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import PostTitleFlair from '../homepage/PostTitleFlair';
 
-export default function SingleGalleryPost({ clickedPost, flairStyle, flairDisplay }) {
+export default function SingleGalleryPost({ clickedPost }) {
   const [currentImageClicked, setCurrentImageClicked] = useState(0);
 
   let galleryData = Object.entries(clickedPost.media_metadata);
@@ -21,11 +22,7 @@ export default function SingleGalleryPost({ clickedPost, flairStyle, flairDispla
 
   return (
     <>
-      <div className="singlepost-title">
-        <span>{clickedPost.title}</span>
-        {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
-        {clickedPost.is_original_content && <span className="flair-oc">OC</span>}
-      </div>
+      <PostTitleFlair handlePostClick={null} post={clickedPost} isShortened={false} singlePost={true} />
       <div className="singlepost-img-center">
         <div className="singlepost-gallery-btn-container">
           {currentImageClicked !== 0 && <button className="singlepost-gallery-button singlepost-gallery-button-left" onClick={() => setCurrentImageClicked(prev => prev-1)}>

@@ -87,8 +87,8 @@
 
 .singlepost-flair {
   font-size: 0.75rem;
-  border-radius: 3px;
-  padding: 0 5px;
+  border-radius: 20px;
+  padding: 2px 8px;
   margin-left: 5px;
   align-self: center;
   font-weight: 500;

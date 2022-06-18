@@ -4,7 +4,7 @@ import PostTitleFlair from './PostTitleFlair';
 export default function VideoPost({ post, handlePostClick }) {
   return (
     <>
-      <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
+      <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} singlePost={false} />
       <div className="video-background" onClick={() => handlePostClick("post")}>
         {/* For the test cases I ran, if post.is_video was false but post.post_hint === "rich:video", then secure_media was empty */}
         {post.secure_media?.reddit_video?.fallback_url || post.media?.reddit_video?.fallback_url || post.preview?.reddit_video_preview?.fallback_url

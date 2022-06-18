@@ -11,8 +11,6 @@ import PostTopBar from './homepage/PostTopBar';
 import TextPost from './homepage/TextPost';
 import VideoPost from "./homepage/VideoPost";
 
-import { htmlDecode } from '../utilities';
-
 export default function Post({ post, setSelectedSubreddit, setScrollPosition, setClickedPostId, setCachedPostData, setPage, setSearch, setSelectedTimeText, setSortTop }) {
   const [subredditInfo, setSubredditInfo] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);

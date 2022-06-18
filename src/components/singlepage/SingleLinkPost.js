@@ -1,6 +1,7 @@
 import React from 'react'
+import PostTitleFlair from '../homepage/PostTitleFlair';
 
-export default function SingleLinkPost({ clickedPost, flairStyle, flairDisplay }) {
+export default function SingleLinkPost({ clickedPost }) {
   // slicing at position 12 works for almost all URLs, but not those that start with en.xxx
   let startSlice = 12;
   if (clickedPost.url_overridden_by_dest.startsWith("https://en.")) startSlice = 8;
@@ -8,10 +9,7 @@ export default function SingleLinkPost({ clickedPost, flairStyle, flairDisplay }
   return (
     <>
       <div style={{display: "flex"}}>
-      <div className="singlepost-title-shortened">
-        <span>{clickedPost.title}</span>
-        {clickedPost.link_flair_text && <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : clickedPost.link_flair_text}</span>}
-      </div>
+      <PostTitleFlair handlePostClick={null} post={clickedPost} isShortened={true} singlePost={true} />
       <div className="singlepost-link-image-container">
         <img className="singlepost-link-image" src={clickedPost.thumbnail} alt="" />
       </div>

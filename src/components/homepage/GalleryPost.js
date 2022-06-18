@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PostFlair from './PostFlair';
+import PostTitleFlair from './PostTitleFlair';
 
 export default function GalleryPost({ post, handlePostClick }) {
   const [currentImage, setCurrentImage] = useState(0);
@@ -25,7 +25,7 @@ export default function GalleryPost({ post, handlePostClick }) {
 
   return (
     <>
-      <PostFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
+      <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
       <div className="img-center" style={{maxHeight: postHeight > 510 ? "510px" : postHeight + "px"}}>
         {currentImage !== 0 && <button className="gallery-button gallery-button-left" onClick={() => setCurrentImage(prev => prev-1)}>
           <span>&#x2039;</span>

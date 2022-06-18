@@ -57,7 +57,7 @@ function App() {
   useEffect(() => {
     const abortApp = new AbortController();
     // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
-    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=10${sortTop}`, { signal: abortApp.signal })
+    fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
       return res.json();

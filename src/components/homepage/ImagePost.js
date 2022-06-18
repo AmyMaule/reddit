@@ -1,10 +1,10 @@
 import React from 'react';
-import PostFlair from './PostFlair';
+import PostTitleFlair from './PostTitleFlair';
 
 export default function ImagePost({ post, handlePostClick }) {
   return (
     <>
-      <PostFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
+      <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
       <div className="img-center" onClick={() => handlePostClick("post")}>
           {post.thumbnail_height &&
           <img

@@ -1,7 +1,7 @@
 import React from 'react';
 import { htmlDecode } from '../../utilities';
 
-const PostFlair = ({ handlePostClick, post, isShortened }) => {
+const PostTitleFlair = ({ handlePostClick, post, isShortened }) => {
   const flairStyle = {
     backgroundColor: post.link_flair_background_color || "rgb(237, 239, 241)",
     color: post.link_flair_text_color === "dark" ? "#000" : "#FFF",
@@ -19,10 +19,10 @@ const PostFlair = ({ handlePostClick, post, isShortened }) => {
   return (
     <div className={isShortened ? "post-title post-title-shortened" : "post-title"} onClick={() => handlePostClick("post")}>
       <span>{post.title}</span>
-      {post.link_flair_text && <span className="flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : post.link_flair_text}</span>}
+      {post.link_flair_text && <span className="flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : htmlDecode(post.link_flair_text)}</span>}
       {post.is_original_content && <span className="flair-oc">OC</span>}
     </div>
   )
 }
 
-export default PostFlair;
+export default PostTitleFlair;

@@ -1,8 +1,8 @@
 import React from 'react';
-import PostFlair from './PostFlair';
+import PostTitleFlair from './PostTitleFlair';
 
 export default function TextPost({ post, handlePostClick }) {
   return (
-    <PostFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
+    <PostTitleFlair handlePostClick={handlePostClick} post={post} isShortened={false} />
   )
 }

@@ -10,11 +10,10 @@ export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelec
     paddingLeft: "3px"
   }
 
-  // as clickedPost is undefined on startup (as no post has been clicked), the map can't run, so the ternary operator has to check to see if clickedPost.all_awardings returns undefined before trying to map over it
   let awards = clickedPost.all_awardings ? clickedPost.all_awardings.map((award, i) => {
     if (award.icon_url) {
       return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
-    } else return <></>
+    } else return null;
   }) : "";
 
   const singlePostSetSubhome = () => {

@@ -1,5 +1,5 @@
-import React from 'react'
-import PostTitleFlair from '../homepage/PostTitleFlair'
+import React from 'react';
+import PostTitleFlair from '../homepage/PostTitleFlair';
 
 export default function SingleImagePost({ clickedPost }) {
   return (

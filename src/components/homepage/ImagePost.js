@@ -9,7 +9,7 @@ export default function ImagePost({ post, handlePostClick }) {
           {post.thumbnail_height &&
             <img
               className={post.thumbnail === "spoiler" ? "post-image spoiler" : "post-image"}
-              src={post.thumbnail !== "spoiler" ? post.url_overridden_by_dest : undefined }
+              src={post.thumbnail === "spoiler" ? null : post.url_overridden_by_dest }
               alt=""
             />
           }

@@ -15,8 +15,8 @@ export default function PostContainer({ posts, setSelectedSubreddit, search, set
         selectedTimeText={selectedTimeText}
         setSelectedTimeText={setSelectedTimeText}
       />
-      {posts.map(post => {
-        return post.data.whitelist_status !== "promo_adult_nsfw" &&
+      {posts.map(post => (
+        post.data.whitelist_status !== "promo_adult_nsfw" &&
           <Post
             key={post.data.id}
             post={post.data}
@@ -31,8 +31,7 @@ export default function PostContainer({ posts, setSelectedSubreddit, search, set
             setSortTop={setSortTop}
             setSelectedTimeText={setSelectedTimeText}
           />
-        }
-      )}
+      ))}
     </div>
   )
 }

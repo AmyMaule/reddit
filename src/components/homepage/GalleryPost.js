@@ -7,8 +7,9 @@ export default function GalleryPost({ post, handlePostClick }) {
   // The gallery from the API is stored as an object with random keys for each item, so Object.entries creates an array containing all the gallery items
   let galleryData = Object.entries(post.media_metadata);
 
-  // The gallery items aren't always valid, so .filter() returns the useable items, then .map() takes the last item in the p array (p.length-1) which is the highest quality image (p is an array of the same image of increasing quality), then removes the the &amp; encoding
+  // The gallery items aren't always valid, so .filter() returns the useable items
   const validGalleryData = galleryData.filter(item => item[1].status === "valid");
+  // the last item in the p array is the highest quality image
   const galleryImages = validGalleryData.map(item => item[1].p[item[1].p.length-1].u.replaceAll("&amp;", "&"));
 
   // To make sure the post renders at the correct height, scale it based on the largest height in the gallery
@@ -17,11 +18,11 @@ export default function GalleryPost({ post, handlePostClick }) {
     if (item[1].p[item[1].p.length-1].y > postHeight) {
       postHeight = item[1].p[item[1].p.length-1].y;
     }
-  })
+  });
 
   useEffect(() => {
     // rerender component when currentImage changes
-  }, [currentImage])
+  }, [currentImage]);
 
   return (
     <>
@@ -36,8 +37,11 @@ export default function GalleryPost({ post, handlePostClick }) {
             onClick={() => handlePostClick("post")}
             alt=""
           />
-        {currentImage !== galleryImages.length-1 && <button className="gallery-button gallery-button-right" onClick={() => setCurrentImage(prev => prev+1)}>
-          <span>&#x203A;</span></button>}
+        {currentImage !== galleryImages.length-1 && 
+          <button className="gallery-button gallery-button-right" onClick={() => setCurrentImage(prev => prev+1)}>
+            <span>&#x203A;</span>
+          </button>
+        }
       </div>
     </>
   )

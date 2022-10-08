@@ -13,10 +13,15 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
   const showAllAwards = useCallback(() => {
     const allAwards = all_awardings.map(award => {
       if (award.icon_url) {
-        return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
+        return (
+          <span key={award.id}>
+            <img key={award.id} src={award.icon_url} style={awardStyle} alt="" />
+            {award.count > 1 && award.count}
+          </span>
+        );
       }
     })
-    return allAwards
+    return allAwards;
   }, [all_awardings]);
 
   // Show awards - as default, only show first 4, then the rest as a "& __ more"
@@ -35,7 +40,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
 
   // if a user clicks on the awards, it should show all of them, not just the first 4
   useEffect(() => {
-    if (showAll) setAwards(showAllAwards)
+    if (showAll) setAwards(showAllAwards);
   }, [showAll, showAllAwards]);
 
   // setSubhome sets the current page to subhome and makes a new fetch request from app.js for the chosen subreddit homepage
@@ -61,7 +66,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
 
   return (
     <div className="post-top">
-    {/* many subreddits don't have icon links in the API even though they do have their own thumbnails, so they just get the default logo */}
+    {/* many subreddits don't have icon links in the API even though they do have their own thumbnails, so they get the default logo */}
       <span className="subreddit-thumbnail">
         <img src={thumbnail || "images/logo-small.png"} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} alt="" />
       </span>
@@ -73,6 +78,6 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
         <span className="plus">+</span>
         <span className="join">Join</span>
       </button>
-  </div>
+    </div>
   )
 }

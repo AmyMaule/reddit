@@ -2,13 +2,13 @@ import React from 'react';
 import { htmlDecode } from '../../utilities';
 
 const PostTitleFlair = ({ handlePostClick, post, isShortened, singlePost, isTopBar }) => {
-  let containerClass = singlePost 
+  const containerClass = singlePost 
     ? isShortened
       ? "singlepost-title singlepost-title-shortened"  
       : "singlepost-title"
     : isShortened
       ? "post-title post-title-shortened"
-      : "post-title"
+      : "post-title";
 
   const flairStyle = {
     backgroundColor: post.link_flair_background_color || "rgb(237, 239, 241)",
@@ -26,13 +26,17 @@ const PostTitleFlair = ({ handlePostClick, post, isShortened, singlePost, isTopB
 
   // the top bar is the black bar that runs at the top of the page for each SinglePost
   if (isTopBar) {
-    return <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : post.link_flair_text}</span>
+    return <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length ? flairDisplay : post.link_flair_text}</span>
   }
 
   return (
     <div className={containerClass} onClick={() => handlePostClick("post")}>
       <span>{post.title}</span>
-      {post.link_flair_text && <span className={singlePost ? "singlepost-flair" : "flair"} style={flairStyle}>{flairDisplay.length > 0 ? flairDisplay : htmlDecode(post.link_flair_text)}</span>}
+      {post.link_flair_text && 
+        <span className={singlePost ? "singlepost-flair" : "flair"} style={flairStyle}>
+          {flairDisplay.length ? flairDisplay : htmlDecode(post.link_flair_text)}
+        </span>
+      }
       {post.is_original_content && <span className="flair-oc">OC</span>}
     </div>
   )

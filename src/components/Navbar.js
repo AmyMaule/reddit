@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SearchIcon from "../images/search-icon.png";
-import UserIcon from "../images/user-2.png";
-import V from "../images/v.png";
 import AllSubs from "../allsubs.json";
 
 // TODO: add default trending subs to the search bar, which also show if you type characters that don't match any subreddits
@@ -205,7 +202,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
         <div className="logo"></div>
       </div>
       <form className="searchbar-container">
-        <img src={SearchIcon} className="search-icon" alt="search-icon" />
+        <img src="images/search-icon.png" className="search-icon" alt="search-icon" />
         <input className="searchbar-subreddits" placeholder="Search Reddit" onChange={handleSearchInput} onKeyDown={handleMouseAndKeySearch} style={{paddingLeft: currentSubredditWidth + 50 + "px"}} />
         {search.startsWith("r/") && !search.startsWith("r/popular")
           ? search.indexOf("/") !== search.lastIndexOf("/") && search.indexOf("/") !== -1
@@ -221,8 +218,8 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
         <button className="btn nav-btn btn-white btn-login">Log In</button>
         <button className="btn nav-btn btn-blue btn-signup">Sign Up</button>
         <div className="user-icons-container">
-          <img src={UserIcon} className="user-icon" alt="user-icon" />
-          <img src={V} className="v-icon" alt="" />
+          <img src="images/user-2.png" className="user-icon" alt="user-icon" />
+          <img src="images/v.png" className="v-icon" alt="" />
         </div>
       </div>
     </div>

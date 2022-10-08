@@ -1,10 +1,4 @@
 import React from 'react';
-import UpV from "../../images/up-v.png";
-import MadeMeSmile from "../../images/mademesmile.png";
-import RareInsults from "../../images/rareinsults.png";
-import CoolGuides from "../../images/coolguides.png";
-import LifeProTips from "../../images/lifeprotips.png";
-import AskMen from "../../images/askmen.png";
 
 export default function SideBar({ setCachedPostData, setSelectedSubreddit, setSearch, setSortTop, setSelectedTimeText, setScrollPosition, setPage }) {
   const setNewSub = (sub) => {
@@ -66,32 +60,32 @@ export default function SideBar({ setCachedPostData, setSelectedSubreddit, setSe
       <div className="community-container">
         <div className="community" onClick={() => setNewSub("r/mademesmile")}>
           <span>1</span>
-          <img src={UpV} className="up-v" alt="" />
-          <img src={MadeMeSmile} alt="" className="sidebar-subreddit-logo" />
+          <img src="images/up-v.png" className="up-v" alt="" />
+          <img src="images/mademesmile.png" alt="" className="sidebar-subreddit-logo" />
           <span className="sidebar-subreddit-name">r/MadeMeSmile</span>
         </div>
         <div className="community" onClick={() => setNewSub("r/rareinsults")}>
           <span>2</span>
-          <img src={UpV} className="up-v" alt="" />
-          <img src={RareInsults} alt="" className="sidebar-subreddit-logo" />
+          <img src="images/up-v.png" className="up-v" alt="" />
+          <img src="images/rareinsults.png" alt="" className="sidebar-subreddit-logo" />
           <span className="sidebar-subreddit-name">r/rareinsults</span>
         </div>
         <div className="community" onClick={() => setNewSub("r/coolguides")}>
           <span>3</span>
-          <img src={UpV} className="up-v" alt="" />
-          <img src={CoolGuides} alt="" className="sidebar-subreddit-logo" />
+          <img src="images/up-v.png" className="up-v" alt="" />
+          <img src="images/coolguides.png" alt="" className="sidebar-subreddit-logo" />
           <span className="sidebar-subreddit-name">r/coolguides</span>
         </div>
         <div className="community" onClick={() => setNewSub("r/lifeprotips")}>
           <span>4</span>
-          <img src={UpV} className="up-v" alt="" />
-          <img src={LifeProTips} alt="" className="sidebar-subreddit-logo" />
+          <img src="images/up-v.png" className="up-v" alt="" />
+          <img src="images/lifeprotips.png" alt="" className="sidebar-subreddit-logo" />
           <span className="sidebar-subreddit-name">r/LifeProTips</span>
         </div>
         <div className="community" onClick={() => setNewSub("r/askmen")}>
           <span>5</span>
-          <img src={UpV} className="up-v" alt="" />
-          <img src={AskMen} alt="" className="sidebar-subreddit-logo" />
+          <img src="images/up-v.png" className="up-v" alt="" />
+          <img src="images/askmen.png" alt="" className="sidebar-subreddit-logo" />
           <span className="sidebar-subreddit-name">r/AskMen</span>
         </div>
       </div>

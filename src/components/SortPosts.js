@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Rectangle from "../images/rectangle.png";
-import VBlue from "../images/v-blue.png";
-import blank from "../images/blank.png";
 import GeoFilter from "../geofilter.json";
 
 export default function SortPosts({ setSelectedSubreddit, search, setSearch, setSortTop, page, selectedTimeText, setSelectedTimeText }) {
@@ -113,28 +110,28 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
       <div className="popular-container">
         <div className="popular-btn popular-hot clicked" onClick={() => trimSearchQuery("r/popular/hot", "hot")}>
         {/* hot is blue by default, so needs the class hot-blue, but also needs the class hot-grey as the grey classes are never removed */}
-          <img src={blank} className="hot-icon hot-blue hot-grey" alt="" />
+          <img src="images/blank.png" className="hot-icon hot-blue hot-grey" alt="" />
           Hot
         </div>
         <div className={page === "home" ? "popular-location" : "hide"}>
           {selectedCountry}
-          <img src={VBlue} className="v-location" alt="" />
+          <img src="images/v-blue.png" className="v-location" alt="" />
           <div className="dropdown-location-container">
             {allCountries.map(country => <div className="dropdown-location" key={country} onClick={() => setSelectedCountry(country)}>{country}</div>)}
           </div>
         </div>
         {/* r/popular/new updates so quickly there will always be something different on refresh */}
         <div className="popular-btn popular-new" onClick={() => trimSearchQuery("r/popular/new", "new")}>
-          <img src={blank} className="new-icon new-grey" alt="" />
+          <img src="images/blank.png" className="new-icon new-grey" alt="" />
           New
         </div>
         <div className="popular-btn popular-top" onClick={() => trimSearchQuery("r/popular/top", "top")}>
-          <img src={blank} className="top-icon top-grey" alt="" />
+          <img src="images/blank.png" className="top-icon top-grey" alt="" />
           Top
         </div>
         <div className="popular-today hide">
           {selectedTimeText}
-          <img src={VBlue} className="v-location" alt="" />
+          <img src="images/v-blue.png" className="v-location" alt="" />
           <div className="dropdown-top-container">
             <div className="dropdown-top-hour dropdown-top" onClick={e => handleTimeSort(e)}>Now</div>
             <div className="dropdown-top-day dropdown-top clicked" onClick={e => handleTimeSort(e)}>Today</div>
@@ -147,7 +144,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
         {/* rising should actually appear as a button which when clicked does this: */}
         <div className="popular-more" onClick={() => handleSort("rising")}>...</div>
         <div className="popular-view">
-          <img src={Rectangle} className="rectangle-icon" alt="" />
+          <img src="images/rectangle.png" className="rectangle-icon" alt="" />
         </div>
       </div>
     </div>

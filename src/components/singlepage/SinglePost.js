@@ -1,12 +1,4 @@
 import React, { useEffect } from 'react';
-import UpArrow from "../../images/up-arrow.png";
-import DownArrow from "../../images/down-arrow.png";
-import SpeechBubble from "../../images/speech.png";
-import ShareArrow from "../../images/share-arrow.png";
-import SaveBanner from "../../images/save.png";
-import x from "../../images/x.png";
-import Hide from "../../images/hide.png";
-import Report from "../../images/report.png";
 import Comment from './Comment';
 import SingleGalleryPost from './SingleGalleryPost';
 import SingleImagePost from './SingleImagePost';
@@ -34,9 +26,9 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
     <div className="SinglePost-page">
       <div className="singlepost-close">
         <div className="top-bar-votes-container">
-          <img src={UpArrow} className="top-bar-up-arrow" alt="up-arrow" />
+          <img src="images/up-arrow.png" className="top-bar-up-arrow" alt="up-arrow" />
           <span className="top-bar-votes">{cachedPostData.votes}</span>
-          <img src={DownArrow} className="top-bar-down-arrow" alt="down-arrow" />
+          <img src="images/down-arrow.png" className="top-bar-down-arrow" alt="down-arrow" />
         </div>
         <div className="top-bar-title-container">
           <h3 className="top-bar-title">{cachedPostData.title}</h3>
@@ -46,7 +38,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
         </div>
         <div className="top-bar-btn-container">
           <div className="top-bar-btn-pointer">
-            <img src={x} className="btn-x" alt="x" />
+            <img src="images/x.png" className="btn-x" alt="" />
             <button className="top-bar-close">Close</button>
           </div>
         </div>
@@ -55,11 +47,11 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
           <div className="singlepost-post">
             <div className="singlepost-votes">
               <div>
-                <img className="singlepost-votes-up" src={UpArrow} alt="up-arrow" />
+                <img className="singlepost-votes-up" src="images/up-arrow.png" alt="up-arrow" />
               </div>
               <div className="singlepost-votes-count">{cachedPostData.votes}</div>
               <div>
-                <img className="singlepost-votes-down" src={DownArrow} alt="down-arrow" />
+                <img className="singlepost-votes-down" src="images/down-arrow.png" alt="down-arrow" />
               </div>
             </div>
             <div className="singlepost-right">
@@ -87,25 +79,25 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
 
               <div className="singlepost-bottom-bar">
                 <div className="singlepost-comments">
-                  <img src={SpeechBubble} className="singlepost-comments-speechbubble" alt="" />
+                  <img src="images/speech.png" className="singlepost-comments-speechbubble" alt="" />
                   <h4 className="singlepost-comments-text">
                     {cachedPostData.num_comments < 1000 ? cachedPostData.num_comments : (cachedPostData.num_comments/1000).toFixed(1) + "k"} comments
                   </h4>
                 </div>
                 <div className="singlepost-share-link">
-                  <img src={ShareArrow} className="singlepost-share-arrow" alt="" />
+                  <img src="images/share-arrow.png" className="singlepost-share-arrow" alt="" />
                   <h4 className="singlepost-share-text">Share</h4>
                 </div>
                 <div className="singlepost-save">
-                  <img src={SaveBanner} className="singlepost-save-banner" alt="" />
+                  <img src="images/save.png" className="singlepost-save-banner" alt="" />
                   <h4 className="singlepost-save-text">Save</h4>
                 </div>
                 <div className="singlepost-hide">
-                  <img src={Hide} className="singlepost-hide-banner" alt="" />
+                  <img src="images/hide.png" className="singlepost-hide-banner" alt="" />
                   <h4 className="singlepost-save-text">Hide</h4>
                 </div>
                 <div className="singlepost-report">
-                  <img src={Report} className="singlepost-report-banner" alt="" />
+                  <img src="images/report.png" className="singlepost-report-banner" alt="" />
                   <h4 className="singlepost-save-text">Report</h4>
                 </div>
               </div>

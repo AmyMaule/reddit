@@ -22,7 +22,7 @@
   position: relative;
   top: 7px;
   left: 20px;
-  background-image: url("../images/logo.png");
+  background-image: url("../assets/images/logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
@@ -187,7 +187,7 @@
   .logo {
     width: 33px;
     height: 33px;
-    background-image: url("../images/logo-small.png");
+    background-image: url("../assets/images/logo-small.png");
   }
 }
 

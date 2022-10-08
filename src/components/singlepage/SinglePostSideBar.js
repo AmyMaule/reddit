@@ -1,6 +1,4 @@
 import React from 'react';
-import DefaultThumbnail from "../../images/logo-small.png";
-import Cake from "../../images/cake.png";
 
 import { htmlDecodeWithReplace } from '../../utilities';
 
@@ -52,7 +50,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
       </div>
       <div className="singlepostsidebar-container">
         {page === "comment" && <img
-          src={cachedPostData.thumbnail ? cachedPostData.thumbnail : DefaultThumbnail}
+          src={cachedPostData.thumbnail || "images/logo-small.png"}
           alt=""
           className="singlepostsidebar-subreddit-thumbnail"
           onClick={() => setSelectedSubreddit(cachedPostData.display_name_prefixed)}
@@ -72,7 +70,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
       </div>
       <div className="singlepostsidebar-border"></div>
       <div className="singlepostsidebar-created-container">
-        <img src={Cake} className="singlepostsidebar-cake" alt="" />
+        <img src="images/cake.png" className="singlepostsidebar-cake" alt="" />
         <h6>Created {created.slice(3)}</h6>
       </div>
       <button className="btn singlepostsidebar-view-all-communities" style={btnStyle}>Join</button>

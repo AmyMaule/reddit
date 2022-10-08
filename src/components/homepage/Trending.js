@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function Trending({ page }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -95,7 +94,7 @@ export default function Trending({ page }) {
                 <div className="trending-block-dark">
                   <div className="trending-links-title">{link.title.slice(0, 50)}{link.title.length > 50 && "..."}</div>
                   <div className="trending-block-subreddit-container">
-                    <img src={link.iconImg || DefaultThumbnail} className="trending-block-subreddit-icon" alt="" />
+                    <img src={link.iconImg || "images/logo-small.png"} className="trending-block-subreddit-icon" alt="" />
                     <div className="trending-links-subreddit">r/{link.subreddit} {link.subreddit.length < 19 && "and more"}</div>
                   </div>
                 </div>

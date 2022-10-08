@@ -70,19 +70,15 @@ function App() {
         console.log("Error 66:", err);
       }
     })
-    return () => {
-      abortApp.abort();
-    }
+    return () => abortApp.abort();
   }, [search, sortTop]);
   // selectedSubreddit no longer a dependency due to search bar problems
 
   // this hides the main scrollbar when the comment page is shown
   useEffect(() => {
-    if (page === "comment") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = page === "comment" 
+      ? "hidden" 
+      : "auto";
   }, [page]);
 
   // this fetches the data for the post itself including comments
@@ -119,10 +115,8 @@ function App() {
       }, 2200);
       return () => clearTimeout(wait2200);
     }
-    return () => {
-      abortClickedPostApp.abort();
-    }
-  }, [clickedPostId])
+    return () => abortClickedPostApp.abort();
+  }, [clickedPostId]);
 
   return (
     <div className="App">
@@ -158,25 +152,33 @@ function App() {
           setSelectedTimeText={setSelectedTimeText}
         />
         <div className="sidebar-container">
-          {page === "home" && <SideBar
-                                subredditInfo={subredditInfo}
-                                setSubredditInfo={setSubredditInfo}
-                                setCachedPostData={setCachedPostData}
-                                setSelectedSubreddit={setSelectedSubreddit}
-                                setSearch={setSearch}
-                                setSortTop={setSortTop}
-                                setSelectedTimeText={setSelectedTimeText}
-                                setScrollPosition={setScrollPosition}
-                                setPage={setPage}
-                              />}
-          {page === "home" && <SideBarPremium />}
-          {page === "subhome" && <SinglePostSideBar
-                                    cachedPostData={cachedPostData}
-                                    clickedPost={clickedPost}
-                                    setSelectedSubreddit={setSelectedSubreddit}
-                                    setScrollPosition={setScrollPosition}
-                                  />}
-          {page === "subhome" && <SubhomeRules cachedPostData={cachedPostData} />}
+          {page === "home" && 
+            <>
+              <SideBar
+                subredditInfo={subredditInfo}
+                setSubredditInfo={setSubredditInfo}
+                setCachedPostData={setCachedPostData}
+                setSelectedSubreddit={setSelectedSubreddit}
+                setSearch={setSearch}
+                setSortTop={setSortTop}
+                setSelectedTimeText={setSelectedTimeText}
+                setScrollPosition={setScrollPosition}
+                setPage={setPage}
+              />
+              <SideBarPremium />
+            </>
+          }
+          {page === "subhome" && 
+            <>
+              <SinglePostSideBar
+                cachedPostData={cachedPostData}
+                clickedPost={clickedPost}
+                setSelectedSubreddit={setSelectedSubreddit}
+                setScrollPosition={setScrollPosition}
+              />
+              <SubhomeRules cachedPostData={cachedPostData} />
+            </>
+          }
           <SideBarLinks page={page} />
         </div>
       </div>

@@ -15,7 +15,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
   const allSubreddits = Object.keys(sortedSubs).map(sub => sub.toLowerCase());
 
   const handleSearchInput = e => {
-    // must keep in this style change as otherwise in various circumstances (including once a search has been performed), the dropdown subreddits box doesn't reappear
+    // must keep this style change to ensure the dropdown subreddits box is visible when necessary
     document.querySelector(".dropdown-subreddits").style.display = "block";
     // searchHistory is emptied at the beginning of each function call to remove previous values that may no longer be correct
     const searchHistory = [];
@@ -23,7 +23,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     setSelectedSubreddit(e.target.value);
     const query = e.target.value;
     allSubreddits.forEach(sub => {
-      // for testing, it's easier to make sure query isn't an empty string, but take this out later to add default values
+      // when default values are added later, query will no longer need to have a value
       if (query && sub.startsWith("r/" + query) && !searchHistory.includes(sub)) {
           searchHistory.push(sub);
       }
@@ -71,53 +71,48 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     .then(data => {
       if (data) {
         setCachedPostData({
-            subreddit_title: data.data.title,
-            thumbnail: data.data.icon_img,
-            subscribers: data.data.subscribers,
-            active_user_count: data.data.active_user_count,
-            primary_color: data.data.primary_color,
-            banner_background_color: data.data.banner_background_color,
-            key_color: data.data.key_color,
-            public_description_html: data.data.public_description_html,
-            created_utc: data.data.created_utc,
-            header_img: data.data.header_img,
-            icon_img: data.data.icon_img,
-            display_name_prefixed: data.data.display_name_prefixed,
-            community_icon: data.data.community_icon,
-            banner_background_image: data.data.banner_background_image,
-            banner_size: data.data.banner_size,
-            banner_img: data.data.banner_img
-          });
-        }
-      })
-      .catch(err => {
-        if (err.name !== "AbortError") {
-          console.log(err);
-        }
-      })
-    return () => {
-      abortSearch.abort();
-    }
-  }, [search])
+          subreddit_title: data.data.title,
+          thumbnail: data.data.icon_img,
+          subscribers: data.data.subscribers,
+          active_user_count: data.data.active_user_count,
+          primary_color: data.data.primary_color,
+          banner_background_color: data.data.banner_background_color,
+          key_color: data.data.key_color,
+          public_description_html: data.data.public_description_html,
+          created_utc: data.data.created_utc,
+          header_img: data.data.header_img,
+          icon_img: data.data.icon_img,
+          display_name_prefixed: data.data.display_name_prefixed,
+          community_icon: data.data.community_icon,
+          banner_background_image: data.data.banner_background_image,
+          banner_size: data.data.banner_size,
+          banner_img: data.data.banner_img
+        });
+      }
+    })
+    .catch(err => {
+      if (err.name !== "AbortError") {
+        console.log(err);
+      }
+    })
+    return () => abortSearch.abort();
+  }, [search]);
 
   const toggleSearchDropdown = e => {
-    if (!e.target.classList.contains("searchbar-subreddits")) {
-      document.querySelector(".dropdown-subreddits").style.display = "none";
-    } else {
-      document.querySelector(".dropdown-subreddits").style.display = "block";
-    }
+    document.querySelector(".dropdown-subreddits").style.display = e.target.classList.contains("searchbar-subreddits")
+      ? "block"
+      : "none";
   };
 
   // handleMouseAndKeySearch allows subreddits to be selected and hovered while the dropdown subreddits bar is open
   const handleMouseAndKeySearch = e => {
     let selectableSubs = Array.from(document.querySelectorAll(".dropdown-div"));
-    // hovered is used to keep track of whether or not any items have the hover class - if an item is found that is being hovered over, hovered becomes true
     let hovered = false;
     // 40 is the down arrow, 38 is the up arrow
     if (e.keyCode === 40 || e.keyCode === 38) {
       for (let i = 0; i < selectableSubs.length; i++) {
         if (hovered) break;
-        // if it gets to the end of the loop and no item was hovered on, hover over the first item for a down arrow press or last item for an up arrow press
+        // if at the end of the loop, no item was hovered, hover the first item for a down arrow press or last item for an up arrow press
         if (i === selectableSubs.length-1 && !selectableSubs[i].classList.contains("dropdown-div-hover")) {
           hovered = true;
           if (e.keyCode === 40) selectableSubs[0].classList.add("dropdown-div-hover");
@@ -128,7 +123,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
         if (e.keyCode === 38 && i === 0 && selectableSubs[i].classList.contains("dropdown-div-hover")) {
           hovered = true;
           selectableSubs[i].classList.remove("dropdown-div-hover");
-          // if it gets to the end of the loop and the last item is hovered on, remove the hover
+          // if at the end of the loop, the last item is hovered on, remove the hover
         } else if (e.keyCode === 40 && i === selectableSubs.length-1 && selectableSubs[i].classList.contains("dropdown-div-hover")) {
           hovered = true;
           selectableSubs[i].classList.remove("dropdown-div-hover");
@@ -160,6 +155,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
     selectableSubContainer.addEventListener("mouseleave", handleMouseAndKeySearch);
     let selectableSubs = Array.from(document.querySelectorAll(".dropdown-div"));
     selectableSubs.map(sub => sub.addEventListener("mouseover", handleMouseAndKeySearch));
+    
     return () => {
       window.removeEventListener("onKeyDown", handleMouseAndKeySearch);
       selectableSubContainer.removeEventListener("mouseleave", handleMouseAndKeySearch);
@@ -169,9 +165,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   useEffect(() => {
     window.addEventListener("click", toggleSearchDropdown);
-    return () => {
-      window.removeEventListener("click", toggleSearchDropdown);
-    }
+    return () => window.removeEventListener("click", toggleSearchDropdown);
   });
 
   const handleReturnToHome = () => {
@@ -199,18 +193,26 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
   return (
     <div className="Navbar">
       <div className="logo-container" onClick={handleReturnToHome}>
-        <div className="logo"></div>
+        <div className="logo" />
       </div>
       <form className="searchbar-container">
         <img src="images/search-icon.png" className="search-icon" alt="search-icon" />
-        <input className="searchbar-subreddits" placeholder="Search Reddit" onChange={handleSearchInput} onKeyDown={handleMouseAndKeySearch} style={{paddingLeft: currentSubredditWidth + 50 + "px"}} />
+        <input 
+          className="searchbar-subreddits"
+          placeholder="Search Reddit"
+          onChange={handleSearchInput}
+          onKeyDown={handleMouseAndKeySearch}
+          style={{paddingLeft: currentSubredditWidth + 50 + "px"}}
+        />
         {search.startsWith("r/") && !search.startsWith("r/popular")
           ? search.indexOf("/") !== search.lastIndexOf("/") && search.indexOf("/") !== -1
             ? <div className="current-subreddit">{search.slice(0, search.lastIndexOf("/"))}</div>
             : <div className="current-subreddit">{search}</div>
           : <></>}
         <div className="dropdown-subreddits" style={document.querySelector(".current-subreddit") && {bottom: "25px"}}>
-          {searchResults.slice(0, 5).map(sub => <div className="dropdown-div" onClick={() => handleSearch(sub)} key={sub}>{sub}</div>)}
+          {searchResults.slice(0, 5).map(sub => 
+            <div className="dropdown-div" onClick={() => handleSearch(sub)} key={sub}>{sub}</div>
+          )}
         </div>
         <button type="submit" onClick={determineChosenSubreddit} style={{display:"none"}}></button>
       </form>

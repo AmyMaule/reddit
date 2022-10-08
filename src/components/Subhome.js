@@ -1,6 +1,15 @@
 import React from 'react';
 
 export default function Subhome({ cachedPostData }) {
+  const subhomeIcon = 
+    cachedPostData.thumbnail || 
+    cachedPostData.header_img || 
+    cachedPostData.icon_img || 
+    cachedPostData.community_icon || 
+    "images/logo-small.png";
+
+  const subhomeJoin = cachedPostData.key_color || cachedPostData.primary_color || "#444e59";
+  
   // If a banner image is given in the API, it is encoded so the amp; must be removed before it can be used
   const getBannerImg = () => {
     if (cachedPostData.banner_background_image) {
@@ -18,10 +27,9 @@ export default function Subhome({ cachedPostData }) {
     if (cachedPostData.banner_size && cachedPostData.banner_size < 200) return cachedPostData.banner_size[1];
     return "180px";
   }
-  const bannerHeight = getBannerHeight();
 
   // If the title of the subreddit is greater than 30 characters, the join button needs to shrink to accommodate it all on one line
-  const btnWidth = (cachedPostData?.subreddit_title?.length > 30) ? 58 : 96;
+  const btnWidth = cachedPostData?.subreddit_title?.length > 30 ? 58 : 96;
 
   // getWidths sets the style properties of the widths object above based on how long the subreddit title is
   const getWidths = () => {
@@ -49,16 +57,32 @@ export default function Subhome({ cachedPostData }) {
   return (
     <div className="Subhome">
       <div className="subhome-header">
-        <div className="subhome-banner" style={{height: bannerHeight, backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59", backgroundImage: `url(${getBannerImg()})` }}></div>
+        <div
+          className="subhome-banner"
+          style={{
+            height: getBannerHeight(), 
+            backgroundColor: cachedPostData.banner_background_color || cachedPostData.key_color || "#444e59", 
+            backgroundImage: `url(${getBannerImg()})`
+          }}
+        />
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content" style={{width: widths.titleWidth}}>
             <div className="subhome-r-bar-top">
-              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon || "images/logo-small.png"} alt="" />
+              <img 
+                className="subhome-icon"
+                src={subhomeIcon}
+                alt=""
+              />
               <div className="subhome-title-container">
                 <div className="subhome-title">{cachedPostData.subreddit_title}</div>
                 <div className="subhome-title-small">{cachedPostData.display_name_prefixed}</div>
               </div>
-              <button className="btn btn-sub-join" style={{color: "white", backgroundColor: cachedPostData.key_color || cachedPostData.primary_color ||  "#444e59", width: btnWidth + "px"}}>Join</button>
+              <button
+                className="btn btn-sub-join"
+                style={{color: "white", backgroundColor: subhomeJoin, width: btnWidth + "px"}}
+              >
+                Join
+              </button>
             </div>
             <div className="subhome-r-bar-bottom">
               <div className="r-bar-link">Posts</div>

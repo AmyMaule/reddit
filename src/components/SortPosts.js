@@ -35,7 +35,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
       document.querySelector(".popular-today").classList.remove("hide");
     } else document.querySelector(".popular-today").classList.add("hide");
 
-    // call handleSort to trigger the fetch request to update the state to reflect the changes made here and in trimSearchQuery
+    // handleSort triggers the fetch request to update the state to reflect the changes made here and in trimSearchQuery
     handleSort(sub);
   }
 
@@ -69,7 +69,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
   const toggleSortMenu = e => {
     const dropdownTop = document.querySelector(".dropdown-top-container");
     if (e.target.classList.contains("popular-today")) {
-      dropdownTop.classList.contains("hide") ? dropdownTop.classList.remove("hide") : dropdownTop.classList.add("hide");
+      dropdownTop.classList.toggle("hide");
     } else {
       dropdownTop.classList.add("hide");
     }
@@ -98,57 +98,56 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
 
   useEffect(() => {
     window.addEventListener("click", handleToggles);
-    return () => {
-      window.removeEventListener("click", handleToggles);
-    }
+    return () => window.removeEventListener("click", handleToggles);
   });
 
   return (
     <>
-    {page === "home" && <h2 className="popular-title">Popular posts</h2>}
-    <div className="SortPosts" style={page === "home" ? {marginTop: "10px"} : {marginTop: "20px"}}>
-      <div className="popular-container">
-        <div className="popular-btn popular-hot clicked" onClick={() => trimSearchQuery("r/popular/hot", "hot")}>
-        {/* hot is blue by default, so needs the class hot-blue, but also needs the class hot-grey as the grey classes are never removed */}
-          <img src="images/blank.png" className="hot-icon hot-blue hot-grey" alt="" />
-          Hot
-        </div>
-        <div className={page === "home" ? "popular-location" : "hide"}>
-          {selectedCountry}
-          <img src="images/v-blue.png" className="v-location" alt="" />
-          <div className="dropdown-location-container">
-            {allCountries.map(country => <div className="dropdown-location" key={country} onClick={() => setSelectedCountry(country)}>{country}</div>)}
+      {page === "home" && <h2 className="popular-title">Popular posts</h2>}
+      <div className="SortPosts" style={page === "home" ? {marginTop: "10px"} : {marginTop: "20px"}}>
+        <div className="popular-container">
+          <div className="popular-btn popular-hot clicked" onClick={() => trimSearchQuery("r/popular/hot", "hot")}>
+          {/* hot is blue by default, so needs the class hot-blue, but also needs the class hot-grey as the grey classes are never removed */}
+            <img src="images/blank.png" className="hot-icon hot-blue hot-grey" alt="" />
+            Hot
           </div>
-        </div>
-        {/* r/popular/new updates so quickly there will always be something different on refresh */}
-        <div className="popular-btn popular-new" onClick={() => trimSearchQuery("r/popular/new", "new")}>
-          <img src="images/blank.png" className="new-icon new-grey" alt="" />
-          New
-        </div>
-        <div className="popular-btn popular-top" onClick={() => trimSearchQuery("r/popular/top", "top")}>
-          <img src="images/blank.png" className="top-icon top-grey" alt="" />
-          Top
-        </div>
-        <div className="popular-today hide">
-          {selectedTimeText}
-          <img src="images/v-blue.png" className="v-location" alt="" />
-          <div className="dropdown-top-container">
-            <div className="dropdown-top-hour dropdown-top" onClick={e => handleTimeSort(e)}>Now</div>
-            <div className="dropdown-top-day dropdown-top clicked" onClick={e => handleTimeSort(e)}>Today</div>
-            <div className="dropdown-top-week dropdown-top" onClick={e => handleTimeSort(e)}>This Week</div>
-            <div className="dropdown-top-month dropdown-top" onClick={e => handleTimeSort(e)}>This Month</div>
-            <div className="dropdown-top-year dropdown-top" onClick={e => handleTimeSort(e)}>This Year</div>
-            <div className="dropdown-top-all dropdown-top" onClick={e => handleTimeSort(e)}>All Time</div>
+          <div className={page === "home" ? "popular-location" : "hide"}>
+            {selectedCountry}
+            <img src="images/v-blue.png" className="v-location" alt="" />
+            <div className="dropdown-location-container">
+              {allCountries.map(country => (
+                <div className="dropdown-location" key={country} onClick={() => setSelectedCountry(country)}>{country}</div>
+              ))}
+            </div>
           </div>
-        </div>
-        {/* rising should actually appear as a button which when clicked does this: */}
-        <div className="popular-more" onClick={() => handleSort("rising")}>...</div>
-        <div className="popular-view">
-          <img src="images/rectangle.png" className="rectangle-icon" alt="" />
+          {/* r/popular/new updates so quickly there will always be something different on refresh */}
+          <div className="popular-btn popular-new" onClick={() => trimSearchQuery("r/popular/new", "new")}>
+            <img src="images/blank.png" className="new-icon new-grey" alt="" />
+            New
+          </div>
+          <div className="popular-btn popular-top" onClick={() => trimSearchQuery("r/popular/top", "top")}>
+            <img src="images/blank.png" className="top-icon top-grey" alt="" />
+            Top
+          </div>
+          <div className="popular-today hide">
+            {selectedTimeText}
+            <img src="images/v-blue.png" className="v-location" alt="" />
+            <div className="dropdown-top-container">
+              <div className="dropdown-top-hour dropdown-top" onClick={handleTimeSort}>Now</div>
+              <div className="dropdown-top-day dropdown-top clicked" onClick={handleTimeSort}>Today</div>
+              <div className="dropdown-top-week dropdown-top" onClick={handleTimeSort}>This Week</div>
+              <div className="dropdown-top-month dropdown-top" onClick={handleTimeSort}>This Month</div>
+              <div className="dropdown-top-year dropdown-top" onClick={handleTimeSort}>This Year</div>
+              <div className="dropdown-top-all dropdown-top" onClick={handleTimeSort}>All Time</div>
+            </div>
+          </div>
+          {/* rising should actually appear as a button which when clicked does this: */}
+          <div className="popular-more" onClick={() => handleSort("rising")}>...</div>
+          <div className="popular-view">
+            <img src="images/rectangle.png" className="rectangle-icon" alt="" />
+          </div>
         </div>
       </div>
-    </div>
-
     </>
   )
 }

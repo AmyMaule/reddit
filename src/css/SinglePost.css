@@ -517,10 +517,11 @@
   margin-top: 50px;
   width: calc(100% + 40px);
   margin-left: -40px;
+  padding: 0 0 32px 0;
 }
 
 .after-comment-box {
-  height: 200px;
+  height: 32px;
   width: calc(100% + 40px);
   margin-left: -40px;
   background-color: rgb(238, 238, 238);

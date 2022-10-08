@@ -1,11 +1,11 @@
 import React from 'react';
 
 export default function SideBarLinks({ page }) {
-  const SideBarLinksMarginLeft = {
+  const sideBarLinksStyle = {
     marginLeft: page === "home" || page === "subhome" ? "25px" : "12px"
   }
   return (
-    <div className="SideBarLinks" style={SideBarLinksMarginLeft}>
+    <div className="SideBarLinks" style={sideBarLinksStyle}>
       <div className="sidebar-links-container">
         <div className="sidebar-links-left">
           <a href="https://www.reddithelp.com/hc/en-us" target="blank">Help</a>

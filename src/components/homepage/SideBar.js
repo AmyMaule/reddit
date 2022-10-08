@@ -4,10 +4,10 @@ export default function SideBar({ setCachedPostData, setSelectedSubreddit, setSe
   const setNewSub = (sub) => {
     // fetches the subreddit data and adds appropriate data to cachedPostData
     fetch(`https://www.reddit.com/${sub}/about/.json`)
-    .then(res => res.json())
-    .then(data => {
-      if (data) {
-        setCachedPostData({
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          setCachedPostData({
             subreddit_title: data.data.title,
             thumbnail: data.data.icon_img,
             subscribers: data.data.subscribers,
@@ -26,14 +26,14 @@ export default function SideBar({ setCachedPostData, setSelectedSubreddit, setSe
             banner_img: data.data.banner_img
           });
         } else {
-          console.log("something went wrong fetching from /about/.json");
-          return;
+            console.log("something went wrong fetching from /about/.json");
+            return;
         }
       })
       .catch(err => {
         console.log(err);
-      }
-    )
+      })
+      
     // set the selectedSubreddit and search to the clicked subreddit, triggering a fetch request for that subreddit's posts from App.js
     setSelectedSubreddit(sub);
     setSearch(sub);

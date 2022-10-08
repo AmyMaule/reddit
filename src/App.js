@@ -47,16 +47,15 @@ function App() {
       setClickedPostId("");
     }
   }
-
+  
+  //rerender to correct scroll position on page change
   useEffect(() => {
-    //rerender to correct scroll position on page change
     if (page !== "comment") window.scrollTo(0, scrollPosition);
   }, [page]);
 
   // this fetches the posts for the homepage or subreddit home page
   useEffect(() => {
     const abortApp = new AbortController();
-    // console.log(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=20${sortTop}`);
     fetch(`https://www.reddit.com/${selectedSubreddit ? selectedSubreddit : "r/popular"}/.json?limit=50${sortTop}`, { signal: abortApp.signal })
     .then(res => {
       if (res.status === 200) {
@@ -64,9 +63,7 @@ function App() {
       } else console.log("Status error");
     })
     .then(data => {
-      if (data) {
-        setPosts(data.data.children);
-      }
+      if (data) setPosts(data.data.children);
     })
     .catch(err => {
       if (err.name !== "AbortError") {

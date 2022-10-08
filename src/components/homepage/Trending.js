@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 export default function Trending({ page }) {
   const [isLoading, setIsLoading] = useState(true);
-  // trendingLinks stores the top trending link posts to use in the Trending component
   const [trendingLinks, setTrendingLinks] = useState([]);
-  // numLinks is the number of trending links that will be displayed - 4 by default, unless the screen is too small, then 3 will be displayed
+  // numLinks is the number of trending links that will be displayed - 4 by default on larger screens
   const [numLinks, setNumLinks] = useState(4);
 
   // These subs contain popular non-news link posts - these should not be in the trending blocks
@@ -12,7 +11,6 @@ export default function Trending({ page }) {
 
   useEffect(() => {
     const abortTrending = new AbortController();
-    // reddit has recently updated the algorithm that chooses which trending posts to display, so t=day currently gives the most accurate links
     fetch("https://www.reddit.com/r/popular/top/.json?t=day&limit=100", { signal: abortTrending.signal })
     .then(res => {
       if (res.status === 200) {
@@ -22,9 +20,8 @@ export default function Trending({ page }) {
     .then(data => {
       if (data) {
         data.data.children.forEach(post => {
-          // If the post hint is "link" and the notTrendingSubs array doesn't contain the current subreddit
           // TODO: add extra error check to make sure the same link isn't already in trendingLinks from another subreddit
-          // TODO: add extra error check to make sure there are 4 links that qualify, if not, either fetch posts from news subreddit directly or trigger second fetch request for /popular/top/.json?t=hour
+          // TODO: add extra error check to make sure there are 4 links that qualify, if not, either fetch posts from news subreddit directly or trigger  second fetch request for /popular/top/.json?t=hour
           if (trendingLinks.length < 5 && post.data.post_hint === "link" && notTrendingSubs.indexOf(post.data.subreddit) === -1) {
             setTrendingLinks(prevLinks => {
               if (!prevLinks) return post.data;
@@ -36,13 +33,12 @@ export default function Trending({ page }) {
       }
     })
     .catch(err => {
-      if (err.name !== "AbortError" && err.name !== "TypeError")
+      if (err.name !== "AbortError") {
         console.log("Trending error:", err);
+      }
     });
 
-    return () => {
-      abortTrending.abort();
-    };
+    return () => abortTrending.abort();
   }, [isLoading, notTrendingSubs, trendingLinks]);
 
   // In order for the trending blocks to load the data, isLoading sets to false once trendingLinks has enough data to render
@@ -50,19 +46,17 @@ export default function Trending({ page }) {
     if (trendingLinks.length > 3) {
       trendingLinks.forEach((link, i) => {
         fetch(`https://www.reddit.com/r/${link.subreddit}/about/.json`)
-        .then(res => res.json())
-        .then(data => {
-          trendingLinks[i].iconImg = data.data.icon_img;
-        })
-        .catch(err => console.log(err));
+          .then(res => res.json())
+          .then(data => trendingLinks[i].iconImg = data.data.icon_img)
+          .catch(err => console.log(err));
         setIsLoading(false);
-        // the image from the API is encoded using &amp; so needs to be removed in order to display
+        // remove encoding from the image from the API
         link.img = link.preview.images[0].source.url.replace("&amp;", "&");
       });
     }
   }, [trendingLinks]);
 
-  // This useEffect checks the window's innerWidth property, and returns 4 if the innerWidth is at least 1010px, or 3 if it is below 1010px, which will display 4 or 3 trending links
+  // determine how many links to show
   useEffect(() => {
     function handleResize() {
       setNumLinks(() => {
@@ -78,30 +72,29 @@ export default function Trending({ page }) {
   }, []);
 
   return (
-    // Trending needs to hide when SinglePost is shown but not demount - otherwise it re-renders from scratch which causes lag and doesn't save the page scroll position
+    // Trending hides when SinglePost is shown but does not demount to reduce lag and save the scroll position
     <div className={page === "home" ? "Trending" : "Trending hide"}>
       <h2 className="trending-title">Trending today</h2>
         <div className="trending-blocks">
         {isLoading
-        ? <>
-            <div className="trending-block-img"></div>
-          </>
-        : <>
-            {trendingLinks.slice(0, numLinks).map(link => {
-              return (
-              <a href={link.url_overridden_by_dest} target="_blank" rel="noreferrer" className="trending-link" key={link.url_overridden_by_dest}>
-                <img className="trending-block-img" src={link.img} alt="" />
-                <div className="trending-block-dark">
-                  <div className="trending-links-title">{link.title.slice(0, 50)}{link.title.length > 50 && "..."}</div>
-                  <div className="trending-block-subreddit-container">
-                    <img src={link.iconImg || "images/logo-small.png"} className="trending-block-subreddit-icon" alt="" />
-                    <div className="trending-links-subreddit">r/{link.subreddit} {link.subreddit.length < 19 && "and more"}</div>
+          ? <div className="trending-block-img"></div>
+          : <>
+              {trendingLinks.slice(0, numLinks).map((link, i) => {
+                const URL = link.url_overridden_by_dest;
+                return (
+                <a href={URL} target="_blank" rel="noreferrer" className="trending-link" key={i + URL}>
+                  <img className="trending-block-img" src={link.img} alt="" />
+                  <div className="trending-block-dark">
+                    <div className="trending-links-title">{link.title.slice(0, 50)}{link.title.length > 50 && "..."}</div>
+                    <div className="trending-block-subreddit-container">
+                      <img src={link.iconImg || "images/logo-small.png"} className="trending-block-subreddit-icon" alt="" />
+                      <div className="trending-links-subreddit">r/{link.subreddit} {link.subreddit.length < 19 && "and more"}</div>
+                    </div>
                   </div>
-                </div>
-              </a>)
-            })}
-          </>
-      }
+                </a>)
+              })}
+            </>
+        }
       </div>
     </div>
   )

@@ -11,18 +11,14 @@ import SideBarLinks from '../SideBarLinks';
 import PostTitleFlair from '../homepage/PostTitleFlair';
 
 export default function SinglePost({ clickedPost, cachedPostData, page, setPage, setSelectedSubreddit, comments, onClose, setSearch, setSelectedTimeText, setSortTop, setScrollPosition }) {
-
   useEffect(() => {
     window.addEventListener("click", onClose);
-    return () => {
-      window.removeEventListener("click", onClose);
-    }
+    return () => window.removeEventListener("click", onClose);
   });
 
-  if (page === "home") {
-    return <></>
-  } else return (
-    <>
+  if (page === "home") return null;
+
+  return (
     <div className="SinglePost-page">
       <div className="singlepost-close">
         <div className="top-bar-votes-container">
@@ -101,7 +97,6 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
                   <h4 className="singlepost-save-text">Report</h4>
                 </div>
               </div>
-
               <div className="signup-bar">
                   <span className="signup-text">Log in or sign up to leave a comment</span>
                   <span>
@@ -109,15 +104,10 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
                     <button className="btn btn-blue post-btn-signup">Sign Up</button>
                   </span>
               </div>
-
               <div className="singlepost-comment-container">
-                {comments && comments.map(comment => {
-                  return <Comment comment={comment.data} key={comment.data.name} />
-                })}
+                {comments && comments.map(comment => <Comment comment={comment.data} key={comment.data.name} />)}
               </div>
-
               <div className="after-comment-box"></div>
-
             </div>
           </div>
           <div className="sidebar-container">
@@ -136,6 +126,5 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
           </div>
       </div>
     </div>
-    </>
   )
 }

@@ -63,8 +63,12 @@
 }
 
 .subreddit-thumbnail {
-  top: 4px;
   position: relative;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 5px;
+  top: 5px;
 }
 
 .post-subreddit {
@@ -127,11 +131,18 @@
   padding-left: 5px;
   color: #7c7c7c;
   cursor: pointer;
-  /* position: relative; */
   display: inline-flex;
   flex-wrap: wrap;
   margin-right: 80px;
-  /* max-width: 50px; */
+}
+
+.post-award {
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+  vertical-align: middle;
+  padding-right: 3px;
+  padding-left: 3px;
 }
 
 .post-title {
@@ -162,6 +173,12 @@
   white-space: nowrap;
   line-height: 16px;
   width: fit-content;
+}
+
+.flair-image {
+  height: 16px;
+  width: 16px;
+  vertical-align: bottom;
 }
 
 .flair-oc {

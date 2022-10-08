@@ -271,19 +271,18 @@
   position: relative;
 }
 
-.singlepost-link-image-container {
-  margin-left: auto;
-  min-width: 150px;
-  margin-top: 5px;
-  margin-right: 10px;
+.singlepost-content-container {
+  display: flex;
 }
 
 .singlepost-link-image {
-  width: 144px;
-  height: 100px;
+  width: 140px;
+  min-width: 140px;
+  height: 110px;
   border-radius: 4px;
   border: 1px solid rgb(0, 121, 211);
   cursor: pointer;
+  margin: 5px 10px auto 10px;
 }
 
 .singlepost-video-background {

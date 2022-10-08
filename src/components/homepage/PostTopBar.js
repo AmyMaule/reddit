@@ -1,21 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick, setSelectedTimeText, setSortTop, setScrollPosition }) {
-  const awardStyle = {
-    height: "16px",
-    width: "16px",
-    lineHeight: "16px",
-    verticalAlign: "middle",
-    paddingRight: "3px",
-    paddingLeft: "3px"
-  }
-
   const showAllAwards = useCallback(() => {
     const allAwards = all_awardings.map(award => {
       if (award.icon_url) {
         return (
           <span key={award.id}>
-            <img key={award.id} src={award.icon_url} style={awardStyle} alt="" />
+            <img key={award.id} src={award.icon_url} className="post-award" alt="" />
             {award.count > 1 && award.count}
           </span>
         );
@@ -24,14 +15,20 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     return allAwards;
   }, [all_awardings]);
 
-  // Show awards - as default, only show first 4, then the rest as a "& __ more"
+  // As default, only show first 4 awards, then the rest as a "& __ more"
   let remainingAwards = 0;
   let initialAwards = all_awardings.map((award, i) => {
     if (award.icon_url && i < 4) {
-      return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
+      return (
+      <span key={award.id}><img key={award.id} src={award.icon_url} className="post-award" alt="" />
+        {award.count > 1 && award.count}
+      </span>
+      );
     }
     if (i >= 4) remainingAwards += award.count;
-    if (i === all_awardings.length - 1 && all_awardings.length > 4) return <span key={award.id}> & {remainingAwards} more</span>
+    if (i === all_awardings.length - 1 && all_awardings.length > 4) {
+      return <span key={award.id}> & {remainingAwards} more</span>
+    }
     return null;
   });
 
@@ -67,9 +64,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
   return (
     <div className="post-top">
     {/* many subreddits don't have icon links in the API even though they do have their own thumbnails, so they get the default logo */}
-      <span className="subreddit-thumbnail">
-        <img src={thumbnail || "images/logo-small.png"} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} alt="" />
-      </span>
+      <img src={thumbnail || "images/logo-small.png"} className="subreddit-thumbnail" alt="" />
       <span className="post-subreddit" onClick={setSubhome}>r/{subreddit}</span>
       <span className="separator-dot">•</span>
       <span className="post-posted-by">Posted by u/{author} {posted} ago</span>

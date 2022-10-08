@@ -55,7 +55,7 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
   }
   const votes = determineNumVotes();
 
-  // this useEffect fetches the subreddit data for each post, in order to get the subreddit thumbnail that isn't in the inital post data - it also stores data for the singlepost sidebar
+  // fetch the subreddit data for each post in order to get the subreddit thumbnail - it also stores data for the singlepost sidebar
   useEffect(() => {
     const abortPost = new AbortController();
     fetch(`https://www.reddit.com/r/${post.subreddit}/about/.json`, { signal: abortPost.signal })
@@ -63,38 +63,36 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
     .then(data => {
       if (data) {
         setSubredditInfo({
-            subreddit_title: data.data.title,
-            thumbnail: data.data.icon_img,
-            subscribers: data.data.subscribers,
-            active_user_count: data.data.active_user_count,
-            primary_color: data.data.primary_color, // color for banner
-            banner_background_color: data.data.banner_background_color, // color for top banner in actual subreddit
-            key_color: data.data.key_color, // color for join buttons, but not always correct
-            public_description_html: data.data.public_description_html,
-            created_utc: data.data.created_utc,
-            header_img: data.data.header_img,
-            icon_img: data.data.icon_img,
-            display_name_prefixed: data.data.display_name_prefixed,
-            community_icon: data.data.community_icon,
-            banner_background_image: data.data.banner_background_image,
-            banner_size: data.data.banner_size,
-            banner_img: data.data.banner_img
-          });
-          setIsLoaded(true);
-        } else {
-          console.log("something went wrong fetching the thumbnail from /about/.json");
-          return;
-        }
+          subreddit_title: data.data.title,
+          thumbnail: data.data.icon_img,
+          subscribers: data.data.subscribers,
+          active_user_count: data.data.active_user_count,
+          primary_color: data.data.primary_color, // color for banner
+          banner_background_color: data.data.banner_background_color, // color for top banner in actual subreddit
+          key_color: data.data.key_color, // color for join buttons, but not always correct
+          public_description_html: data.data.public_description_html,
+          created_utc: data.data.created_utc,
+          header_img: data.data.header_img,
+          icon_img: data.data.icon_img,
+          display_name_prefixed: data.data.display_name_prefixed,
+          community_icon: data.data.community_icon,
+          banner_background_image: data.data.banner_background_image,
+          banner_size: data.data.banner_size,
+          banner_img: data.data.banner_img
+        });
+        setIsLoaded(true);
+      } else {
+        console.log("Error fetching subreddit data");
+        return;
+      }
       })
       .catch(err => {
-        if (err.name !== "AbortError" && err.name !== "TypeError") {
+        if (err.name !== "AbortError") {
           console.log(err);
         }
-      })
-    return () => {
-      abortPost.abort();
-    }
-  }, [post.subreddit])
+      });
+    return () => abortPost.abort();
+  }, [post.subreddit]);
 
   const handlePostClick = postId => {
     // this sets the subreddit thumbnail and other data for the clicked post without having to do another fetch request
@@ -111,13 +109,15 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
   }
 
   return (
-    <div className={post.is_video
-      ? "Post video-post"
-      : post.post_hint === "image"
-        ? "Post image-post"
-        : post.post_hint === "link" || post.is_gallery
-          ? "Post link-post"
-          : "Post text-post"} id={post.id}
+    <div 
+      className={post.is_video
+        ? "Post video-post"
+        : post.post_hint === "image"
+          ? "Post image-post"
+          : post.post_hint === "link" || post.is_gallery
+            ? "Post link-post"
+            : "Post text-post"} 
+      id={post.id}
     >
       <div className="post-votes">
         <div>

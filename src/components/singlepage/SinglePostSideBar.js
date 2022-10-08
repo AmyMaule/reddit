@@ -4,6 +4,7 @@ import { htmlDecodeWithReplace } from '../../utilities';
 
 export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, setSearch, page, setPage, subreddit, setSelectedTimeText, setSortTop, setScrollPosition }) {
   const aboutCommunityHeight = page === "comment" ? "34px" : "44px";
+  const bannerBackgroundColor = cachedPostData.primary_color || cachedPostData.key_color || "#444e59";
 
   // If there are a million+ members, round to 1 decimal place and add "m" otherwise if there are 1000+, round to 1 decimal place and add "k"
   const totalMembers = cachedPostData.subscribers > 999999
@@ -46,7 +47,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
     <div className={page === "comment" ? "SinglePostSideBar sidebar-height" : "SinglePostSideBar subhome-sidebar-margin"}>
       <div 
         className="singlepostsidebar-banner"
-        style={{color: "white", backgroundColor: cachedPostData.primary_color || cachedPostData.key_color || "#444e59", height: aboutCommunityHeight}}
+        style={{color: "white", backgroundColor: bannerBackgroundColor, height: aboutCommunityHeight}}
       >
         {page !== "subhome" && <div className="about-community">About Community</div>}
       </div>

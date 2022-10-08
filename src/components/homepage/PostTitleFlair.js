@@ -19,7 +19,7 @@ const PostTitleFlair = ({ handlePostClick, post, isShortened, singlePost, isTopB
     ? post.link_flair_richtext?.map((part, i) => {
       // Some flair text is encoded (so & shows as &amp; for example) so each flair text is run through htmlDecode before displaying
       if (part.t) return <span key={i+part.a || i+part.t}>{htmlDecode(part.t)}</span>;
-      if (part.u) return <img key={i+part.a} src={part.u} style={{height: "16px", width: "16px", verticalAlign: "bottom"}} alt="" />;
+      if (part.u) return <img key={i+part.a} src={part.u} className="flair-image" alt="" />;
       return null;
     }) 
     : "";

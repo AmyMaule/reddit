@@ -214,7 +214,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
             <div className="dropdown-div" onClick={() => handleSearch(sub)} key={sub}>{sub}</div>
           )}
         </div>
-        <button type="submit" onClick={determineChosenSubreddit} style={{display:"none"}}></button>
+        <button type="submit" onClick={determineChosenSubreddit} className="hide"></button>
       </form>
       <div className = "btn-container">
         <button className="btn nav-btn btn-white btn-login">Log In</button>

@@ -1,18 +1,9 @@
 import React from 'react';
 
 export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelectedSubreddit, setSearch, setPage, setSelectedTimeText, setSortTop, setScrollPosition }) {
-  const awardStyle = {
-    height: "16px",
-    width: "16px",
-    lineHeight: "16px",
-    verticalAlign: "middle",
-    paddingRight: "3px",
-    paddingLeft: "3px"
-  }
-
   let awards = clickedPost.all_awardings ? clickedPost.all_awardings.map((award, i) => {
     if (award.icon_url) {
-      return <span key={award.id}><img key={award.id} src={award.icon_url} style={awardStyle} alt="" />{award.count > 1 && award.count}</span>;
+      return <span key={award.id}><img key={award.id} src={award.icon_url} className="post-award" alt="" />{award.count > 1 && award.count}</span>;
     } else return null;
   }) : "";
 
@@ -36,9 +27,7 @@ export default function SinglePostTopBar({ clickedPost, cachedPostData, setSelec
 
   return (
     <div className="singlepost-top">
-      <span className="subreddit-thumbnail">
-        <img src={cachedPostData.thumbnail || "images/logo-small.png"} style={{height: "21px", width: "21px", borderRadius: "50%", marginRight: "5px"}} alt="" />
-      </span>
+      <img src={cachedPostData.thumbnail || "images/logo-small.png"} className="subreddit-thumbnail" alt="" />
       <span className="singlepost-subreddit" onClick={singlePostSetSubhome}>r/{clickedPost.subreddit}</span>
       <span className="singlepost-separator-dot">•</span>
       <div className="singlepost-posted-by">Posted by u/{clickedPost.author} {cachedPostData.posted} ago</div>

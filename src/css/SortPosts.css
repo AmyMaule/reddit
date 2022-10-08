@@ -32,7 +32,7 @@
 }
 
 .hot-grey {
-  background: url(../images/hot.png);
+  background: url("../assets/images/hot.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;
@@ -43,7 +43,7 @@
 }
 
 .hot-blue {
-  background: url(../images/hot-blue.png);
+  background: url("../assets/images/hot-blue.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;
@@ -99,7 +99,7 @@
 }
 
 .new-grey {
-  background: url(../images/star.png);
+  background: url("../assets/images/star.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;
@@ -110,7 +110,7 @@
 }
 
 .new-blue {
-  background: url(../images/star-blue.png);
+  background: url("../assets/images/star-blue.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;
@@ -143,7 +143,7 @@
 }
 
 .top-grey {
-  background: url(../images/top.png);
+  background: url("../assets/images/top.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;
@@ -154,7 +154,7 @@
 }
 
 .top-blue {
-  background: url(../images/top-blue.png);
+  background: url("../assets/images/top-blue.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -ms-background-size: cover;

@@ -1,8 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import SpeechBubble from "../../images/speech.png";
-import UpArrow from "../../images/up-arrow.png";
-import DownArrow from "../../images/down-arrow.png";
-import DefaultThumbnail from "../../images/logo-small.png";
 
 import { htmlDecode } from '../../utilities';
 
@@ -45,12 +41,12 @@ export default function Comment({ comment }) {
     const abortComment = new AbortController();
     // If the post has been deleted or the author has removed their account, the author will be undefined or "[deleted]" so no need to fetch
     if (!comment.author || comment.author === "[deleted]") {
-      setProfileImage(DefaultThumbnail);
+      setProfileImage("images/logo-small.png");
     } else fetch(`https://www.reddit.com/user/${comment.author}/about/.json`, { signal: abortComment.signal })
     .then(res => res.json())
     .then(data => {
         if (!data?.data?.icon_img) {
-          setProfileImage(DefaultThumbnail);
+          setProfileImage("images/logo-small.png");
         } else {
         // remove the encoding
         data.data.icon_img = data.data.icon_img.replaceAll("&amp;", "&");
@@ -105,12 +101,12 @@ export default function Comment({ comment }) {
           <div className="comment-body" dangerouslySetInnerHTML={{__html: htmlDecode(comment.body_html)}}></div>
           <div className="comment-bottom-bar">
             <div className="comment-votes">
-              <img className="comment-votes-up" src={UpArrow} alt="up-arrow" />
+              <img className="comment-votes-up" src="images/up-arrow.png" alt="up-arrow" />
               <div className="comment-votes-count">{determineVotes()}</div>
-              <img className="comment-votes-down" src={DownArrow} alt="down-arrow" />
+              <img className="comment-votes-down" src="images/down-arrow.png" alt="down-arrow" />
             </div>
             <div className="comment-reply-container comment-link">
-              <img src={SpeechBubble} className="comment-speechbubble" alt="" />
+              <img src="images/speech.png" className="comment-speechbubble" alt="" />
               <h4 className="comment-reply">Reply</h4>
             </div>
             <h4 className="comment-link comment-share">Share</h4>

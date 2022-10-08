@@ -1,5 +1,4 @@
 import React from 'react';
-import DefaultThumbnail from "../images/logo-small.png";
 
 export default function Subhome({ cachedPostData }) {
   // If a banner image is given in the API, it is encoded so the amp; must be removed before it can be used
@@ -54,7 +53,7 @@ export default function Subhome({ cachedPostData }) {
         <div className="subhome-r-bar">
           <div className="subhome-r-bar-content" style={{width: widths.titleWidth}}>
             <div className="subhome-r-bar-top">
-              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon || DefaultThumbnail} alt="" />
+              <img className="subhome-icon" src={cachedPostData.thumbnail || cachedPostData.header_img || cachedPostData.icon_img || cachedPostData.community_icon || "images/logo-small.png"} alt="" />
               <div className="subhome-title-container">
                 <div className="subhome-title">{cachedPostData.subreddit_title}</div>
                 <div className="subhome-title-small">{cachedPostData.display_name_prefixed}</div>

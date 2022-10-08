@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import UpArrow from "../images/up-arrow.png";
-import DownArrow from "../images/down-arrow.png";
-import SpeechBubble from "../images/speech.png";
-import ShareArrow from "../images/share-arrow.png";
-import SaveBanner from "../images/save.png";
 import GalleryPost from './homepage/GalleryPost';
 import ImagePost from './homepage/ImagePost';
 import LinkPost from './homepage/LinkPost';
@@ -126,11 +121,11 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
     >
       <div className="post-votes">
         <div>
-          <img className="post-votes-up" src={UpArrow} alt="up-arrow" />
+          <img className="post-votes-up" src="images/up-arrow.png"s alt="up-arrow" />
         </div>
         <div className="post-votes-count">{votes}</div>
         <div>
-        <img className="post-votes-down" src={DownArrow} alt="down-arrow" />
+          <img className="post-votes-down" src="images/down-arrow.png" alt="down-arrow" />
         </div>
       </div>
       <div className="post-right">
@@ -164,15 +159,15 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
 
         <div className="post-bottom-bar" >
           <div className="post-comments" onClick={() => handlePostClick("post")}>
-            <img src={SpeechBubble} className="comments-speechbubble" alt="" />
+            <img src="images/speech.png" className="comments-speechbubble" alt="" />
             <h4 className="comments">{post.num_comments < 1000 ? post.num_comments : (post.num_comments/1000).toFixed(1) + "k"} comments</h4>
           </div>
           <div className="post-share-link">
-            <img src={ShareArrow} className="share-arrow" alt="" />
+            <img src="images/share-arrow.png" className="share-arrow" alt="" />
             <h4 className="share">Share</h4>
           </div>
           <div className="post-save">
-            <img src={SaveBanner} className="save-banner" alt="" />
+            <img src="images/save.png" className="save-banner" alt="" />
             <h4 className="save">Save</h4>
           </div>
           <div className="post-more">...</div>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect }  from 'react';
-import V from "../images/v.png";
 
 import { htmlDecode } from '../utilities';
 
@@ -67,7 +66,7 @@ export default function SubhomeRules({ cachedPostData }) {
               </div>
               {rules[i].description &&
                 <div className="v-container">
-                  <img src={V} className="subhome-v-icon" alt="" />
+                  <img src="images/v.png" className="subhome-v-icon" alt="" />
                 </div>}
             </div>
           )

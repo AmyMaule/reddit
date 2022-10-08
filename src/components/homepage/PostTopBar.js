@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import DefaultThumbnail from "../../images/logo-small.png";
 
 export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick, setSelectedTimeText, setSortTop, setScrollPosition }) {
   const awardStyle = {
@@ -64,7 +63,7 @@ export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardi
     <div className="post-top">
     {/* many subreddits don't have icon links in the API even though they do have their own thumbnails, so they just get the default logo */}
       <span className="subreddit-thumbnail">
-        <img src={thumbnail ? thumbnail : DefaultThumbnail} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} alt="" />
+        <img src={thumbnail || "images/logo-small.png"} style={{height: "20px", width: "20px", borderRadius: "50%", marginRight: "5px"}} alt="" />
       </span>
       <span className="post-subreddit" onClick={setSubhome}>r/{subreddit}</span>
       <span className="separator-dot">•</span>

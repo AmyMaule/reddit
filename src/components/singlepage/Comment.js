@@ -1,47 +1,22 @@
 import React, { useState, useEffect, Fragment } from 'react';
 
-import { htmlDecode } from '../../utilities';
+import { 
+  determineNumVotes,
+  determineTimePosted,
+  htmlDecode 
+} from '../../utilities';
 
 // TODO - figure out when the comment borders are being hovered over and make them collapsible
 
 export default function Comment({ comment }) {
   const [profileImage, setProfileImage] = useState();
-
-  // determine how long ago the comment was posted
-  const determineTimePosted = () => {
-    const timeNow = Date.now();
-    const postedMsAgo = (timeNow/1000 - comment.created_utc);
-    // Reddit uses "m" for minutes and for months
-    if (postedMsAgo < 3600) {
-      return (postedMsAgo/60).toFixed(0) + "m";
-    } else if (postedMsAgo < 86400) { // 86400 is 24 hours
-      return (postedMsAgo/3600).toFixed(0) + "h";
-    } else if (postedMsAgo < 2.592e+6) {  // 2.592e+6 is 30 days
-      return (postedMsAgo/86400).toFixed(0) + "d";
-    } else if (postedMsAgo < 3.154e+7) {  // 3.154e+7 is 1 year
-      return (postedMsAgo/2.592e+6).toFixed(0) + "m";
-    } else {
-      return (postedMsAgo/3.154e+7).toFixed(0) + "y";
-    }
-  }
-
-  // if a comment has fewer than 0 upvotes, comment.ups is 0 and comment.downs keeps the vote tally, otherwise comment.ups keeps the tally and comment.downs is 0
-  const determineVotes = () => {
-    if (comment.ups > 0) {
-      if (comment.ups < 1000) {
-        return comment.ups;
-      } else if (comment.ups > 100000) {
-        return `${(comment.ups/1000).toFixed(0)}k`;
-      } else return `${(comment.ups/1000).toFixed(1)}k`;
-    } else if (comment.downs < 1000) {
-      return comment.downs;
-    } else return `-${(comment.downs/1000).toFixed(1)}k`;
-  }
-
+  const posted = determineTimePosted(comment.created_utc, true);
+  const votes = determineNumVotes(comment.ups, comment.downs);
+  
   // Fetch the user's avatar separately as it isn't in the main comment data
   useEffect(() => {
     const abortComment = new AbortController();
-    // If the post has been deleted or the author has removed their account, the author will be undefined or "[deleted]" so no need to fetch
+    // If the post has been deleted or the author has removed their account, the author will be undefined or "[deleted]"
     if (!comment.author || comment.author === "[deleted]") {
       setProfileImage("images/logo-small.png");
     } else {
@@ -76,7 +51,7 @@ export default function Comment({ comment }) {
             <div className="comment-details">
               <div className="comment-author">{comment.author}</div>
               <div className="comment-separator-dot">.</div>
-              <div className="comment-time-posted">{determineTimePosted()}</div>
+              <div className="comment-time-posted">{posted}</div>
             </div>
           </div>
           <div className="comment-border">
@@ -84,7 +59,7 @@ export default function Comment({ comment }) {
             <div className="comment-bottom-bar">
               <div className="comment-votes">
                 <img className="comment-votes-up" src="images/up-arrow.png" alt="up-arrow" />
-                <div className="comment-votes-count">{determineVotes()}</div>
+                <div className="comment-votes-count">{votes}</div>
                 <img className="comment-votes-down" src="images/down-arrow.png" alt="down-arrow" />
               </div>
               <div className="comment-reply-container comment-link">

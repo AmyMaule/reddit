@@ -2,6 +2,7 @@ import React from 'react';
 import { htmlDecode } from '../../utilities';
 
 const PostTitleFlair = ({ handlePostClick, post, isShortened, singlePost, isTopBar }) => {
+  const { link_flair_text } = post;
   const containerClass = singlePost 
     ? isShortened
       ? "singlepost-title singlepost-title-shortened"  
@@ -26,15 +27,15 @@ const PostTitleFlair = ({ handlePostClick, post, isShortened, singlePost, isTopB
 
   // the top bar is the black bar that runs at the top of the page for each SinglePost
   if (isTopBar) {
-    return <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length ? flairDisplay : post.link_flair_text}</span>
+    return <span className="singlepost-flair" style={flairStyle}>{flairDisplay.length ? flairDisplay : link_flair_text}</span>
   }
 
   return (
     <div className={containerClass} onClick={() => handlePostClick("post")}>
       <span>{post.title}</span>
-      {post.link_flair_text && 
+      {link_flair_text && 
         <span className={singlePost ? "singlepost-flair" : "flair"} style={flairStyle}>
-          {flairDisplay.length ? flairDisplay : htmlDecode(post.link_flair_text)}
+          {flairDisplay.length ? flairDisplay : htmlDecode(link_flair_text)}
         </span>
       }
       {post.is_original_content && <span className="flair-oc">OC</span>}

@@ -26,13 +26,11 @@ export default function SideBar({ setCachedPostData, setSelectedSubreddit, setSe
             banner_img: data.data.banner_img
           });
         } else {
-            console.log("something went wrong fetching from /about/.json");
-            return;
+          console.log("Error fetching cachedPostData");
+          return;
         }
       })
-      .catch(err => {
-        console.log(err);
-      })
+      .catch(err => console.log(err));
       
     // set the selectedSubreddit and search to the clicked subreddit, triggering a fetch request for that subreddit's posts from App.js
     setSelectedSubreddit(sub);

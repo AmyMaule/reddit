@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-export default function PostTopBar({ setSelectedSubreddit, thumbnail, all_awardings, subreddit, author, setSearch, setPage, posted, handlePostClick, setSelectedTimeText, setSortTop, setScrollPosition }) {
+export default function PostTopBar({ setSelectedSubreddit, post, thumbnail, setSearch, setPage, posted, handlePostClick, setSelectedTimeText, setSortTop, setScrollPosition }) {
+  const { all_awardings, author, subreddit } = post;
+
   const showAllAwards = useCallback(() => {
     const allAwards = all_awardings.map(award => {
       if (award.icon_url) {

@@ -56,18 +56,18 @@ export default function Trending({ page }) {
     }
   }, [trendingLinks]);
 
-  // determine how many links to show
+  // determine how many links to show based on screen width
   useEffect(() => {
     function handleResize() {
       setNumLinks(() => {
-        if (window.innerWidth >= 1010) {
-          return 4;
-        } else return 3;
+        return window.innerWidth >= 1010
+          ? 4
+          : 3;
       });
     }
-    window.addEventListener("resize", handleResize);
     // Call handleResize immediately so state is updated with initial window size
     handleResize();
+    window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 

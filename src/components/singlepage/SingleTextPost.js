@@ -2,6 +2,7 @@ import React from 'react'
 import PostTitleFlair from '../homepage/PostTitleFlair'
 
 export default function SingleTextPost({ clickedPost }) {
+  const { thumbnail, thumbnail_height, url_overridden_by_dest } = clickedPost;
   return (
     <>
       <PostTitleFlair
@@ -11,10 +12,10 @@ export default function SingleTextPost({ clickedPost }) {
         singlePost={true}
       />
       <div className="singlepost-img-center">
-        {clickedPost.thumbnail_height && 
+        {thumbnail_height && 
           <img 
-            className={clickedPost.thumbnail === "spoiler" ? "singlepost-image spoiler" : "singlepost-image"}
-            src={clickedPost.thumbnail !== "spoiler" ? clickedPost.url_overridden_by_dest : undefined }
+            className={thumbnail === "spoiler" ? "singlepost-image spoiler" : "singlepost-image"}
+            src={thumbnail !== "spoiler" ? url_overridden_by_dest : null }
             alt="" 
           />
         }

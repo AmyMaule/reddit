@@ -6,7 +6,6 @@ export default function SingleLinkPost({ clickedPost }) {
   // slicing at position 12 works for most URLs, but not those that start with en.xxx
   const startSlice = URL?.startsWith("https://en.") ? 8 : 12;
 
-  console.log(clickedPost)
   return (
     <>
       <div className="singlepost-content-container">

@@ -15,9 +15,9 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
     // "popular-location" is only accessible from the homepage
     if (page === "home") {
       // "new" and "top" hide the location button, "hot" shows the location button (so does the reddit logo in Navbar.js)
-      if (clickedClass === "hot") {
-        document.querySelector(".popular-location").classList.remove("hide");
-      } else document.querySelector(".popular-location").classList.add("hide");
+      clickedClass === "hot"
+        ? document.querySelector(".popular-location").classList.remove("hide")
+        : document.querySelector(".popular-location").classList.add("hide");
     }
 
     const popularBtns = Array.from(document.querySelectorAll(".popular-btn"));

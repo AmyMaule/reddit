@@ -5,13 +5,14 @@ import { htmlDecode } from '../utilities';
 const marked = require('marked');
 
 export default function SubhomeRules({ cachedPostData }) {
+  const { display_name_prefixed } = cachedPostData;
   const [rules, setRules] = useState([]);
 
   const rulesBackground = cachedPostData.primary_color || cachedPostData.key_color || "#444e59";
 
   useEffect(() => {
     const abortRules = new AbortController();
-    fetch(`https://www.reddit.com/${cachedPostData.display_name_prefixed}/about/rules/.json`, { signal: abortRules.signal })
+    fetch(`https://www.reddit.com/${display_name_prefixed}/about/rules/.json`, { signal: abortRules.signal })
       .then(res => res.json())
       .then(data => {
         if (data) setRules(data.rules);
@@ -20,7 +21,7 @@ export default function SubhomeRules({ cachedPostData }) {
         if (err.name !== "AbortError") console.log("Rules error:", err);
       })
     return () => abortRules.abort();
-  }, [cachedPostData.display_name_prefixed]);
+  }, [display_name_prefixed]);
 
   // toggleRule adds the inner rule text as a child, or removes it
   const toggleRule = (e, i) => {
@@ -51,7 +52,7 @@ export default function SubhomeRules({ cachedPostData }) {
   return (
     <div className="subhome-rules-container">
       <div className="subhome-rules-heading" style={{color: "white", backgroundColor: rulesBackground}}>
-        {cachedPostData.display_name_prefixed} rules
+        {display_name_prefixed} rules
       </div>
       <div className="subhome-rules-inner-container">
         {rules.map((rule, i) => {

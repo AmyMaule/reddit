@@ -3,22 +3,23 @@ import React from 'react';
 import { htmlDecodeWithReplace } from '../../utilities';
 
 export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit, setSearch, page, setPage, subreddit, setSelectedTimeText, setSortTop, setScrollPosition }) {
+  const { active_user_count, display_name_prefixed, subscribers } = cachedPostData;
   const aboutCommunityHeight = page === "comment" ? "34px" : "44px";
   const bannerBackgroundColor = cachedPostData.primary_color || cachedPostData.key_color || "#444e59";
 
   // If there are a million+ members, round to 1 decimal place and add "m" otherwise if there are 1000+, round to 1 decimal place and add "k"
-  const totalMembers = cachedPostData.subscribers > 999999
-    ? (cachedPostData.subscribers/1000000).toFixed(1) + "m"
-    : cachedPostData.subscribers > 999
-      ? (cachedPostData.subscribers/1000).toFixed(1) + "k"
-      : cachedPostData.subscribers;
+  const totalMembers = subscribers > 999999
+    ? (subscribers/1000000).toFixed(1) + "m"
+    : subscribers > 999
+      ? (subscribers/1000).toFixed(1) + "k"
+      : subscribers;
 
   // If there are more than 999 active users, round to 1 decimal place and add k (so 18130 becomes 18.1k)
-  const activeUsers = cachedPostData.active_user_count > 999
-    ? (cachedPostData.active_user_count/1000).toFixed(1) + "k"
-    : cachedPostData.active_user_count;
+  const activeUsers = active_user_count > 999
+    ? (active_user_count/1000).toFixed(1) + "k"
+    : active_user_count;
 
-  const created = new Date(cachedPostData.created_utc*1000).toDateString();
+  const created = new Date(cachedPostData.created_utc * 1000).toDateString();
 
   const btnStyle = {
     backgroundColor: cachedPostData.primary_color || cachedPostData.banner_background_color || cachedPostData.key_color || "#0079d3",
@@ -57,14 +58,22 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
             src={cachedPostData.thumbnail || "images/logo-small.png"}
             alt=""
             className="singlepostsidebar-subreddit-thumbnail"
-            onClick={() => setSelectedSubreddit(cachedPostData.display_name_prefixed)}
+            onClick={() => setSelectedSubreddit(display_name_prefixed)}
           />
         }
         {page === "comment" && 
-          <h2 className="singlepostsidebar-subreddit" onClick={singlePostSetSubhome}>{cachedPostData.display_name_prefixed}</h2>
+          <h2 
+            className="singlepostsidebar-subreddit"
+            onClick={singlePostSetSubhome}
+          >
+            {display_name_prefixed}
+          </h2>
         }
       </div>
-      <div className="singlepostsidebar-description" dangerouslySetInnerHTML={{__html: htmlDecodeWithReplace(cachedPostData)}}></div>
+      <div 
+        className="singlepostsidebar-description"
+        dangerouslySetInnerHTML={{__html: htmlDecodeWithReplace(cachedPostData)}}
+      ></div>
       <div className="singlepostsidebar-member-info-container">
         <div className="singlepostsidebar-members-container">
           <h6 className="singlepostsidebar-num-members">{totalMembers}</h6>

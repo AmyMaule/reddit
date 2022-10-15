@@ -26,7 +26,10 @@ export default function SingleGalleryPost({ clickedPost }) {
       <div className="singlepost-img-center">
         <div className="singlepost-gallery-btn-container">
           {currentImageClicked !== 0 && 
-            <button className="singlepost-gallery-button singlepost-gallery-button-left" onClick={() => setCurrentImageClicked(prev => prev-1)}>
+            <button
+              className="singlepost-gallery-button singlepost-gallery-button-left"
+              onClick={() => setCurrentImageClicked(prev => prev-1)}
+            >
               <span>&#x2039;</span>
             </button>
           }
@@ -38,7 +41,10 @@ export default function SingleGalleryPost({ clickedPost }) {
         />
         <div className="singlepost-gallery-btn-container">
           {currentImageClicked !== galleryImages.length-1 && 
-            <button className="singlepost-gallery-button singlepost-gallery-button-right" onClick={() => setCurrentImageClicked(prev => prev+1)}>
+            <button 
+              className="singlepost-gallery-button singlepost-gallery-button-right"
+              onClick={() => setCurrentImageClicked(prev => prev+1)}
+            >
               <span>&#x203A;</span>
             </button>
           }

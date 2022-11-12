@@ -1,5 +1,6 @@
 .single-post-sidebar {
-  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid $mid-gray-1;
   width: 310px;
   background-color: $white;
@@ -7,24 +8,23 @@
   max-height: 540px;
   height: fit-content;
   margin-right: 32px;
-  display: flex;
-  flex-direction: column;
+  margin-left: 12px;
 }
 
 .sidebar-height {
   min-height: 300px;
 }
 
-.singlepostsidebar-banner {
+.single-post-sidebar-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
   width: 310px;
   height: 34px;
   font-weight: bold;
   background-position: contain;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  position: relative;
-  display: flex;
-  align-items: center;
 }
 
 .about-community {
@@ -32,44 +32,44 @@
   margin-left: 10px;
 }
 
-.singlepostsidebar-container {
+.single-post-sidebar-container {
   margin-left: 10%;
   display: flex;
   align-items: center;
 }
 
-.singlepostsidebar-subreddit {
+.single-post-sidebar-subreddit {
   font-weight: 500;
   font-size: 1rem;
   margin: 10px 15px 5px 5px;
   cursor: pointer;
 }
 
-.singlepostsidebar-subreddit-thumbnail {
+.single-post-sidebar-subreddit-thumbnail {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  margin: 10px 0 2px 0;
-  margin-left: -20px;
+  margin: 10px 0 -20px 0;
   cursor: pointer;
 }
 
-.singlepostsidebar-description {
+.single-post-sidebar-description {
   padding-left: 5px;
   margin-top: 10px;
   padding-right: 2px;
   overflow-wrap: break-word;
 }
 
-.singlepostsidebar-description, .singlepostsidebar-description h2{
+.single-post-sidebar-description,
+.single-post-sidebar-description h2 {
+  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
   font-size: 0.89rem;
   line-height: 1.3rem;
   margin-left: 5px;
   font-weight: 400;
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
 }
 
-.singlepostsidebar-member-info-container {
+.single-post-sidebar-info-container {
   width: 80%;
   display: flex;
   align-items: center;
@@ -77,82 +77,83 @@
   padding-top: 8px;
 }
 
-.singlepostsidebar-members-container {
+.single-post-sidebar-members-container {
   display: flex;
   flex-direction: column;
   margin-left: 12px;
   width: 50%;
 }
 
-.singlepostsidebar-num-members {
+.single-post-sidebar-members {
+  font-family: $IBMPlexSans;
   font-weight: 500;
   font-size: 1rem;
-  font-family: $IBMPlexSans;
 }
 
-.singlepostsidebar-members-text {
+.single-post-sidebar-members-text {
+  font-family: $IBMPlexSans;
   font-size: 0.75rem;
   font-weight: 500;
   padding-top: 1px;
-  font-family: $IBMPlexSans;
   margin-top: 1px;
 }
 
-.singlepostsidebar-online-container {
+.single-post-sidebar-online-container {
   display: flex;
   flex-direction: column;
   margin-left: 12px;
   width: 50%;
 }
 
-.singlepostsidebar-num-online {
+.single-post-sidebar-online {
   font-weight: 500;
   font-size: 1rem;
   font-family: $IBMPlexSans;
   margin-left: 2px;
 }
 
-.singlepostsidebar-online-text {
+.single-post-sidebar-online-text {
+  font-family: $IBMPlexSans;
   font-size: 0.75rem;
   font-weight: 500;
   padding-top: 1px;
-  font-family: $IBMPlexSans;
   margin-left: 2px;
   margin-top: 1px;
 }
 
-.singlepostsidebar-border {
+.single-post-sidebar-hr {
   border-bottom: 1px solid $light-gray-8;
   width: 80%;
   margin-left: 10%;
 }
 
-.singlepostsidebar-cake {
+.single-post-side-bar-created {
+  margin: auto 0;
+}
+
+.single-post-sidebar-cake {
   width: 20px;
   height: 20px;
   margin-left: 12px;
   margin-right: 5px;
 }
 
-.singlepostsidebar-created-container {
+.single-post-sidebar-created-container {
   display: flex;
   margin-top: 20px;
 }
 
-.singlepostsidebar-view-all-communities {
-  padding: 4px 16px;
-  width: 280px;
-  /* the margin 0 auto and display: block center the button horizontally */
-  margin: 0 auto;
-  margin-top: 20px;
+.single-post-sidebar-all-communities {
   display: block;
+  min-width: 32px;
+  width: 280px;
   height: 24px;
+  min-height: 32px;
   line-height: 17px;
   font-size: 14px;
-  min-height: 32px;
-  min-width: 32px;
+  padding: 4px 16px;
+  margin: 20px auto;
   cursor: pointer;
-  margin-bottom: 20px;
 }
 
 .subhome-sidebar-margin {

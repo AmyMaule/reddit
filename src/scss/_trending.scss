@@ -51,24 +51,22 @@
 }
 
 .trending-block-dark {
-  margin-left: 6px;
-  margin-right: 6px;
   height: 178px;
   background-image: linear-gradient(0deg,rgba(0,0,0,0.9) 25%,rgba(0,0,0,0.65) 50%,rgba(0,0,0,0.2) 75%,rgba(0,0,0,0.1));
   width: 238px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  margin-top: -183px;
+  margin: -183px 6px 0 6px;
   opacity: 1;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
-}
 
-.trending-block-dark:hover {
-  background-color: $very-low-opacity-gray;
-  transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
+  &:hover {
+    background-color: $very-low-opacity-gray;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+  }
 }
 
 .trending-links-title {

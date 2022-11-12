@@ -1,0 +1,48 @@
+// Font imports
+@font-face {
+  font-family: BentonSans;
+  src: url("../fonts/BentonSansRegular.otf");
+}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&display=swap');
+
+// Fonts
+$NotoSans:  NotoSans, BentonSans, Verdana, sans-serif;
+$BentonSans: BentonSans, Verdana, sans-serif;
+$IBMPlexSans: 'IBM Plex Sans', sans-serif;
+
+// Colors
+$white: rgb(255, 255, 255);
+
+$light-red: hwb(16 8% 0%);
+$red: rgb(255, 69, 0);
+
+$blue: rgb(0, 121, 211);
+$dark-blue: rgb(20, 132, 215);
+
+
+$light-gray-1: rgb(245, 250, 253);
+$light-gray-2: rgb(241, 241, 241);
+$light-gray-3: rgb(232, 232, 232);
+$light-gray-4: rgb(224, 224, 224);
+$light-gray-5: rgb(214, 214, 214);
+$light-gray-6: rgb(215, 218, 220);
+$light-gray-7: rgb(218, 224, 230);
+$light-gray-8: rgb(237, 239, 241);
+
+$mid-gray-1: rgb(204, 204, 204);
+$mid-gray-2: rgb(135, 138, 140);
+$mid-gray-3: rgb(124, 124, 124);
+$mid-gray-4: rgb(137, 137, 137);
+
+$dark-gray-1: rgb(50, 50, 50);
+$dark-gray-2: rgb(34, 34, 34);
+$dark-gray-3: rgb(28, 28, 28);
+$dark-gray-4: rgb(52, 53, 54);
+
+$ultra-low-opacity-gray: rgba(0, 0, 0, 0.04);
+$very-low-opacity-gray: rgba(0, 0, 0, 0.2);
+$low-opacity-gray: rgba(26, 26, 27, 0.1);
+$mid-opacity-gray: rgba(0, 0, 0, 0.7);
+
+$low-opacity-blue: rgba(125, 130, 180, 0.314);

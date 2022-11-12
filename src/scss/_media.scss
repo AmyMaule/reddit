@@ -1,0 +1,57 @@
+@media screen and (max-width: 1205px) {
+  .btn-login {
+    width: 78px;
+  }
+
+  .btn-signup {
+    width: 85px;
+    padding: 1px 10px;
+    margin-left: 5px;
+  }
+
+  .user-icons-container {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 67px;
+  }
+
+  .user-icons-container {
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 1087px) {
+  .logo {
+    width: 33px;
+    height: 33px;
+    background-image: url("../assets/images/logo-small.png");
+  }
+
+  .dropdown-subreddits {
+    width: calc(130%);
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .post-container {
+    width: unset;
+    margin: 72px 0 0 24px;
+  }
+}
+
+@media screen and (max-width: 1009px) {
+  .trending-title {
+    // the margin-left keeps it in line with the trending blocks
+    margin-left: calc(50% - 370px);
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .sidebar,
+  .sidebar-container,
+  .single-post-sidebar,
+  .sidebar-links,
+  .sidebar-premium-container {
+    display: none;
+  }
+}

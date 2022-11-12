@@ -1,5 +1,5 @@
 .sidebar-links {
-  border: 1px solid #CCC;
+  border: 1px solid $mid-gray-1;
   width: 310px;
   /* width: 340px; */
   margin-top: 16px;
@@ -31,25 +31,27 @@
 .sidebar-links-left a {
   font-weight: 300;
   font-size: 0.75rem;
-  font-family: Noto Sans, Arial, sans-serif;
+  font-family: Noto Sans,Arial,sans-serif;
   padding-bottom: 6px;
   text-decoration: none;
   color: black;
-}
-.sidebar-links-left a:hover {
-  text-decoration: underline;
+
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .sidebar-links-right a {
   font-weight: 300;
   font-size: 0.75rem;
-  font-family: Noto Sans, Arial, sans-serif;
+  font-family: Noto Sans,Arial,sans-serif;
   padding-bottom: 6px;
   text-decoration: none;
   color: black;
-}
-.sidebar-links-right a:hover {
-  text-decoration: underline;
+
+  &:hover{
+    text-decoration: underline;
+  }
 }
 
 .sidebar-copyright {
@@ -57,14 +59,6 @@
   display: inline;
   font-weight: 300;
   font-size: 0.75rem;
-  font-family: Noto Sans, Arial, sans-serif;
+  font-family: Noto Sans,Arial,sans-serif;
   padding: 12px;
 }
-
-@media screen and (max-width: 1119px) {
-  .sidebar-links {
-    display: none;
-  }
-}
-
-/*# sourceMappingURL=sidebar-links.css.map */

@@ -1,0 +1,15 @@
+*, *::before, *::after {
+  margin: 0;
+}
+
+body {
+  background-color: $light-gray-7;
+  font-family: $IBMPlexSans;
+  min-height: 100vh;
+}
+
+.main-content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

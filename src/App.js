@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './css/app.css';
 import Navbar from './components/Navbar';
 import Trending from './components/homepage/Trending';
 import SideBar from './components/homepage/SideBar';
@@ -119,7 +118,7 @@ function App() {
   }, [clickedPostId]);
 
   return (
-    <div className="App">
+    <div>
       <Navbar
         selectedSubreddit={selectedSubreddit}
         setSelectedSubreddit={setSelectedSubreddit}
@@ -131,10 +130,10 @@ function App() {
         setSortTop={setSortTop}
         setScrollPosition={setScrollPosition}
       />
-      {/* Trending and the div with className main-container need to hide when SinglePost is shown but not demount, because otherwise they re-render from scratch which causes lag and doesn't save the scroll position */}
+      {/* Trending and the main-content-container div need to hide when SinglePost is shown but not demount, otherwise they re-render which causes lag and doesn't save the scroll position */}
       <Trending page={page} />
       {page === "subhome" && <Subhome cachedPostData={cachedPostData} />}
-      <div className={page !== "comment" ? "main-container" : "main-container hide"}>
+      <div className={page !== "comment" ? "main-content-container" : "main-content-container hide"}>
         <PostContainer
           setSubredditInfo={setSubredditInfo}
           posts={posts}
@@ -183,7 +182,7 @@ function App() {
         </div>
       </div>
       {page === "comment" &&
-        <div className="main-container">
+        <div className="main-content-container">
           <SinglePost
             clickedPost={clickedPost}
             posts={posts}

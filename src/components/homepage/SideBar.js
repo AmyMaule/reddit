@@ -51,7 +51,7 @@ export default function SideBar({ setCachedPostData, setSelectedSubreddit, setSe
   }
 
   return (
-    <div className="SideBar">
+    <div className="sidebar">
       <div className="top-community">
         <h2 className="top-community-title">Today's Top Growing Communities</h2>
       </div>

@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function SideBarPremium() {
   return (
-    <div className="SideBarPremium">
-      <div className="sidebar-premium-container">
+    <div className="sidebar-premium-container">
+      <div className="sidebar-premium-content-container">
         <img src="images/premium.png" className="premium-icon" alt="" />
         <div className="premium-text-container">
           <h4 className="premium-title">Reddit Premium</h4>

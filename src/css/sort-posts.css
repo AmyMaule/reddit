@@ -1,4 +1,4 @@
-.SortPosts {
+.sort-posts {
   display: flex;
   /* margin-top: 10px; */
   height: 60px;
@@ -37,9 +37,9 @@
   -moz-background-size: cover;
   -ms-background-size: cover;
   -o-background-size: cover;
-   background-size: cover;
-   outline: none;
-   border: none;
+  background-size: cover;
+  outline: none;
+  border: none;
 }
 
 .hot-blue {
@@ -48,9 +48,9 @@
   -moz-background-size: cover;
   -ms-background-size: cover;
   -o-background-size: cover;
-   background-size: cover;
-   outline: none;
-   border: none;
+  background-size: cover;
+  outline: none;
+  border: none;
 }
 
 .popular-hot {
@@ -69,7 +69,7 @@
 }
 
 .popular-location {
-  color: rgb(0, 121, 211);
+  color: #0079d3;
   background-color: #F6F7F8;
   border-radius: 100vmax;
   font-weight: bold;
@@ -104,9 +104,9 @@
   -moz-background-size: cover;
   -ms-background-size: cover;
   -o-background-size: cover;
-   background-size: cover;
-   outline: none;
-   border: none;
+  background-size: cover;
+  outline: none;
+  border: none;
 }
 
 .new-blue {
@@ -115,9 +115,9 @@
   -moz-background-size: cover;
   -ms-background-size: cover;
   -o-background-size: cover;
-   background-size: cover;
-   outline: none;
-   border: none;
+  background-size: cover;
+  outline: none;
+  border: none;
 }
 
 .popular-new {
@@ -148,9 +148,9 @@
   -moz-background-size: cover;
   -ms-background-size: cover;
   -o-background-size: cover;
-   background-size: cover;
-   outline: none;
-   border: none;
+  background-size: cover;
+  outline: none;
+  border: none;
 }
 
 .top-blue {
@@ -159,9 +159,9 @@
   -moz-background-size: cover;
   -ms-background-size: cover;
   -o-background-size: cover;
-   background-size: cover;
-   outline: none;
-   border: none;
+  background-size: cover;
+  outline: none;
+  border: none;
 }
 
 .popular-top {
@@ -182,7 +182,7 @@
 .popular-today {
   position: relative;
   /* bottom: 2px; */
-  color: rgb(0, 121, 211);
+  color: #0079d3;
   left: 4px;
   font-size: 1rem;
   font-weight: bold;
@@ -231,7 +231,7 @@
 }
 
 .rectangle-icon:hover {
-  background-color: rgb(246, 247, 248);
+  background-color: #f6f7f8;
   border-radius: 5px;
 }
 
@@ -255,17 +255,17 @@
 }
 
 .dropdown-location {
-    position: relative;
-    background-color: white;
-    width: 115px;
-    color: #878A8C;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 7px 0px 7px 5px;
-    text-decoration: none;
-    display: block;
-    z-index: 5;
+  position: relative;
+  background-color: white;
+  width: 115px;
+  color: #878A8C;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 7px 0px 7px 5px;
+  text-decoration: none;
+  display: block;
+  z-index: 5;
 }
 
 .dropdown-location:hover {
@@ -282,8 +282,10 @@
   overflow: hidden;
   min-width: 400px;
   background-color: white;
-  top: 20px;
-  border-radius: 5px;
+  top: 30px;
+  border-radius: 4px;
+  border: 1px solid #EDEFF1;
+  box-shadow: 0 2px 4px 0 rgba(28, 28, 28, 0.2);
 }
 
 .popular-today:active + .dropdown-top-container {
@@ -291,18 +293,18 @@
 }
 
 .dropdown-top {
-    position: relative;
-    background-color: white;
-    /* min-width: 55px; */
-    color: #878A8C;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 8px 10px;
-    text-decoration: none;
-    white-space: nowrap;
-    /* display: block; */
-    z-index: 5;
+  position: relative;
+  background-color: white;
+  /* min-width: 55px; */
+  color: #878A8C;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  /* display: block; */
+  z-index: 5;
 }
 
 .dropdown-top:hover {
@@ -311,5 +313,8 @@
 }
 
 .clicked, .clicked:hover {
-  color: rgb(0, 121, 211);
+  color: #0079d3;
+  background-color: #f1f1f1;
 }
+
+/*# sourceMappingURL=sort-posts.css.map */

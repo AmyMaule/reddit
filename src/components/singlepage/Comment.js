@@ -44,7 +44,7 @@ export default function Comment({ comment }) {
   if (!body_html) return null;
 
   return (
-    <div className="Comment">
+    <div className="comment-container">
       <ul>
         <li className="base-comment" key={comment.id}>
           <div className="comment-details-container">

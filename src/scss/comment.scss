@@ -20,7 +20,7 @@ li, li p, li h1, li h2 {
 
 .comment-border {
   /* border-left: 2px solid #f51c40; */
-  border-left: 2px solid #edeff1;
+  border-left: 2px solid rgb(237, 239, 241);
   margin-left: -5px;
   padding-left: 5px;
   position: relative;
@@ -38,7 +38,7 @@ li, li p, li h1, li h2 {
 
 .subcomment {
   /* border-left: 2px solid #f7cc3f; */
-  border-left: 2px solid #edeff1;
+  border-left: 2px solid rgb(237, 239, 241);
   /* hover 68, 78, 89 */
 }
 
@@ -57,7 +57,7 @@ li, li p, li h1, li h2 {
   font-size: 0.75rem;
   color: #1A1A1B;
   font-weight: 500;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   margin-left: -5px;
 }
 
@@ -111,7 +111,7 @@ li, li p, li h1, li h2 {
 .comment-votes-count {
   font-size: 0.73rem;
   font-weight: bold;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   margin-right: 5px;
   position: relative;
   top: 8px;
@@ -131,13 +131,12 @@ li, li p, li h1, li h2 {
 .comment-link {
   color: #898989;
   font-size: 0.75rem;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   padding: 8px 7px 3px 7px;
   border-radius: 3px;
   cursor: pointer;
-}
-.comment-link:hover {
-  background-color: rgba(26, 26, 27, 0.1);
-}
 
-/*# sourceMappingURL=comment.css.map */
+  &:hover {
+    background-color: rgba(26, 26, 27, 0.1);
+  }
+}

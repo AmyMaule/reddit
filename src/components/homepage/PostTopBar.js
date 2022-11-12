@@ -13,6 +13,7 @@ export default function PostTopBar({ setSelectedSubreddit, post, thumbnail, setS
           </span>
         );
       }
+      return null;
     })
     return allAwards;
   }, [all_awardings]);

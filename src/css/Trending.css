@@ -1,4 +1,4 @@
-.Trending {
+.trending {
   display: inline;
   position: relative;
   top: 50px;
@@ -54,7 +54,7 @@
   margin-left: 6px;
   margin-right: 6px;
   height: 178px;
-  background-image: linear-gradient(0deg,rgba(0,0,0,0.9) 25%,rgba(0,0,0,0.65) 50%,rgba(0,0,0,0.2) 75%,rgba(0,0,0,0.1));
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.9) 25%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.1));
   width: 238px;
   border-radius: 8px;
   display: flex;
@@ -123,3 +123,5 @@
     margin-left: calc(50% - 370px);
   }
 }
+
+/*# sourceMappingURL=trending.css.map */

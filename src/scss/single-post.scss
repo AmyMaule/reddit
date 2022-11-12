@@ -1,4 +1,4 @@
-.SinglePost-page {
+.single-post-page {
   display: flex;
   width: 100vw;
   /* this height was working fine */
@@ -9,7 +9,6 @@
   scrollbar-color: rgb(122, 122, 124) rgb(38, 38, 40);
   justify-content: center;
   position: relative;
-  /* margin-top: 48px; */
   z-index: 2;
 }
 

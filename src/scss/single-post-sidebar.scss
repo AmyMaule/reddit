@@ -1,4 +1,4 @@
-.SinglePostSideBar {
+.single-post-sidebar {
   margin-left: 12px;
   border: 1px solid #CCC;
   width: 310px;
@@ -13,11 +13,6 @@
 
 .sidebar-height {
   min-height: 300px;
-}
-
-@font-face {
-  font-family: BentonSans;
-  src: url(../fonts/BentonSans\ Regular.otf);
 }
 
 .singlepostsidebar-banner {
@@ -168,7 +163,7 @@
 
 
 @media screen and (max-width: 1119px) {
-  .SinglePostSideBar {
+  .single-post-sidebar {
     display: none;
   }
 }

@@ -45,7 +45,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
   }
 
   return (
-    <div className={page === "comment" ? "SinglePostSideBar sidebar-height" : "SinglePostSideBar subhome-sidebar-margin"}>
+    <div className={`single-post-sidebar ${page === "comment" ? "sidebar-height" : "subhome-sidebar-margin"}`}>
       <div 
         className="singlepostsidebar-banner"
         style={{color: "white", backgroundColor: bannerBackgroundColor, height: aboutCommunityHeight}}

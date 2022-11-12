@@ -104,7 +104,7 @@ export default function SortPosts({ setSelectedSubreddit, search, setSearch, set
   return (
     <>
       {page === "home" && <h2 className="popular-title">Popular posts</h2>}
-      <div className="SortPosts" style={page === "home" ? {marginTop: "10px"} : {marginTop: "20px"}}>
+      <div className="sort-posts" style={page === "home" ? {marginTop: "10px"} : {marginTop: "20px"}}>
         <div className="popular-container">
           <div className="popular-btn popular-hot clicked" onClick={() => trimSearchQuery("r/popular/hot", "hot")}>
           {/* hot is blue by default, so needs the class hot-blue, but also needs the class hot-grey as the grey classes are never removed */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './css/app.css';
 import Navbar from './components/Navbar';
 import Trending from './components/homepage/Trending';
 import SideBar from './components/homepage/SideBar';
@@ -31,7 +31,7 @@ function App() {
 
   // useCallback?
   const onClose = e => {
-    if (e.target.classList.contains("SinglePost-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
+    if (e.target.classList.contains("single-post-page") || e.target.classList.contains("top-bar-btn-pointer") || e.target.classList.contains("top-bar-close") || e.target.classList.contains("btn-x")) {
       document.querySelector(".popular-hot").classList.add("clicked");
       document.querySelector(".popular-top").classList.remove("clicked");
       document.querySelector(".popular-new").classList.remove("clicked");

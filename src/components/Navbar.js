@@ -191,7 +191,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
   let currentSubredditWidth = (document.querySelector(".current-subreddit")) ? document.querySelector(".current-subreddit").clientWidth : 0;
 
   return (
-    <div className="Navbar">
+    <div className="navbar">
       <div className="logo-container" onClick={handleReturnToHome}>
         <div className="logo" />
       </div>

@@ -1,0 +1,125 @@
+.trending {
+  display: inline;
+  position: relative;
+  top: 50px;
+  max-width: 1020px;
+  height: 200px;
+  margin-top: 2px;
+  width: 50%;
+}
+
+.trending-title {
+  /* margin-left: 265px; */
+  margin-top: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 0.88rem;
+  /* this margin-left keeps it inline with the trending blocks below */
+  margin-left: calc(50% - 495px);
+}
+
+.trending-blocks {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.trending-block-img {
+  margin-left: 6px;
+  margin-right: 6px;
+  height: 178px;
+  width: 238px;
+  border-radius: 8px;
+  opacity: 0.9;
+  object-fit: cover;
+  position: relative;
+  z-index: -1;
+}
+
+.black-overlay {
+  height: 178px;
+  width: 238px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  z-index: 10;
+  display: inline;
+}
+
+.no-data {
+  background-color: rgba(125, 130, 180, 0.315);
+}
+
+.trending-block-dark {
+  margin-left: 6px;
+  margin-right: 6px;
+  height: 178px;
+  background-image: linear-gradient(0deg,rgba(0,0,0,0.9) 25%,rgba(0,0,0,0.65) 50%,rgba(0,0,0,0.2) 75%,rgba(0,0,0,0.1));
+  width: 238px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  margin-top: -183px;
+  opacity: 1;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+}
+
+.trending-block-dark:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+}
+
+.trending-links-title {
+  color: white;
+  font-size: 0.89rem;
+  margin-top: 101px;
+  padding-left: 10px;
+  padding-right: 3px;
+  line-height: 20px;
+  font-family: Noto Sans, Arial, sans-serif;
+  opacity: 1;
+  z-index: 3;
+  position: relative;
+  height: 39px;
+  /* hide any text that spans 3 lines */
+  overflow: hidden;
+  font-weight: 500;
+}
+
+.trending-links-subreddit {
+  color: white;
+  margin-left: 5px;
+  font-family: Noto Sans, Arial, sans-serif;
+  opacity: 1;
+  z-index: 3;
+  position: relative;
+  font-size: 0.75rem;
+  margin-top: 10px;
+}
+
+.trending-link {
+  text-decoration: none;
+}
+
+.trending-block-subreddit-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-top: 10px;
+  background-color: white;
+}
+
+.trending-block-subreddit-container {
+  display: flex;
+}
+
+@media screen and (max-width: 1009px) {
+  .trending-title {
+    /* this margin-left keeps it inline with the trending blocks below */
+    /* margin-left: calc(50% - 495px); */
+    margin-left: calc(50% - 370px);
+  }
+}

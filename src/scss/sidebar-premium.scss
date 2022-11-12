@@ -1,4 +1,4 @@
-.SideBarPremium {
+.sidebar-premium-container {
   margin-left: 24px;
   border: 1px solid #CCC;
   width: 310px;
@@ -9,7 +9,7 @@
   height: 106px;
 }
 
-.sidebar-premium-container {
+.sidebar-premium-content-container {
   display: flex;
   padding: 10px;
   align-items: center;
@@ -48,7 +48,7 @@
 }
 
 @media screen and (max-width: 959px) {
-  .SideBarPremium {
+  .sidebar-premium-container {
     display: none;
   }
 }

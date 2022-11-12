@@ -73,7 +73,7 @@ export default function Trending({ page }) {
 
   return (
     // Trending hides when SinglePost is shown but does not demount to reduce lag and save the scroll position
-    <div className={page === "home" ? "Trending" : "Trending hide"}>
+    <div className={page === "home" ? "trending" : "trending hide"}>
       <h2 className="trending-title">Trending today</h2>
         <div className="trending-blocks">
         {isLoading

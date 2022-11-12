@@ -76,12 +76,12 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
     <div 
       className={
         is_video
-          ? "Post video-post"
+          ? "post video-post"
           : post_hint === "image"
-            ? "Post image-post"
+            ? "post image-post"
             : post_hint === "link" || is_gallery
-              ? "Post link-post"
-              : "Post text-post"
+              ? "post link-post"
+              : "post text-post"
       }
       id={id}
     >

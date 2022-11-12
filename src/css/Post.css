@@ -2,8 +2,7 @@
   font-family: NotoSans;
   src: url(../fonts/NotoSans-Regular.ttf);
 }
-
-.Post {
+.post {
   background-color: white;
   margin-top: 10px;
   border-radius: 5px;
@@ -19,7 +18,7 @@
 }
 
 .post-votes {
-  background-color: rgb(248, 249, 250);
+  background-color: #f8f9fa;
   align-items: center;
   min-width: 40px;
   width: 40px;
@@ -104,7 +103,6 @@
   /* margin-top: 3px; */
   justify-content: center;
   cursor: pointer;
-
   position: absolute;
   top: 8px;
   right: 8px;
@@ -154,7 +152,7 @@
   cursor: pointer;
   font-weight: 500;
   color: #222222;
-  font-family: 'IBM Plex Sans', Arial, sans-serif;
+  font-family: "IBM Plex Sans", Arial, sans-serif;
   word-break: break-word;
 }
 
@@ -206,7 +204,7 @@
   width: 144px;
   height: 100px;
   border-radius: 4px;
-  border: 1px solid rgb(0, 121, 211);
+  border: 1px solid #0079d3;
   position: absolute;
   bottom: 30px;
   right: 20px;
@@ -282,7 +280,7 @@
 }
 
 .spoiler {
-  background: linear-gradient(#AAA, rgb(116, 116, 116), #999);
+  background: linear-gradient(#AAA, #747474, #999);
   outline: none;
   border: none;
 }
@@ -301,10 +299,8 @@
   cursor: pointer;
   padding: 10px;
 }
-
 .post-comments:hover {
-  /* background-color: rgba(0,0,0,0.04); */
-  background-color: rgba(232, 232, 232);
+  background-color: #e8e8e8;
   border-radius: 5px;
 }
 
@@ -325,9 +321,8 @@
   cursor: pointer;
   padding: 10px;
 }
-
 .post-share-link:hover {
-  background-color: rgba(232, 232, 232);
+  background-color: #e8e8e8;
   border-radius: 5px;
 }
 
@@ -349,9 +344,8 @@
   cursor: pointer;
   padding: 10px;
 }
-
 .post-save:hover {
-  background-color: rgba(232, 232, 232);
+  background-color: #e8e8e8;
   border-radius: 5px;
 }
 
@@ -382,8 +376,9 @@
   margin-bottom: 5px;
   padding-bottom: 10px;
 }
-
 .post-more:hover {
-  background-color: rgba(232, 232, 232);
+  background-color: #e8e8e8;
   border-radius: 5px;
 }
+
+/*# sourceMappingURL=post.css.map */

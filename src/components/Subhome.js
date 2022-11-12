@@ -55,7 +55,7 @@ export default function Subhome({ cachedPostData }) {
   const widths = getWidths();
 
   return (
-    <div className="Subhome">
+    <div className="subhome">
       <div className="subhome-header">
         <div
           className="subhome-banner"

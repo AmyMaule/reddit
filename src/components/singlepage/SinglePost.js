@@ -19,7 +19,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
   if (page === "home") return null;
 
   return (
-    <div className="SinglePost-page">
+    <div className="single-post-page">
       <div className="singlepost-close">
         <div className="top-bar-votes-container">
           <img src="images/up-arrow.png" className="top-bar-up-arrow" alt="up-arrow" />

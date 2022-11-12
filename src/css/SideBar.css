@@ -1,4 +1,4 @@
-.SideBar {
+.sidebar {
   margin-left: 24px;
   border: 1px solid #CCC;
   width: 310px;
@@ -8,11 +8,6 @@
   border-radius: 4px;
   min-height: 400px;
   max-height: 450px;
-}
-
-@font-face {
-  font-family: BentonSans;
-  src: url(../fonts/BentonSans\ Regular.otf);
 }
 
 .top-community {
@@ -32,9 +27,9 @@
   width: 100%;
   height: 100%;
   display: block;
-  background: linear-gradient(180deg,rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
   position: absolute;
-  content: '';
+  content: "";
 }
 
 .top-community-title {
@@ -53,7 +48,7 @@
 .community {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgb(224, 224, 224);
+  border-bottom: 1px solid #e0e0e0;
   width: 295px;
   height: 48px;
   padding-left: 15px;
@@ -106,7 +101,7 @@
 }
 
 .btn-community-small {
-  color: rgb(0, 121, 211);
+  color: #0079d3;
   background-color: #F6F7F8;
   border-radius: 100vmax;
   font-weight: bold;
@@ -117,11 +112,13 @@
 }
 
 .btn-community-small:hover {
-  background-color: rgb(226, 237, 245);
+  background-color: #e2edf5;
 }
 
 @media screen and (max-width: 959px) {
-  .SideBar {
+  .sidebar {
     display: none;
   }
 }
+
+/*# sourceMappingURL=sidebar.css.map */

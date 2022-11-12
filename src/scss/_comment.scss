@@ -5,7 +5,6 @@
 
 .comment-container li {
   list-style-type: none;
-  /* border-left: 2px solid rgb(199, 84, 84); */
   padding-left: 20px;
   margin-left: -20px;
   padding-left: 5px;
@@ -19,8 +18,7 @@ li, li p, li h1, li h2 {
 }
 
 .comment-border {
-  /* border-left: 2px solid #f51c40; */
-  border-left: 2px solid rgb(237, 239, 241);
+  border-left: 2px solid $light-gray-8;
   margin-left: -5px;
   padding-left: 5px;
   position: relative;
@@ -37,8 +35,7 @@ li, li p, li h1, li h2 {
 }
 
 .subcomment {
-  /* border-left: 2px solid #f7cc3f; */
-  border-left: 2px solid rgb(237, 239, 241);
+  border-left: 2px solid $light-gray-8;
   /* hover 68, 78, 89 */
 }
 
@@ -55,9 +52,9 @@ li, li p, li h1, li h2 {
 
 .comment-author {
   font-size: 0.75rem;
-  color: #1A1A1B;
+  color: $dark-gray-3;
   font-weight: 500;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: $IBMPlexSans;
   margin-left: -5px;
 }
 
@@ -69,7 +66,7 @@ li, li p, li h1, li h2 {
 
 .comment-time-posted {
   font-size: 0.75rem;
-  color: #7c7c7c;
+  color: $mid-gray-3;
 }
 
 .comment-avatar {
@@ -79,7 +76,6 @@ li, li p, li h1, li h2 {
   margin-right: 10px;
   margin-top: -10px;
   border-radius: 50%;
-  /* padding-top: 5px; */
 }
 
 .comment-body {
@@ -92,7 +88,6 @@ li, li p, li h1, li h2 {
 .comment-bottom-bar {
   display: flex;
   position: relative;
-  /* margin-top: auto; */
   margin-left: 18px;
   margin-top: -10px;
 }
@@ -111,7 +106,7 @@ li, li p, li h1, li h2 {
 .comment-votes-count {
   font-size: 0.73rem;
   font-weight: bold;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: $IBMPlexSans;
   margin-right: 5px;
   position: relative;
   top: 8px;
@@ -129,14 +124,14 @@ li, li p, li h1, li h2 {
 }
 
 .comment-link {
-  color: #898989;
+  color: $mid-gray-4;
   font-size: 0.75rem;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: $IBMPlexSans;
   padding: 8px 7px 3px 7px;
   border-radius: 3px;
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(26, 26, 27, 0.1);
+    background-color: $low-opacity-gray;
   }
 }

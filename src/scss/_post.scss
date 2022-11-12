@@ -3,13 +3,19 @@
   src: url(../fonts/NotoSans-Regular.ttf);
 }
 
+.post-container {
+  width: 640px;
+  min-height: 1000px;
+  margin-top: 72px;
+}
+
 .post {
   background-color: white;
   margin-top: 10px;
   border-radius: 5px;
-  border: 1px solid #CCC;
+  border: 1px solid $mid-gray-1;
   display: flex;
-  width: 640px;
+  // width: 640px;
   position: relative;
   /* max-width: 700px; */
 }
@@ -19,7 +25,7 @@
 }
 
 .post-votes {
-  background-color: rgb(248, 249, 250);
+  background-color: $light-gray-1;
   align-items: center;
   min-width: 40px;
   width: 40px;
@@ -78,7 +84,7 @@
 }
 
 .post-posted-by {
-  color: #7c7c7c;
+  color: $mid-gray-3;
   font-size: 0.7rem;
   cursor: pointer;
 }
@@ -86,7 +92,7 @@
 .separator-dot {
   font-size: 8px;
   line-height: 20px;
-  color: #7c7c7c;
+  color: $mid-gray-3;
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -129,7 +135,7 @@
 .post-awards {
   font-size: 0.7rem;
   padding-left: 5px;
-  color: #7c7c7c;
+  color: $mid-gray-3;
   cursor: pointer;
   display: inline-flex;
   flex-wrap: wrap;
@@ -153,8 +159,8 @@
   margin-bottom: 10px;
   cursor: pointer;
   font-weight: 500;
-  color: #222222;
-  font-family: 'IBM Plex Sans', Arial, sans-serif;
+  color: $dark-gray-2;
+  font-family: $IBMPlexSans;
   word-break: break-word;
 }
 
@@ -182,7 +188,7 @@
 }
 
 .flair-oc {
-  background-color: #0079D3;
+  background-color: $blue;
   color: white;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -206,7 +212,7 @@
   width: 144px;
   height: 100px;
   border-radius: 4px;
-  border: 1px solid rgb(0, 121, 211);
+  border: 1px solid $blue;
   position: absolute;
   bottom: 30px;
   right: 20px;
@@ -255,7 +261,7 @@
   outline: none;
   border: none;
   background-color: white;
-  color: #878A8C;
+  color: $mid-gray-2;
   cursor: pointer;
 }
 
@@ -282,12 +288,11 @@
 }
 
 .spoiler {
-  background: linear-gradient(#AAA, rgb(116, 116, 116), #999);
+  background: linear-gradient($mid-gray-1, $mid-gray-2, $mid-gray-3);
   outline: none;
   border: none;
 }
 
-/* start of styles the comments bar at the bottom */
 .post-bottom-bar {
   display: flex;
   margin-top: auto;
@@ -302,7 +307,7 @@
   padding: 10px;
 
   &:hover {
-    background-color: rgba(232, 232, 232);
+    background-color: $light-gray-3;
     border-radius: 5px;
   }
 }
@@ -315,7 +320,7 @@
 .comments {
   position: relative;
   font-size: 0.75rem;
-  color: #898989;
+  color: $mid-gray-4;
   left: 5px;
 }
 
@@ -325,7 +330,7 @@
   padding: 10px;
 
   &:hover {
-    background-color: rgba(232, 232, 232);
+    background-color: $light-gray-3;
     border-radius: 5px;
   }
 }
@@ -338,7 +343,7 @@
 
 .share {
   position: relative;
-  color: #898989;
+  color: $mid-gray-4;
   font-size: 0.75rem;
   top: 1px;
 }
@@ -349,7 +354,7 @@
   padding: 10px;
 
   &:hover {
-    background-color: rgba(232, 232, 232);
+    background-color: $light-gray-3;
     border-radius: 5px;
   }
 }
@@ -362,13 +367,13 @@
 
 .save {
   position: relative;
-  color: #898989;
+  color: $mid-gray-4;
   font-size: 0.75rem;
   left: 5px;
 }
 
 .post-more {
-  color: #898989;
+  color: $mid-gray-4;
   font-size: 1.3rem;
   cursor: pointer;
   height: 50%;
@@ -382,7 +387,7 @@
   padding-bottom: 10px;
 
   &:hover {
-    background-color: rgba(232, 232, 232);
+    background-color: $light-gray-3;
     border-radius: 5px;
   }
 }

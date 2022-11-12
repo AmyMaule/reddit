@@ -1,0 +1,38 @@
+.btn {
+  font-family: $NotoSans;
+  border-radius: 100vmax;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-blue {
+  background-color: $blue;
+  border: 1px solid $blue;
+  color: white;
+}
+
+.btn-blue:hover {
+  background-color: $dark-blue;
+}
+
+.btn-white {
+  background-color: white;
+  border: 1px solid $blue;
+  color: $blue;
+}
+
+.btn-white:hover {
+  background-color: $light-gray-1;
+}
+
+.btn-red {
+  background-color: $red;
+  border: none;
+  color: white;
+}
+
+.btn-red:hover {
+  background-color: $light-red;
+}

@@ -5,10 +5,9 @@
 
 .navbar {
   display: flex;
-  border-bottom: 1px solid #EDEFF1;
-  background-color: #FFF;
+  border-bottom: 1px solid $light-gray-8;
+  background-color: $white;
   height: 48px;
-  /* justify-content: left; */
   position: fixed;
   width: 100%;
   top: 0;
@@ -36,27 +35,26 @@
 
 .searchbar-subreddits {
   position: relative;
-  margin-top: 5px;
-  padding-top: 1px;
   font-family: inherit;
   font-size: 0.9rem;
   box-sizing: border-box;
   min-width: 90%;
   width: 90%;
   max-width: 655px;
-  /* max-width: 655px; */
   height: 36px;
   border-radius: 4px;
   outline: none;
-  border: 1px solid #EDEFF1;
+  border: 1px solid $light-gray-2;
   line-height: 14px;
-  background-color: #F6F7F8;
-  color: #1c1c1c;
+  background-color: $light-gray-1;
+  color: $dark-gray-3;
+  margin-top: 5px;
+  padding-top: 1px;
   z-index: 5;
 
   &:focus,
   &:hover {
-    border-color: rgb(0, 121, 211);
+    border-color: $blue;
   }
 }
 
@@ -71,13 +69,13 @@
 
 .current-subreddit {
   position: relative;
-  background-color: #d6d6d6;
+  background-color: $light-gray-5;
   left: 65px;
   width: fit-content;
   padding: 3px 4px;
   font-size: 0.9rem;
   font-weight: 500;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: $IBMPlexSans;
   bottom: 29px;
   border-radius: 15px;
   z-index: 7;
@@ -87,10 +85,9 @@
   margin-left: 21px;
   margin-top: 7px;
   position: relative;
-  background-color: #f9f9f9;
+  background-color: $light-gray-1;
   width: 655px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  /* z-index: 2; */
+  box-shadow: 0px 8px 16px 0px $very-low-opacity-gray;
   z-index: 25;
 }
 
@@ -105,7 +102,7 @@
 }
 
 .dropdown-div-hover {
-  background-color: #f1f1f1;
+  background-color: $light-gray-2;
 }
 
 .btn-container {
@@ -140,7 +137,7 @@
   cursor: pointer;
 
   &:hover {
-    border: 1px solid #EDEFF1;
+    border: 1px solid $light-gray-8;
   }
 }
 
@@ -154,41 +151,4 @@
   height: 6px;
   padding-bottom: 6px;
   padding-left: 3px;
-}
-
-
-@media screen and (max-width: 1205px) {
-  .btn-login {
-    width: 78px;
-  }
-
-  .btn-signup {
-    width: 85px;
-    padding: 1px 10px;
-    margin-left: 5px;
-  }
-
-  .user-icons-container {
-    margin-left: 0px;
-    margin-right: 0px;
-    width: 67px;
-  }
-
-  .user-icons-container {
-    margin-left: 5px;
-  }
-}
-
-@media screen and (max-width: 1087px) {
-  .logo {
-    width: 33px;
-    height: 33px;
-    background-image: url("../assets/images/logo-small.png");
-  }
-}
-
-@media screen and (max-width: 1087px) {
-  .dropdown-subreddits {
-    width: calc(130%);
-  }
 }

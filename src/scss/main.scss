@@ -1,0 +1,23 @@
+@import "./variables.scss";
+@import "./reset.scss";
+@import "./buttons.scss";
+
+// pages
+@import "comment.scss";
+@import "navbar.scss";
+@import "post.scss";
+@import "sidebar-links.scss";
+@import "sidebar-premium.scss";
+@import "sidebar.scss";
+@import "single-post-sidebar.scss";
+@import "single-post.scss";
+@import "sort-posts.scss";
+@import "subhome.scss";
+@import "trending.scss";
+
+// media queries
+@import "media.scss";
+
+.hide {
+  display: none;
+}

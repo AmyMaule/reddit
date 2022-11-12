@@ -40,14 +40,14 @@
   height: 178px;
   width: 238px;
   border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: $very-low-opacity-gray;
   opacity: 1;
   z-index: 10;
   display: inline;
 }
 
 .no-data {
-  background-color: rgba(125, 130, 180, 0.315);
+  background-color: $low-opacity-blue;
 }
 
 .trending-block-dark {
@@ -66,7 +66,7 @@
 }
 
 .trending-block-dark:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: $very-low-opacity-gray;
   transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
 }
@@ -114,12 +114,4 @@
 
 .trending-block-subreddit-container {
   display: flex;
-}
-
-@media screen and (max-width: 1009px) {
-  .trending-title {
-    /* this margin-left keeps it inline with the trending blocks below */
-    /* margin-left: calc(50% - 495px); */
-    margin-left: calc(50% - 370px);
-  }
 }

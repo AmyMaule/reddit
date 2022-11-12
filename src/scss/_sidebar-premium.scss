@@ -1,6 +1,6 @@
 .sidebar-premium-container {
   margin-left: 24px;
-  border: 1px solid #CCC;
+  border: 1px solid $mid-gray-1;
   width: 310px;
   /* width: 340px; */
   margin-top: 16px;
@@ -45,10 +45,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@media screen and (max-width: 959px) {
-  .sidebar-premium-container {
-    display: none;
-  }
 }

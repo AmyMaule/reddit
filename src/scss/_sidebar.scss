@@ -1,10 +1,14 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .sidebar {
   margin-left: 24px;
-  border: 1px solid #CCC;
+  border: 1px solid $mid-gray-1;
   width: 310px;
-  /* width: 340px; */
   margin-top: 100px;
-  background-color: white;
+  background-color: $white;
   border-radius: 4px;
   min-height: 400px;
   max-height: 450px;
@@ -12,9 +16,8 @@
 
 .top-community {
   width: 310px;
-  /* width: 340px; */
   height: 80px;
-  color: white;
+  color: $white;
   font-weight: bold;
   background-image: url("../assets/images/banner-background.png");
   background-position: contain;
@@ -27,7 +30,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  background: linear-gradient(180deg,rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(180deg, $very-low-opacity-gray 0%, $mid-opacity-gray 100%);
   position: absolute;
   content: '';
 }
@@ -37,7 +40,7 @@
   font-weight: 500;
   line-height: 20px;
   bottom: 8px;
-  color: #fff;
+  color: $white;
   left: 16px;
   position: absolute;
   font-weight: bold;
@@ -48,7 +51,7 @@
 .community {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgb(224, 224, 224);
+  border-bottom: 1px solid $light-gray-4;
   width: 295px;
   height: 48px;
   padding-left: 15px;
@@ -80,7 +83,6 @@
 .view-all-communities {
   padding: 4px 16px;
   width: 280px;
-  /* the margin 0 auto and display: block center the button horizontally */
   margin: 0 auto;
   margin-top: 12px;
   display: block;
@@ -101,22 +103,16 @@
 }
 
 .btn-community-small {
-  color: rgb(0, 121, 211);
-  background-color: #F6F7F8;
+  color: $blue;
+  background-color: $light-gray-1;
   border-radius: 100vmax;
   font-weight: bold;
   padding: 5px;
   font-size: 0.75rem;
   border: none;
   cursor: pointer;
-}
 
-.btn-community-small:hover {
-  background-color: rgb(226, 237, 245);
-}
-
-@media screen and (max-width: 959px) {
-  .sidebar {
-    display: none;
+  &:hover {
+    background-color: $light-gray-7;
   }
 }

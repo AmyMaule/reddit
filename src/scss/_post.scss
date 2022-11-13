@@ -15,9 +15,7 @@
   border-radius: 5px;
   border: 1px solid $mid-gray-1;
   display: flex;
-  // width: 640px;
   position: relative;
-  /* max-width: 700px; */
 }
 
 .link-post {
@@ -56,16 +54,16 @@
   font-weight: bold;
 }
 
-/* flex-direction column keeps the comments bar at the bottom (combined with margin-top: auto) */
 .post-right {
   display: flex;
   flex-direction: column;
+  padding: 2px 0;
 }
 
 .post-top {
-  padding-left: 8px;
   width: 595px;
-  padding-top: 5px;
+  padding-top: 2px;
+  padding-left: 8px;
 }
 
 .subreddit-thumbnail {
@@ -81,6 +79,10 @@
   font-weight: bold;
   font-size: 0.8rem;
   cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .post-posted-by {
@@ -95,41 +97,6 @@
   color: $mid-gray-3;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-.btn-join {
-  float: right;
-  border: none;
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
-  font-weight: 700;
-  line-height: 18px;
-  height: 24px;
-  min-width: 24px;
-  width: 59px;
-  /* margin-right: 13px; */
-  /* margin-top: 3px; */
-  justify-content: center;
-  cursor: pointer;
-
-  position: absolute;
-  top: 8px;
-  right: 8px;
-}
-
-.join {
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
-  font-size: 0.75rem;
-  position: relative;
-  bottom: 5px;
-  left: 2px;
-  letter-spacing: 0.5px;
-}
-
-.plus {
-  position: relative;
-  right: 2px;
-  font-size: 30px;
-  font-weight: lighter;
 }
 
 .post-awards {

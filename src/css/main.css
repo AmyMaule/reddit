@@ -56,6 +56,21 @@ body {
   background-color: hwb(16 8% 0%);
 }
 
+.btn-join {
+  position: absolute;
+  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  height: 24px;
+  min-width: 24px;
+  width: 59px;
+  cursor: pointer;
+  top: 8px;
+  right: 8px;
+}
+
 .comment-container {
   align-items: center;
   width: 100%;
@@ -361,7 +376,6 @@ li, li p, li h1, li h2 {
   border: 1px solid #cccccc;
   display: flex;
   position: relative;
-  /* max-width: 700px; */
 }
 
 .link-post {
@@ -400,16 +414,16 @@ li, li p, li h1, li h2 {
   font-weight: bold;
 }
 
-/* flex-direction column keeps the comments bar at the bottom (combined with margin-top: auto) */
 .post-right {
   display: flex;
   flex-direction: column;
+  padding: 2px 0;
 }
 
 .post-top {
-  padding-left: 8px;
   width: 595px;
-  padding-top: 5px;
+  padding-top: 2px;
+  padding-left: 8px;
 }
 
 .subreddit-thumbnail {
@@ -426,6 +440,9 @@ li, li p, li h1, li h2 {
   font-size: 0.8rem;
   cursor: pointer;
 }
+.post-subreddit:hover {
+  text-decoration: underline;
+}
 
 .post-posted-by {
   color: #7c7c7c;
@@ -439,40 +456,6 @@ li, li p, li h1, li h2 {
   color: #7c7c7c;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-.btn-join {
-  float: right;
-  border: none;
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
-  font-weight: 700;
-  line-height: 18px;
-  height: 24px;
-  min-width: 24px;
-  width: 59px;
-  /* margin-right: 13px; */
-  /* margin-top: 3px; */
-  justify-content: center;
-  cursor: pointer;
-  position: absolute;
-  top: 8px;
-  right: 8px;
-}
-
-.join {
-  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
-  font-size: 0.75rem;
-  position: relative;
-  bottom: 5px;
-  left: 2px;
-  letter-spacing: 0.5px;
-}
-
-.plus {
-  position: relative;
-  right: 2px;
-  font-size: 30px;
-  font-weight: lighter;
 }
 
 .post-awards {
@@ -1652,11 +1635,12 @@ li, li p, li h1, li h2 {
 .popular-container {
   display: flex;
   flex: 1;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
   border-radius: 5px;
   border: 1px solid #cccccc;
-  align-items: center;
-  justify-content: space-between;
+  padding: 0 6px 0 14px;
   width: 640px;
 }
 
@@ -1680,9 +1664,8 @@ li, li p, li h1, li h2 {
   background-color: #f5fafd;
   border-radius: 100vmax;
   font-weight: bold;
-  padding: 1px 8px 7px 8px;
   font-size: 1rem;
-  margin-left: 20px;
+  padding: 1px 9px 7px 9px;
   cursor: pointer;
 }
 .popular-hot:hover {
@@ -1694,9 +1677,10 @@ li, li p, li h1, li h2 {
   background-color: #f5fafd;
   border-radius: 100vmax;
   font-weight: bold;
-  padding: 6px 17px;
   font-size: 1rem;
+  padding: 6px 17px;
   margin-right: 10px;
+  margin-left: 5px;
   cursor: pointer;
 }
 .popular-location:hover {
@@ -1707,6 +1691,7 @@ li, li p, li h1, li h2 {
   height: 6px;
   position: relative;
   left: 5px;
+  bottom: 1px;
   align-self: center;
 }
 
@@ -1732,7 +1717,7 @@ li, li p, li h1, li h2 {
   font-size: 1rem;
   font-weight: bold;
   right: 2px;
-  padding: 3px 7px 6px 7px;
+  padding: 3px 8px 6px 7px;
   cursor: pointer;
   border-radius: 20px;
 }
@@ -1744,7 +1729,7 @@ li, li p, li h1, li h2 {
   position: relative;
   height: 22px;
   top: 5px;
-  right: 4px;
+  right: 3px;
 }
 
 .top-grey {
@@ -1772,9 +1757,9 @@ li, li p, li h1, li h2 {
   color: #878a8c;
   font-size: 1rem;
   font-weight: bold;
-  cursor: pointer;
   border-radius: 18px;
-  padding: 0 6px 6px 8px;
+  padding: 0 8px 6px 10px;
+  cursor: pointer;
 }
 .popular-top:hover {
   background-color: #f1f1f1;
@@ -1782,30 +1767,30 @@ li, li p, li h1, li h2 {
 
 .popular-today {
   position: relative;
+  display: flex;
   color: #0079d3;
-  left: 4px;
   font-size: 1rem;
   font-weight: bold;
   right: 10px;
-  cursor: pointer;
-  display: flex;
+  left: 4px;
   padding: 5px 0px;
+  cursor: pointer;
 }
 
 .popular-more {
   position: relative;
+  display: flex;
+  justify-content: center;
   left: 9px;
-  padding: 2px;
   color: #878a8c;
   font-size: 1.2rem;
   font-weight: bold;
   letter-spacing: 1px;
-  cursor: pointer;
   line-height: 15px;
-  display: flex;
-  justify-content: center;
   height: 25px;
   width: 25px;
+  padding: 3px;
+  cursor: pointer;
 }
 .popular-more:hover {
   background-color: #f1f1f1;
@@ -1813,11 +1798,8 @@ li, li p, li h1, li h2 {
 }
 
 .popular-view {
-  padding-left: 145px;
-  padding-right: 12px;
-  margin-right: 0;
   position: relative;
-  right: 2px;
+  margin-left: auto;
 }
 
 .rectangle-icon {
@@ -1826,11 +1808,11 @@ li, li p, li h1, li h2 {
   position: relative;
   top: 3px;
   cursor: pointer;
-  padding: 4px 7px;
+  padding: 6px 10px 6px 13px;
 }
 .rectangle-icon:hover {
   background-color: #f5fafd;
-  border-radius: 5px;
+  border-radius: 100vmax;
 }
 
 .dropdown-location-container {
@@ -1855,16 +1837,16 @@ li, li p, li h1, li h2 {
 
 .dropdown-location {
   position: relative;
+  display: block;
   background-color: white;
-  width: 115px;
   color: #878a8c;
+  width: 115px;
   font-size: 0.9rem;
   font-weight: 500;
-  cursor: pointer;
   padding: 7px 0px 7px 5px;
   text-decoration: none;
-  display: block;
   z-index: 5;
+  cursor: pointer;
 }
 .dropdown-location:hover {
   background-color: #f1f1f1;
@@ -2242,10 +2224,20 @@ li, li p, li h1, li h2 {
     width: 130%;
   }
 }
+@media screen and (max-width: 1060px) {
+  .trending {
+    max-width: 90%;
+  }
+}
 @media screen and (max-width: 1040px) {
   .post-container {
-    width: unset;
-    margin: 72px 0 0 24px;
+    display: block;
+    width: calc(100% - 48px - 24px - 310px);
+    margin: 72px 0 72px 24px;
+  }
+
+  .sidebar-container {
+    margin-right: 24px;
   }
 }
 @media screen and (max-width: 1009px) {
@@ -2254,6 +2246,11 @@ li, li p, li h1, li h2 {
   }
 }
 @media screen and (max-width: 960px) {
+  .post-container {
+    width: 100%;
+    margin: 72px 24px;
+  }
+
   .sidebar,
 .sidebar-container,
 .single-post-sidebar,

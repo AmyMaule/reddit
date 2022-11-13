@@ -1012,7 +1012,7 @@ li, li p, li h1, li h2 {
   width: 54px;
   height: 54px;
   border-radius: 50%;
-  margin: 10px 0 -20px 0;
+  margin: 10px 0 2px -20px;
   cursor: pointer;
 }
 

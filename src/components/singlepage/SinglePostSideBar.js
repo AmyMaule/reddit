@@ -47,23 +47,23 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
   return (
     <div className={`single-post-sidebar ${page === "comment" ? "sidebar-height" : "subhome-sidebar-margin"}`}>
       <div 
-        className="singlepostsidebar-banner"
+        className="single-post-sidebar-banner"
         style={{color: "white", backgroundColor: bannerBackgroundColor, height: aboutCommunityHeight}}
       >
         {page !== "subhome" && <div className="about-community">About Community</div>}
       </div>
-      <div className="singlepostsidebar-container">
+      <div className="single-post-sidebar-container">
         {page === "comment" && 
           <img
             src={cachedPostData.thumbnail || "images/logo-small.png"}
             alt=""
-            className="singlepostsidebar-subreddit-thumbnail"
+            className="single-post-sidebar-subreddit-thumbnail"
             onClick={() => setSelectedSubreddit(display_name_prefixed)}
           />
         }
         {page === "comment" && 
           <h2 
-            className="singlepostsidebar-subreddit"
+            className="single-post-sidebar-subreddit"
             onClick={singlePostSetSubhome}
           >
             {display_name_prefixed}
@@ -71,25 +71,25 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
         }
       </div>
       <div 
-        className="singlepostsidebar-description"
+        className="single-post-sidebar-description"
         dangerouslySetInnerHTML={{__html: htmlDecodeWithReplace(cachedPostData)}}
       ></div>
-      <div className="singlepostsidebar-member-info-container">
-        <div className="singlepostsidebar-members-container">
-          <h6 className="singlepostsidebar-num-members">{totalMembers}</h6>
-          <h6 className="singlepostsidebar-members-text">Members</h6>
+      <div className="single-post-sidebar-info-container">
+        <div className="single-post-sidebar-members-container">
+          <h6 className="single-post-sidebar-members">{totalMembers}</h6>
+          <h6 className="single-post-sidebar-members-text">Members</h6>
         </div>
-        <div className="singlepostsidebar-online-container">
-          <h6 className="singlepostsidebar-num-online">{activeUsers}</h6>
-          <h6 className="singlepostsidebar-online-text">Online</h6>
+        <div className="single-post-sidebar-online-container">
+          <h6 className="single-post-sidebar-online">{activeUsers}</h6>
+          <h6 className="single-post-sidebar-online-text">Online</h6>
         </div>
       </div>
-      <div className="singlepostsidebar-border"></div>
-      <div className="singlepostsidebar-created-container">
-        <img src="images/cake.png" className="singlepostsidebar-cake" alt="" />
-        <h6>Created {created.slice(3)}</h6>
+      <div className="single-post-sidebar-hr"></div>
+      <div className="single-post-sidebar-created-container">
+        <img src="images/cake.png" className="single-post-sidebar-cake" alt="" />
+        <h6 className="single-post-side-bar-created">Created {created.slice(3)}</h6>
       </div>
-      <button className="btn singlepostsidebar-view-all-communities" style={btnStyle}>Join</button>
+      <button className="btn single-post-sidebar-all-communities" style={btnStyle}>Join</button>
     </div>
   )
 }

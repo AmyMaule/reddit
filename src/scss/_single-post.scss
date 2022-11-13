@@ -363,16 +363,16 @@
   position: relative;
   font-size: 0.75rem;
   color: $mid-gray-4;
+
+  &:hover {
+    background-color: $ultra-low-opacity-gray;
+    border-radius: 5px;
+  }
 }
 
 .singlepost-comments-text {
   position: relative;
   left: 8px;
-}
-
-.singlepost-comments:hover {
-  background-color: $ultra-low-opacity-gray;
-  border-radius: 5px;
 }
 
 .singlepost-comments-speechbubble {
@@ -385,11 +385,11 @@
   display: flex;
   cursor: pointer;
   padding: 10px;
-}
 
-.singlepost-share-link:hover {
-  background-color: $ultra-low-opacity-gray;
-  border-radius: 5px;
+  &:hover {
+    background-color: $ultra-low-opacity-gray;
+    border-radius: 5px;
+  }
 }
 
 .singlepost-share-arrow {
@@ -409,11 +409,11 @@
   display: flex;
   cursor: pointer;
   padding: 10px;
-}
 
-.singlepost-save:hover {
-  background-color: $ultra-low-opacity-gray;
-  border-radius: 5px;
+  &:hover {
+    background-color: $ultra-low-opacity-gray;
+    border-radius: 5px;
+  }
 }
 
 .singlepost-save-banner {
@@ -434,6 +434,11 @@
   display: flex;
   cursor: pointer;
   padding: 10px;
+  
+  &:hover {
+    background-color: $ultra-low-opacity-gray;
+    border-radius: 5px;
+  }
 }
 
 .singlepost-hide-banner {
@@ -441,25 +446,20 @@
   height: 20px;
 }
 
-.singlepost-hide:hover {
-  background-color: $ultra-low-opacity-gray;
-  border-radius: 5px;
-}
-
 .singlepost-report {
   display: flex;
   cursor: pointer;
   padding: 10px;
+
+  &:hover {
+    background-color: $ultra-low-opacity-gray;
+    border-radius: 5px;
+  }
 }
 
 .singlepost-report-banner {
   width: 15px;
   height: 18px;
-}
-
-.singlepost-report:hover {
-  background-color: $ultra-low-opacity-gray;
-  border-radius: 5px;
 }
 
 .signup-bar {
@@ -477,6 +477,7 @@
 .signup-text {
   color: $mid-gray-3;
   font-weight: 600;
+  margin: auto 0;
 }
 
 .post-btn-login {
@@ -486,6 +487,10 @@
   min-width: 32px;
   font-size: 14px;
   line-height: 14px;
+
+  &:hover {
+    background-color: $light-gray-1;
+  }
 }
 
 .post-btn-signup {
@@ -494,14 +499,10 @@
   min-width: 32px;
   font-size: 14px;
   line-height: 14px;
-}
 
-.post-btn-login:hover {
-  background-color: $light-gray-1;
-}
-
-.post-btn-signup:hover {
-  background-color: $dark-blue;
+  &:hover {
+    background-color: $dark-blue;
+  }
 }
 
 .singlepost-comment-container {

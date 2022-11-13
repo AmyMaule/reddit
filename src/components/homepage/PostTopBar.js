@@ -72,10 +72,7 @@ export default function PostTopBar({ setSelectedSubreddit, post, thumbnail, setS
       <span className="separator-dot">•</span>
       <span className="post-posted-by">Posted by u/{author} {posted} ago</span>
       <span className="post-awards" onClick={() => setShowAll(true)}>{awards}</span>
-      <button className="btn btn-blue btn-join">
-        <span className="plus">+</span>
-        <span className="join">Join</span>
-      </button>
+      <button className="btn btn-blue btn-join">Join</button>
     </div>
   )
 }

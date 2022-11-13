@@ -32,10 +32,26 @@
   }
 }
 
+@media screen and (max-width: 1060px) {
+  .trending {
+    max-width: 90%;
+  }
+
+  // .trending-block-img {
+  //   // height: 178px; previous values
+  //   // width: 238px;
+  // }
+}
+
 @media screen and (max-width: 1040px) {
   .post-container {
-    width: unset;
-    margin: 72px 0 0 24px;
+    display: block;
+    width: calc(100% - 48px - 24px - 310px);
+    margin: 72px 0 72px 24px;
+  }
+
+  .sidebar-container {
+    margin-right: 24px;
   }
 }
 
@@ -47,6 +63,11 @@
 }
 
 @media screen and (max-width: 960px) {
+  .post-container {
+    width: 100%;
+    margin: 72px 24px;
+  }
+
   .sidebar,
   .sidebar-container,
   .single-post-sidebar,

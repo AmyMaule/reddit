@@ -36,3 +36,18 @@
     background-color: $light-red;
   }
 }
+
+.btn-join {
+  position: absolute;
+  font-family: NotoSans, BentonSans, Verdana, arial, helvetica, sans-serif;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  height: 24px;
+  min-width: 24px;
+  width: 59px;
+  cursor: pointer;
+  top: 8px;
+  right: 8px;
+}

@@ -51,7 +51,7 @@ export default function Trending({ page }) {
           .catch(err => console.log(err));
         setIsLoading(false);
         // remove encoding from the image from the API
-        link.img = link.preview.images[0].source.url.replace("&amp;", "&");
+        link.img = link.preview.images[0].source.url.replaceAll("&amp;", "&");
       });
     }
   }, [trendingLinks]);
@@ -60,9 +60,13 @@ export default function Trending({ page }) {
   useEffect(() => {
     function handleResize() {
       setNumLinks(() => {
-        return window.innerWidth >= 1010
+        return window.innerWidth > 999
           ? 4
-          : 3;
+          : window.innerWidth > 749
+            ? 3
+            : window.innerWidth > 519
+              ? 2
+              : 1;
       });
     }
     // Call handleResize immediately so state is updated with initial window size

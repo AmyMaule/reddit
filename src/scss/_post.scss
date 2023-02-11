@@ -57,6 +57,7 @@
 .post-right {
   display: flex;
   flex-direction: column;
+  width: 599px;
   padding: 2px 0;
 }
 
@@ -191,7 +192,6 @@
   background-color: black;
   justify-content: center;
   display: flex;
-  width: 600px;
   margin-top: 10px;
   position: relative;
   cursor: pointer;
@@ -202,18 +202,19 @@
   justify-content: center;
   align-items: center;
   max-width: 600px;
+  // max-width: 100%;
 }
 
 .post-image {
-  max-width: 600px;
-  cursor: pointer;
-  max-height: 510px;
   position: relative;
+  max-width: 100%;
+  max-height: 510px;
   padding-bottom: 4px;
+  cursor: pointer;
 }
 
 .post-gallery-image {
-  max-width: 600px;
+  max-width: 100%;
   cursor: pointer;
   max-height: 510px;
   position: relative;
@@ -251,7 +252,7 @@
 .post-video {
   position: relative;
   max-height: 500px;
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .spoiler {

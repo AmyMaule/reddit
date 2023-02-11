@@ -55,7 +55,11 @@
   }
 
   .sidebar-container {
-    margin-right: 24px;
+    margin: 72px 24px 72px 0;
+  }
+
+  .subhome {
+    margin-bottom: -72px;
   }
 }
 
@@ -79,6 +83,14 @@
   .sidebar-links,
   .sidebar-premium-container {
     display: none;
+  }
+
+  .post-top,
+  .post-right,
+  .img-center {
+    width: unset;
+    width: 100%;
+    max-width: unset;
   }
 }
 

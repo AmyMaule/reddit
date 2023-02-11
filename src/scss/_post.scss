@@ -6,7 +6,6 @@
 .post-container {
   width: 640px;
   min-height: 1000px;
-  margin-top: 72px;
 }
 
 .post {
@@ -31,27 +30,19 @@
   flex-direction: column;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
-}
-
-.post-votes-up {
-  width: 18px;
-  height: 18px;
   padding-top: 10px;
-  cursor: pointer;
 }
 
-.post-votes-down {
-  padding-top: 4px;
+.post-votes-arrow {
   width: 18px;
   height: 18px;
   cursor: pointer;
 }
 
 .post-votes-count {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 0.73rem;
   font-weight: bold;
+  font-size: 0.73rem;
+  padding: 5px 0 9px 0;
 }
 
 .post-right {
@@ -94,20 +85,18 @@
 
 .separator-dot {
   font-size: 8px;
-  line-height: 20px;
   color: $mid-gray-3;
   padding-left: 5px;
   padding-right: 5px;
 }
 
 .post-awards {
-  font-size: 0.7rem;
-  padding-left: 5px;
-  color: $mid-gray-3;
-  cursor: pointer;
   display: inline-flex;
   flex-wrap: wrap;
-  margin-right: 80px;
+  font-size: 0.7rem;
+  color: $mid-gray-3;
+  cursor: pointer;
+  margin: 0 80px 0 5px;
 }
 
 .post-award {
@@ -115,21 +104,17 @@
   width: 16px;
   line-height: 16px;
   vertical-align: middle;
-  padding-right: 3px;
-  padding-left: 3px;
+  margin: 0 3px;
 }
 
 .post-title {
-  padding-left: 8px;
-  padding-right: 40px;
+  font-family: $IBMPlexSans;
   font-size: 1.1rem;
-  padding-top: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
   font-weight: 500;
   color: $dark-gray-2;
-  font-family: $IBMPlexSans;
   word-break: break-word;
+  cursor: pointer;
+  margin: 12px 40px 10px 8px;
 }
 
 .post-title-shortened {
@@ -189,7 +174,7 @@
 }
 
 .video-background {
-  background-color: black;
+  background-color: $black;
   justify-content: center;
   display: flex;
   margin-top: 10px;
@@ -202,7 +187,6 @@
   justify-content: center;
   align-items: center;
   max-width: 600px;
-  // max-width: 100%;
 }
 
 .post-image {
@@ -251,8 +235,9 @@
 
 .post-video {
   position: relative;
-  max-height: 500px;
+  height: 500px;
   max-width: 100%;
+  object-fit: contain;
 }
 
 .spoiler {

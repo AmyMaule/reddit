@@ -143,12 +143,12 @@
 
 .user-icon {
   height: 21px;
-  padding-left: 15px;
-  padding-top: 4px;
+  margin: 4px 0 0 15px;
 }
 
 .v-icon {
+  position: relative;
   height: 6px;
-  padding-bottom: 6px;
-  padding-left: 3px;
+  bottom: 6px;
+  margin-left: 3px;
 }

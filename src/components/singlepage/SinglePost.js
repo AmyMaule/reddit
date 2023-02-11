@@ -43,11 +43,11 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
           <div className="singlepost-post">
             <div className="singlepost-votes">
               <div>
-                <img className="singlepost-votes-up" src="images/up-arrow.png" alt="up-arrow" />
+                <img className="post-votes-arrow" src="images/up-arrow.png" alt="up-arrow" />
               </div>
               <div className="singlepost-votes-count">{cachedPostData.votes}</div>
               <div>
-                <img className="singlepost-votes-down" src="images/down-arrow.png" alt="down-arrow" />
+                <img className="singlepost-votes-arrow" src="images/down-arrow.png" alt="down-arrow" />
               </div>
             </div>
             <div className="singlepost-right">

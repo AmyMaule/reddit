@@ -87,11 +87,11 @@ export default function Post({ post, setSelectedSubreddit, setScrollPosition, se
     >
       <div className="post-votes">
         <div>
-          <img className="post-votes-up" src="images/up-arrow.png"s alt="up-arrow" />
+          <img className="post-votes-arrow" src="images/up-arrow.png"s alt="up-arrow" />
         </div>
         <div className="post-votes-count">{votes}</div>
         <div>
-          <img className="post-votes-down" src="images/down-arrow.png" alt="down-arrow" />
+          <img className="post-votes-arrow" src="images/down-arrow.png" alt="down-arrow" />
         </div>
       </div>
       <div className="post-right">

@@ -21,7 +21,7 @@
   background-color: black;
   /* must keep z-index at 1 or the search is obstructed */
   z-index: 1;
-  top: 48px;
+  // top: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,14 +161,7 @@
   flex-direction: column;
 }
 
-.singlepost-votes-up {
-  width: 18px;
-  height: 18px;
-  padding-top: 10px;
-  cursor: pointer;
-}
-
-.singlepost-votes-down {
+.singlepost-votes-arrow {
   padding-top: 4px;
   width: 18px;
   height: 18px;

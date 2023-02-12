@@ -90,7 +90,7 @@ export default function Subhome({ cachedPostData }) {
               <div className="r-bar-link">Best of</div>
             </div>
           </div>
-          <div className="subhome-r-bar-positioning" style={{width: widths.positioningWidth}}></div>
+          <div className="subhome-r-bar-positioning" style={{width: widths.positioningWidth}} />
         </div>
       </div>
     </div>

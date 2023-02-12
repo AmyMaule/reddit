@@ -56,7 +56,7 @@ export default function Comment({ comment }) {
             </div>
           </div>
           <div className="comment-border">
-            <div className="comment-body" dangerouslySetInnerHTML={{__html: htmlDecode(body_html)}}></div>
+            <div className="comment-body" dangerouslySetInnerHTML={{__html: htmlDecode(body_html)}} />
             <div className="comment-bottom-bar">
               <div className="comment-votes">
                 <img className="comment-votes-up" src="images/up-arrow.png" alt="up-arrow" />
@@ -78,7 +78,7 @@ export default function Comment({ comment }) {
       {replies && replies.data.children.map((subcomment, i) => {
         /* the last object in the children array isn't a comment so shouldn't render */
         if (replies.data.children.length !== 1 && i === replies.data.children.length - 1) {
-          return <Fragment key={i}></Fragment>;
+          return null;
         }
         return (
           <li className="subcomment" key={subcomment.data.id}>

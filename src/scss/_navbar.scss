@@ -29,7 +29,8 @@
 }
 
 .searchbar-container {
-  width: 60%;
+  width: 100%;
+  max-width: 700px;
   margin-left: 5px;
 }
 
@@ -37,10 +38,7 @@
   position: relative;
   font-family: inherit;
   font-size: 0.9rem;
-  box-sizing: border-box;
-  min-width: 90%;
-  width: 90%;
-  max-width: 655px;
+  width: 93%;
   height: 36px;
   border-radius: 4px;
   outline: none;
@@ -48,7 +46,7 @@
   line-height: 14px;
   background-color: $light-gray-1;
   color: $dark-gray-3;
-  margin-top: 5px;
+  margin-top: 6px;
   padding-top: 1px;
   z-index: 5;
 
@@ -151,4 +149,50 @@
   height: 6px;
   bottom: 6px;
   margin-left: 3px;
+}
+
+.hamburger-container {
+  display: none;
+  position: relative;
+  margin: auto;
+}
+
+.navbar-hamburger {
+  font-size: 20px;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+  margin: auto 10px auto 0;
+}
+
+.hamburger-options-container {
+  position: absolute;
+  width: 150px;
+  border-radius: 5px;
+  background-color: $light-gray-1;
+  box-shadow: 0px 8px 16px 0px $very-low-opacity-gray;
+  z-index: 25;
+  top: 36px;
+  right: 5px;
+}
+
+.hamburger-option {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $light-gray-2;
+  }
+
+  &:nth-child(1) {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  &:nth-child(2) {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
 }

@@ -1,4 +1,8 @@
-@media screen and (max-width: 1205px) {
+@media screen and (max-width: 1087px) {
+  .dropdown-subreddits {
+    width: calc(130%);
+  }
+  
   .btn-login {
     width: 78px;
   }
@@ -10,25 +14,8 @@
   }
 
   .user-icons-container {
-    margin-left: 0px;
-    margin-right: 0px;
     width: 67px;
-  }
-
-  .user-icons-container {
     margin-left: 5px;
-  }
-}
-
-@media screen and (max-width: 1087px) {
-  .logo {
-    width: 33px;
-    height: 33px;
-    background-image: url("../assets/images/logo-small.png");
-  }
-
-  .dropdown-subreddits {
-    width: calc(130%);
   }
 }
 
@@ -72,6 +59,12 @@
 }
 
 @media screen and (max-width: 960px) {
+  .logo {
+    width: 33px;
+    height: 33px;
+    background-image: url("../assets/images/logo-small.png");
+  }
+
   .post-container {
     width: 100%;
     margin: 72px 24px;
@@ -95,10 +88,38 @@
 }
 
 @media screen and (max-width: 750px) {
+  .logo {
+    left: 7px;
+    margin: 0;
+  }
+
+  .searchbar-container {
+    margin: 0;
+  }
+
+  .user-icons-container {
+    width: 50px;
+    margin-right: 7px;
+  }
+
+  .user-icon {
+    margin: 4px 0 0 5px;
+  }
+
   .trending-block-dark,
   .trending-block-img {
     max-width: 310px;
     width: 43vw;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .btn-container {
+    display: none;
+  }
+
+  .hamburger-container {
+    display: block;
   }
 }
 

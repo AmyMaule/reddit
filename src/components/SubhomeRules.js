@@ -61,7 +61,7 @@ export default function SubhomeRules({ cachedPostData }) {
             <div className="subhome-rule-container-outer" key={i} style={{cursor: cursorStatus}}>
               <div onClick={e => toggleRule(e, i)} className="subhome-rule-container">
                 <span className="subhome-rule-number">{i+1}.</span>
-                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecode(rule.short_name)}}></span>
+                <span className="subhome-rule" dangerouslySetInnerHTML={{__html: htmlDecode(rule.short_name)}} />
               </div>
               {rules[i].description &&
                 <div className="v-container">

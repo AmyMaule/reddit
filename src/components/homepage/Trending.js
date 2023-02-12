@@ -81,7 +81,7 @@ export default function Trending({ page }) {
       <h2 className="trending-title">Trending today</h2>
         <div className="trending-blocks">
         {isLoading
-          ? <div className="trending-block-img"></div>
+          ? <div className="trending-block-img" />
           : <>
               {trendingLinks.slice(0, numLinks).map((link, i) => {
                 const URL = link.url_overridden_by_dest;

@@ -46,9 +46,7 @@
 }
 
 .post-right {
-  display: flex;
-  flex-direction: column;
-  width: 599px;
+  overflow: hidden;
   padding: 2px 0;
 }
 

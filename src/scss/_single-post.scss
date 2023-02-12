@@ -153,29 +153,6 @@
   margin-left: 32px;
 }
 
-.singlepost-votes {
-  align-items: center;
-  min-width: 40px;
-  width: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-.singlepost-votes-arrow {
-  padding-top: 4px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.singlepost-votes-count {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 0.73rem;
-  font-weight: bold;
-}
-
-/* flex-direction column keeps the comments bar at the bottom (combined with margin-top: auto) */
 .singlepost-right {
   display: flex;
   flex-direction: column;

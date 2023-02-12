@@ -73,7 +73,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
       <div 
         className="single-post-sidebar-description"
         dangerouslySetInnerHTML={{__html: htmlDecodeWithReplace(cachedPostData)}}
-      ></div>
+      />
       <div className="single-post-sidebar-info-container">
         <div className="single-post-sidebar-members-container">
           <h6 className="single-post-sidebar-members">{totalMembers}</h6>
@@ -84,7 +84,7 @@ export default function SinglePostSideBar({ cachedPostData, setSelectedSubreddit
           <h6 className="single-post-sidebar-online-text">Online</h6>
         </div>
       </div>
-      <div className="single-post-sidebar-hr"></div>
+      <div className="single-post-sidebar-hr" />
       <div className="single-post-sidebar-created-container">
         <img src="images/cake.png" className="single-post-sidebar-cake" alt="" />
         <h6 className="single-post-side-bar-created">Created {created.slice(3)}</h6>

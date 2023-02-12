@@ -41,14 +41,10 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
       </div>
       <div className="singlepost-container">
           <div className="singlepost-post">
-            <div className="singlepost-votes">
-              <div>
-                <img className="post-votes-arrow" src="images/up-arrow.png" alt="up-arrow" />
-              </div>
-              <div className="singlepost-votes-count">{cachedPostData.votes}</div>
-              <div>
-                <img className="singlepost-votes-arrow" src="images/down-arrow.png" alt="down-arrow" />
-              </div>
+            <div className="post-votes">
+              <img className="post-votes-arrow" src="images/up-arrow.png" alt="up-arrow" />
+              <div className="post-votes-count">{cachedPostData.votes}</div>
+              <img className="post-votes-arrow" src="images/down-arrow.png" alt="down-arrow" />
             </div>
             <div className="singlepost-right">
               <SinglePostTopBar
@@ -107,7 +103,7 @@ export default function SinglePost({ clickedPost, cachedPostData, page, setPage,
               <div className="singlepost-comment-container">
                 {comments && comments.map(comment => <Comment comment={comment.data} key={comment.data.name} />)}
               </div>
-              <div className="after-comment-box"></div>
+              <div className="after-comment-box" />
             </div>
           </div>
           <div className="sidebar-container">

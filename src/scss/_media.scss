@@ -1,8 +1,33 @@
-@media screen and (max-width: 1087px) {
-  .dropdown-subreddits {
-    width: calc(130%);
+@media screen and (max-width: 1200px) {
+  .logo {
+    height: 33px;
+    min-width: 105px;
+    margin: 0 10px 0 20px;
   }
-  
+
+  .btn-login,
+  .btn-signup {
+    width: 115px;
+  }
+
+  .user-icons-container {
+    width: 67px;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .dropdown-subreddits {
+    width: 93%;
+  }
+
+  .btn-login,
+  .btn-signup {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 1120px) {
   .btn-login {
     width: 78px;
   }
@@ -10,11 +35,6 @@
   .btn-signup {
     width: 85px;
     padding: 1px 10px;
-    margin-left: 5px;
-  }
-
-  .user-icons-container {
-    width: 67px;
     margin-left: 5px;
   }
 }
@@ -59,12 +79,6 @@
 }
 
 @media screen and (max-width: 960px) {
-  .logo {
-    width: 33px;
-    height: 33px;
-    background-image: url("../assets/images/logo-small.png");
-  }
-
   .post-container {
     width: 100%;
     margin: 72px 24px;
@@ -87,25 +101,40 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+.logo {
+  min-width: 33px;
+  background-image: url("../assets/images/logo-small.png");
+  margin: 0 5px 0 8px;
+}
+
+.searchbar-container {
+  margin: 0;
+}
+
+.searchbar-subreddits {
+  margin-left: -17px;
+}
+
+.search-icon {
+  left: 19px;
+}
+
+.dropdown-subreddits {
+  margin-left: 5px;
+}
+
+.user-icons-container {
+  width: 50px;
+  margin-right: 7px;
+}
+
+.user-icon {
+  margin: 4px 0 0 5px;
+}
+}
+
 @media screen and (max-width: 750px) {
-  .logo {
-    left: 7px;
-    margin: 0;
-  }
-
-  .searchbar-container {
-    margin: 0;
-  }
-
-  .user-icons-container {
-    width: 50px;
-    margin-right: 7px;
-  }
-
-  .user-icon {
-    margin: 4px 0 0 5px;
-  }
-
   .trending-block-dark,
   .trending-block-img {
     max-width: 310px;
@@ -113,7 +142,11 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 670px) {
+  .dropdown-subreddits {
+    width: calc(100% - 5.75vw);
+  }
+
   .btn-container {
     display: none;
   }
@@ -129,4 +162,8 @@
     max-width: unset;
     width: 100%;
   }
+
+  // .searchbar-subreddits {
+  //   margin-left: -15px;
+  // }
 }

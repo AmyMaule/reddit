@@ -40,9 +40,7 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
 
   return (
     <div className="navbar">
-      <div className="logo-container" onClick={handleReturnToHome}>
-        <div className="logo" />
-      </div>
+      <div className="logo" onClick={handleReturnToHome} />
       <Searchbar 
         selectedSubreddit={selectedSubreddit}
         setSelectedSubreddit={setSelectedSubreddit}
@@ -54,8 +52,8 @@ export default function Navbar({ selectedSubreddit, setSelectedSubreddit, search
         setSortTop={setSortTop}
         setScrollPosition={setScrollPosition}
       />
-      <div className="hamburger-container">
-        <img src="images/hamburger.png" className="navbar-hamburger" alt="" onClick={toggleHamburger} />
+      <div className="hamburger-container" onClick={toggleHamburger} >
+        <img src="images/hamburger.png" className="navbar-hamburger" alt="" />
         {hamburgerOpen && 
           <div className="hamburger-options-container" ref={hamburgerOptionsRef}>
             <div className="hamburger-option">Log in</div>

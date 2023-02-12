@@ -16,22 +16,20 @@
 }
 
 .logo {
-  height: 33px;
-  width: 129px;
   position: relative;
-  top: 7px;
-  left: 20px;
+  height: 33px;
+  min-width: 129px;
   background-image: url("../assets/images/logo.png");
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
-  margin-right: 10px;
+  top: 7px;
+  margin: 0 10px 0 20px;
 }
 
 .searchbar-container {
   width: 100%;
   max-width: 700px;
-  margin-left: 5px;
 }
 
 .searchbar-subreddits {
@@ -47,7 +45,7 @@
   background-color: $light-gray-1;
   color: $dark-gray-3;
   margin-top: 6px;
-  padding-top: 1px;
+  padding: 1px 0 0 0;
   z-index: 5;
 
   &:focus,
@@ -81,7 +79,7 @@
 
 .dropdown-subreddits {
   margin-left: 21px;
-  margin-top: 7px;
+  margin-top: 6px;
   position: relative;
   background-color: $light-gray-1;
   width: 655px;
@@ -93,6 +91,7 @@
   position: relative;
   cursor: pointer;
   color: black;
+  background-color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -162,7 +161,7 @@
   width: 25px;
   height: 20px;
   cursor: pointer;
-  margin: auto 10px auto 0;
+  margin: auto 12px auto 0;
 }
 
 .hamburger-options-container {

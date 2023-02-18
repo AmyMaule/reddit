@@ -79,9 +79,13 @@
 }
 
 @media screen and (max-width: 960px) {
+  .main-content-container {
+    margin: 0 24px;
+  }
+  
   .post-container {
     width: 100%;
-    margin: 72px 24px;
+    margin: 72px 0;
   }
 
   .sidebar,
@@ -143,6 +147,14 @@
 }
 
 @media screen and (max-width: 670px) {
+  .main-content-container {
+    margin: 0;
+  }
+
+  .post {
+    border-radius: 0;
+  }
+
   .dropdown-subreddits {
     width: calc(100% - 5.75vw);
   }

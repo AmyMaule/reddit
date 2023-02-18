@@ -46,12 +46,16 @@
 }
 
 .post-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
   padding: 2px 0;
 }
 
 .post-top {
   width: 595px;
+  height: 35px;
   padding-top: 2px;
   padding-left: 8px;
 }
@@ -112,11 +116,12 @@
   color: $dark-gray-2;
   word-break: break-word;
   cursor: pointer;
-  margin: 12px 40px 10px 8px;
+  margin: 4px 40px 10px 8px;
 }
 
 .post-title-shortened {
-  width: 70%;
+  width: calc(100% - 175px);
+  margin: 4px 0 10px 8px;
 }
 
 .flair {
@@ -148,27 +153,29 @@
   line-height: 0.75rem;
 }
 
-.post-link-container {
-  margin-top: -10px;
-  padding-left: 8px;
-  margin-bottom: 10px;
-}
-
 .post-link {
+  position: relative;
+  display: block;
   font-size: 0.8rem;
+  padding-left: 8px;
+  margin-top: -5px;
+  margin-bottom: 5px;
 }
 
 .link-image {
-  float: right;
+  position: absolute;
+  display: block;
   width: 144px;
   height: 100px;
   border-radius: 4px;
   border: 1px solid $blue;
-  position: absolute;
-  bottom: 30px;
-  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  margin: 6px 0;
   cursor: pointer;
   object-fit: cover;
+  margin-left: auto;
 }
 
 .video-background {
@@ -245,8 +252,10 @@
 }
 
 .post-bottom-bar {
+  position: relative;
   display: flex;
   margin-top: auto;
+  bottom: 0;
   font-size: 0.85rem;
   height: 35px;
   width: 70%;

@@ -23,6 +23,11 @@
 ## About The Project
 
 This is a frontend clone of [Reddit](https://www.reddit.com/), using the [Reddit API](https://www.reddit.com/dev/api/) to display posts and comments as on reddit.com. This version allows searching by hot, new, top and rising (and sub-searching by top of today, this week, this month, this year and all time). This SPA has 3 'pages' - the homepage, a page for each subtopic (subreddit) and a page for each post. Click on any link beginning with "r/" to visit a subreddit homepage, and click on the content of any post, its title or comment button to visit the post in detail including all comments.
+
+<br>
+Note: This site was originally created in 2021. In 2023, Reddit made harsh changes to their API including reducing the rate limits for the Data API such that this app rapidly reaches the limits when used normally. When browsing this SPA frontend Reddit clone, be aware that these API changes may cause the site to temporarily stop working as the limits are reached. This is intentional on Reddit's part.
+
+More info in [this statement](https://www.reddit.com/r/reddit/comments/145bram/addressing_the_community_about_changes_to_our_api/) from the Reddit CEO.
 <br>
 
 ## Demo & Screenshots
@@ -36,7 +41,7 @@ Some videos in case there are any changes to the Reddit API that result in the l
 </div>
 <br><br>
 
-# Live version [here](https://amy-reddit.netlify.app/).
+# Live version [here](https://amy-reddit.pages.dev/).
 <br>
 
 ### Built With
